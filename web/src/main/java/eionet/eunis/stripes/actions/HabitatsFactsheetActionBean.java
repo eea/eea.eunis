@@ -13,6 +13,7 @@ import net.sourceforge.stripes.action.UrlBinding;
 
 import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
@@ -93,12 +94,18 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     /** Conservation status tab specifics. */
     private List<ForeignDataQueryDTO> conservationStatusQueries;
+    private List<ForeignDataQueryDTO> syntaxaQueries;
+
     private String conservationStatusQuery;
     private String conservationStatusAttribution;
+
+
     private LinkedHashMap<String, ArrayList<Map<String, Object>>> conservationStatusQueryResultCols =
             new LinkedHashMap<String, ArrayList<Map<String, Object>>>();
     private LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>> conservationStatusQueryResultRows =
             new LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>>();
+
+
 
     private List history = new ArrayList();
     private List otherClassifications = new ArrayList();
@@ -186,6 +193,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         } catch (InitializationException e) {
             e.printStackTrace();
         }
+
+        newSyntaxa(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
 
         if(factsheet.isAnnexI()){
             return new ForwardResolution("/stripes/habitats-factsheet/annex1/habitats-factsheet-annex1.layout.jsp");
@@ -340,6 +349,48 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                     conservationStatusAttribution = ld.getAttribution();
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String syntaxaAttribution;
+    private ArrayList<Map<String, Object>> syntaxaQueryResultCols =
+            new ArrayList<Map<String, Object>>();
+    private ArrayList<HashMap<String, ResultValue>> syntaxaQueryResultRows =
+            new  ArrayList<HashMap<String, ResultValue>>();
+
+    public List<Map<String, Object>> getSyntaxaQueryResultCols() {
+        return syntaxaQueryResultCols;
+    }
+
+    public List<HashMap<String, ResultValue>> getSyntaxaQueryResultRows() {
+        return syntaxaQueryResultRows;
+    }
+
+    public String getSyntaxaAttribution() {
+        return syntaxaAttribution;
+    }
+
+    private void newSyntaxa(int habitatId, Integer natureObjectId){
+
+        try {
+
+            Properties props = new Properties();
+            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("habitats_syntaxa.xml"));
+            LinkedData ld = new LinkedData(props, natureObjectId, "force");
+            syntaxaQueries = ld.getQueryObjects();
+            for (int i = 0; i < syntaxaQueries.size(); i++) {
+                String syntaxaQuery = syntaxaQueries.get(i).getId();
+                if (!StringUtils.isBlank(syntaxaQuery)) {
+                    ld.executeQuery(syntaxaQuery, habitatId);
+                    syntaxaQueryResultCols = ld.getCols();
+                    syntaxaQueryResultRows = ld.getRows();
+
+                    syntaxaAttribution = ld.getAttribution();
+                }
+            }
+            System.out.println("--------- syntaxa query returned " + syntaxaQueryResultRows.size());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -85,7 +85,11 @@ public class LinkedData {
                 boolean resultExists = false;
                 if (natureObjId != null) {
                     INatureObjectAttrDao dao = DaoFactory.getDaoFactory().getNatureObjectAttrDao();
-                    resultExists = dao.queryResultExists(natureObjId, queryId, queriesName);
+                    if(!queriesName.equalsIgnoreCase("force")) {
+                        resultExists = dao.queryResultExists(natureObjId, queryId, queriesName);
+                    } else {
+                        resultExists = true; // optimistical
+                    }
                 }
 
                 if (natureObjId == null || (natureObjId != null && resultExists)) {
