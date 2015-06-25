@@ -194,7 +194,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             e.printStackTrace();
         }
 
-        newSyntaxa(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+        if(factsheet.isEunis()){
+            populateSyntaxa(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+        }
 
         if(factsheet.isAnnexI()){
             return new ForwardResolution("/stripes/habitats-factsheet/annex1/habitats-factsheet-annex1.layout.jsp");
@@ -372,7 +374,13 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return syntaxaAttribution;
     }
 
-    private void newSyntaxa(int habitatId, Integer natureObjectId){
+    /**
+     * Populate the Syntaxa/Vegetation section from SPARQL query
+     * https://taskman.eionet.europa.eu/issues/21160
+     * @param habitatId
+     * @param natureObjectId
+     */
+    private void populateSyntaxa(int habitatId, Integer natureObjectId){
 
         try {
 
@@ -390,7 +398,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                     syntaxaAttribution = ld.getAttribution();
                 }
             }
-            System.out.println("--------- syntaxa query returned " + syntaxaQueryResultRows.size());
         } catch (Exception e) {
             e.printStackTrace();
         }

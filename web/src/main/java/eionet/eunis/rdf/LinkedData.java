@@ -65,7 +65,8 @@ public class LinkedData {
      *
      * @param props
      * @param natureObjId
-     * @param queriesName
+     * @param queriesName The query name in the nature_object_attributes table; the query is only executed when
+     * a row is found in that table for the queriesName. To bypass the check send "force".
      * @throws Exception
      */
     public LinkedData(Properties props, Integer natureObjId, String queriesName) throws Exception {
