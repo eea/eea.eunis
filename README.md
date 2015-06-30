@@ -20,7 +20,7 @@ If you are using Tomcat > 7, add in `CATALINA_OPTS`:
 For correct URI handling, the `<Connector>` in server.xml needs the following setting: URIEncoding="UTF-8".
 
 To create the tables do:
-
+  
 ```sh
 cd web
 mvn -Dmaven.test.skip=true liquibase:update
