@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.factsheet.habitats;
 
+import eionet.eunis.dto.DcLinkDTO;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
 import ro.finsiel.eunis.search.Utilities;
 
@@ -33,7 +34,7 @@ public class LegalStatusWrapper {
     private String parentLink;
     private String parentAlternative;
 
-    private List<String> moreInfo = new ArrayList<String>();
+    private List<DcLinkDTO> moreInfo = new ArrayList<DcLinkDTO>();
     private String replacedByTitle;
     private String replacedBy;
 
@@ -95,11 +96,11 @@ public class LegalStatusWrapper {
         return relationTypeMap.get(legalPersist.getRelationType());
     }
 
-    public void addMoreInfo(String value) {
+    public void addMoreInfo(DcLinkDTO value) {
         moreInfo.add(value);
     }
 
-    public List<String> getMoreInfo() {
+    public List<DcLinkDTO> getMoreInfo() {
         return moreInfo;
     }
 

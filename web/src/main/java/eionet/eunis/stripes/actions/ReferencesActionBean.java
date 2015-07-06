@@ -41,6 +41,7 @@ public class ReferencesActionBean extends AbstractStripesAction {
     private DcIndexDTO parent;
     private List<DcIndexDTO> children;
     private List<AttributeDto> dcAttributes;
+    private List<DcLinkDTO> links;
 
     /** tabs to display */
 //    private List<Pair<String, String>> tabsWithData = new LinkedList<Pair<String, String>>();
@@ -83,6 +84,8 @@ public class ReferencesActionBean extends AbstractStripesAction {
             if(dcIndex.getReference() != null) {
                 parent = dao.getDcIndex(dcIndex.getReference());
             }
+
+            links = dao.getLinks(dcIndex.getIdDc());
 
             // search for the children ; orders by alphanum
             children = dao.getChildren(dcIndex.getIdDc());
@@ -242,5 +245,13 @@ public class ReferencesActionBean extends AbstractStripesAction {
             }
             return ac.compare(((DcIndexDTO) o1).getTitle(), ((DcIndexDTO) o2).getTitle());
         }
+    }
+
+    public List<DcLinkDTO> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<DcLinkDTO> links) {
+        this.links = links;
     }
 }

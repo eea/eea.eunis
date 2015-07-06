@@ -812,14 +812,17 @@ public class SpeciesFactsheet {
                 legalStatus.setReference(report.getReference().toString());
             }
 
+            List<DcLinkDTO> dcLinks = dao.getLinks(report.getIdDc().toString());
+            // populate the more info section from the annex links
+            for(DcLinkDTO link : dcLinks){
+                legalStatus.addMoreInfo(link);
+            }
+
             List<AttributeDto> dcAttributes = dao.getDcAttributes(report.getIdDc().toString());
             for(AttributeDto a : dcAttributes){
                 if(a.getName().equals("description"))
                     legalStatus.setDescription(a.getObjectLabel());
-                // populate the more info section from the annex links
-                if(a.getName().equalsIgnoreCase("foaf:page")) {
-                    legalStatus.addMoreInfo(a.getValue());
-                }
+
             }
 
             legalStatus.setIdReportAttributes(report.getIdReportAttributes());

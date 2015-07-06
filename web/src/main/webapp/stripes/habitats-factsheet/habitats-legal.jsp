@@ -40,9 +40,17 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="${legal.annex.url}">
-                                    ${eunis:shortenURL(legal.annex.url)}
-                                </a>
+                                <c:forEach var="link" items="${legal.moreInfo}" varStatus="status">
+                                    <c:choose>
+                                        <c:when test="${empty link.linkText}">
+                                            <a href="${ link.link }">${eunis:shortenURL(link.link)}</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="${ link.link }">${link.linkText}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:if test="${not status.last}"><br><br></c:if>
+                                </c:forEach>
 
                             </td>
                         </tr>
@@ -115,8 +123,16 @@
                             <td>${legal.relationTypeString}</td>
                             <td>
                                 <c:forEach var="link" items="${legal.moreInfo}" varStatus="status">
-                                    <c:if test="${oldLink != link}">
-                                        <a href="${ link }">${eunis:shortenURL(link)}</a> <c:if test="${not status.last}"><br></c:if>
+                                    <c:if test="${not (oldLink eq link)}">
+                                        <c:choose>
+                                            <c:when test="${empty link.linkText}">
+                                                <a href="${ link.link }">${eunis:shortenURL(link.link)}</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="${ link.link }">${link.linkText}</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <c:if test="${not status.last}"><br><br></c:if>
                                     </c:if>
                                     <c:set var="oldLink" value="${link}"/>
                                 </c:forEach>
