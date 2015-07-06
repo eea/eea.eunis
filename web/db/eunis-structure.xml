@@ -2274,4 +2274,23 @@ END
             <sql>ALTER TABLE `chm62edt_species` DROP INDEX `IDX_SPECIES_CODE_2000`</sql>
         </rollback>
     </changeSet>
+
+    <changeSet id="rev-139" author="ivascu">
+        <comment>Moves the DC links from DC_ATTRIBUTES to a new table, DC_LINKS (#15649)</comment>
+        <sql> CREATE TABLE `dc_links` (
+            `ID_DC` INT(11) NOT NULL,
+            `LINK` TEXT NOT NULL,
+            `LINKTEXT` TEXT)
+            ENGINE=InnoDB DEFAULT CHARSET=utf8
+        </sql>
+        <sql>insert into dc_links(id_dc, link) select id_dc, OBJECT link from dc_attributes where name='foaf:page'</sql>
+        <sql>delete from dc_links where id_dc=2442</sql>
+        <sql>insert into dc_links(id_dc, link) values ('2442', 'https://wcd.coe.int/ViewDoc.jsp?Ref=T-PVS/PA(2010)10&amp;Language=lanEnglish&amp;Ver=rev&amp;Site=DG4-Nature&amp;BackColorInternet=DBDCF2&amp;BackColorIntranet=FDC864&amp;BackColorLogged=FDC864')</sql>
+        <sql>insert into dc_links(id_dc, link, linktext) values('2442', 'http://www.coe.int/t/dg4/cultureheritage/nature/econetworks/default_en.asp', 'Resolution No. 4 (1996) of the Bern Convention lists endangered natural habitats requiring specific conservation measures [and the designation of Areas of Special Conservation Interest (ASCIs) forming the Emerald network]')</sql>
+        <sql>delete from dc_links where id_dc=2443</sql>
+        <sql>insert into dc_links(id_dc, link) values ('2443', 'https://wcd.coe.int/ViewDoc.jsp?Ref=T-PVS/PA(2011)15&amp;&amp;Language=lanEnglish&amp;&amp;Ver=original&amp;&amp;Site=DG4-Nature&amp;&amp;BackColorInternet=DBDCF2&amp;&amp;BackColorIntranet=FDC864&amp;&amp;BackColorLogged=FDC864')</sql>
+        <sql>insert into dc_links(id_dc, link, linktext) values('2443', 'http://www.coe.int/t/dg4/cultureheritage/nature/econetworks/default_en.asp', 'Resolution No. 6 (1998) of the Bern Convention lists the species requiring specific habitat conservation measures [and the designation of Areas of Special Conservation Interest (ASCIs) forming for the Emerald network]')</sql>
+
+        <sql>delete from dc_attributes where name='foaf:page'</sql>
+    </changeSet>
 </databaseChangeLog>

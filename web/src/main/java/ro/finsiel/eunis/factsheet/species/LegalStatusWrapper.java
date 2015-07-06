@@ -1,5 +1,7 @@
 package ro.finsiel.eunis.factsheet.species;
 
+import eionet.eunis.dto.DcLinkDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class LegalStatusWrapper {
 
     private int idReportAttributes = -1;
 
-    private List<String> moreInfo = new ArrayList<String>();
+    private List<DcLinkDTO> moreInfo = new ArrayList<DcLinkDTO>();
 
 
     /**
@@ -267,11 +269,11 @@ public class LegalStatusWrapper {
         this.idReportAttributes = idReportAttributes;
     }
 
-    public void addMoreInfo(String value) {
+    public void addMoreInfo(DcLinkDTO value) {
         moreInfo.add(value);
     }
 
-    public List<String> getMoreInfo() {
+    public List<DcLinkDTO> getMoreInfo() {
         return moreInfo;
     }
 }

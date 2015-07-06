@@ -3,11 +3,7 @@ package eionet.eunis.dao;
 
 import java.util.List;
 
-import eionet.eunis.dto.AttributeDto;
-import eionet.eunis.dto.DcIndexDTO;
-import eionet.eunis.dto.DesignationDcObjectDTO;
-import eionet.eunis.dto.PairDTO;
-import eionet.eunis.dto.ReferenceDTO;
+import eionet.eunis.dto.*;
 import eionet.eunis.stripes.actions.ReferencesActionBean;
 import eionet.eunis.util.CustomPaginatedList;
 
@@ -81,5 +77,12 @@ public interface IReferencesDao {
      * @return List of DC objects
      */
     public List<DcIndexDTO> getChildren(String idDc);
+
+    /**
+     * Reads the links of the reference (for More Info section)
+     * @param idDc The reference ID
+     * @return List of links
+     */
+    public List<DcLinkDTO> getLinks(String idDc);
 
 }

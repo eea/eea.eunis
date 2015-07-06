@@ -671,6 +671,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                     IReferencesDao dao = DaoFactory.getDaoFactory().getReferncesDao();
                     DcIndexDTO annex = dao.getDcIndex(idDc.toString());
                     m.setAnnex(annex);
+                    m.setMoreInfo(dao.getLinks(annex.getIdDc()));
 
         //          Populate the parent and link
                     if(annex.getReference() != null){
@@ -684,6 +685,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                             }
                         }
                     }
+
                     result.add(m);
                 }
             }
@@ -700,6 +702,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         private DcIndexDTO annex;
         private DcIndexDTO parent;
         private DcIndexDTO replaces;
+        private List<DcLinkDTO> moreInfo = new ArrayList<>();
 
         public DcIndexDTO getAnnex() {
             if(parent != null) {
@@ -731,6 +734,14 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
         public void setReplaces(DcIndexDTO replaces) {
             this.replaces = replaces;
+        }
+
+        public List<DcLinkDTO> getMoreInfo() {
+            return moreInfo;
+        }
+
+        public void setMoreInfo(List<DcLinkDTO> moreInfo) {
+            this.moreInfo = moreInfo;
         }
     }
 
@@ -764,15 +775,10 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                         legalStatusWrapper.setParentAlternative(dto.getAlternative());
                     }
 
-                    List<AttributeDto> annexAttributes = dao.getDcAttributes(legalStatusWrapper.getLegalPersist().getIdDc().toString());
-                    for(AttributeDto a : annexAttributes){
-//                        if(a.getName().equals("description"))
-//                            legalStatus.setDescription(a.getObjectLabel());
-
-                        // populate the more info section from the annex links
-                        if(a.getName().equalsIgnoreCase("foaf:page")) {
-                            legalStatusWrapper.addMoreInfo(a.getValue());
-                        }
+                    List<DcLinkDTO> dcLinks = dao.getLinks(legalStatusWrapper.getLegalPersist().getIdDc().toString());
+                    // populate the more info section from the annex links
+                    for(DcLinkDTO link : dcLinks){
+                        legalStatusWrapper.addMoreInfo(link);
                     }
                 }
             } catch (InitializationException e) {

@@ -11,17 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import eionet.eunis.dto.*;
 import org.apache.commons.lang.StringUtils;
 import org.displaytag.properties.SortOrderEnum;
 
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.dao.IReferencesDao;
-import eionet.eunis.dto.AttributeDto;
-import eionet.eunis.dto.DcIndexDTO;
-import eionet.eunis.dto.DesignationDcObjectDTO;
-import eionet.eunis.dto.PairDTO;
-import eionet.eunis.dto.ReferenceDTO;
 import eionet.eunis.dto.readers.DcIndexDTOReader;
 import eionet.eunis.dto.readers.ReferenceDTOReader;
 import eionet.eunis.stripes.actions.ReferencesActionBean;
@@ -141,6 +137,43 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             while (rs.next()) {
                 ret = rs.getInt(1);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAllResources(con, preparedStatement, rs);
+        }
+
+        return ret;
+    }
+
+    /**
+     * Reads the links of the reference (for More Info section)
+     * @param idDc The reference ID
+     * @return List of links
+     */
+     @Override
+    public List<DcLinkDTO> getLinks(String idDc){
+        List<DcLinkDTO> ret = new ArrayList<DcLinkDTO>();
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            preparedStatement =
+                    con.prepareStatement(
+                            "select ID_DC, LINK, LINKTEXT from DC_LINKS where ID_DC=?");
+            preparedStatement.setString(1, idDc);
+            rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                String link = rs.getString("LINK");
+                String linkText = rs.getString("LINKTEXT");
+
+                DcLinkDTO attr = new DcLinkDTO(idDc, link, linkText);
+                ret.add(attr);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

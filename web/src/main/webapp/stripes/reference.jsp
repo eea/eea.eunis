@@ -85,6 +85,22 @@
                                 <c:set var="zebra" value="${(zebra eq 'zebraeven')?'':'zebraeven' }"/>
                             </tr>
                         </c:forEach>
+                        <c:forEach var="link" items="${actionBean.links}" varStatus="status">
+                            <tr class="${zebra}">
+                                <th scope="row">Web page</th>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${empty link.linkText}">
+                                            <a href="${ link.link }">${eunis:shortenURL(link.link)}</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="${ link.link }">${link.linkText}</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <c:set var="zebra" value="${(zebra eq 'zebraeven')?'':'zebraeven' }"/>
+                            </tr>
+                        </c:forEach>
                         <c:if test="${!empty actionBean.dcAttributes}">
                             <c:forEach items="${actionBean.dcAttributes}" var="attr" varStatus="loop">
                                 <tr class="${zebra}">
