@@ -8,6 +8,7 @@ public class RestrictionsRow {
     private String legalText;
     private String restriction;
     private int priority = 0;
+    private boolean used;
 
     public String getSpecies() {
         return species;
@@ -48,5 +49,13 @@ public class RestrictionsRow {
                 ", legalText='" + legalText + '\'' +
                 ", restriction='" + restriction + '\'' +
                 '}';
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
     }
 }

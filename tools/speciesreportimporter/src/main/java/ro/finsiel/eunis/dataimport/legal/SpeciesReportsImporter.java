@@ -596,7 +596,7 @@ public class SpeciesReportsImporter {
 
             // check that nameInDocument is synonym
             if(isSynonymName(nameInDocument)){
-                System.out.println("Searching for synonyms: " + nameInDocument);
+                System.out.print("Searching for synonyms of: " + nameInDocument + " - ");
 
                 // find in DB
                 String[] names = nameInDocument.split(";");
@@ -606,14 +606,15 @@ public class SpeciesReportsImporter {
                         if(debug) System.out.println(name.trim());
                         // check it's a synonym
                         if(l.size() == 0) {
-                            if(debug) System.out.println(" Not found");
+                            System.out.println(" Not found");
                             // todo add it ?
                         } else if (l.size() == 1) {
-                            if(debug) System.out.println(" Found 1");
+                            System.out.print("Found ");
                             // check it's synonym or original species
 
                             String idSpeciesSynonym = ((TableColumns)l.get(0)).getColumnsValues().get(0).toString();
                             String validName = ((TableColumns)l.get(0)).getColumnsValues().get(2).toString();
+                            System.out.println(((TableColumns)l.get(0)).getColumnsValues().get(5).toString());
                             String link = ((TableColumns)l.get(0)).getColumnsValues().get(3).toString();
                             String related = ((TableColumns)l.get(0)).getColumnsValues().get(4).toString();
 
@@ -626,7 +627,7 @@ public class SpeciesReportsImporter {
                             }
 
                         } else if (l.size() > 1) {
-                            if(debug) System.out.println(" Found too many (" + l.size() + ")");
+                           System.out.println(" Found too many (" + l.size() + ")");
                             // todo still check
                         }
                     }
