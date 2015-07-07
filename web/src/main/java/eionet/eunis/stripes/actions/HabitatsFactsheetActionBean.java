@@ -799,23 +799,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return speciesForHabitats;
     }
 
-    private List habitatSintaxa = null;
-
-    /**
-     * Cache the habitat vegetation
-     * @return List of vegetation
-     */
-    public List getHabitatSintaxa() {
-        if(habitatSintaxa == null) {
-            try {
-                habitatSintaxa = factsheet.getHabitatSintaxa();
-            } catch (InitializationException e) {
-                habitatSintaxa = new ArrayList();
-            }
-        }
-        return habitatSintaxa;
-    }
-
     /**
      * The english description
      * @return

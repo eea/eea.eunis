@@ -2293,4 +2293,11 @@ END
 
         <sql>delete from dc_attributes where name='foaf:page'</sql>
     </changeSet>
+
+    <changeSet id="rev-140" author="ivascu">
+        <comment>Drops the old (unused) Syntaxa tables (#22050)</comment>
+        <dropTable tableName="chm62edt_habitat_syntaxa"/>
+        <dropTable tableName="chm62edt_syntaxa"/>
+        <dropTable tableName="chm62edt_syntaxa_source"/>
+    </changeSet>
 </databaseChangeLog>

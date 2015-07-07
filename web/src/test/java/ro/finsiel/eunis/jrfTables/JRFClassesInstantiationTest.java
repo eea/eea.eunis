@@ -430,18 +430,6 @@ public class JRFClassesInstantiationTest {
     }
 
     @Test
-    public void test_Chm62edtHabitatSyntaxaDomain() {
-        Chm62edtHabitatSyntaxaDomain instance = new Chm62edtHabitatSyntaxaDomain();
-        assertNotNull("Instantiation failed", instance);
-    }
-
-    @Test
-    public void test_Chm62edtHabitatSyntaxaPersist() {
-        Chm62edtHabitatSyntaxaPersist instance = new Chm62edtHabitatSyntaxaPersist();
-        assertNotNull("Instantiation failed", instance);
-    }
-
-    @Test
     public void test_Chm62edtHumanActivityDomain() {
         Chm62edtHumanActivityDomain instance = new Chm62edtHumanActivityDomain();
         assertNotNull("Instantiation failed", instance);
@@ -954,30 +942,6 @@ public class JRFClassesInstantiationTest {
     @Test
     public void test_Chm62edtSubstratePersist() {
         Chm62edtSubstratePersist instance = new Chm62edtSubstratePersist();
-        assertNotNull("Instantiation failed", instance);
-    }
-
-    @Test
-    public void test_Chm62edtSyntaxaDomain() {
-        Chm62edtSyntaxaDomain instance = new Chm62edtSyntaxaDomain();
-        assertNotNull("Instantiation failed", instance);
-    }
-
-    @Test
-    public void test_Chm62edtSyntaxaPersist() {
-        Chm62edtSyntaxaPersist instance = new Chm62edtSyntaxaPersist();
-        assertNotNull("Instantiation failed", instance);
-    }
-
-    @Test
-    public void test_Chm62edtSyntaxaSourceDomain() {
-        Chm62edtSyntaxaSourceDomain instance = new Chm62edtSyntaxaSourceDomain();
-        assertNotNull("Instantiation failed", instance);
-    }
-
-    @Test
-    public void test_Chm62edtSyntaxaSourcePersist() {
-        Chm62edtSyntaxaSourcePersist instance = new Chm62edtSyntaxaSourcePersist();
         assertNotNull("Instantiation failed", instance);
     }
 
