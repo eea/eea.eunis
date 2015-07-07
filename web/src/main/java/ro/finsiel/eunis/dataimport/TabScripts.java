@@ -256,13 +256,6 @@ public class TabScripts {
                     + "WHERE A.ID_HABITAT <> '-1' AND A.ID_HABITAT <> '10000'";
             updateTab(s, con, sqlc, "SPECIES", "chm62edt_tab_page_habitats");
 
-            // Update HABITATS tab
-            s = "SELECT DISTINCT A.ID_NATURE_OBJECT FROM chm62edt_habitat_syntaxa AS S "
-                    + "JOIN chm62edt_habitat AS A ON S.ID_HABITAT = A.ID_HABITAT "
-                    + "JOIN chm62edt_syntaxa AS B ON S.ID_SYNTAXA = B.ID_SYNTAXA "
-                    + "JOIN chm62edt_syntaxa_source AS C ON S.ID_SYNTAXA_SOURCE = C.ID_SYNTAXA_SOURCE";
-            updateTab(s, con, sqlc, "HABITATS", "chm62edt_tab_page_habitats");
-
             // Update LEGAL_INSTRUMENTS tab
             s = "SELECT DISTINCT A.ID_NATURE_OBJECT FROM chm62edt_habitat AS A "
                     + "JOIN chm62edt_habitat_class_code AS B ON A.ID_HABITAT = B.ID_HABITAT "

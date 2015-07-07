@@ -82,9 +82,6 @@ public class PDFHabitatsFactsheet {
             getLegalInstruments();
             report.getDocument().newPage();
 
-            getRelatedHabitats();
-            report.getDocument().newPage();
-
             getRelatedSpecies();
             report.getDocument().newPage();
 
@@ -698,99 +695,6 @@ public class PDFHabitatsFactsheet {
                 }
                 report.addTable(table);
             }
-        }
-    }
-
-    /**
-     * Generate habitats-factsheet-related.jsp equivalent.
-     * @throws Exception When error occurrs
-     */
-    private void getRelatedHabitats() throws Exception {
-        Vector syntaxaw = new Vector();
-
-        try {
-            syntaxaw = factsheet.getHabitatSintaxa();
-        } catch (InitializationException e) {
-            e.printStackTrace();
-        }
-        if (!syntaxaw.isEmpty()) {
-            Table table = new Table(5);
-
-            table.setCellsFitPage(true);
-            table.setWidth(TABLE_WIDTH);
-            table.setAlignment(Table.ALIGN_LEFT);
-            table.setBorderWidth(1);
-            table.setDefaultCellBorderWidth(1);
-            table.setBorderColor(Color.BLACK);
-            table.setCellspacing(2);
-
-            float[] colWidths1 = { 30, 20, 30, 10, 10 };
-
-            table.setWidths(colWidths1);
-
-            Cell cell;
-
-            cell = new Cell(
-                    new Phrase(cm.cmsPhrase("Habitat type syntaxa"), fontSubtitle));
-            cell.setBackgroundColor(new Color(0xDD, 0xDD, 0xDD));
-            cell.setColspan(5);
-            table.addCell(cell);
-
-            cell = new Cell(new Phrase(cm.cmsPhrase("Name"), fontNormalBold));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
-            table.addCell(cell);
-
-            cell = new Cell(new Phrase(cm.cmsPhrase("Relation"), fontNormalBold));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
-            table.addCell(cell);
-
-            cell = new Cell(
-                    new Phrase(cm.cmsPhrase("Source (abbreviated)"), fontNormalBold));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
-            table.addCell(cell);
-
-            cell = new Cell(new Phrase(cm.cmsPhrase("Author"), fontNormalBold));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
-            table.addCell(cell);
-
-            cell = new Cell(new Phrase(cm.cmsPhrase("References"), fontNormalBold));
-            cell.setBackgroundColor(new Color(0xEE, 0xEE, 0xEE));
-            table.addCell(cell);
-
-            String IdDc = "";
-
-            for (int i = 0; i < syntaxaw.size(); i++) {
-                SyntaxaWrapper syntaxa = (SyntaxaWrapper) syntaxaw.get(i);
-
-                cell = new Cell(new Phrase(syntaxa.getName(), fontNormal));
-                table.addCell(cell);
-
-                cell = new Cell(
-                        new Phrase(
-                                HabitatsFactsheet.mapHabitatsRelations(
-                                        syntaxa.getRelation()),
-                                        fontNormal));
-                table.addCell(cell);
-
-                cell = new Cell(
-                        new Phrase(syntaxa.getSourceAbbrev(), fontNormal));
-                table.addCell(cell);
-
-                cell = new Cell(new Phrase(syntaxa.getAuthor(), fontNormal));
-                table.addCell(cell);
-
-                String text = " ";
-
-                if (syntaxa.getIdDc() != null) {
-                    IdDc = syntaxa.getIdDc().toString();
-                }
-                if (!IdDc.equalsIgnoreCase("0")) {
-                    text = Utilities.getAuthorAndUrlByIdDc(IdDc).get(0).toString();
-                }
-                cell = new Cell(new Phrase(text, fontNormal));
-                table.addCell(cell);
-            }
-            report.addTable(table);
         }
     }
 

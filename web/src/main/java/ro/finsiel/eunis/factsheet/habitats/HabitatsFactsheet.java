@@ -266,42 +266,6 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * Retrieve syntaxa for this habitat.
-     *
-     * @return Vector of SyntaxaWrapper objects, one for each habitat.
-     * @throws InitializationException If idHabitat is null.
-     */
-    public Vector getHabitatSintaxa() throws InitializationException {
-        if (null == idHabitat) {
-            throw new InitializationException(
-            "idHabitat was null. This is unacceptable.");
-        }
-        Vector ret = new Vector();
-
-        try {
-            List list = new Chm62edtHabitatSyntaxaDomain().findWhere(
-                    "A.ID_HABITAT='" + idHabitat + "'");
-
-            for (Object aList : list) {
-                Chm62edtHabitatSyntaxaPersist habSyn = (Chm62edtHabitatSyntaxaPersist) aList;
-                SyntaxaWrapper syntaxa = new SyntaxaWrapper();
-
-                syntaxa.setRelation(habSyn.getRelationType());
-                syntaxa.setSource(habSyn.getSource());
-                syntaxa.setSourceAbbrev(habSyn.getSourceAbbrev());
-                syntaxa.setName(habSyn.getSyntaxaName());
-                syntaxa.setAuthor(habSyn.getSyntaxaAuthor());
-                syntaxa.setIdDc(habSyn.getIdDc());
-                ret.addElement(syntaxa);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace(System.err);
-            ret = new Vector();
-        }
-        return ret;
-    }
-
-    /**
      * This method retrieves 'other information' available for this habitat.
      *
      * @param information What information to retrieve. Is one of the OTHER_INFO_* public fields declared above.
