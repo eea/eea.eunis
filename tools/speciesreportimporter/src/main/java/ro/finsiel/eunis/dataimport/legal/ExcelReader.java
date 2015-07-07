@@ -101,6 +101,7 @@ public class ExcelReader {
     /**
      * Populate the restriction maps of the species with the data read from the Geographic and other Restrictions tab
      * Also populates the priority data (Habitats "Priority in Annex II")
+     * The used Restrictions are marked so we can identify the unused ones at the end
      */
     private void populateRestrictions(){
 
@@ -109,6 +110,7 @@ public class ExcelReader {
             for(RestrictionsRow r : restrictionsRows){
                 if(sr.getSpeciesName().equalsIgnoreCase(r.getSpecies())){
                     sr.getRestrictionsMap().put(r.getLegalText(), r);
+                    r.setUsed(true);
                 }
             }
 
@@ -120,6 +122,13 @@ public class ExcelReader {
                     sr.getRestrictionsMap().put("HD II", rr);
                 }
                 rr.setPriority(1);
+            }
+        }
+
+        // Log the unused restrictions
+        for(RestrictionsRow r : restrictionsRows){
+            if(!r.isUsed()){
+                System.out.println("WARNING: Species not found for restriction " + r.getSpecies() + " / " + r.getLegalText());
             }
         }
 
