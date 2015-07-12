@@ -85,6 +85,7 @@ public class ExcelRowFactory {
         r.setOspar(getCellValue(row, "M"));
         r.setHelcom(getCellValue(row, "N"));
         r.setRedList(getCellValue(row, "O"));
+        r.setRedListName(getCellValue(row, "P"));
 
         r.setExcelRow(row.getRowNum() + 1);
 
