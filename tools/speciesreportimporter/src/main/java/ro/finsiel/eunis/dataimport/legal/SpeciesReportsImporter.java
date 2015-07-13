@@ -596,7 +596,7 @@ public class SpeciesReportsImporter {
 
             // check that nameInDocument is synonym
             if(isSynonymName(nameInDocument)){
-                System.out.print("Searching for synonyms of: " + nameInDocument + " - ");
+                System.out.print("Searching for synonyms: " + nameInDocument + " - ");
 
                 // find in DB
                 String[] names = nameInDocument.split(";");

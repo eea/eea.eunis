@@ -3,6 +3,7 @@ package ro.finsiel.eunis.dataimport.legal;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import ro.finsiel.eunis.search.Utilities;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -110,6 +111,10 @@ public class ExcelReader {
             for(RestrictionsRow r : restrictionsRows){
                 if(sr.getSpeciesName().equalsIgnoreCase(r.getSpecies())){
                     sr.getRestrictionsMap().put(r.getLegalText(), r);
+                    r.setUsed(true);
+                } else if ((! Utilities.isEmptyString(r.getSpeciesValidName())) && sr.getSpeciesName().equalsIgnoreCase(r.getSpeciesValidName())){
+                    sr.getRestrictionsMap().put(r.getLegalText(), r);
+                    r.setRestriction(r.getRestriction() + " (the synonym name [" + r.getSpecies() + "] appears in the document)");
                     r.setUsed(true);
                 }
             }

@@ -105,6 +105,7 @@ public class ExcelRowFactory {
         r.setSpecies(getCellValue(row, "A"));
         r.setLegalText(getCellValue(row, "B"));
         r.setRestriction(getCellValue(row, "C"));
+        r.setSpeciesValidName(getCellValue(row, "D"));
 
         if(r.getLegalText().isEmpty() || r.getLegalText().contains("Legal text"))
             return null;

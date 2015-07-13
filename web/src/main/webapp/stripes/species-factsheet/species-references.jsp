@@ -54,7 +54,7 @@
                                     </c:choose>
                                 </td>
 		        				<td>
-		              				${ legal.comments }
+		              				${ eunis:bracketsToItalics(legal.comments) }
 		        				</td>
 		        				<td>
                                     <c:forEach var="link" items="${legal.moreInfo}" varStatus="status">
