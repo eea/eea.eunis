@@ -5,6 +5,7 @@ package ro.finsiel.eunis.dataimport.legal;
  */
 public class RestrictionsRow {
     private String species;
+    private String speciesValidName;
     private String legalText;
     private String restriction;
     private int priority = 0;
@@ -40,6 +41,14 @@ public class RestrictionsRow {
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public String getSpeciesValidName() {
+        return speciesValidName;
+    }
+
+    public void setSpeciesValidName(String speciesValidName) {
+        this.speciesValidName = speciesValidName;
     }
 
     @Override
