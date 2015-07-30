@@ -48,6 +48,7 @@
                             frame_width: 50,
                             frame_height: 50,
                             frame_scale: 'fit',
+                            frame_gap: 0,
                             show_infobar: false,
                         });
                     </script>
