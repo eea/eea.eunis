@@ -2,7 +2,6 @@ package eionet.eunis.stripes.actions;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -15,15 +14,11 @@ import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 
-import org.apache.commons.lang.StringUtils;
-
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
 import ro.finsiel.eunis.jrfTables.Chm62edtSitesAttributesPersist;
-import ro.finsiel.eunis.jrfTables.DesignationsSitesRelatedDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteSpeciesPersist;
-import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesDesignationsPersist;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesSpeciesReportAttributesPersist;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.sites.SitesSearchUtility;
@@ -149,8 +144,9 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             siteName = factsheet.getSiteObject().getName();
             country = factsheet.getCountry();
             setSiteDesignationDateDisplayValue();
-            surfaceAreaKm2 = Math.round(Double.parseDouble(factsheet.getSiteObject().getArea()) / 100) + "";
-
+            if(!Utilities.isEmptyString(factsheet.getSiteObject().getArea())) {
+                surfaceAreaKm2 = Math.round(Double.parseDouble(factsheet.getSiteObject().getArea()) / 100) + "";
+            }
             populateHabitatLists();
             calculateHabitatsCount();
             prepareBiogeographicRegion();
