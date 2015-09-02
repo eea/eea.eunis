@@ -120,9 +120,14 @@
 	                   if(expand.length()>0 && Utilities.expandContains(expand,rs2.getString("CODE_2000").substring(0,2))) {
 	                     strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
 	                     strSQL = strSQL + " FROM chm62edt_habitat";
-	                     strSQL = strSQL + " WHERE CODE_2000 LIKE '"+rs2.getString("CODE_2000").substring(0,2)+"%0'";
+	                     strSQL = strSQL + " WHERE ( CODE_2000 LIKE '"+rs2.getString("CODE_2000").substring(0,2)+"%0'";
+	                     strSQL = strSQL + " or CODE_2000 LIKE '"+rs2.getString("CODE_2000").substring(0,2)+"%A' )";
 	                     strSQL = strSQL + " AND CODE_2000 NOT LIKE '"+rs2.getString("CODE_2000").substring(0,2)+"%00'";
-	                     strSQL = strSQL + " ORDER BY CODE_2000 ASC";
+						   // orders by code_2000 but first by the last letter of the code (09110, 09120... 091Z0, A91AA ...)
+                           // the last letter is not the fourth level, it is used as a continuation of the third level
+                           // the order should be 9110, 9120 ... 91Y0, 91Z0, 91AA, 91BA, 91CA
+                           // https://taskman.eionet.europa.eu/issues/27925
+	                     strSQL = strSQL + " ORDER BY concat(substr(CODE_2000, 4,1), CODE_2000) ASC";
 	
 	                     ps4 = con.prepareStatement( strSQL );
 	                     rs4 = ps4.executeQuery();
@@ -134,49 +139,9 @@
 	                     {
 	%>
 	                       <li>
-	<%
-	                       if(sqlc.Annex1HabitatHasChilds(rs4.getString("CODE_2000").substring(0,rs4.getString("CODE_2000").length()-1),rs4.getString("CODE_2000"))) {
-	%>						  <% if(Utilities.expandContains(expand,rs4.getString("CODE_2000").substring(0,4))){ %>
-			                    <a title="<%=hide%>" id="level_<%=rs4.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,rs4.getString("CODE_2000").substring(0,4))%>#level_<%=rs4.getString("CODE_2000")%>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
-		                      <% } else { %>
-		                        <a title="<%=show%>" id="level_<%=rs4.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs4.getString("CODE_2000").substring(0,4))%>#level_<%=rs4.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
-		                      <% } %>
-	                          <a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("CODE_2000")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a><br/>
-	<%
-	                       } else {
-	%>
+
 	                         <img src="images/img_bullet.gif" alt="<%=rs4.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs4.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs4.getString("ID_HABITAT")%>"><%=rs4.getString("CODE_2000")%> : <%=rs4.getString("SCIENTIFIC_NAME")%></a><br/>
-	<%
-	                       }
-	                       if(expand.length()>0 && Utilities.expandContains(expand,rs4.getString("CODE_2000").substring(0,4))) {
-	                         strSQL = "SELECT ID_HABITAT, SCIENTIFIC_NAME, CODE_2000";
-	                         strSQL = strSQL + " FROM chm62edt_habitat";
-	                         strSQL = strSQL + " WHERE CODE_2000 LIKE '"+rs4.getString("CODE_2000").substring(0,4)+"%'";
-	                         strSQL = strSQL + " AND CODE_2000 NOT LIKE '"+rs4.getString("CODE_2000").substring(0,4)+"%0'";
-	                         strSQL = strSQL + " ORDER BY CODE_2000 ASC";
-	
-	                         ps5 = con.prepareStatement( strSQL );
-	                         rs5 = ps5.executeQuery();
-	
-	%>
-	                         <ul class="eunistree">
-	<%
-	                         while(rs5.next())
-	                         {
-	%>
-	                           <li>
-	                             <img src="images/img_bullet.gif" alt="<%=rs4.getString("SCIENTIFIC_NAME")%>"/>&nbsp;<a title="<%=rs5.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs5.getString("ID_HABITAT")%>"><%=rs5.getString("CODE_2000")%> : <%=rs5.getString("SCIENTIFIC_NAME")%></a><br/>
-	                           </li>
-	<%
-	                         }
-	%>
-	                         </ul>
-	<%
-	
-	                         rs5.close();
-	                         ps5.close();
-	                       }
-	%>
+
 	                       </li>
 	<%
 	                     }
