@@ -106,7 +106,7 @@ public class SpeciesRow {
     public boolean isSpecies(){
         return speciesName != null
             && speciesName.contains(" ")
-            && !(speciesName.contains("("))
+           // && !(speciesName.contains("("))  // https://taskman.eionet.europa.eu/issues/26690#note-74
             && !speciesName.startsWith("Order ")
             && !speciesName.startsWith("Phyllum ")
             && !speciesName.startsWith("Phylum ")

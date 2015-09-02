@@ -80,7 +80,7 @@ public class ExcelReader {
         if(fileType == FileType.VERTEBRATES){
             sheet = workbook.getSheetAt(2);
         } else {
-            sheet = workbook.getSheetAt(1);
+            sheet = workbook.getSheetAt(2);
         }
 
         rowIterator = sheet.iterator();
@@ -133,7 +133,7 @@ public class ExcelReader {
         // Log the unused restrictions
         for(RestrictionsRow r : restrictionsRows){
             if(!r.isUsed()){
-                System.out.println("WARNING: Species not found for restriction " + r.getSpecies() + " / " + r.getLegalText());
+                System.out.println("WARNING: Species not found for restriction " + r.getSpecies() + " (valid name " + r.getSpeciesValidName() + ")" + " / " + r.getLegalText());
             }
         }
 

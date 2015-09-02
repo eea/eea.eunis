@@ -105,7 +105,7 @@ public class ExcelRowFactory {
         r.setSpecies(getCellValue(row, "A"));
         r.setLegalText(getCellValue(row, "B"));
         r.setRestriction(getCellValue(row, "C"));
-        r.setSpeciesValidName(getCellValue(row, "D"));
+        r.setSpeciesValidName(getCellValue(row, "D").trim());
 
         if(r.getLegalText().isEmpty() || r.getLegalText().contains("Legal text"))
             return null;
@@ -122,7 +122,13 @@ public class ExcelRowFactory {
     private String getCellValue(Row row, String column){
         Cell c = row.getCell(CellReference.convertColStringToIndex(column));
         if(c!=null){
-            String s = c.getStringCellValue();
+            String s = null;
+            try{
+                s = c.getStringCellValue();
+            } catch (IllegalStateException ise){
+             ise.printStackTrace();
+               System.out.println("ERROR: Illegal stat on cell " + row.getRowNum() + ", " + column);
+            }
             if(s == null) {
                 s = "";
             }

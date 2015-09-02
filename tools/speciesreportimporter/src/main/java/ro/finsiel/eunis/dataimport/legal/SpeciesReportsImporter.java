@@ -596,7 +596,7 @@ public class SpeciesReportsImporter {
 
             // check that nameInDocument is synonym
             if(isSynonymName(nameInDocument)){
-                System.out.print("Searching for synonyms: " + nameInDocument + " - ");
+                System.out.print(" Searching for synonyms: " + nameInDocument + " - ");
 
                 // find in DB
                 String[] names = nameInDocument.split(";");
@@ -606,20 +606,23 @@ public class SpeciesReportsImporter {
                         if(debug) System.out.println(name.trim());
                         // check it's a synonym
                         if(l.size() == 0) {
-                            System.out.println(" Not found");
+                            System.out.println(" WARNING: Not found " + name);
                             // todo add it ?
                         } else if (l.size() == 1) {
-                            System.out.print("Found ");
+                            System.out.print("  Found ");
                             // check it's synonym or original species
 
                             String idSpeciesSynonym = ((TableColumns)l.get(0)).getColumnsValues().get(0).toString();
                             String validName = ((TableColumns)l.get(0)).getColumnsValues().get(2).toString();
-                            System.out.println(((TableColumns)l.get(0)).getColumnsValues().get(5).toString());
                             String link = ((TableColumns)l.get(0)).getColumnsValues().get(3).toString();
                             String related = ((TableColumns)l.get(0)).getColumnsValues().get(4).toString();
 
+                            System.out.println(((TableColumns)l.get(0)).getColumnsValues().get(5).toString() + " (" + related + ")");
+
                             if(validName.equals("0") && (related.equalsIgnoreCase("synonym") || related.equalsIgnoreCase("Subspecies")) && link.equalsIgnoreCase(idSpecies)) {
                                 if(debug) System.out.println(" Synonym ok");
+                            } else if(related.equalsIgnoreCase("misspelling")){
+                                if(debug) System.out.println(" Misspelling ok");
                             } else if(idSpeciesSynonym.trim().equalsIgnoreCase(idSpecies.trim())) {
                                 if(debug) System.out.println(" Same species! " + idSpeciesSynonym.trim());
                             } else {
