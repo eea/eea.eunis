@@ -401,6 +401,17 @@ public class SpeciesRow {
     }
 
     /**
+     * Cleans the row data, trimming the strings and removing unnecessary spaces
+     */
+    public void cleanup(){
+        speciesName = cleanString(speciesName);
+    }
+
+    private String cleanString(String s){
+        return s.replaceAll("\\s", " ").trim();
+    }
+
+    /**
      * Splits the list by the given separator, trimming the result. If the parameter is empty returns an empty array.
      * @param list The string to be split
      * @param separator The separator used for splitting

@@ -71,6 +71,7 @@ public class ExcelReader {
 
             if(sr != null && sr.isSpecies()) {
 //                System.out.println(sr);
+                sr.cleanup();
                 speciesRows.add(sr);
             }
         }
@@ -91,6 +92,7 @@ public class ExcelReader {
 
             if(restrictionsRow != null) {
 //                System.out.println(restrictionsRow);
+                restrictionsRow.cleanup();
                 restrictionsRows.add(restrictionsRow);
             }
         }

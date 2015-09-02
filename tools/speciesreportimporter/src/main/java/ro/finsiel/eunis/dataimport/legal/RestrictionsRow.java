@@ -51,6 +51,18 @@ public class RestrictionsRow {
         this.speciesValidName = speciesValidName;
     }
 
+    /**
+     * Cleans the row data, trimming the strings and removing unnecessary spaces
+     */
+    public void cleanup(){
+        species = cleanString(species);
+        speciesValidName = cleanString(speciesValidName);
+    }
+
+    private String cleanString(String s){
+        return s.replaceAll("\\s", " ").trim();
+    }
+
     @Override
     public String toString() {
         return "RestrictionsRow{" +
