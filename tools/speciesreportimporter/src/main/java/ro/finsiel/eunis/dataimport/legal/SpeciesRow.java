@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Bean to keep the Species read from an Excel row
  */
-public class SpeciesRow {
+public class SpeciesRow extends ExcelRow {
     private String speciesName;
 
     // single values, read from the Excel columns
@@ -405,10 +405,12 @@ public class SpeciesRow {
      */
     public void cleanup(){
         speciesName = cleanString(speciesName);
-    }
-
-    private String cleanString(String s){
-        return s.replaceAll("\\s", " ").trim();
+        habitatsName = cleanString(habitatsName);
+        birdsName = cleanString(birdsName);
+        emeraldName = cleanString(emeraldName);
+        bonnName = cleanString(bonnName);
+        spaName = cleanString(spaName);
+        redListName = cleanString(redListName);
     }
 
     /**

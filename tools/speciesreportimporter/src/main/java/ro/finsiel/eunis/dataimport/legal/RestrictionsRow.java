@@ -3,7 +3,7 @@ package ro.finsiel.eunis.dataimport.legal;
 /**
  * Bean to keep the Geographic and other restrictions Excel sheet data
  */
-public class RestrictionsRow {
+public class RestrictionsRow extends ExcelRow {
     private String species;
     private String speciesValidName;
     private String legalText;
@@ -57,10 +57,6 @@ public class RestrictionsRow {
     public void cleanup(){
         species = cleanString(species);
         speciesValidName = cleanString(speciesValidName);
-    }
-
-    private String cleanString(String s){
-        return s.replaceAll("\\s", " ").trim();
     }
 
     @Override
