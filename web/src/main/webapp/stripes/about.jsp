@@ -113,6 +113,10 @@
             </div>
         </div>
 
+        <div>
+            ${actionBean.report}
+        </div>
+
 <!-- END MAIN CONTENT -->
 
     </stripes:layout-component>

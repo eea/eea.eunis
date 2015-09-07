@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="testreport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="acde6c67-2db8-472f-be88-05da1115559d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="endpoint" class="java.lang.String">
+		<parameterDescription><![CDATA[SPARQL endpoint]]></parameterDescription>
+		<defaultValueExpression><![CDATA["http://dbpedia.org/sparql"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SPARQL">
+		<![CDATA[PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX dbpp: <http://dbpedia.org/ontology/PopulatedPlace/>
+
+SELECT ?subject ?name sample(?lat) AS ?lat sample(?long) AS ?long sample(?area) AS ?areaKM
+WHERE {
+  ?subject a <http://dbpedia.org/class/yago/EuropeanCountries> ;
+           geo:lat ?lat;
+           geo:long ?long;
+           dbpp:areaTotal ?area;
+           rdfs:label ?name  FILTER(LANG(?name) = "en")
+}
+ORDER BY ?name]]>
+	</queryString>
+	<field name="subject" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="areaKM" class="java.lang.String"/>
+	<field name="long" class="java.lang.Float"/>
+	<field name="lat" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="2" width="100" height="20" uuid="fced3d95-9e28-4c1e-8094-2a92cbb3ef9f"/>
+				<text><![CDATA[subject]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="2" width="100" height="20" uuid="d42d6b26-4508-4472-83ec-a09759b80020"/>
+				<text><![CDATA[name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="2" width="100" height="20" uuid="57aeb45b-99d0-4eab-b1f5-f91e12af4a3f"/>
+				<text><![CDATA[areaKM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="2" width="100" height="20" uuid="88ee2a3a-d68c-436b-a3a9-a4c07e3d49bd"/>
+				<text><![CDATA[long]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="2" width="100" height="20" uuid="6dc36b4e-651d-4543-8657-bf64b8277e1a"/>
+				<text><![CDATA[lat]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="2" width="100" height="20" uuid="b9103053-3c16-44ec-aa04-c8c4bceb4dfd"/>
+				<textFieldExpression><![CDATA[$F{subject}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="2" width="100" height="20" uuid="f5da40e4-66b3-4b17-81f5-9fcd12df18e7"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="2" width="100" height="20" uuid="0444a9db-8537-46f4-9938-40d1fbcc874d"/>
+				<textFieldExpression><![CDATA[$F{areaKM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="2" width="100" height="20" uuid="6b9894f2-00de-4b84-93a2-0242adb5f4e6"/>
+				<textFieldExpression><![CDATA[$F{long}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="2" width="100" height="20" uuid="e86d8353-d7ce-4cdf-9d2f-4c1c688ad883"/>
+				<textFieldExpression><![CDATA[$F{lat}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

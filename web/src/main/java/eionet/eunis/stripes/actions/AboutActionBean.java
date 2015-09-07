@@ -1,5 +1,6 @@
 package eionet.eunis.stripes.actions;
 
+import eionet.eunis.jasper.JasperReportGenerator;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -38,5 +39,12 @@ public class AboutActionBean extends AbstractStripesAction {
             }
         }
         return files;
+    }
+
+    public String getReport(){
+
+        JasperReportGenerator jrg = new JasperReportGenerator();
+        String s = jrg.generate("http://dbpedia.org/sparql", "/testreport.jrxml");
+        return s;
     }
 }
