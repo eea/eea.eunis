@@ -43,8 +43,13 @@ public class SpeciesRow extends ExcelRow {
     private String spaName = "";
     private String ospar = "";
     private String helcom = "";
+    // EU RedList
     private String redList = "";
     private String redListName = "";
+
+    // EU27 RedList
+    private String redListEU27 = "";
+    private String redListEU27Name = "";
 
     // identification data, read from the database
     private String idSpecies;
@@ -107,6 +112,7 @@ public class SpeciesRow extends ExcelRow {
         return speciesName != null
             && speciesName.contains(" ")
            // && !(speciesName.contains("("))  // https://taskman.eionet.europa.eu/issues/26690#note-74
+            && !speciesName.equalsIgnoreCase("VASCULAR PLANTS")
             && !speciesName.startsWith("Order ")
             && !speciesName.startsWith("Phyllum ")
             && !speciesName.startsWith("Phylum ")
@@ -128,6 +134,9 @@ public class SpeciesRow extends ExcelRow {
     public void setHabitatsD(String habitatsD) {
         this.habitatsD = habitatsD;
         habitatsDAnnex = explode(habitatsD, ",");
+        if(habitatsDAnnex.length == 1){ // also try /
+            habitatsDAnnex = explode(habitatsDAnnex[0], "/");
+        }
     }
 
     public String[] getHabitatsDAnnex() {
@@ -398,6 +407,22 @@ public class SpeciesRow extends ExcelRow {
 
     public String getIdGroup() {
         return idGroup;
+    }
+
+    public String getRedListEU27() {
+        return redListEU27;
+    }
+
+    public void setRedListEU27(String redListEU27) {
+        this.redListEU27 = redListEU27;
+    }
+
+    public String getRedListEU27Name() {
+        return redListEU27Name;
+    }
+
+    public void setRedListEU27Name(String redListEU27Name) {
+        this.redListEU27Name = redListEU27Name;
     }
 
     /**

@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.dataimport.legal;
 
+import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import ro.finsiel.eunis.utilities.TableColumns;
 
@@ -405,7 +406,11 @@ public class SpeciesReportsImporter {
         singleInsertReport("OSPAR", speciesRow.getOspar(), "I", OSPAR, ID_GEOSCOPE_EU, null, speciesRow.getOsparName(), speciesRow);
         singleInsertReport("HELCOM", speciesRow.getHelcom(), "A", HELCOM, ID_GEOSCOPE_EU, null, speciesRow);
 
-        insertRedListReport(ID_GEOSCOPE_EU, speciesRow);
+        // EU report
+        insertRedListReport(ID_GEOSCOPE_EU, speciesRow.getIdNatureObject(), speciesRow.getRedList(), speciesRow.getRedListName(), speciesRow);
+        if(!Utilities.isEmptyString(speciesRow.getRedListEU27())) {
+            insertRedListReport(ID_GEOSCOPE_EU27, speciesRow.getIdNatureObject(), speciesRow.getRedListEU27(), speciesRow.getRedListEU27Name(), speciesRow);
+        }
     }
 
     /**
@@ -413,11 +418,11 @@ public class SpeciesReportsImporter {
      * @param idGeoscope
      * @param speciesRow
      */
-    private void insertRedListReport(String idGeoscope, SpeciesRow speciesRow){
+    private void insertRedListReport(String idGeoscope, String idNatureObject, String redList, String redListName, SpeciesRow speciesRow){
 
         // clean the EU Red List first
         try {
-            selectToDeleteRedListPs.setString(1, speciesRow.getIdNatureObject());
+            selectToDeleteRedListPs.setString(1, idNatureObject);
             selectToDeleteRedListPs.setString(2, idGeoscope);
 
             ResultSet rs = selectToDeleteRedListPs.executeQuery();
@@ -431,7 +436,7 @@ public class SpeciesReportsImporter {
                 deleteReportTypePs.setString(3, "CONSERVATION_STATUS");
                 del += deleteReportTypePs.executeUpdate();
 
-                deleteReportPs.setString(1, speciesRow.getIdNatureObject());
+                deleteReportPs.setString(1, idNatureObject);
                 deleteReportPs.setString(2, rs.getString(1));
                 deleteReportPs.setString(3, rs.getString(3));
                 del += deleteReportPs.executeUpdate();
@@ -444,19 +449,19 @@ public class SpeciesReportsImporter {
         }
 
 
-        if(!speciesRow.getRedList().isEmpty()) {
+        if(!redList.isEmpty()) {
             try {
-                Integer idConservationStatus = conservationStatusCode.get(speciesRow.getRedList());
+                Integer idConservationStatus = conservationStatusCode.get(redList);
                 if(idConservationStatus != null) {
 
                     int idReportType = insertReportType(idConservationStatus, "CONSERVATION_STATUS");
-                    int idReportAttributes = insertRedListReportAttribute(speciesRow.getRedListName());
+                    int idReportAttributes = insertRedListReportAttribute(redListName);
 
-                    insertReport(speciesRow.getIdNatureObject(), RED_LIST, idGeoscope, idReportAttributes, idReportType);
+                    insertReport(idNatureObject, RED_LIST, idGeoscope, idReportAttributes, idReportType);
 
-                    if(debug) System.out.println(" Inserted conservation status code " + speciesRow.getRedList());
+                    if(debug) System.out.println(" Inserted conservation status code " + redList);
                 } else {
-                    System.out.println("WARNING: Red List code " + speciesRow.getRedList() + " not identified");
+                    System.out.println("WARNING: Red List code " + redList + " not identified");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -747,6 +752,7 @@ public class SpeciesReportsImporter {
 
         // fix for CR/PE (Critically Endangered, Possibly Extinct) - should be treated as Critically Endangered (CR)
         conservationStatusCode.put("CR/PE", conservationStatusCode.get("CR"));
+        conservationStatusCode.put("CR (PE)", conservationStatusCode.get("CR"));
     }
 
     /**

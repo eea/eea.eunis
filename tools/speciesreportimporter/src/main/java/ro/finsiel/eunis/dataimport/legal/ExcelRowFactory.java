@@ -93,6 +93,47 @@ public class ExcelRowFactory {
     }
 
     /**
+     * Reads Plants row (https://taskman.eionet.europa.eu/issues/22176)
+     * @param row
+     * @return
+     */
+    public SpeciesRow getPlantsRow(Row row) {
+        if(row.getLastCellNum()<15){
+            return null;
+        }
+
+        SpeciesRow r = new SpeciesRow();
+        r.setSpeciesName(getCellValue(row, "A"));
+        r.setHabitatsD(getCellValue(row, "K"));
+        r.setHabitatsName(getCellValue(row, "L"));
+        r.setBernConvention(getCellValue(row, "M"));
+//        r.setBernRestrictions(getCellValue(row, "E"));
+        r.setBernName(getCellValue(row, "N"));
+        r.setEmeraldR6(getCellValue(row, "O"));
+        r.setEmeraldName(getCellValue(row, "P"));
+        r.setCites(getCellValue(row, "Q"));
+        // todo: name in CITES
+        r.setEuTrade(getCellValue(row, "S"));
+        // todo: name in EU Trade
+        r.setSpa(getCellValue(row, "U")); // Barcelona
+        r.setSpaName(getCellValue(row, "V"));
+//        r.setOspar(getCellValue(row, "M"));
+        r.setHelcom(getCellValue(row, "N"));
+
+        r.setRedList(getCellValue(row, "B"));
+//        r.setRedListName(getCellValue(row, "P"));
+
+        r.setRedListEU27(getCellValue(row, "D"));
+        r.setHelcom("");
+
+        // todo: HELCOM?
+
+        r.setExcelRow(row.getRowNum() + 1);
+
+        return r;
+    }
+
+    /**
      * Reads an Excel row as a Restrictions table row
      * @param row
      * @return

@@ -24,7 +24,7 @@ public class ExcelReader {
     /**
      * The file type, identified by the column A1
      */
-    public static enum FileType { VERTEBRATES, UNKNOWN, INVERTEBRATES }
+    public static enum FileType { VERTEBRATES, UNKNOWN, INVERTEBRATES, PLANTS }
 
     private FileType fileType = FileType.UNKNOWN ;
 
@@ -54,6 +54,8 @@ public class ExcelReader {
             fileType = FileType.VERTEBRATES;
         } else if(type.equalsIgnoreCase("INVERTEBRATES")){
             fileType = FileType.INVERTEBRATES;
+        } else if(type.equalsIgnoreCase("PLANTS")){
+            fileType = FileType.PLANTS;
         } else {
             System.out.println("Unknown file type '" + type + "'! Please fill the cell A1 with 'Vertebrates' or 'Invertebrates'");
             return;
@@ -65,8 +67,12 @@ public class ExcelReader {
 
             if(fileType == FileType.VERTEBRATES){
                 sr = erf.getVertebratesRow(row);
-            } else {
+            } else if(fileType == FileType.INVERTEBRATES) {
                 sr = erf.getInvertebratesRow(row);
+            } else if(fileType == FileType.PLANTS){
+                sr = erf.getPlantsRow(row);
+            } else {
+                sr = null;
             }
 
             if(sr != null && sr.isSpecies()) {
@@ -76,28 +82,35 @@ public class ExcelReader {
             }
         }
 
-        // Geographic sheet
+        // Geographic restrictions sheet
 
         if(fileType == FileType.VERTEBRATES){
             sheet = workbook.getSheetAt(2);
-        } else {
+        } else if(fileType == FileType.INVERTEBRATES) {
             sheet = workbook.getSheetAt(2);
+        } else {
+            sheet = null;
         }
 
-        rowIterator = sheet.iterator();
+        if(sheet != null) {
 
-        while(rowIterator.hasNext()) {
-            Row row = rowIterator.next();
-            RestrictionsRow restrictionsRow = erf.getRestrictionsRow(row);
+            rowIterator = sheet.iterator();
 
-            if(restrictionsRow != null) {
+            while (rowIterator.hasNext()) {
+                Row row = rowIterator.next();
+                RestrictionsRow restrictionsRow = erf.getRestrictionsRow(row);
+
+                if (restrictionsRow != null) {
 //                System.out.println(restrictionsRow);
-                restrictionsRow.cleanup();
-                restrictionsRows.add(restrictionsRow);
+                    restrictionsRow.cleanup();
+                    restrictionsRows.add(restrictionsRow);
+                }
             }
+
+            populateRestrictions();
         }
 
-        populateRestrictions();
+
         file.close();
     }
 
