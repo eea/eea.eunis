@@ -72,10 +72,49 @@
                             <b>Source:</b> ${actionBean.attribution}
                         </c:if>
                     </c:when>
+                    <c:when test="${not empty actionBean.jasperReportPage}">
+                        <div>
+                            <c:if test="${actionBean.paginable}">
+
+                                <c:if test="${actionBean.page gt 0}"><span><a href="/externalglobal?query=${param["query"]}&page=${actionBean.page-1}">Previous</a></span></c:if>
+                                <c:set var="dots" value="0"/>
+                                <c:forEach begin="0" end="${actionBean.lastPage}" var="i">
+                                    <span>
+                                    <c:choose>
+                                        <c:when test="${i eq actionBean.page}">
+                                            ${i+1}
+                                        </c:when>
+                                        <c:when test="${i lt 3}">
+                                            <a href="/externalglobal?query=${param["query"]}&page=${i}">${i+1}</a>
+                                        </c:when>
+                                        <c:when test="${i gt (actionBean.lastPage - 3)}">
+                                            <a href="/externalglobal?query=${param["query"]}&page=${i}">${i+1}</a>
+                                        </c:when>
+                                        <c:when test="${i gt (actionBean.page-3) and i lt(actionBean.page+3)}">
+                                            <a href="/externalglobal?query=${param["query"]}&page=${i}">${i+1}</a>
+                                            <c:set var="dots" value="0"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:if test="${dots eq 0}">.....</c:if>
+                                            <c:set var="dots" value="1"/>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    </span>
+                                </c:forEach>
+                                <c:if test="${actionBean.page lt actionBean.lastPage}"><span><a href="/externalglobal?query=${param["query"]}&page=${actionBean.page+1}">Next</a></span></span></c:if>
+
+                            </c:if>
+                        <div>
+                            ${actionBean.jasperReportPage}
+                        </div>
+                            <a href="/jreportdown?query=${param["query"]}&format=PDF">Download as PDF</a>
+                        </div>
+                    </c:when>
                     <c:otherwise>
                         <div style="font-weight:bold">Query didn't return any result!</div>
                     </c:otherwise>
                 </c:choose>
+
             </c:otherwise>
         </c:choose>
 

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="testreportsql" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="43dddf8f-215b-4f3f-b3c1-9c40a66610ed">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from chm62edt_species where scientific_name like 'O%']]>
+	</queryString>
+	<field name="ID_SPECIES" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_NATURE_OBJECT" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SCIENTIFIC_NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VALID_NAME" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_SPECIES_LINK" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TYPE_RELATED_SPECIES" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TEMPORARY_SELECT" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GENUS" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SPECIES_MAP" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_GROUP_SPECIES" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ID_TAXONOMY" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="AUTHOR" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IGNORE_ON_MATCH" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CODE_2000" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="100" height="20" uuid="c59ff6ed-7c5a-4e62-b913-d3b5c76d4e41"/>
+				<textFieldExpression><![CDATA["SQL report"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="2" width="167" height="20" uuid="36751ea7-ebee-4256-8feb-19834866b3a9"/>
+				<text><![CDATA[SCIENTIFIC_NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="2" width="105" height="20" uuid="88f07095-a8e9-4ddd-8a94-71ee397e651f"/>
+				<text><![CDATA[GENUS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="2" width="145" height="20" uuid="c2e44554-9de7-4f3b-907a-45723e319299"/>
+				<text><![CDATA[AUTHOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="2" width="100" height="20" uuid="7d93f7b9-d663-4a8e-813a-c3e95b6b9179"/>
+				<text><![CDATA[CODE_2000]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="3" width="167" height="20" uuid="f3ece139-ba23-4903-a41a-f3677b1f1c03"/>
+				<textFieldExpression><![CDATA[$F{SCIENTIFIC_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="313" y="3" width="105" height="20" uuid="8180e0ef-2969-4934-8aab-462200f37189"/>
+				<textFieldExpression><![CDATA[$F{GENUS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="3" width="145" height="20" uuid="3ba7f885-e397-47bd-bd42-060472410d6c"/>
+				<textFieldExpression><![CDATA[$F{AUTHOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="3" width="100" height="20" uuid="6c271ba1-61c1-4551-a38d-7eaaa0792a94"/>
+				<textFieldExpression><![CDATA[$F{CODE_2000}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
