@@ -7,7 +7,7 @@
 %>
 <stripes:layout-render name="/stripes/common/template.jsp" bookmarkPageName="externalglobal" pageTitle="Global queries" btrail="<%=btrail%>">
     <stripes:layout-component name="head">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.servletPath}/css/eea_search.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/eea_search.css"/>
     </stripes:layout-component>
     <stripes:layout-component name="contents">
 
@@ -75,8 +75,11 @@
                     <c:when test="${not empty actionBean.jasperReportPage}">
                         <div>
                             <c:if test="${actionBean.paginable}">
-
-                                <c:if test="${actionBean.page gt 0}"><span><a href="/externalglobal?query=${param["query"]}&page=${actionBean.page-1}">Previous</a></span></c:if>
+                                <span>Pages</span>
+                                <c:choose>
+                                    <c:when test="${actionBean.page gt 0}"><span><a href="/externalglobal?query=${param["query"]}&page=${actionBean.page-1}" title="Previous page">Previous</a></span></c:when>
+                                    <c:otherwise><span >Previous</span></c:otherwise>
+                                </c:choose>
                                 <c:set var="dots" value="0"/>
                                 <c:forEach begin="0" end="${actionBean.lastPage}" var="i">
                                     <span>
@@ -84,16 +87,17 @@
                                         <c:when test="${i eq actionBean.page}">
                                             ${i+1}
                                         </c:when>
-                                        <c:when test="${i lt 3}">
-                                            <a href="/externalglobal?query=${param["query"]}&page=${i}">${i+1}</a>
-                                        </c:when>
-                                        <c:when test="${i gt (actionBean.lastPage - 3)}">
-                                            <a href="/externalglobal?query=${param["query"]}&page=${i}">${i+1}</a>
-                                        </c:when>
-                                        <c:when test="${i gt (actionBean.page-3) and i lt(actionBean.page+3)}">
-                                            <a href="/externalglobal?query=${param["query"]}&page=${i}">${i+1}</a>
+                                        <c:when test="${(i lt 3) or (i gt (actionBean.lastPage - 3)) or (i gt (actionBean.page-3) and i lt(actionBean.page+3))}">
+                                            <a href="/externalglobal?query=${param["query"]}&page=${i}" title="Go to page ${i+1}">${i+1}</a>
                                             <c:set var="dots" value="0"/>
                                         </c:when>
+                                        <%--<c:when test="${i gt (actionBean.lastPage - 3)}">--%>
+                                            <%--<a href="/externalglobal?query=${param["query"]}&page=${i}" title="Go to page ${i+1}">${i+1}</a>--%>
+                                        <%--</c:when>--%>
+                                        <%--<c:when test="${i gt (actionBean.page-3) and i lt(actionBean.page+3)}">--%>
+                                            <%--<a href="/externalglobal?query=${param["query"]}&page=${i}" title="Go to page ${i+1}">${i+1}</a>--%>
+                                            <%--<c:set var="dots" value="0"/>--%>
+                                        <%--</c:when>--%>
                                         <c:otherwise>
                                             <c:if test="${dots eq 0}">.....</c:if>
                                             <c:set var="dots" value="1"/>
@@ -101,13 +105,20 @@
                                     </c:choose>
                                     </span>
                                 </c:forEach>
-                                <c:if test="${actionBean.page lt actionBean.lastPage}"><span><a href="/externalglobal?query=${param["query"]}&page=${actionBean.page+1}">Next</a></span></span></c:if>
-
+                                <c:choose>
+                                    <c:when test="${actionBean.page lt actionBean.lastPage}"><span><a href="/externalglobal?query=${param["query"]}&page=${actionBean.page+1}" title="Next page">Next</a></span></span></c:when>
+                                    <c:otherwise>Next</c:otherwise>
+                                </c:choose>
                             </c:if>
                         <div>
                             ${actionBean.jasperReportPage}
                         </div>
                             <a href="/jreportdown?query=${param["query"]}&format=PDF">Download as PDF</a>
+                            <script>
+                                $(document).ready(function() {
+                                    $('.jrPage').css('width','100%');
+                                });
+                            </script>
                         </div>
                     </c:when>
                     <c:otherwise>

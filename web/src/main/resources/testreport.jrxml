@@ -3,6 +3,8 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="EUNISTableHeader" mode="Opaque" forecolor="#FFFFFF" backcolor="#006090" fontName="Verdana" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="EUNISTable" mode="Opaque" forecolor="#FFFFFF" backcolor="#FFFFFF" fontName="Verdana" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 	<parameter name="endpoint" class="java.lang.String">
 		<parameterDescription><![CDATA[SPARQL endpoint]]></parameterDescription>
 		<defaultValueExpression><![CDATA["http://dbpedia.org/sparql"]]></defaultValueExpression>
@@ -37,60 +39,102 @@ ORDER BY ?name]]>
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="28" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<staticText>
-				<reportElement x="10" y="2" width="100" height="20" uuid="fced3d95-9e28-4c1e-8094-2a92cbb3ef9f"/>
-				<text><![CDATA[subject]]></text>
+				<reportElement style="EUNISTableHeader" mode="Opaque" x="10" y="2" width="100" height="20" uuid="fced3d95-9e28-4c1e-8094-2a92cbb3ef9f">
+					<property name="net.sf.jasperreports.export.html.class" value="dt_sortable"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Verdana" isUnderline="false"/>
+					<paragraph spacingAfter="4"/>
+				</textElement>
+				<text><![CDATA[Subject]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="110" y="2" width="100" height="20" uuid="d42d6b26-4508-4472-83ec-a09759b80020"/>
-				<text><![CDATA[name]]></text>
+				<reportElement style="EUNISTableHeader" mode="Opaque" x="110" y="2" width="100" height="20" uuid="d42d6b26-4508-4472-83ec-a09759b80020"/>
+				<text><![CDATA[Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="210" y="2" width="100" height="20" uuid="57aeb45b-99d0-4eab-b1f5-f91e12af4a3f"/>
-				<text><![CDATA[areaKM]]></text>
+				<reportElement style="EUNISTableHeader" mode="Opaque" x="210" y="2" width="100" height="20" uuid="57aeb45b-99d0-4eab-b1f5-f91e12af4a3f"/>
+				<text><![CDATA[Area [Km]]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="310" y="2" width="100" height="20" uuid="88ee2a3a-d68c-436b-a3a9-a4c07e3d49bd"/>
-				<text><![CDATA[long]]></text>
+				<reportElement style="EUNISTableHeader" mode="Opaque" x="310" y="2" width="100" height="20" uuid="88ee2a3a-d68c-436b-a3a9-a4c07e3d49bd"/>
+				<text><![CDATA[Longitude]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="2" width="100" height="20" uuid="6dc36b4e-651d-4543-8657-bf64b8277e1a"/>
-				<text><![CDATA[lat]]></text>
+				<reportElement style="EUNISTableHeader" mode="Opaque" x="410" y="2" width="100" height="20" uuid="6dc36b4e-651d-4543-8657-bf64b8277e1a"/>
+				<text><![CDATA[Latitude]]></text>
 			</staticText>
+			<image>
+				<reportElement x="511" y="2" width="17" height="14" uuid="c82ff709-0586-47cc-be1a-afed901c9718"/>
+				<imageExpression><![CDATA["\\bookmarks.gif"]]></imageExpression>
+			</image>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="50" splitType="Stretch">
-			<textField>
-				<reportElement x="11" y="2" width="100" height="20" uuid="b9103053-3c16-44ec-aa04-c8c4bceb4dfd"/>
+		<band height="24" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="0" width="100" height="20" isPrintWhenDetailOverflows="true" uuid="b9103053-3c16-44ec-aa04-c8c4bceb4dfd"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isBold="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{subject}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="111" y="2" width="100" height="20" uuid="f5da40e4-66b3-4b17-81f5-9fcd12df18e7"/>
+				<reportElement x="110" y="0" width="100" height="20" uuid="f5da40e4-66b3-4b17-81f5-9fcd12df18e7"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isBold="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="211" y="2" width="100" height="20" uuid="0444a9db-8537-46f4-9938-40d1fbcc874d"/>
+				<reportElement x="210" y="0" width="100" height="20" uuid="0444a9db-8537-46f4-9938-40d1fbcc874d"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isBold="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{areaKM}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="311" y="2" width="100" height="20" uuid="6b9894f2-00de-4b84-93a2-0242adb5f4e6"/>
+				<reportElement x="310" y="0" width="100" height="20" uuid="6b9894f2-00de-4b84-93a2-0242adb5f4e6"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isBold="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{long}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="411" y="2" width="100" height="20" uuid="e86d8353-d7ce-4cdf-9d2f-4c1c688ad883"/>
+				<reportElement x="410" y="0" width="100" height="20" uuid="e86d8353-d7ce-4cdf-9d2f-4c1c688ad883"/>
+				<textElement>
+					<font fontName="Verdana" size="12" isBold="false"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{lat}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="37" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="38" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="516" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="516" uuid="c15ce3e0-7fad-4d42-8552-e1a23f1dc83d"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset minPercentage="1.0">
+					<keyExpression><![CDATA[$F{name}]]></keyExpression>
+					<valueExpression><![CDATA[Float.parseFloat($F{areaKM})]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
 	</summary>
 </jasperReport>

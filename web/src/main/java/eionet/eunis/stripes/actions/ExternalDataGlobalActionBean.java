@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import eionet.eunis.jasper.JasperReportGenerator;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.j2ee.servlets.ImageServlet;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -83,7 +85,7 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
      */
     private String attribution;
 
-    private String jasperReportPage;
+    private String jasperReportPage = "";
 
     private int page=0;
 
@@ -127,13 +129,12 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
                 JasperReportGenerator jrg = (JasperReportGenerator) this.getContext().getFromSession(SESSION_PREFIX + "." + query);
                 paginable = Boolean.valueOf(linkedDataHelper.getQueryAttribute(query, "pagination"));
                 if(jrg != null){
-                    if(jrg.getLastPage() < page){
-                        page = jrg.getLastPage();
-                    }
-                    if(page!=0 && paginable) {
+                    // the report was already generated
+                    if(paginable) {
                         jrg.setCurrentPage(page);
                     }
                 } else {
+                    // generate report
                     String endpoint = linkedDataHelper.getQueryAttribute(query, "endpoint");
                     String file = linkedDataHelper.getQueryAttribute(query, "file");
                     if(isJASPER_SPARQL) {
@@ -141,15 +142,18 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
                     } else if(isJASPER_SQL) {
                         jrg = new JasperReportGenerator(file, paginable);
                     }
-                    if(jrg.getLastPage() < page){
-                        page = jrg.getLastPage();
-                    }
-                    if(page!=0){
+                    if(paginable){
                         jrg.setCurrentPage(page);
                     }
                 }
                 lastPage = jrg.getLastPage();
-                jasperReportPage = jrg.getGeneratedPage();
+                try {
+                    jasperReportPage = jrg.getGeneratedPage();
+                    // for images and charts
+                    this.getContext().addToSession(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jrg.getJasperPrint());
+                } catch (JRException e) {
+                    LOGGER.error(e,e);
+                }
                 this.getContext().addToSession(SESSION_PREFIX + "." + query, jrg);
 
                 // TODO: check memory footprint of the session object and better handling (cleanup)

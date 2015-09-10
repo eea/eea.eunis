@@ -350,6 +350,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>JasperReportImageServlet</servlet-name>
+        <servlet-class>net.sf.jasperreports.j2ee.servlets.ImageServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>StatisticalResultRedirectServlet</servlet-name>
         <servlet-class>eionet.eunis.servlets.StatisticalResultRedirectServlet</servlet-class>
     </servlet>
@@ -657,6 +662,11 @@
     <servlet-mapping>
         <servlet-name>JasperReportDownloadServlet</servlet-name>
         <url-pattern>/jreportdown</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>JasperReportImageServlet</servlet-name>
+        <url-pattern>/jreportimg</url-pattern>
     </servlet-mapping>
 
 

@@ -1,16 +1,20 @@
 package eionet.eunis.jasper;
 
-import java.io.*;
-import java.sql.Connection;
-import java.util.HashMap;
-
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.export.HtmlExporter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.query.QueryExecuterFactory;
 import net.sf.jasperreports.export.*;
+import net.sf.jasperreports.web.util.WebHtmlResourceHandler;
 import org.apache.log4j.Logger;
 import ro.finsiel.eunis.utilities.TheOneConnectionPool;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.sql.Connection;
+import java.util.HashMap;
 
 /**
  * Gerenates a page based on a Jasper Reports file
@@ -20,7 +24,6 @@ public class JasperReportGenerator implements Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(JasperReportGenerator.class);
 
-    private String generatedPage;
     // page numbering starts at zero
     private int currentPage;
     private int lastPage;
@@ -80,12 +83,14 @@ public class JasperReportGenerator implements Serializable {
             InputStream is = JasperReportGenerator.class.getResourceAsStream(jrxmlFileName);
 
             DefaultJasperReportsContext.getInstance().setProperty(QueryExecuterFactory.QUERY_EXECUTER_FACTORY_PREFIX + "SPARQL", "eionet.jasperreports.cds.SPARQLQueryExecuterFactory");
+            DefaultJasperReportsContext.getInstance().setProperty(QueryExecuterFactory.QUERY_EXECUTER_FACTORY_PREFIX + "sparql", "eionet.jasperreports.cds.SPARQLQueryExecuterFactory");
 
             JasperReport jr = JasperCompileManager.compileReport(is);
             is.close();
 
             HashMap<String, Object> parameters = new HashMap<>();
             parameters.put("endpoint", endpoint);
+
 
             // Generate the jasper print
             jasperPrint = JasperFillManager.fillReport(jr, parameters);
@@ -105,39 +110,45 @@ public class JasperReportGenerator implements Serializable {
      * Generates the current page as HTML into the currentPage String
      * @throws JRException
      */
-    private void generatePage() throws JRException {
+    private String generatePage() throws JRException {
         HtmlExporter exporter = new HtmlExporter(DefaultJasperReportsContext.getInstance());
         SimpleHtmlExporterConfiguration hec = new SimpleHtmlExporterConfiguration();
         hec.setHtmlFooter("");
         hec.setHtmlHeader("");
         hec.setBetweenPagesHtml("");
 
+
         shrc = new SimpleHtmlReportConfiguration();
         if(pagination) {
             shrc.setPageIndex(currentPage);
         }
         shrc.setIgnorePageMargins(true);
+        shrc.setRemoveEmptySpaceBetweenRows(true);
+        shrc.setWhitePageBackground(true);
+        shrc.setWrapBreakWord(false);
+
 
         exporter.setConfiguration(shrc);
-
-//            exporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, "../servlets/image?image=");
 
         exporter.setConfiguration(hec);
 
         StringBuffer sb = new StringBuffer();
         exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
         SimpleHtmlExporterOutput sheo = new SimpleHtmlExporterOutput(sb) ;
+        WebHtmlResourceHandler hrh = new WebHtmlResourceHandler("/jreportimg?image={0}");
+
+        sheo.setImageHandler(hrh);
 
         exporter.setExporterOutput(sheo);
 
         exporter.exportReport();
 
-        generatedPage = sb.toString();
+        return sb.toString();
     }
 
     /**
      * Generate the report as PDF
-     * @throws JRException
+     * @throws JRException byte array
      */
     public byte[] generatePDF() throws JRException {
 
@@ -161,10 +172,11 @@ public class JasperReportGenerator implements Serializable {
     }
 
     /**
-     * The generated report page
+     * The generated report page; the page will actually be generated on request
      * @return
      */
-    public String getGeneratedPage() {
+    public String getGeneratedPage() throws JRException {
+        String generatedPage = generatePage();
         return generatedPage;
     }
 
@@ -177,7 +189,7 @@ public class JasperReportGenerator implements Serializable {
     }
 
     /**
-     * The current page
+     * The current page index (pages start at zero)
      * @return
      */
     public int getCurrentPage() {
@@ -185,17 +197,22 @@ public class JasperReportGenerator implements Serializable {
     }
 
     /**
-     * Sets the current page; this will generate the new page
+     * Sets the current page
      * @param currentPage
      */
     public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-        try {
-            if(pagination) {
-                generatePage();
+        if(currentPage<lastPage) {
+            if(currentPage<0){
+                this.currentPage = 0;
+            } else {
+                this.currentPage = currentPage;
             }
-        } catch (JRException e) {
-            e.printStackTrace();
+        } else {
+            this.currentPage = lastPage;
         }
+    }
+
+    public JasperPrint getJasperPrint() {
+        return jasperPrint;
     }
 }
