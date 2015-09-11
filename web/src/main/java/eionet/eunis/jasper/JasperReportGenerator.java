@@ -7,6 +7,8 @@ import net.sf.jasperreports.engine.query.QueryExecuterFactory;
 import net.sf.jasperreports.export.*;
 import net.sf.jasperreports.web.util.WebHtmlResourceHandler;
 import org.apache.log4j.Logger;
+import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 import ro.finsiel.eunis.utilities.TheOneConnectionPool;
 
 import java.io.ByteArrayOutputStream;
@@ -15,6 +17,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Gerenates a page based on a Jasper Reports file
@@ -33,40 +36,40 @@ public class JasperReportGenerator implements Serializable {
     private boolean pagination = true;
     SimpleHtmlReportConfiguration shrc;
 
-    /**
-     * Create a SQL report with optional pagination
-     * @param jrxmlFileName
-     * @param pagination
-     */
-    public JasperReportGenerator(String jrxmlFileName, boolean pagination){
-        this.fileName = jrxmlFileName;
-        this.pagination = pagination;
-
-        try {
-            InputStream is = JasperReportGenerator.class.getResourceAsStream(jrxmlFileName);
-
-            JasperReport jr = JasperCompileManager.compileReport(is);
-            is.close();
-
-            Connection connection = TheOneConnectionPool.getConnection();
-
-            HashMap<String, Object> parameters = new HashMap<>();
-
-            // Generate the jasper print using the SQL connection
-            jasperPrint = JasperFillManager.fillReport(jr, parameters, connection);
-
-            currentPage = 0;
-            lastPage = jasperPrint.getPages().size() - 1;
-            // refresh the first page
-            generatePage();
-
-            connection.close();
-
-        } catch (Exception e) {
-            System.out.print("Exception" + e);
-            LOGGER.error(e,e);
-        }
-    }
+//    /**
+//     * Create a SQL report with optional pagination
+//     * @param jrxmlFileName
+//     * @param pagination
+//     */
+//    public JasperReportGenerator(String jrxmlFileName, List<String> subreports, boolean pagination){
+//        this.fileName = jrxmlFileName;
+//        this.pagination = pagination;
+//
+//        try {
+//            InputStream is = JasperReportGenerator.class.getResourceAsStream(jrxmlFileName);
+//
+//            JasperReport jr = JasperCompileManager.compileReport(is);
+//            is.close();
+//
+//            Connection connection = TheOneConnectionPool.getConnection();
+//
+//            HashMap<String, Object> parameters = new HashMap<>();
+//
+//            // Generate the jasper print using the SQL connection
+//            jasperPrint = JasperFillManager.fillReport(jr, parameters, connection);
+//
+//            currentPage = 0;
+//            lastPage = jasperPrint.getPages().size() - 1;
+//            // refresh the first page
+//            generatePage();
+//
+//            connection.close();
+//
+//        } catch (Exception e) {
+//            System.out.print("Exception" + e);
+//            LOGGER.error(e,e);
+//        }
+//    }
 
     /**
      * Create a SPARQL report with optional pagination
@@ -78,6 +81,7 @@ public class JasperReportGenerator implements Serializable {
         this.endpoint = endpoint;
         this.fileName = jrxmlFileName;
         this.pagination = pagination;
+        Connection connection = null;
 
         try {
             InputStream is = JasperReportGenerator.class.getResourceAsStream(jrxmlFileName);
@@ -89,20 +93,30 @@ public class JasperReportGenerator implements Serializable {
             is.close();
 
             HashMap<String, Object> parameters = new HashMap<>();
-            parameters.put("endpoint", endpoint);
+            if(!Utilities.isEmptyString(endpoint)){
+                parameters.put("endpoint", endpoint);
+            }
 
+            if(!pagination) {
+                parameters.put(JRParameter.IS_IGNORE_PAGINATION, true);
+            }
+
+            connection = TheOneConnectionPool.getConnection();
 
             // Generate the jasper print
-            jasperPrint = JasperFillManager.fillReport(jr, parameters);
+            jasperPrint = JasperFillManager.fillReport(jr, parameters, connection);
 
             currentPage = 0;
             lastPage = jasperPrint.getPages().size() - 1;
             // refresh the first page
             generatePage();
 
+
         } catch (Exception e) {
             System.out.print("Exception" + e);
             LOGGER.error(e,e);
+        } finally {
+            SQLUtilities.closeAll(connection, null, null);
         }
     }
 
@@ -126,6 +140,7 @@ public class JasperReportGenerator implements Serializable {
         shrc.setRemoveEmptySpaceBetweenRows(true);
         shrc.setWhitePageBackground(true);
         shrc.setWrapBreakWord(false);
+
 
 
         exporter.setConfiguration(shrc);

@@ -74,8 +74,9 @@
                     </c:when>
                     <c:when test="${not empty actionBean.jasperReportPage}">
                         <div>
+                            <div style="height: 18px;">
                             <c:if test="${actionBean.paginable}">
-                                <span>Pages</span>
+                                <span style="margin-right: 10px;">Page ${actionBean.page+1} of ${actionBean.lastPage+1}</span>
                                 <c:choose>
                                     <c:when test="${actionBean.page gt 0}"><span><a href="/externalglobal?query=${param["query"]}&page=${actionBean.page-1}" title="Previous page">Previous</a></span></c:when>
                                     <c:otherwise><span >Previous</span></c:otherwise>
@@ -110,10 +111,14 @@
                                     <c:otherwise>Next</c:otherwise>
                                 </c:choose>
                             </c:if>
+                            <span style="float:right;">
+                                <a href="/jreportdown?query=${param["query"]}&format=PDF">Download as PDF</a>
+                            </span>
+                            </div>
                         <div>
                             ${actionBean.jasperReportPage}
                         </div>
-                            <a href="/jreportdown?query=${param["query"]}&format=PDF">Download as PDF</a>
+
                             <script>
                                 $(document).ready(function() {
                                     $('.jrPage').css('width','100%');

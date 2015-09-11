@@ -140,7 +140,7 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
                     if(isJASPER_SPARQL) {
                         jrg = new JasperReportGenerator(file, endpoint, paginable);
                     } else if(isJASPER_SQL) {
-                        jrg = new JasperReportGenerator(file, paginable);
+                        jrg = new JasperReportGenerator(file, null, paginable);
                     }
                     if(paginable){
                         jrg.setCurrentPage(page);
