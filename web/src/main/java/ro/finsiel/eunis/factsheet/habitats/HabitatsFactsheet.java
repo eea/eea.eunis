@@ -1296,6 +1296,12 @@ public class HabitatsFactsheet {
      * @return A code or empty if none found
      */
     public Chm62edtHabitatPersist getResolution4Parent() {
+        if(this.getEunisHabitatCode() != null && this.getEunisHabitatCode().equalsIgnoreCase("F9.35")){
+//            workaround for exclusion of a specific habitat
+//            https://taskman.eionet.europa.eu/issues/28693
+//            row 149  F9.3 	Southern riparian galleries and thickets 	exclude F9.35 : Riparian stands of invasive shrubs
+            return null;
+        }
         if(resolution4Parent == null) {
             HabitatLegalPersist result = null;
             List<Chm62edtHabitatHabitatPersist> list = new Chm62edtHabitatHabitatDomain().findWhere("ID_HABITAT='" + idHabitat + "'");
