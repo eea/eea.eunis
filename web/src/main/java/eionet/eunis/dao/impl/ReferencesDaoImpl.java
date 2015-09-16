@@ -162,7 +162,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             con = getConnection();
             preparedStatement =
                     con.prepareStatement(
-                            "select ID_DC, LINK, LINKTEXT from DC_LINKS where ID_DC=?");
+                            "select ID_DC, LINK, LINKTEXT from dc_links where ID_DC=?");
             preparedStatement.setString(1, idDc);
             rs = preparedStatement.executeQuery();
 
