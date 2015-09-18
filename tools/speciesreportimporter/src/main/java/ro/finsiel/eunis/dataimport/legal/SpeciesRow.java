@@ -79,6 +79,9 @@ public class SpeciesRow extends ExcelRow {
     private String aewaName = "";
     private String osparName = "";
 
+    // import result
+    private String result = "";
+
     public Map<String, RestrictionsRow> getRestrictionsMap() {
         return restrictionsMap;
     }
@@ -102,6 +105,8 @@ public class SpeciesRow extends ExcelRow {
     public String[] getBernConventionAnnex() {
         return bernConventionAnnex;
     }
+
+
 
     /**
      * Checks that the row is actually a species or something else using the species name
@@ -527,5 +532,13 @@ public class SpeciesRow extends ExcelRow {
 
     public String getOsparName() {
         return osparName;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void appendResult(String toAppend){
+        result = result + toAppend + "; ";
     }
 }
