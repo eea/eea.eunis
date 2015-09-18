@@ -92,13 +92,6 @@
                                             <a href="/externalglobal?query=${param["query"]}&page=${i}" title="Go to page ${i+1}">${i+1}</a>
                                             <c:set var="dots" value="0"/>
                                         </c:when>
-                                        <%--<c:when test="${i gt (actionBean.lastPage - 3)}">--%>
-                                            <%--<a href="/externalglobal?query=${param["query"]}&page=${i}" title="Go to page ${i+1}">${i+1}</a>--%>
-                                        <%--</c:when>--%>
-                                        <%--<c:when test="${i gt (actionBean.page-3) and i lt(actionBean.page+3)}">--%>
-                                            <%--<a href="/externalglobal?query=${param["query"]}&page=${i}" title="Go to page ${i+1}">${i+1}</a>--%>
-                                            <%--<c:set var="dots" value="0"/>--%>
-                                        <%--</c:when>--%>
                                         <c:otherwise>
                                             <c:if test="${dots eq 0}">.....</c:if>
                                             <c:set var="dots" value="1"/>
@@ -112,7 +105,10 @@
                                 </c:choose>
                             </c:if>
                             <span style="float:right;">
-                                <a href="/jreportdown?query=${param["query"]}&format=PDF">Download as PDF</a>
+                                <a href="/jreportdown?query=${param["query"]}&format=PDF">
+                                    <img src="images/pdf.png"
+                                        title="Download as PDF" />
+                                    Download as PDF</a>
                             </span>
                             </div>
                         <div>

@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa jaspertest jaspertestp jaspertestsql jaspertestsqlp
+  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa jaspertest jaspertestp jaspertestsql jaspertestsqlp jaspertestsqls
   </entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
@@ -418,5 +418,13 @@ ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
     using SQL data source and pagination ]]></entry>
     <entry key="jaspertestsqlp.pagination">true</entry>
     <entry key="jaspertestsqlp.file">/testreportsql.jrxml</entry>
+
+    <entry key="jaspertestsqls.querytype">JASPER</entry>
+    <entry key="jaspertestsqls.title">Jasper Reports test with subreports</entry>
+    <entry key="jaspertestsqls.summary"><![CDATA[Test for Jasper Reports integration
+    using a subreport and combining SQL with SPARQL ]]></entry>
+    <entry key="jaspertestsqls.pagination">true</entry>
+    <entry key="jaspertestsqls.file">/testreport_wsub.jrxml</entry>
+    <entry key="jaspertestsqls.subreport.SUBREPORT1">/testreport_sub.jrxml</entry>
 
 </properties>

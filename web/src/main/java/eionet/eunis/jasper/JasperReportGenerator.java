@@ -77,7 +77,7 @@ public class JasperReportGenerator implements Serializable {
      * @param jrxmlFileName
      * @param pagination
      */
-    public JasperReportGenerator(String jrxmlFileName, String endpoint, boolean pagination) {
+    public JasperReportGenerator(String jrxmlFileName, String endpoint, List<Subreport> subreports, boolean pagination) {
         this.endpoint = endpoint;
         this.fileName = jrxmlFileName;
         this.pagination = pagination;
@@ -93,6 +93,14 @@ public class JasperReportGenerator implements Serializable {
             is.close();
 
             HashMap<String, Object> parameters = new HashMap<>();
+
+            for(Subreport subreport : subreports){
+                is = JasperReportGenerator.class.getResourceAsStream(subreport.fileName);
+                JasperReport compiledReport = JasperCompileManager.compileReport(is);
+                parameters.put(subreport.property, compiledReport);
+                is.close();
+            }
+
             if(!Utilities.isEmptyString(endpoint)){
                 parameters.put("endpoint", endpoint);
             }
@@ -229,5 +237,24 @@ public class JasperReportGenerator implements Serializable {
 
     public JasperPrint getJasperPrint() {
         return jasperPrint;
+    }
+
+    public static class Subreport {
+        private String fileName;
+        private String property;
+
+        public Subreport(String file, String property) {
+            this.fileName = file;
+            this.property = property;
+        }
+
+        public String getProperty() {
+            return property;
+        }
+
+        public String getFileName() {
+            return fileName;
+        }
+
     }
 }

@@ -57,7 +57,7 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
      * The query types supported by this action bean.
      */
     public enum QueryType {
-        SQL, SPARQL, JASPER_SPARQL, JASPER_SQL
+        SQL, SPARQL, JASPER
     }
 
     /**
@@ -104,10 +104,7 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
 
             boolean isSPARQL = queryType.equalsIgnoreCase(QueryType.SPARQL.name());
             boolean isSQL = queryType.equalsIgnoreCase(QueryType.SQL.name());
-            boolean isJASPER_SPARQL = queryType.equalsIgnoreCase(QueryType.JASPER_SPARQL.name());
-            boolean isJASPER_SQL = queryType.equalsIgnoreCase(QueryType.JASPER_SQL.name());
-
-
+            boolean isJASPER = queryType.equalsIgnoreCase(QueryType.JASPER.name());
 
             if (isSPARQL || isSQL) {
                 try {
@@ -125,7 +122,7 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
                     showWarning(msg + e.getMessage());
                     LOGGER.error(msg, e);
                 }
-            } else if(isJASPER_SPARQL || isJASPER_SQL) {
+            } else if(isJASPER) {
                 JasperReportGenerator jrg = (JasperReportGenerator) this.getContext().getFromSession(SESSION_PREFIX + "." + query);
                 paginable = Boolean.valueOf(linkedDataHelper.getQueryAttribute(query, "pagination"));
                 if(jrg != null){
@@ -137,11 +134,19 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
                     // generate report
                     String endpoint = linkedDataHelper.getQueryAttribute(query, "endpoint");
                     String file = linkedDataHelper.getQueryAttribute(query, "file");
-                    if(isJASPER_SPARQL) {
-                        jrg = new JasperReportGenerator(file, endpoint, paginable);
-                    } else if(isJASPER_SQL) {
-                        jrg = new JasperReportGenerator(file, null, paginable);
+                    // test for subreports
+                    List<String> subProperties = linkedDataHelper.getQueryAttributeKeys(query + ".subreport.");
+                    List<JasperReportGenerator.Subreport> subreportList = new ArrayList<>();
+
+                    for(String subProperty : subProperties){
+                        subProperty = subProperty.replace(query + ".subreport.", "");
+                        String fileName = linkedDataHelper.getQueryAttribute(query + ".subreport", subProperty);
+                        JasperReportGenerator.Subreport sr = new JasperReportGenerator.Subreport(fileName, subProperty);
+                        subreportList.add(sr);
                     }
+
+                    jrg = new JasperReportGenerator(file, endpoint, subreportList, paginable);
+
                     if(paginable){
                         jrg.setCurrentPage(page);
                     }
