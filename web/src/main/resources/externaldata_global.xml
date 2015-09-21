@@ -388,7 +388,7 @@ ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
 
 <!--Samples for Jasper Reports -->
 
-    <entry key="jaspertest.querytype">JASPER_SPARQL</entry>
+    <entry key="jaspertest.querytype">JASPER</entry>
     <entry key="jaspertest.title">Jasper Reports SPARQL integration test</entry>
     <entry key="jaspertest.summary"><![CDATA[Test for Jasper Reports integration
     using SPARQL data source and no pagination ]]></entry>
@@ -396,7 +396,7 @@ ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
     <entry key="jaspertest.file">/testreport.jrxml</entry>
     <entry key="jaspertest.endpoint">http://dbpedia.org/sparql</entry>
 
-    <entry key="jaspertestp.querytype">JASPER_SPARQL</entry>
+    <entry key="jaspertestp.querytype">JASPER</entry>
     <entry key="jaspertestp.title">Jasper Reports SPARQL integration test paginated</entry>
     <entry key="jaspertestp.summary"><![CDATA[Test for Jasper Reports integration
     using SPARQL data source and pagination ]]></entry>
@@ -405,14 +405,14 @@ ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
     <entry key="jaspertestp.endpoint">http://dbpedia.org/sparql</entry>
 
 
-    <entry key="jaspertestsql.querytype">JASPER_SQL</entry>
+    <entry key="jaspertestsql.querytype">JASPER</entry>
     <entry key="jaspertestsql.title">Jasper Reports SQL integration test</entry>
     <entry key="jaspertestsql.summary"><![CDATA[Test for Jasper Reports integration
     using SQL data source and no pagination ]]></entry>
     <entry key="jaspertestsql.pagination">false</entry>
     <entry key="jaspertestsql.file">/testreportsql.jrxml</entry>
 
-    <entry key="jaspertestsqlp.querytype">JASPER_SQL</entry>
+    <entry key="jaspertestsqlp.querytype">JASPER</entry>
     <entry key="jaspertestsqlp.title">Jasper Reports SQL integration test paginated</entry>
     <entry key="jaspertestsqlp.summary"><![CDATA[Test for Jasper Reports integration
     using SQL data source and pagination ]]></entry>
