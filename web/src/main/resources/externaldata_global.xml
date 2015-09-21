@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa
+  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa jaspertest jaspertestp jaspertestsql jaspertestsqlp jaspertestsqls
   </entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
@@ -385,5 +385,46 @@ LEFT JOIN chm62edt_taxonomy AS t ON s.ID_TAXONOMY=t.ID_TAXONOMY AND t.LEVEL='Fam
 WHERE a.NAME="sameSynonymISSG"
 ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
 ]]></entry>
+
+<!--Samples for Jasper Reports -->
+
+    <entry key="jaspertest.querytype">JASPER_SPARQL</entry>
+    <entry key="jaspertest.title">Jasper Reports SPARQL integration test</entry>
+    <entry key="jaspertest.summary"><![CDATA[Test for Jasper Reports integration
+    using SPARQL data source and no pagination ]]></entry>
+    <entry key="jaspertest.pagination">false</entry>
+    <entry key="jaspertest.file">/testreport.jrxml</entry>
+    <entry key="jaspertest.endpoint">http://dbpedia.org/sparql</entry>
+
+    <entry key="jaspertestp.querytype">JASPER_SPARQL</entry>
+    <entry key="jaspertestp.title">Jasper Reports SPARQL integration test paginated</entry>
+    <entry key="jaspertestp.summary"><![CDATA[Test for Jasper Reports integration
+    using SPARQL data source and pagination ]]></entry>
+    <entry key="jaspertestp.pagination">true</entry>
+    <entry key="jaspertestp.file">/testreport.jrxml</entry>
+    <entry key="jaspertestp.endpoint">http://dbpedia.org/sparql</entry>
+
+
+    <entry key="jaspertestsql.querytype">JASPER_SQL</entry>
+    <entry key="jaspertestsql.title">Jasper Reports SQL integration test</entry>
+    <entry key="jaspertestsql.summary"><![CDATA[Test for Jasper Reports integration
+    using SQL data source and no pagination ]]></entry>
+    <entry key="jaspertestsql.pagination">false</entry>
+    <entry key="jaspertestsql.file">/testreportsql.jrxml</entry>
+
+    <entry key="jaspertestsqlp.querytype">JASPER_SQL</entry>
+    <entry key="jaspertestsqlp.title">Jasper Reports SQL integration test paginated</entry>
+    <entry key="jaspertestsqlp.summary"><![CDATA[Test for Jasper Reports integration
+    using SQL data source and pagination ]]></entry>
+    <entry key="jaspertestsqlp.pagination">true</entry>
+    <entry key="jaspertestsqlp.file">/testreportsql.jrxml</entry>
+
+    <entry key="jaspertestsqls.querytype">JASPER</entry>
+    <entry key="jaspertestsqls.title">Jasper Reports test with subreports</entry>
+    <entry key="jaspertestsqls.summary"><![CDATA[Test for Jasper Reports integration
+    using a subreport and combining SQL with SPARQL ]]></entry>
+    <entry key="jaspertestsqls.pagination">true</entry>
+    <entry key="jaspertestsqls.file">/testreport_wsub.jrxml</entry>
+    <entry key="jaspertestsqls.subreport.SUBREPORT1">/testreport_sub.jrxml</entry>
 
 </properties>
