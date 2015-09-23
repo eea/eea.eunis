@@ -68,7 +68,7 @@ ORDER BY ?name]]>
 			</staticText>
 			<image>
 				<reportElement x="511" y="2" width="17" height="14" uuid="c82ff709-0586-47cc-be1a-afed901c9718"/>
-				<imageExpression><![CDATA["\\bookmarks.gif"]]></imageExpression>
+				<imageExpression><![CDATA["./bookmarks.gif"]]></imageExpression>
 			</image>
 		</band>
 	</columnHeader>
