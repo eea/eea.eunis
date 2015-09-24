@@ -25,8 +25,8 @@
   </foaf:Organization>
 
   <void:Dataset rdf:ID="eunis">
-    <dcterms:title>EUNIS - European Nature Information System</dcterms:title>
-    <dcterms:description>EUNIS consists of information on Species, Habitat types and Sites</dcterms:description>
+    <dcterms:title xml:lang="en">EUNIS - European Nature Information System</dcterms:title>
+    <dcterms:description xml:lang="en">EUNIS consists of information on Species, Habitat types and Sites</dcterms:description>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -62,7 +62,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="biogeoregions">
-    <dcterms:title>Biogeographical regions from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Biogeographical regions from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -71,7 +71,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="countries">
-    <dcterms:title>Countries from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Countries from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -80,7 +80,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="countrybiogeo">
-    <dcterms:title>Links between countries and biogeographical regions in EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Links between countries and biogeographical regions in EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -89,7 +89,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="designations">
-    <dcterms:title>Designations of sites from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Designations of sites from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -98,8 +98,8 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="eunishabitats">
-    <dcterms:title>EUNIS Habitat types for the INSPIRE Directive Annex III no 18: Habitats and biotopes</dcterms:title>
-    <dcterms:description>EUNIS habitats types classification as reference for the INSPIRE Directive Annex III no 18: Habitats and biotopes</dcterms:description>
+    <dcterms:title xml:lang="en">EUNIS Habitat types for the INSPIRE Directive Annex III no 18: Habitats and biotopes</dcterms:title>
+    <dcterms:description xml:lang="en">EUNIS habitats types classification as reference for the INSPIRE Directive Annex III no 18: Habitats and biotopes</dcterms:description>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -111,7 +111,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="geoscope">
-    <dcterms:title>Geographical scopes from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Geographical scopes from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -120,8 +120,8 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="habitats">
-    <dcterms:title>All habitat types from EUNIS</dcterms:title>
-    <dcterms:description>The EUNIS Habitat types classification is a comprehensive pan-European system to facilitate the harmonised description and collection of data across Europe through the use of criteria for habitat identification; it covers all types of habitats from natural to artificial, from terrestrial to freshwater and marine.</dcterms:description>
+    <dcterms:title xml:lang="en">All habitat types from EUNIS</dcterms:title>
+    <dcterms:description xml:lang="en">The EUNIS Habitat types classification is a comprehensive pan-European system to facilitate the harmonised description and collection of data across Europe through the use of criteria for habitat identification; it covers all types of habitats from natural to artificial, from terrestrial to freshwater and marine.</dcterms:description>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -132,7 +132,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="images">
-    <dcterms:title>Images from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Images from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -141,7 +141,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="legalrefs">
-    <dcterms:title>Legislation references from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Legislation references from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -151,7 +151,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="references">
-    <dcterms:title>References from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">References from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -160,7 +160,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="regioncoverage">
-    <dcterms:title>Region coverage of protected sites from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Region coverage of protected sites from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -169,7 +169,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="sites">
-    <dcterms:title>Sites from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Sites from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -180,7 +180,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="species">
-    <dcterms:title>Species from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Species from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -191,7 +191,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="speciesgroup">
-    <dcterms:title>Species groups from EUNIS (mammals, birds, etc.)</dcterms:title>
+    <dcterms:title xml:lang="en">Species groups from EUNIS (mammals, birds, etc.)</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
@@ -200,7 +200,7 @@
   </void:Dataset>
 
   <void:Dataset rdf:ID="taxonomies">
-    <dcterms:title>Higher (family and up) taxonomies from EUNIS</dcterms:title>
+    <dcterms:title xml:lang="en">Higher (family and up) taxonomies from EUNIS</dcterms:title>
     <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/2.5/dk/"/>
     <dcterms:creator rdf:resource="#EEA"/>
     <dcterms:publisher rdf:resource="#EEA"/>
