@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa jaspertest jaspertestp jaspertestsql jaspertestsqlp jaspertestsqls
+  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa art172013cr jaspertest jaspertestp jaspertestsql jaspertestsqlp jaspertestsqls
   </entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
@@ -426,5 +426,33 @@ ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
     <entry key="jaspertestsqls.pagination">true</entry>
     <entry key="jaspertestsqls.file">/testreport_wsub.jrxml</entry>
     <entry key="jaspertestsqls.subreport.SUBREPORT1">/testreport_sub.jrxml</entry>
+
+
+
+    <entry key="art172013cr.querytype">SPARQL</entry>
+    <entry key="art172013cr.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art172013cr.title">Art. 17 2013 Country data</entry>
+    <entry key="art172013cr.summary"><![CDATA[Art. 17 2013 Country data
+]]></entry>
+    <entry key="art172013cr.link.species">speciesurl</entry>
+    <entry key="art172013cr.query"><![CDATA[
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
+
+SELECT ?habitat_code ?habitat_name ?region_code ?region_name ?conclusion_future
+WHERE {
+  ?habitatasm a p:Habitats_regions_eu_level;
+             p:habitat ?habitatURI;
+             p:region ?regionURI;
+             p:conclusion_future ?conclusionURI .
+  ?conclusionURI rdfs:label ?conclusion_future .
+  ?habitatURI skos:notation ?habitat_code;
+              rdfs:label ?habitat_name .
+  ?regionURI skos:notation ?region_code;
+              rdfs:label ?region_name
+} ORDER BY ?habitat_code ?region_code
+]]></entry>
+
 
 </properties>
