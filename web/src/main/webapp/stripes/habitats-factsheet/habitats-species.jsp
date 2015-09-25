@@ -108,7 +108,7 @@
             <div id="sites-species-gallery">
                 <div class="paginate">
                     <c:forEach items="${actionBean.species}" var="specie">
-                        <div class="photoAlbumEntry">
+                        <div class="photoAlbumEntry" style="padding-top: 0px;">
                             <a href="/species/${specie.source.idSpecies}">
                                 <span class="photoAlbumEntryWrapper">
                                     <c:choose>
@@ -122,7 +122,7 @@
                                 </span>
                                 <span class="photoAlbumEntryTitle">
                                     ${specie.commonName}
-                                    <br/>
+
                                     <span class="italics">${specie.scientificName} </span>
                                 </span>
                             </a>
