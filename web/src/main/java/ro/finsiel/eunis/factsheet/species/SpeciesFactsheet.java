@@ -1192,7 +1192,7 @@ public class SpeciesFactsheet {
      *
      * @return A list of SpeciesNatureObjectPersist objects.
      */
-    public List getSynonymsIterator() {
+    public List<SpeciesNatureObjectPersist> getSynonymsIterator() {
         List synonyms = new Vector();
 
         try {
@@ -1583,9 +1583,14 @@ public class SpeciesFactsheet {
     public List<Chm62edtNatureObjectPicturePersist> getPicturesForSpecies(Integer limit, boolean mainPic) {
         List<Chm62edtNatureObjectPicturePersist> results = new ArrayList<Chm62edtNatureObjectPicturePersist>();
 
+        String syn= getSpeciesObject().getIdSpecies().toString();
+        for(SpeciesNatureObjectPersist s: this.getSynonymsIterator()){
+            syn = syn + "," + s.getIdSpecies().toString();
+        }
+
         Chm62edtNatureObjectPictureDomain nop = new Chm62edtNatureObjectPictureDomain();
         String where = "";
-        where += " ID_OBJECT='" + getSpeciesObject().getIdSpecies() + "'";
+        where += " ID_OBJECT IN ( " + syn + " )";
         where += " AND NATURE_OBJECT_TYPE='Species'";
         where += " AND (SOURCE LIKE 'Saxifraga%' OR SOURCE LIKE 'Otars%' OR SOURCE LIKE 'LIFE%')";
         if (mainPic) {
