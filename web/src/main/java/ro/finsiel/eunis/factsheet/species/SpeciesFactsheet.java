@@ -1702,7 +1702,9 @@ public class SpeciesFactsheet {
 
                     pic = new PictureDTO();
                     pic.setFilename(pp.getFileName());
-                    pic.setDescription(desc);
+                    if(! pp.getIdObject().equals(this.speciesObject.getIdSpecies().toString())) {
+                        pic.setDescription(desc);
+                    }
                     pic.setSource(pp.getSource());
                     pic.setSourceUrl(pp.getSourceUrl());
                     pic.setPath(picturePath);
