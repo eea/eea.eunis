@@ -63,6 +63,10 @@ public class SpeciesReportsImporter {
         birdsMap.put("III A", "2457");
         birdsMap.put("III B", "2457");
 
+        birdsMap.put("GP", "0");  // General protection
+        birdsMap.put("GPCBR", "0"); // General Protection, Can Be Removed -- to remove from EUNIS
+        birdsMap.put("ECBR", "0"); // Extinct, Can Be Removed
+
         // the Birds Directive
         birdsMap.put("Other", "2440");
 
@@ -554,7 +558,11 @@ public class SpeciesReportsImporter {
             }
 
             if(idDc != null) {
-                insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument);
+                if(idDc.equals("0")){
+                    // todo: special treatment for Birds D GP / GPCBR / ECBR
+                } else { // ok
+                    insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument);
+                }
             } else {
                 System.out.println("WARNING: for species '" + speciesRow.getSpeciesName() + "' the " + name + " Annex " + annex + " was not found!");
                 speciesRow.appendResult( name + " annex " + annex + " not found");

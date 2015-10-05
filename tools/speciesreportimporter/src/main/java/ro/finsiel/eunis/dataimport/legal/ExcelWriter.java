@@ -52,7 +52,7 @@ public class ExcelWriter {
         String column = "ZZ";
         if (fileType == ExcelReader.FileType.VERTEBRATES) {
             // write to AH column
-            column = "AH";
+            column = "AL";
         }
 
         int col = CellReference.convertColStringToIndex(column);
