@@ -221,12 +221,13 @@ public class SpeciesReportsImporter {
             for(String excelFile : excelFiles){
                 excelReader = new ExcelReader(excelFile);
 
+
                 System.out.println("File " + excelFile + " read, found " + excelReader.getSpeciesRows().size() + " species and " + excelReader.getRestrictionsRows().size() + " restrictions");
                 notFoundCount = 0; importedCount = 0; foundBySynonyms = 0;
 
                 List<SpeciesRow> rows = importAllSpecies();
                 // write the result
-                ExcelWriter excelWriter = new ExcelWriter(excelFile, ExcelReader.FileType.VERTEBRATES, rows);
+                ExcelWriter excelWriter = new ExcelWriter(excelFile, excelReader.getFileType(), rows);
                 excelWriter.writeToFile();
 
                 totalImportedCount += importedCount;
