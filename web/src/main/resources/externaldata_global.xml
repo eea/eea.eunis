@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa art172013cr jaspertest jaspertestp jaspertestsql jaspertestsqlp jaspertestsqls
+  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa
   </entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
