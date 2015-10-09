@@ -63,6 +63,10 @@ public class SpeciesReportsImporter {
         birdsMap.put("III A", "2457");
         birdsMap.put("III B", "2457");
 
+        birdsMap.put("GP", "0");  // General protection
+        birdsMap.put("GPCBR", "0"); // General Protection, Can Be Removed -- to remove from EUNIS
+        birdsMap.put("ECBR", "0"); // Extinct, Can Be Removed
+
         // the Birds Directive
         birdsMap.put("Other", "2440");
 
@@ -217,10 +221,14 @@ public class SpeciesReportsImporter {
             for(String excelFile : excelFiles){
                 excelReader = new ExcelReader(excelFile);
 
+
                 System.out.println("File " + excelFile + " read, found " + excelReader.getSpeciesRows().size() + " species and " + excelReader.getRestrictionsRows().size() + " restrictions");
                 notFoundCount = 0; importedCount = 0; foundBySynonyms = 0;
 
-                importAllSpecies();
+                List<SpeciesRow> rows = importAllSpecies();
+                // write the result
+                ExcelWriter excelWriter = new ExcelWriter(excelFile, excelReader.getFileType(), rows);
+                excelWriter.writeToFile();
 
                 totalImportedCount += importedCount;
                 totalFoundBySynonyms += foundBySynonyms;
@@ -238,7 +246,7 @@ public class SpeciesReportsImporter {
     /**
      * Import all the species in the list
      */
-    private void importAllSpecies(){
+    private List<SpeciesRow> importAllSpecies(){
         List<SpeciesRow> rows = excelReader.getSpeciesRows();
         // identify doubles
         for(SpeciesRow sr : rows) {
@@ -248,15 +256,17 @@ public class SpeciesReportsImporter {
                     count++;
                     if(count>0){
                         System.out.println("WARNING: Species " + sr.getSpeciesName() + " (row " + sr.getExcelRow() + ") doubled by row " + sr2.getExcelRow());
+                        sr.appendResult( "Doubled by row " + sr2.getExcelRow());
                     }
                 }
             }
         }
 
         for(SpeciesRow sr : rows){
-//            if(sr.getSpeciesName().equals("Lethenteron camtschaticum"))
-                importSpecies(sr);
+            importSpecies(sr);
         }
+
+        return rows;
     }
 
     /**
@@ -269,6 +279,7 @@ public class SpeciesReportsImporter {
         if(speciesRow.getIdSpecies() == null) {
             notFoundCount++;
             System.out.println("WARNING: Species '" + speciesRow.getSpeciesName() + "' (Excel row " + speciesRow.getExcelRow() + ") not found!");
+            speciesRow.appendResult("WARNING: species not found");
         } else {
             try {
                 System.out.println("Species '" + speciesRow.getSpeciesName() + "' " +
@@ -306,6 +317,8 @@ public class SpeciesReportsImporter {
             List speciesFullList = selectSpeciesById(idLink);
             populateSpeciesIds(speciesRow, speciesFullList);
             foundBySynonyms++;
+
+            speciesRow.appendResult("Synonym of " + speciesRow.getDatabaseName());
         }
     }
 
@@ -462,6 +475,7 @@ public class SpeciesReportsImporter {
                     if(debug) System.out.println(" Inserted conservation status code " + redList);
                 } else {
                     System.out.println("WARNING: Red List code " + redList + " not identified");
+                    speciesRow.appendResult("Red list code not found");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -504,8 +518,10 @@ public class SpeciesReportsImporter {
 
             insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument);
         } else {
-            if(!annex.isEmpty())
+            if(!annex.isEmpty()) {
                 System.out.println("WARNING: for species '" + speciesRow.getSpeciesName() + "' the " + name + " Annex " + annex + " was not found!");
+                speciesRow.appendResult(name + " annex " + annex + " not found");
+            }
         }
     }
 
@@ -543,9 +559,15 @@ public class SpeciesReportsImporter {
             }
 
             if(idDc != null) {
-                insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument);
+                if(idDc.equals("0")){
+                    // todo: special treatment for Birds D GP / GPCBR / ECBR
+                } else { // ok
+                    insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument);
+                }
             } else {
                 System.out.println("WARNING: for species '" + speciesRow.getSpeciesName() + "' the " + name + " Annex " + annex + " was not found!");
+                speciesRow.appendResult( name + " annex " + annex + " not found");
+
             }
         }
     }
@@ -610,8 +632,9 @@ public class SpeciesReportsImporter {
                         List l = selectSpeciesByName(name.trim());
                         if(debug) System.out.println(name.trim());
                         // check it's a synonym
-                        if(l.size() == 0) {
+                        if (l.size() == 0) {
                             System.out.println(" WARNING: Not found " + name);
+
                             // todo add it ?
                         } else if (l.size() == 1) {
                             System.out.print("  Found ");

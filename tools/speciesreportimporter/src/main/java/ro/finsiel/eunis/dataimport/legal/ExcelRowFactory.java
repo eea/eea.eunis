@@ -26,33 +26,39 @@ public class ExcelRowFactory {
         r.setHabitatsRestrictions(getCellValue(row, "D"));
         r.setHabitatsName(getCellValue(row, "E"));
         r.setBirdsD(getCellValue(row, "F"));
-        r.setBirdsName(getCellValue(row, "G"));
-        r.setBernConvention(getCellValue(row, "H"));
-        r.setBernRestrictions(getCellValue(row, "I"));
-        r.setBernName(getCellValue(row, "J"));
-        r.setEmeraldR6(getCellValue(row, "K"));
-        r.setEmeraldRestrictions(getCellValue(row, "L"));
-        r.setEmeraldName(getCellValue(row, "M"));
-        r.setBonnConvention(getCellValue(row, "N"));
-        r.setBonnRestrictions(getCellValue(row, "O"));
-        r.setBonnName(getCellValue(row, "P"));
-        r.setCites(getCellValue(row, "Q"));
-        r.setCitesName(getCellValue(row, "R"));
-        r.setEuTrade(getCellValue(row, "S"));
-        r.setEuTradeName(getCellValue(row, "T"));
-        r.setAewa(getCellValue(row, "U"));
-        r.setAewaName(getCellValue(row, "V"));
-        r.setEurobats(getCellValue(row, "W"));
-        r.setAccobams(getCellValue(row, "X"));
-        r.setAscobans(getCellValue(row, "Y"));
-        r.setWadden(getCellValue(row, "Z"));
-        r.setSpa(getCellValue(row, "AA"));
-        r.setSpaName(getCellValue(row, "AB"));
-        r.setOspar(getCellValue(row, "AC"));
-        r.setOsparName(getCellValue(row, "AD"));
-        r.setHelcom(getCellValue(row, "AE"));
-        r.setRedList(getCellValue(row, "AF"));
-        r.setRedListName(getCellValue(row, "AG"));
+// todo restriction
+        r.setBirdsName(getCellValue(row, "H"));
+        r.setBernConvention(getCellValue(row, "I"));
+        r.setBernRestrictions(getCellValue(row, "J"));
+        r.setBernName(getCellValue(row, "K"));
+        r.setEmeraldR6(getCellValue(row, "L"));
+        r.setEmeraldRestrictions(getCellValue(row, "M"));
+        r.setEmeraldName(getCellValue(row, "N"));
+        r.setBonnConvention(getCellValue(row, "O"));
+        r.setBonnRestrictions(getCellValue(row, "P"));
+        r.setBonnName(getCellValue(row, "Q"));
+        r.setCites(getCellValue(row, "R"));
+        r.setCitesName(getCellValue(row, "S"));
+        r.setEuTrade(getCellValue(row, "T"));
+        r.setEuTradeName(getCellValue(row, "U"));
+        r.setAewa(getCellValue(row, "V"));
+        r.setAewaName(getCellValue(row, "W"));
+
+        //ACAP  X
+        //raptors Y
+        //anme in raptors Z
+
+        r.setEurobats(getCellValue(row, "AA"));
+        r.setAccobams(getCellValue(row, "AB"));
+        r.setAscobans(getCellValue(row, "AC"));
+        r.setWadden(getCellValue(row, "AD"));
+        r.setSpa(getCellValue(row, "AE"));
+        r.setSpaName(getCellValue(row, "AF"));
+        r.setOspar(getCellValue(row, "AG"));
+        r.setOsparName(getCellValue(row, "AH"));
+        r.setHelcom(getCellValue(row, "AI"));
+        r.setRedList(getCellValue(row, "AJ"));
+        r.setRedListName(getCellValue(row, "AK"));
 
         r.setExcelRow(row.getRowNum() + 1);
 
@@ -144,9 +150,9 @@ public class ExcelRowFactory {
         }
         RestrictionsRow r = new RestrictionsRow();
         r.setSpecies(getCellValue(row, "A"));
-        r.setLegalText(getCellValue(row, "B"));
+        r.setLegalText(getCellValue(row, "D"));
         r.setRestriction(getCellValue(row, "C"));
-        r.setSpeciesValidName(getCellValue(row, "D"));
+        r.setSpeciesValidName(getCellValue(row, "B"));
 
         if(r.getLegalText().isEmpty() || r.getLegalText().contains("Legal text"))
             return null;

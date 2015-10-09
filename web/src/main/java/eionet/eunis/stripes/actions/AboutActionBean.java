@@ -1,5 +1,6 @@
 package eionet.eunis.stripes.actions;
 
+import eionet.eunis.jasper.JasperReportGenerator;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;

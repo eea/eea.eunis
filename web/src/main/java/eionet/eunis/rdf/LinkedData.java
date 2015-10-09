@@ -3,12 +3,7 @@
  */
 package eionet.eunis.rdf;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import net.sourceforge.stripes.action.ActionBeanContext;
 
@@ -338,6 +333,19 @@ public class LinkedData {
         } else {
             return props.getProperty(queryId + "." + attrName);
         }
+    }
+
+    public List<String> getQueryAttributeKeys(String queryId){
+        Set<String> all = props.stringPropertyNames();
+        List<String> result = new ArrayList<>();
+
+        for(String s : all){
+            if(s.startsWith(queryId)){
+                result.add(s);
+            }
+        }
+
+        return result;
     }
 
     /**

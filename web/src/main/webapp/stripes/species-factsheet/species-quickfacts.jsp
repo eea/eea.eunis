@@ -17,7 +17,7 @@
                             <c:forEach items="${actionBean.pics}" var="pic" varStatus="loop">
                                 <li>
                                     <img src="${pic.path}/${pic.filename}"
-                                    <c:if test="${not empty pic.source && not fn:containsIgnoreCase(pic.source, 'saxifraga')}">
+                                    <c:if test="${not empty pic.source && fn:containsIgnoreCase(pic.description, 'no photo available')}">
                                     title="${pic.description}"
                                     </c:if>
                                      style="display: none;"

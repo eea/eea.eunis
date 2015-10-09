@@ -169,4 +169,8 @@ public class ExcelReader {
     public List<RestrictionsRow> getRestrictionsRows() {
         return restrictionsRows;
     }
+
+    public FileType getFileType() {
+        return fileType;
+    }
 }
