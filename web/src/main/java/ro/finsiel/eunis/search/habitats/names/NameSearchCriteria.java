@@ -14,19 +14,19 @@ import ro.finsiel.eunis.utilities.EunisUtil;
 public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /** Used for search in results, to filter after the level. */
-    public static final Integer CRITERIA_LEVEL = new Integer(0);
+    public static final Integer CRITERIA_LEVEL = 0;
 
     /** Used for search in results, to filter after the eunis code. */
-    public static final Integer CRITERIA_CODE_EUNIS = new Integer(1);
+    public static final Integer CRITERIA_CODE_EUNIS = 1;
 
     /** Used for search in results, to filter after the scientific name. */
-    public static final Integer CRITERIA_SCIENTIFIC_NAME = new Integer(2);
+    public static final Integer CRITERIA_SCIENTIFIC_NAME = 2;
 
     /** Used for search in results, to filter after the common name. */
-    public static final Integer CRITERIA_NAME = new Integer(3);
+    public static final Integer CRITERIA_NAME = 3;
 
     /** Used for search in results, to filter after the annex code. */
-    public static final Integer CRITERIA_CODE_ANNEX = new Integer(4);
+    public static final Integer CRITERIA_CODE_ANNEX = 4;
 
     /** Searched string. */
     private String searchString = null;
@@ -228,8 +228,17 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
                 if (addOROperator) {
                     sql.append(" OR ");
                 }
+                sql.append("(");
 
                 sql.append(Utilities.prepareSQLOperator("A.SCIENTIFIC_NAME", searchString, Utilities.OPERATOR_CONTAINS));
+
+                sql.append(" OR ");
+                sql.append(Utilities.prepareSQLOperator("A.CODE_2000", searchString, Utilities.OPERATOR_CONTAINS));
+                sql.append(" OR ");
+                sql.append(Utilities.prepareSQLOperator("A.CODE_ANNEX1", searchString, Utilities.OPERATOR_CONTAINS));
+                sql.append(" OR ");
+                sql.append(Utilities.prepareSQLOperator("A.EUNIS_HABITAT_CODE", searchString, Utilities.OPERATOR_CONTAINS));
+
 
                 int substringLength = 3;
                 if (fuzzySearch && searchString.length() >=substringLength) {
@@ -239,7 +248,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
                             .append(subSearchString.toLowerCase()).append("', LOWER(A.SCIENTIFIC_NAME)) <= 10 ) ");
                 }
 
-                sql.append("  ");
+                sql.append(") ");
                 addOROperator = true;
             }
             if (useVernacularName) {
@@ -341,6 +350,10 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
                 }
                 human.append("Common name");
             }
+            if(addOROperator) {
+                human.append(" / ");
+            }
+            human.append("Code");
             human = Utilities.prepareHumanString(human.toString(), searchString, relationOp);
         }
         // Search in results

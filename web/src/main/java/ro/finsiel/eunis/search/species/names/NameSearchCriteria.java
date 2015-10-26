@@ -14,22 +14,25 @@ import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 public class NameSearchCriteria extends AbstractSearchCriteria {
 
     /** Coming from first form (scientific name). */
-    public static final Integer CRITERIA_SCIENTIFIC = new Integer(0);
+    public static final Integer CRITERIA_SCIENTIFIC = 0;
 
     /** Coming from second form (common name). */
-    public static final Integer CRITERIA_VERNACULAR = new Integer(1);
+    public static final Integer CRITERIA_VERNACULAR = 1;
 
     /** Used in filters, filtering by Group. */
-    public static final Integer CRITERIA_GROUP = new Integer(2);
+    public static final Integer CRITERIA_GROUP = 2;
 
     /** Used in filters, filtering by Order. */
-    public static final Integer CRITERIA_ORDER = new Integer(3);
+    public static final Integer CRITERIA_ORDER = 3;
 
     /** Used in filters, filtering by Family. */
-    public static final Integer CRITERIA_FAMILY = new Integer(5);
+    public static final Integer CRITERIA_FAMILY = 5;
 
     /** Used in filters, filtering by Scientific name. */
-    public static final Integer CRITERIA_SCIENTIFIC_NAME = new Integer(4);
+    public static final Integer CRITERIA_SCIENTIFIC_NAME = 4;
+
+    /** Used to search for Natura 2000 codes */
+    public static final Integer CRITERIA_NATURA2000 = 5;
 
     /** Scientific name if coming from first form. */
     private String scientificName = null;
@@ -129,6 +132,7 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
         sqlMappings.put(CRITERIA_ORDER, "D.NAME");
         sqlMappings.put(CRITERIA_FAMILY, "C.NAME");
         sqlMappings.put(CRITERIA_SCIENTIFIC_NAME, "A.SCIENTIFIC_NAME ");
+        sqlMappings.put(CRITERIA_NATURA2000, "A.CODE_2000 ");
     }
 
     /** Init the human mappings so you can represent this object in human language. */
@@ -143,6 +147,8 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
         humanMappings.put(CRITERIA_ORDER, "Order ");
         humanMappings.put(CRITERIA_FAMILY, "Family ");
         humanMappings.put(CRITERIA_SCIENTIFIC_NAME, "Scientific name ");
+        humanMappings.put(CRITERIA_NATURA2000, "Natura 2000 code ");
+
     }
 
     /**
@@ -178,11 +184,15 @@ public class NameSearchCriteria extends AbstractSearchCriteria {
      * @return SQL string representing this object.
      */
     public String toSQL() {
-        StringBuffer sql = new StringBuffer();
+        StringBuilder sql = new StringBuilder();
 
         // Coming from form 1
         if (null != scientificName && null != relationOp) {
+            sql.append("(");
             sql.append(Utilities.prepareSQLOperator((String) sqlMappings.get(CRITERIA_SCIENTIFIC), scientificName, relationOp));
+            sql.append(" OR ");
+            sql.append(Utilities.prepareSQLOperator((String) sqlMappings.get(CRITERIA_NATURA2000), scientificName, Utilities.OPERATOR_CONTAINS));
+            sql.append(")");
         }
         // Coming from form 2
         if (null != vernacularName && null != relationOp && null != language) {
