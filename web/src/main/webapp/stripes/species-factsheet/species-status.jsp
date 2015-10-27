@@ -144,9 +144,7 @@
                 <div class="right-area conservation-status">
                     <h3>EU conservation status</h3>
                     <p>Conservation status assesses every six years and for each biogeographical region the condition of habitats and species compared to the favourable status as described in the Habitats Directive. The map shows the 2013 assessments.</p>
-                    <div class="map-border">
-                        <iframe id="speciesStatusMap" src="" height="400px" width="100%"></iframe>
-                    </div>
+                        <iframe id="speciesStatusMap" class="map-border" src="" height="420px" width="100%"></iframe>
 
                     <script>
                         addReloadOnDisplay("speciesStatusPane", "speciesStatusMap", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=f50de51b438446499382664f9620081f&Code=${actionBean.n2000id}");
