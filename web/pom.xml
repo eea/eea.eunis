@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <env>local</env>
         <main.basedir>${project.basedir}/..</main.basedir>
-        <jasper.version>5.6.0</jasper.version>
+        <jasper.version>5.6.1</jasper.version>
     </properties>
 
     <parent>
