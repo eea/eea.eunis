@@ -71,13 +71,13 @@
                   <input type="hidden" name="searchSynonyms" value="true" />
                   <input type="hidden" name="sort" value="<%=NameSortCriteria.SORT_SCIENTIFIC_NAME%>" />
                   <input type="hidden" name="ascendency" value="<%=AbstractSortCriteria.ASCENDENCY_ASC%>" />
-                  <label for="scientificName"><%=cm.cmsPhrase("Search species with names starting with:")%></label>
+                  <label for="scientificName"><%=cm.cmsPhrase("Search species by code or names starting with:")%></label>
                   <input size="32"
                          id="scientificName"
                          name="scientificName"
-                         value="<%=cm.cmsPhrase("Enter species name here...")%>"
-                         onfocus="if(this.value=='<%=cm.cmsPhrase("Enter species name here...")%>')this.value='';"
-                         onblur="if(this.value=='')this.value='<%=cm.cmsPhrase("Enter species name here...")%>';" />
+                         value="<%=cm.cmsPhrase("Enter species name or code here...")%>"
+                         onfocus="if(this.value=='<%=cm.cmsPhrase("Enter species name or code here...")%>')this.value='';"
+                         onblur="if(this.value=='')this.value='<%=cm.cmsPhrase("Enter species name or code here...")%>';" />
                   <input id="search" type="submit"
                          value="<%=cm.cmsPhrase("Search")%>"
                          name="Submit"

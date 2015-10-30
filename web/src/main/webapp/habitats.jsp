@@ -48,7 +48,7 @@
                     <input type="hidden" name="useVernacular" value="true" />
                     <input type="hidden" name="fuzzySearch" value="true" />
                     <input type="hidden" name="relationOp" value="<%=Utilities.OPERATOR_STARTS%>" />
-                    <label for="searchString"><%=cm.cmsPhrase("Search habitat types with names starting with:")%></label>
+                    <label for="searchString"><%=cm.cmsPhrase("Search habitat types by code or names starting with:")%></label>
                     <input id="searchString" type="text"
                            size="30" name="searchString"
                            value="<%=cm.cms("enter_habitat_name_here")%>"
