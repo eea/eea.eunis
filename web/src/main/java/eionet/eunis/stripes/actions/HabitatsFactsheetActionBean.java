@@ -19,6 +19,7 @@ import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.factsheet.habitats.LegalStatusWrapper;
 import ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist;
+import ro.finsiel.eunis.jrfTables.EcosystemsPersist;
 import ro.finsiel.eunis.jrfTables.ReferencesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
@@ -118,6 +119,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private List speciesForHabitats = null;
     // cache for legal mentioned in
     private List<MentionedIn> mentionedInList = null;
+
+    private Set<EcosystemsPersist> uniqueEcosystems;
 
 
 
@@ -831,6 +834,18 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
+     * Returns the list of ecosystems of the habitat, filtered to be unique
+     * @return
+     */
+    public Set<EcosystemsPersist> getUniqueEcosystems(){
+        if(uniqueEcosystems == null){
+            uniqueEcosystems = new HashSet<>();
+            uniqueEcosystems.addAll(factsheet.getEcosystems());
+        }
+        return uniqueEcosystems;
+    }
+
+    /**
      * Returns the conservation status link
      * @return Object containing the link
      */
@@ -841,4 +856,5 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     public Chm62edtHabitatPersist getResolution4Parent(){
         return factsheet.getResolution4Parent();
     }
+
 }

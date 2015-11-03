@@ -2191,4 +2191,16 @@ public class HabitatsFactsheet {
         return results;
     }
 
+    /**
+     * Returns the list of ecosystems of the habitat
+     * @return
+     */
+    public List<EcosystemsPersist> getEcosystems(){
+        List<EcosystemsPersist> results = null;
+
+        results = new EcosystemsDomain().findWhere("ID_NATURE_OBJECT = '" + getHabitat().getIdNatureObject() + "'");
+
+        return results;
+    }
+
 }
