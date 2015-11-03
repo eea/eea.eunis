@@ -5,7 +5,7 @@ import net.sf.jrf.domain.PersistentObject;
 /**
  * Bean for Species and Habitats Ecosystems
  */
-public class EcosystemsPersist extends PersistentObject {
+public class EcosystemsPersist extends PersistentObject implements Comparable{
     /**
      * Nature object id
      */
@@ -102,5 +102,15 @@ public class EcosystemsPersist extends PersistentObject {
         int result = idNatureObject.hashCode();
         result = 31 * result + ecoCode.hashCode();
         return result;
+    }
+
+    /**
+     * Orders by ecosystem name
+     * @param o
+     * @return
+     */
+    @Override
+    public int compareTo(Object o) {
+        return this.getEcoName().compareTo(((EcosystemsPersist)o).getEcoName());
     }
 }

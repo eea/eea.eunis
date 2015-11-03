@@ -136,6 +136,18 @@
                                     <span class="bold italics"><a href="/species/${actionBean.factsheet.validSpeciesId}">${actionBean.factsheet.parentSpeciesName}</a></span>
                                 </li>
                             </c:if>
+                            <c:if test="${not empty actionBean.preferredEcosystems or not empty actionBean.suitableEcosystems}">
+                                <li><c:if test="${not empty actionBean.preferredEcosystems}">
+                                    Occurs in
+                                        <c:forEach var="ecosystem" items="${actionBean.preferredEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if><span class="bold">${ecosystem.ecoName}</span></c:forEach>
+                                        ecosystems.
+                                    </c:if>
+                                    <c:if test="${not empty actionBean.suitableEcosystems}">
+                                        Other suitable ecosystems include
+                                        <c:forEach var="ecosystem" items="${actionBean.suitableEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if><span class="bold">${ecosystem.ecoName}</span></c:forEach>.
+                                    </c:if>
+                                </li>
+                            </c:if>
                             <c:if test="${!empty actionBean.n2000id}">
                                 <li class="discreet">
                                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code')}: ${actionBean.n2000id}

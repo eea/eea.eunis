@@ -191,6 +191,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String parentN2k;
     private List<LegalStatusWrapper> parentLegal;
 
+    private Set<EcosystemsPersist> uniqueEcosystems;
+
     /**
      * Default Stripes handler
      * @return Stripes resolution
@@ -1632,6 +1634,60 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public List<LegalStatusWrapper> getParentLegal() {
         return parentLegal;
+    }
+
+    private List<EcosystemsPersist> allEcosystems = null;
+
+    private List<EcosystemsPersist> getAllEcosystems(){
+        if(allEcosystems == null){
+            allEcosystems = factsheet.getEcosystems();
+        }
+        return allEcosystems;
+    }
+
+    private List<EcosystemsPersist> preferredEcosystems = null;
+    private List<EcosystemsPersist> suitableEcosystems = null;
+
+    /**
+     * Returns preferred ecosystems (unique)
+     * @return
+     */
+    public List<EcosystemsPersist> getPreferredEcosystems(){
+
+        if(preferredEcosystems == null){
+            Set<EcosystemsPersist>preferredEcosystemsSet = new HashSet<>();
+
+            for(EcosystemsPersist ep : getAllEcosystems()){
+                if(ep.getTypeAssoc().equalsIgnoreCase("P")){
+                    preferredEcosystemsSet.add(ep);
+                }
+            }
+            preferredEcosystems = new ArrayList<>();
+            preferredEcosystems.addAll(preferredEcosystemsSet);
+            Collections.sort(preferredEcosystems);
+        }
+        return preferredEcosystems;
+    }
+
+    /**
+     * Returns suitable ecosystems (unique and not in the preferred list)
+     * @return
+     */
+    public List<EcosystemsPersist> getSuitableEcosystems(){
+        if(suitableEcosystems == null){
+            Set<EcosystemsPersist>suitableEcosystemsSet = new HashSet<>();
+            for(EcosystemsPersist ep : getAllEcosystems()){
+                if(ep.getTypeAssoc().equalsIgnoreCase("S")){
+                    suitableEcosystemsSet.add(ep);
+                }
+            }
+            suitableEcosystemsSet.removeAll(getPreferredEcosystems());
+
+            suitableEcosystems = new ArrayList<>();
+            suitableEcosystems.addAll(suitableEcosystemsSet);
+            Collections.sort(suitableEcosystems);
+        }
+        return suitableEcosystems;
     }
 }
 
