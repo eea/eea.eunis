@@ -120,7 +120,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     // cache for legal mentioned in
     private List<MentionedIn> mentionedInList = null;
 
-    private Set<EcosystemsPersist> uniqueEcosystems;
+    private List<EcosystemsPersist> uniqueEcosystems = null;
 
 
 
@@ -837,10 +837,14 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
      * Returns the list of ecosystems of the habitat, filtered to be unique
      * @return
      */
-    public Set<EcosystemsPersist> getUniqueEcosystems(){
+    public List<EcosystemsPersist> getUniqueEcosystems(){
         if(uniqueEcosystems == null){
-            uniqueEcosystems = new HashSet<>();
-            uniqueEcosystems.addAll(factsheet.getEcosystems());
+            Set<EcosystemsPersist> uniqueEcosystemsSet = new HashSet<>();
+            uniqueEcosystemsSet.addAll(factsheet.getEcosystems());
+
+            uniqueEcosystems = new ArrayList<>();
+            uniqueEcosystems.addAll(uniqueEcosystemsSet);
+            Collections.sort(uniqueEcosystems);
         }
         return uniqueEcosystems;
     }
