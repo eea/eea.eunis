@@ -263,6 +263,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // populates the external data
             linkeddataTabActions(mainIdSpecies, specie.getIdNatureObject());
 
+            if(isBird()){
+                populateBirdEcosystems();
+            }
+
             // it is a synonym, populate the synonym fields
             if (mainIdSpecies != seniorIdSpecies) {
                 SpeciesFactsheet parent = new SpeciesFactsheet(seniorIdSpecies, seniorIdSpecies);
@@ -1688,6 +1692,87 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             Collections.sort(suitableEcosystems);
         }
         return suitableEcosystems;
+    }
+
+    /**
+     * Checks if the species is a bird
+     * @return
+     */
+    public boolean isBird(){
+        return factsheet.getSpeciesGroup().equalsIgnoreCase("Birds");
+    }
+
+    /**
+     * Breeding ecosystem for Birds
+     */
+    private List<EcosystemsPersist> breedingEcosystems;
+    /**
+     * Wintering ecosystems for Birds
+     */
+    private List<EcosystemsPersist> winteringEcosystems;
+
+    /**
+     * Populates the Breeding/Wintering ecosystems for Birds
+     */
+    private void populateBirdEcosystems(){
+        winteringEcosystems = new ArrayList<>();
+        breedingEcosystems = new ArrayList<>();
+        for(EcosystemsPersist ep : getPreferredEcosystems()){
+            if(ep.getSeason().equalsIgnoreCase("B")){
+                breedingEcosystems.add(ep);
+            }
+            if(ep.getSeason().equalsIgnoreCase("W")){
+                winteringEcosystems.add(ep);
+            }
+        }
+
+
+        // check if the breeding and wintering ecosystems are the same
+        int diff = 0;
+
+        if(breedingEcosystems.size() == winteringEcosystems.size()) {
+            for (EcosystemsPersist wep : winteringEcosystems) {
+                boolean found = false;
+                for(EcosystemsPersist bep : breedingEcosystems){
+                    if(bep.getEcoCode().equalsIgnoreCase(wep.getEcoCode())){
+                        found = true;
+                    }
+                }
+                if(!found){
+                    diff++; break;
+                }
+            }
+        } else {
+            diff = 1;
+        }
+
+        if(diff == 0) {
+            // show only one list as "occurs in"
+            preferredEcosystems = breedingEcosystems;
+            breedingEcosystems = new ArrayList<>();
+            winteringEcosystems = new ArrayList<>();
+        } else {
+            // don't show the preferred list
+            preferredEcosystems = new ArrayList<>();
+        }
+        // do not display suitable
+        suitableEcosystems = new ArrayList<>();
+    }
+
+    /**
+     * Returns the Birds breeding ecosystems; empty if the same as wintering (preferred is used in this case)
+     * @return
+     */
+    public List<EcosystemsPersist> getBreedingEcosystems() {
+        return breedingEcosystems;
+    }
+
+    /**
+     * Returns the Birds wintering ecosystems; empty if the same as breeding (preferred is used in this case)
+     * @return
+     */
+    public List<EcosystemsPersist> getWinteringEcosystems() {
+        return winteringEcosystems;
     }
 }
 

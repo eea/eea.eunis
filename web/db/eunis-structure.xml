@@ -2325,5 +2325,10 @@ END
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         </sql>
     </changeSet>
+    <changeSet id="rev-143" author="ivascu">
+        <addColumn tableName="chm62edt_nature_object_ecosystem">
+            <column name="season" type="char(1)" defaultValue="NULL"/>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

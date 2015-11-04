@@ -24,6 +24,11 @@ public class EcosystemsPersist extends PersistentObject implements Comparable{
     private String typeAssoc;
 
     /**
+     * Season for birds (Breeding/Winter)
+     */
+    private String season;
+
+    /**
      * Name of the ecosystem (from chm62edt_ecosystems)
      */
     private String ecoName;
@@ -31,6 +36,8 @@ public class EcosystemsPersist extends PersistentObject implements Comparable{
      * MAES ecosystem or not
      */
     private String isMaes;
+
+
 
     public Integer getIdNatureObject() {
         return idNatureObject;
@@ -80,6 +87,14 @@ public class EcosystemsPersist extends PersistentObject implements Comparable{
         this.isMaes = isMaes;
     }
 
+    public String getSeason() {
+        return season;
+    }
+
+    public void setSeason(String season) {
+        this.season = season;
+    }
+
     /**
      * Equals is used to get rid of the name duplicates caused by biogeoregions (only uses the ecosystem code and id nature object)
      * @param o
@@ -93,7 +108,8 @@ public class EcosystemsPersist extends PersistentObject implements Comparable{
         EcosystemsPersist that = (EcosystemsPersist) o;
 
         if (!idNatureObject.equals(that.idNatureObject)) return false;
-        return ecoCode.equals(that.ecoCode);
+        if (!ecoCode.equals(that.ecoCode)) return false;
+        return !(season != null ? !season.equals(that.season) : that.season != null);
 
     }
 
@@ -101,6 +117,7 @@ public class EcosystemsPersist extends PersistentObject implements Comparable{
     public int hashCode() {
         int result = idNatureObject.hashCode();
         result = 31 * result + ecoCode.hashCode();
+        result = 31 * result + (season != null ? season.hashCode() : 0);
         return result;
     }
 

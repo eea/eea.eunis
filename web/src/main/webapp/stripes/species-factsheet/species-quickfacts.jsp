@@ -136,6 +136,21 @@
                                     <span class="bold italics"><a href="/species/${actionBean.factsheet.validSpeciesId}">${actionBean.factsheet.parentSpeciesName}</a></span>
                                 </li>
                             </c:if>
+
+                            <c:if test="${not empty actionBean.breedingEcosystems or not empty actionBean.winteringEcosystems}">
+                                <li><c:if test="${not empty actionBean.breedingEcosystems}">
+                                    Breeds in
+                                    <c:forEach var="ecosystem" items="${actionBean.breedingEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if>${ecosystem.ecoName}</c:forEach>
+                                    ecosystems.
+                                </c:if>
+                                    <c:if test="${not empty actionBean.winteringEcosystems}">
+                                        The species is wintering in
+                                        <c:forEach var="ecosystem" items="${actionBean.winteringEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if>${ecosystem.ecoName}</c:forEach>
+                                        ecosystems.
+                                    </c:if>
+                                </li>
+                            </c:if>
+
                             <c:if test="${not empty actionBean.preferredEcosystems or not empty actionBean.suitableEcosystems}">
                                 <li><c:if test="${not empty actionBean.preferredEcosystems}">
                                     Occurs in

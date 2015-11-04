@@ -20,6 +20,7 @@ public class EcosystemsDomain extends AbstractDomain {
         this.addColumnSpec(new StringColumnSpec("code_eco", "getEcoCode", "setEcoCode", DEFAULT_TO_EMPTY_STRING, REQUIRED));
         this.addColumnSpec(new IntegerColumnSpec("id_biogeoregion", "getIdBioGeoRegion", "setIdBioGeoRegion", DEFAULT_TO_ZERO));
         this.addColumnSpec(new StringColumnSpec("type_assoc", "getTypeAssoc", "setTypeAssoc", DEFAULT_TO_EMPTY_STRING));
+        this.addColumnSpec(new StringColumnSpec("season", "getSeason", "setSeason", DEFAULT_TO_EMPTY_STRING));
 
         JoinTable ecosystemsNames = new JoinTable("chm62edt_ecosystems A", "code_eco", "code");
         ecosystemsNames.addJoinColumn(new StringJoinColumn("value", "ecoName", "setEcoName"));
