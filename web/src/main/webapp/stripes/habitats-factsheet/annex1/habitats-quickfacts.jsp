@@ -38,7 +38,7 @@
                 </c:if>
                 <c:if test="${not empty actionBean.uniqueEcosystems}">
                     <li>Occurs in
-                    <c:forEach var="ecosystem" items="${actionBean.uniqueEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if><span class="bold">${ecosystem.ecoName}</span></c:forEach>
+                    <c:forEach var="ecosystem" items="${actionBean.uniqueEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if>${ecosystem.ecoName}</c:forEach>
                     ecosystems</li>
                 </c:if>
             </ul>

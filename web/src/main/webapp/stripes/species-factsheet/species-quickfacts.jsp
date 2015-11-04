@@ -138,13 +138,13 @@
                             </c:if>
                             <c:if test="${not empty actionBean.preferredEcosystems or not empty actionBean.suitableEcosystems}">
                                 <li><c:if test="${not empty actionBean.preferredEcosystems}">
-                                    Lives in
-                                        <c:forEach var="ecosystem" items="${actionBean.preferredEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if><span class="bold">${ecosystem.ecoName}</span></c:forEach>
+                                    Occurs in
+                                        <c:forEach var="ecosystem" items="${actionBean.preferredEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if>${ecosystem.ecoName}</c:forEach>
                                         ecosystems.
                                     </c:if>
                                     <c:if test="${not empty actionBean.suitableEcosystems}">
                                         Other suitable ecosystems include
-                                        <c:forEach var="ecosystem" items="${actionBean.suitableEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if><span class="bold">${ecosystem.ecoName}</span></c:forEach>.
+                                        <c:forEach var="ecosystem" items="${actionBean.suitableEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if>${ecosystem.ecoName}</c:forEach>.
                                     </c:if>
                                 </li>
                             </c:if>
