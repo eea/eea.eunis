@@ -22,7 +22,7 @@
                                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Annex')}
                               </th>
                             <th scope="col" style="cursor: pointer;" class="nosort">
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical and other restrictions')}
+                               Conditions
                              </th>
                             <th scope="col" style="cursor: pointer;" class="nosort">
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'More information')}
