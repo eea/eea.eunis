@@ -17,6 +17,7 @@ public class EunisUtil {
      * Map for default picture (if there is no other picture in the DB)
      */
     static final Map<String, String> defaultPictures = new HashMap<String, String>();
+    public static HashMap<Integer, Integer> legalStatusOrder = new HashMap<>();
 
     static {
         defaultPictures.put("Algae","Algae");
@@ -32,6 +33,77 @@ public class EunisUtil {
         defaultPictures.put("Mosses & Liverworts","Mosses-and-liverworths");
         defaultPictures.put("Protists","Protists");
         defaultPictures.put("Reptiles","Reptiles");
+
+        /**
+         * 1. Habitats Directive  2324 2325 2326 2327
+         2. Birds Directive 2440 2441 2456 2457
+         3. Bern Convention  1564 1565 1566 1567
+         3.1 Emerald Res. 4 2442 2467
+         3.2 Emerald Res. 6 2443
+         4. Bonn Convention 1799 1800
+         4.1 ACAP TODO
+         4.2 ACCOBAMS  1802
+         4.3 AEWA  2447
+         4.4 ASCOBANS 1803
+         4.5 EuroBats  1804
+         4.6 MoU Raptors TODO
+         4.7 Wadden Sea Agreement  2451
+         5. CITES  1791 1792 1793
+         6. EU Trade  2444 2462  2445 2463  2446 2464  2458 2465  2459 2466
+         7. SPA/BD Mediterranean 1818 1819
+         8. OSPAR 1832
+         9. HELCOM 2455
+         */
+        EunisUtil.legalStatusOrder.put(2324, 100); // Habitats I
+        EunisUtil.legalStatusOrder.put(2325, 200); // Habitats II
+        EunisUtil.legalStatusOrder.put(2326, 300); // Habitats III
+        EunisUtil.legalStatusOrder.put(2327, 400); // Habitats IV
+
+        EunisUtil.legalStatusOrder.put(2440, 500); // Birds
+        EunisUtil.legalStatusOrder.put(2441, 600); // Birds I
+        EunisUtil.legalStatusOrder.put(2456, 700); // Birds II
+        EunisUtil.legalStatusOrder.put(2457, 800); // Birds III
+
+        EunisUtil.legalStatusOrder.put(1564, 900); // Bern
+        EunisUtil.legalStatusOrder.put(1565, 1000); // Bern I
+        EunisUtil.legalStatusOrder.put(1566, 1100); // Bern II
+        EunisUtil.legalStatusOrder.put(1567, 1200); // Bern III
+
+        EunisUtil.legalStatusOrder.put(2442, 1300); // Emerald R4
+        EunisUtil.legalStatusOrder.put(2467, 1400); // Emerald R4 (new)
+        EunisUtil.legalStatusOrder.put(2443, 1500); // Emerald R6
+
+        EunisUtil.legalStatusOrder.put(1799, 1600); // Bonn
+        EunisUtil.legalStatusOrder.put(1800, 1700); // Bonn
+
+        EunisUtil.legalStatusOrder.put(1, 1800); // todo: ACAP here
+        EunisUtil.legalStatusOrder.put(1802, 1900); // ACCOBAMS
+        EunisUtil.legalStatusOrder.put(2447, 2000); // AEWA
+        EunisUtil.legalStatusOrder.put(1803, 2100); // ASCOBANS
+        EunisUtil.legalStatusOrder.put(1804, 2200); // EuroBats
+        EunisUtil.legalStatusOrder.put(2, 2300); // todo: raptors here
+        EunisUtil.legalStatusOrder.put(2451, 2400); // Wadden Sea Agreement
+
+        EunisUtil.legalStatusOrder.put(1791, 2500); // CITES
+        EunisUtil.legalStatusOrder.put(1792, 2600); // CITES
+        EunisUtil.legalStatusOrder.put(1793, 2700); // CITES
+
+        EunisUtil.legalStatusOrder.put(2444, 2800); //  EU Trade
+        EunisUtil.legalStatusOrder.put(2462, 2900); //  EU Trade
+        EunisUtil.legalStatusOrder.put(2445, 3000); //  EU Trade
+        EunisUtil.legalStatusOrder.put(2463, 3100); //  EU Trade
+        EunisUtil.legalStatusOrder.put(2446, 3200); //  EU Trade
+        EunisUtil.legalStatusOrder.put(2464, 3300); //  EU Trade
+        EunisUtil.legalStatusOrder.put(2458, 3400); //  EU Trade
+        EunisUtil.legalStatusOrder.put(2465, 3500); //  EU Trade
+        EunisUtil.legalStatusOrder.put(2459, 3600); //  EU Trade
+        EunisUtil.legalStatusOrder.put(2466, 3700); //  EU Trade
+
+        EunisUtil.legalStatusOrder.put(1818, 3800); // SPA/BD Mediterranean
+        EunisUtil.legalStatusOrder.put(1819, 3900); // SPA/BD Mediterranean
+
+        EunisUtil.legalStatusOrder.put(1832, 4000); // OSPAR
+        EunisUtil.legalStatusOrder.put(2455, 4100); // HELCOM
     }
 
     // species groups as a list for SQL IN, to determine if a species is in Natura or just other species

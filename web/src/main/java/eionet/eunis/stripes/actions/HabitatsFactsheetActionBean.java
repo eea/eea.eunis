@@ -111,7 +111,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private List history = new ArrayList();
     private List otherClassifications = new ArrayList();
 
-    private List legalInfo = null;
+    private List<LegalStatusWrapper> legalInfo = null;
     private Set<String> protectedBy = null;
 
     private String englishDescription = null;
@@ -784,6 +784,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                         legalStatusWrapper.addMoreInfo(link);
                     }
                 }
+                // Order the results
+                Collections.sort(legalInfo);
+
             } catch (InitializationException e) {
                 legalInfo = new ArrayList<LegalStatusWrapper>();
             }

@@ -465,6 +465,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             legalStatuses.add(legalStatus);
         }
 
+        // order the legal status
+        Collections.sort(legalStatuses);
+
         List<LinkDTO> natureLinks = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
         links = new ArrayList<LinkDTO>();
 
