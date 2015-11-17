@@ -41,18 +41,25 @@ public class EunisUtil {
          3.1 Emerald Res. 4 2442 2467
          3.2 Emerald Res. 6 2443
          4. Bonn Convention 1799 1800
-         4.1 ACAP TODO
+         4.1 ACAP 2468 2469
          4.2 ACCOBAMS  1802
          4.3 AEWA  2447
          4.4 ASCOBANS 1803
          4.5 EuroBats  1804
-         4.6 MoU Raptors TODO
-         4.7 Wadden Sea Agreement  2451
+         4.6 AWarbler 2470 2471
+         4.7 GBustard 2472 2473
+         4.8 MSeal 2474 2475
+         4.9 MoU Raptors 2476 2477
+         4.10 SbCurlew 2478 2479
+         4.11 Sharks MoU 2480 2481
+         4.12 Wadden Sea Agreement 2451
+
          5. CITES  1791 1792 1793
          6. EU Trade  2444 2462  2445 2463  2446 2464  2458 2465  2459 2466
          7. SPA/BD Mediterranean 1818 1819
          8. OSPAR 1832
          9. HELCOM 2455
+
          */
         EunisUtil.legalStatusOrder.put(2324, 100); // Habitats I
         EunisUtil.legalStatusOrder.put(2325, 200); // Habitats II
@@ -76,12 +83,31 @@ public class EunisUtil {
         EunisUtil.legalStatusOrder.put(1799, 1600); // Bonn
         EunisUtil.legalStatusOrder.put(1800, 1700); // Bonn
 
-        EunisUtil.legalStatusOrder.put(1, 1800); // todo: ACAP here
+        EunisUtil.legalStatusOrder.put(2468 , 1800); // ACAP
+        EunisUtil.legalStatusOrder.put(2469 , 1810); // ACAP
         EunisUtil.legalStatusOrder.put(1802, 1900); // ACCOBAMS
         EunisUtil.legalStatusOrder.put(2447, 2000); // AEWA
         EunisUtil.legalStatusOrder.put(1803, 2100); // ASCOBANS
         EunisUtil.legalStatusOrder.put(1804, 2200); // EuroBats
-        EunisUtil.legalStatusOrder.put(2, 2300); // todo: raptors here
+
+        EunisUtil.legalStatusOrder.put(2470, 2220); // AWarbler
+        EunisUtil.legalStatusOrder.put(2471, 2230); // AWarbler
+
+        EunisUtil.legalStatusOrder.put(2472, 2240); // GBustard
+        EunisUtil.legalStatusOrder.put(2473, 2250); // GBustard
+
+        EunisUtil.legalStatusOrder.put(2474, 2260); //  MSeal
+        EunisUtil.legalStatusOrder.put(2475, 2270); // MSeal
+
+        EunisUtil.legalStatusOrder.put(2476, 2300); // Raptors
+        EunisUtil.legalStatusOrder.put(2477, 2350); // Raptors
+
+        EunisUtil.legalStatusOrder.put(2478, 2360); // SbCurlew
+        EunisUtil.legalStatusOrder.put(2479, 2370); // SbCurlew
+
+        EunisUtil.legalStatusOrder.put(2480, 2380); // Sharks MoU
+        EunisUtil.legalStatusOrder.put(2481, 2390); // Sharks MoU
+
         EunisUtil.legalStatusOrder.put(2451, 2400); // Wadden Sea Agreement
 
         EunisUtil.legalStatusOrder.put(1791, 2500); // CITES
