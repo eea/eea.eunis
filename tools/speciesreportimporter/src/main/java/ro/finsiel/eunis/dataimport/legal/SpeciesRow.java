@@ -71,7 +71,7 @@ public class SpeciesRow extends ExcelRow {
     private int excelRow;
 
     // flag if it is a synonym
-    private String databaseName;
+    private String nameInDatabase;
     // the group ID, to identify Birds (id group = 5)
     private String idGroup;
     private String citesName = "";
@@ -81,6 +81,18 @@ public class SpeciesRow extends ExcelRow {
 
     // import result
     private String result = "";
+    private String acap;
+    private String AWarbler;
+    private String GBustard;
+    private String MSeal;
+    private String mouRaptors;
+    private String mouRaptorsName;
+    private String sbCurlew;
+    private String sharksMou;
+    private String eurobatsName;
+    private String helcomRestrictions;
+    private String helcomName;
+    private String birdsDRestrictions;
 
     public Map<String, RestrictionsRow> getRestrictionsMap() {
         return restrictionsMap;
@@ -118,6 +130,7 @@ public class SpeciesRow extends ExcelRow {
             && speciesName.contains(" ")
            // && !(speciesName.contains("("))  // https://taskman.eionet.europa.eu/issues/26690#note-74
             && !speciesName.equalsIgnoreCase("VASCULAR PLANTS")
+            && !speciesName.startsWith("Family ")
             && !speciesName.startsWith("Order ")
             && !speciesName.startsWith("Phyllum ")
             && !speciesName.startsWith("Phylum ")
@@ -398,12 +411,12 @@ public class SpeciesRow extends ExcelRow {
         this.spaName = spaName;
     }
 
-    public String getDatabaseName() {
-        return databaseName;
+    public String getNameInDatabase() {
+        return nameInDatabase;
     }
 
-    public void setDatabaseName(String databaseName) {
-        this.databaseName = databaseName;
+    public void setNameInDatabase(String nameInDatabase) {
+        this.nameInDatabase = nameInDatabase;
     }
 
     public void setIdGroup(String idGroup) {
@@ -445,6 +458,7 @@ public class SpeciesRow extends ExcelRow {
 
     /**
      * Splits the list by the given separator, trimming the result. If the parameter is empty returns an empty array.
+     * Removes the stars from the list, as they are only
      * @param list The string to be split
      * @param separator The separator used for splitting
      * @return An array of the split values, trimmed.
@@ -540,5 +554,101 @@ public class SpeciesRow extends ExcelRow {
 
     public void appendResult(String toAppend){
         result = result + toAppend + "; ";
+    }
+
+    public void setAcap(String acap) {
+        this.acap = acap;
+    }
+
+    public String getAcap() {
+        return acap;
+    }
+
+    public void setAWarbler(String AWarbler) {
+        this.AWarbler = AWarbler;
+    }
+
+    public String getAWarbler() {
+        return AWarbler;
+    }
+
+    public void setGBustard(String GBustard) {
+        this.GBustard = GBustard;
+    }
+
+    public String getGBustard() {
+        return GBustard;
+    }
+
+    public void setMSeal(String MSeal) {
+        this.MSeal = MSeal;
+    }
+
+    public void setMouRaptors(String mouRaptors) {
+        this.mouRaptors = mouRaptors;
+    }
+
+    public void setMouRaptorsName(String mouRaptorsName) {
+        this.mouRaptorsName = mouRaptorsName;
+    }
+
+    public void setSbCurlew(String sbCurlew) {
+        this.sbCurlew = sbCurlew;
+    }
+
+    public void setSharksMou(String sharksMou) {
+        this.sharksMou = sharksMou;
+    }
+
+    public String getMSeal() {
+        return MSeal;
+    }
+
+    public String getMouRaptors() {
+        return mouRaptors;
+    }
+
+    public String getMouRaptorsName() {
+        return mouRaptorsName;
+    }
+
+    public String getSbCurlew() {
+        return sbCurlew;
+    }
+
+    public String getSharksMou() {
+        return sharksMou;
+    }
+
+    public void setEurobatsName(String eurobatsName) {
+        this.eurobatsName = eurobatsName;
+    }
+
+    public String getEurobatsName() {
+        return eurobatsName;
+    }
+
+    public void setHelcomRestrictions(String helcomRestrictions) {
+        this.helcomRestrictions = helcomRestrictions;
+    }
+
+    public String getHelcomRestrictions() {
+        return helcomRestrictions;
+    }
+
+    public void setHelcomName(String helcomName) {
+        this.helcomName = helcomName;
+    }
+
+    public String getHelcomName() {
+        return helcomName;
+    }
+
+    public void setBirdsDRestrictions(String birdsDRestrictions) {
+        this.birdsDRestrictions = birdsDRestrictions;
+    }
+
+    public String getBirdsDRestrictions() {
+        return birdsDRestrictions;
     }
 }

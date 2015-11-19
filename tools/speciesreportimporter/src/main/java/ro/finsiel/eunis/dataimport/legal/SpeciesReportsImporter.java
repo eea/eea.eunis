@@ -49,6 +49,14 @@ public class SpeciesReportsImporter {
     private static final String RED_LIST = "2408";   // for reports table
     private static final String RED_LIST_CATEGORIES = "2407"; // from conservation_status table
 
+    private static final String ACAP = "2469";
+    private static final String AWARBLER = "2471";
+    private static final String GBUSTARD = "2473";
+    private static final String MSEAL = "2475";
+    private static final String RAPTORS = "2477";
+    private static final String SBCURLEW = "2479";
+    private static final String SHARKS = "2481";
+
     static {
         habitatsMap.put("I", "2324");
         habitatsMap.put("II", "2325");
@@ -59,16 +67,12 @@ public class SpeciesReportsImporter {
         birdsMap.put("II", "2456");    // annex II
         birdsMap.put("II A", "2456");
         birdsMap.put("II B", "2456");
+        birdsMap.put("IIB", "2456"); // misspelling
         birdsMap.put("III", "2457");   // annex III
         birdsMap.put("III A", "2457");
         birdsMap.put("III B", "2457");
 
-        birdsMap.put("GP", "0");  // General protection
-        birdsMap.put("GPCBR", "0"); // General Protection, Can Be Removed -- to remove from EUNIS
-        birdsMap.put("ECBR", "0"); // Extinct, Can Be Removed
-
-        // the Birds Directive
-        birdsMap.put("Other", "2440");
+        birdsMap.put("GP", "2482");  // General protection - to be added for the general protection text
 
         bernMap.put("I", "1565");
         bernMap.put("II", "1566");
@@ -81,10 +85,10 @@ public class SpeciesReportsImporter {
         citesMap.put("II", "1792");
         citesMap.put("III", "1793");
 
-        euTradeMap.put("A", "2445");
-        euTradeMap.put("B", "2446");
-        euTradeMap.put("C", "2458");
-        euTradeMap.put("D", "2459");
+        euTradeMap.put("A", "2463");
+        euTradeMap.put("B", "2464");
+        euTradeMap.put("C", "2465");
+        euTradeMap.put("D", "2466");
 
         spaMap.put("II", "1818");
         spaMap.put("III", "1819");
@@ -139,10 +143,6 @@ public class SpeciesReportsImporter {
         }
 
         ResourceBundle props = ResourceBundle.getBundle("jrf");
-        String dbDriver = props.getString("mysql.driver");
-        String dbUrl = props.getString("mysql.url");
-        String dbUser = props.getString("mysql.user");
-        String dbPass = props.getString("mysql.password");
 
         SQLUtilities sqlUtilities = new SQLUtilities();
 
@@ -286,7 +286,7 @@ public class SpeciesReportsImporter {
                         "(id_species=" + speciesRow.getIdSpecies() + ", " +
                         "id_nature_object=" + speciesRow.getIdNatureObject() + ", " +
                         "Excel row=" + speciesRow.getExcelRow() +")" +
-                        (speciesRow.getSpeciesName().equals(speciesRow.getDatabaseName())?"":" synonym of " + speciesRow.getDatabaseName())
+                        (speciesRow.getSpeciesName().equals(speciesRow.getNameInDatabase())?"":" synonym of " + speciesRow.getNameInDatabase())
                         );
 
                 cleanExistingData(speciesRow);
@@ -318,7 +318,7 @@ public class SpeciesReportsImporter {
             populateSpeciesIds(speciesRow, speciesFullList);
             foundBySynonyms++;
 
-            speciesRow.appendResult("Synonym of " + speciesRow.getDatabaseName());
+            speciesRow.appendResult("Synonym of " + speciesRow.getNameInDatabase());
         }
     }
 
@@ -351,7 +351,7 @@ public class SpeciesReportsImporter {
                 // is valid name
                 speciesRow.setIdSpecies(l2.getColumnsValues().get(0).toString());
                 speciesRow.setIdNatureObject(l2.getColumnsValues().get(1).toString());
-                speciesRow.setDatabaseName(l2.getColumnsValues().get(5).toString());
+                speciesRow.setNameInDatabase(l2.getColumnsValues().get(5).toString());
                 speciesRow.setIdGroup(l2.getColumnsValues().get(6).toString());
             } else {
                 // extract the valid species link from the synonym
@@ -400,9 +400,9 @@ public class SpeciesReportsImporter {
 
         multipleInsertReport("Habitats D", speciesRow.getHabitatsDAnnex(), habitatsMap, ID_GEOSCOPE_EU, "HD", speciesRow.getHabitatsName(), speciesRow);
         if(speciesRow.getIdGroup().equals("5") && speciesRow.getBirdsDAnnex().length == 0) {
-            // bird species not mentioned in Birds Directive annex, has to be associated with the Birds Directive directly
-            speciesRow.setBirdsD("Other");
-            System.out.println("Bird species added in Birds Directive");
+            // bird species not mentioned in Birds Directive annex
+            System.out.println(" WARNING: Bird not set as under Birds Directive GP");
+            speciesRow.appendResult("Bird not under GP");
         }
         multipleInsertReport("Birds D", speciesRow.getBirdsDAnnex(), birdsMap, ID_GEOSCOPE_EU, null, speciesRow.getBirdsName(), speciesRow);
         multipleInsertReport("Bern Convention", speciesRow.getBernConventionAnnex(), bernMap, ID_GEOSCOPE_EU, "Bern", speciesRow.getBernName(), speciesRow);
@@ -417,21 +417,38 @@ public class SpeciesReportsImporter {
         singleInsertReport("Wadden Sea Seals", speciesRow.getWadden(), "Yes", WADDEN, ID_GEOSCOPE_EU, null, speciesRow);
         multipleInsertReport("Barcelona SPA", speciesRow.getSpaAnnex(), spaMap, ID_GEOSCOPE_EU, null, speciesRow.getSpaName(), speciesRow);
         singleInsertReport("OSPAR", speciesRow.getOspar(), "I", OSPAR, ID_GEOSCOPE_EU, null, speciesRow.getOsparName(), speciesRow);
-        singleInsertReport("HELCOM", speciesRow.getHelcom(), "A", HELCOM, ID_GEOSCOPE_EU, null, speciesRow);
+
+        singleInsertReport("ACAP", speciesRow.getAcap(), "I", ACAP, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("AWarbler", speciesRow.getAWarbler(), "Yes", AWARBLER, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("GBustard", speciesRow.getGBustard(), "Yes", GBUSTARD, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("MSeal", speciesRow.getMSeal(), "Yes", MSEAL, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("MoU Raptors", speciesRow.getMouRaptors(), "I", RAPTORS, ID_GEOSCOPE_EU, null, speciesRow.getMouRaptorsName(), speciesRow);
+        singleInsertReport("SbCurlew", speciesRow.getSbCurlew(), "Yes", SBCURLEW, ID_GEOSCOPE_EU, null, speciesRow);
+        singleInsertReport("Sharks MoU", speciesRow.getSharksMou(), "1", SHARKS, ID_GEOSCOPE_EU, null, speciesRow);
+
+
+        if(!speciesRow.getHelcom().isEmpty()) {
+            singleInsertReport("HELCOM", "A", "A", HELCOM, ID_GEOSCOPE_EU, null, speciesRow);
+            insertRedListReport(ID_GEOSCOPE_EU, speciesRow.getIdNatureObject(), speciesRow.getHelcom(), "", HELCOM, speciesRow);
+        }
 
         // EU report
-        insertRedListReport(ID_GEOSCOPE_EU, speciesRow.getIdNatureObject(), speciesRow.getRedList(), speciesRow.getRedListName(), speciesRow);
+        insertRedListReport(ID_GEOSCOPE_EU, speciesRow.getIdNatureObject(), speciesRow.getRedList(), speciesRow.getRedListName(), RED_LIST, speciesRow);
         if(!Utilities.isEmptyString(speciesRow.getRedListEU27())) {
-            insertRedListReport(ID_GEOSCOPE_EU27, speciesRow.getIdNatureObject(), speciesRow.getRedListEU27(), speciesRow.getRedListEU27Name(), speciesRow);
+            insertRedListReport(ID_GEOSCOPE_EU27, speciesRow.getIdNatureObject(), speciesRow.getRedListEU27(), speciesRow.getRedListEU27Name(), RED_LIST, speciesRow);
         }
     }
 
     /**
      * Insert a red list record for the given species in the given geoscope
-     * @param idGeoscope
-     * @param speciesRow
+     * @param idGeoscope The RL geoscope (EU, EU27)
+     * @param idNatureObject The species nature object
+     * @param assessment The assessment (must be from the conservationStatusCode
+     * @param redListName Name in document (if different)
+     * @param document The document (RED_LIST or HELCOM)
+     * @param speciesRow The full Excel row object
      */
-    private void insertRedListReport(String idGeoscope, String idNatureObject, String redList, String redListName, SpeciesRow speciesRow){
+    private void insertRedListReport(String idGeoscope, String idNatureObject, String assessment, String redListName, String document, SpeciesRow speciesRow){
 
         // clean the EU Red List first
         try {
@@ -461,20 +478,30 @@ public class SpeciesReportsImporter {
             e.printStackTrace();
         }
 
+        boolean fromParent = false;
 
-        if(!redList.isEmpty()) {
+        if(!assessment.isEmpty()) {
             try {
-                Integer idConservationStatus = conservationStatusCode.get(redList);
+                Integer idConservationStatus = conservationStatusCode.get(assessment);
+
+                if(idConservationStatus == null){
+                    idConservationStatus = conservationStatusCode.get(assessment.replace("*",""));
+                    if(idConservationStatus !=null) {
+                        if(debug) System.out.println(" Marking as from parent species for the conservation status " + assessment);
+                        fromParent = true;
+                    }
+                }
+
                 if(idConservationStatus != null) {
 
                     int idReportType = insertReportType(idConservationStatus, "CONSERVATION_STATUS");
-                    int idReportAttributes = insertRedListReportAttribute(redListName);
+                    int idReportAttributes = insertRedListReportAttribute(redListName, fromParent);
 
-                    insertReport(idNatureObject, RED_LIST, idGeoscope, idReportAttributes, idReportType);
+                    insertReport(idNatureObject, document, idGeoscope, idReportAttributes, idReportType);
 
-                    if(debug) System.out.println(" Inserted conservation status code " + redList);
+                    if(debug) System.out.println(" Inserted conservation status code " + assessment);
                 } else {
-                    System.out.println("WARNING: Red List code " + redList + " not identified");
+                    System.out.println("WARNING: Red List code " + assessment + " not identified");
                     speciesRow.appendResult("Red list code not found");
                 }
             } catch (SQLException e) {
@@ -501,22 +528,28 @@ public class SpeciesReportsImporter {
      * @param speciesRow
      */
     private void singleInsertReport(String name, String annex, String expectedValue, String idDc, String geoscope, String restrictionPrefix, String nameInDocument, SpeciesRow speciesRow){
+
+        RestrictionsRow restriction = null;
+        if(restrictionPrefix!= null) {
+            restriction = speciesRow.getRestrictionsMap().get(restrictionPrefix);
+        }
+
+        String restrictionText = null;
+        int priority = 0;
+
+        if(restriction != null){
+            restrictionText = restriction.getRestriction();
+            priority = restriction.getPriority();
+        }
+
         if(annex.equals(expectedValue)){
-
-            RestrictionsRow restriction = null;
-            if(restrictionPrefix!= null) {
-                restriction = speciesRow.getRestrictionsMap().get(restrictionPrefix);
+            insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument, false);
+        } else if(annex.equals(expectedValue + "*")){
+            if(debug) System.out.println(" Marking as from parent species for the " + name + " Annex " + annex);
+            if(speciesRow.getSpeciesName().length()-speciesRow.getSpeciesName().replace(" ","").length() != 2){
+                System.out.println("WARNING: Starred annex value not applied to subspecies");
             }
-
-            String restrictionText = null;
-            int priority = 0;
-
-            if(restriction != null){
-                restrictionText = restriction.getRestriction();
-                priority = restriction.getPriority();
-            }
-
-            insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument);
+            insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument, true);
         } else {
             if(!annex.isEmpty()) {
                 System.out.println("WARNING: for species '" + speciesRow.getSpeciesName() + "' the " + name + " Annex " + annex + " was not found!");
@@ -545,6 +578,22 @@ public class SpeciesReportsImporter {
 
         for(String annex : annexes){
             String idDc = values.get(annex);
+            boolean fromParent = false;
+
+            if(idDc == null){
+                // search for the star
+                idDc = values.get(annex.replace("*", ""));
+                if(idDc != null){
+                    if(debug) System.out.println(" Marking as from parent species for the " + name + " Annex " + annex);
+                    annex = annex.replace("*","");
+
+                    if(speciesRow.getSpeciesName().length()-speciesRow.getSpeciesName().replace(" ","").length() != 2){
+                        System.out.println("WARNING: Starred annex value not applied to subspecies");
+                    }
+                    fromParent = true;
+                }
+            }
+
             RestrictionsRow restriction = null;
             if(restrictionPrefix!= null) {
                 restriction = speciesRow.getRestrictionsMap().get(restrictionPrefix + " " + annex);
@@ -559,15 +608,10 @@ public class SpeciesReportsImporter {
             }
 
             if(idDc != null) {
-                if(idDc.equals("0")){
-                    // todo: special treatment for Birds D GP / GPCBR / ECBR
-                } else { // ok
-                    insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument);
-                }
+                insertLegalStatusReport(speciesRow.getIdSpecies(), speciesRow.getIdNatureObject(), idDc, geoscope, restrictionText, priority, annex, nameInDocument, fromParent);
             } else {
                 System.out.println("WARNING: for species '" + speciesRow.getSpeciesName() + "' the " + name + " Annex " + annex + " was not found!");
-                speciesRow.appendResult( name + " annex " + annex + " not found");
-
+                speciesRow.appendResult(name + " annex " + annex + " not found");
             }
         }
     }
@@ -607,10 +651,11 @@ public class SpeciesReportsImporter {
      * @param restrictionText
      * @param priority
      * @param annex
+     * @param fromParent The legal text is inherited from parent species (only for subspecies)
      */
-    private void insertLegalStatusReport(String idSpecies, String idNatureObject, String idDc, String idGeoscope, String restrictionText, int priority, String annex, String nameInDocument) {
+    private void insertLegalStatusReport(String idSpecies, String idNatureObject, String idDc, String idGeoscope, String restrictionText, int priority, String annex, String nameInDocument, boolean fromParent) {
         try {
-            int idReportAttributes = insertLegalReportAttribute(idDc, idSpecies, nameInDocument);
+            int idReportAttributes = insertLegalReportAttribute(idDc, idSpecies, nameInDocument, fromParent);
 
             int idLegalStatus = -1;
             if(restrictionText != null || priority == 1){
@@ -713,16 +758,20 @@ public class SpeciesReportsImporter {
      * @param idDc
      * @param speciesCode
      * @param nameInDocument The name in the legal document; can be eplty if none specified
+     * @param fromParent The legal text is inherited from parent species (only for subspecies)
      * @return
      * @throws SQLException
      */
-    private int insertLegalReportAttribute(String idDc, String speciesCode, String nameInDocument) throws SQLException {
+    private int insertLegalReportAttribute(String idDc, String speciesCode, String nameInDocument, boolean fromParent) throws SQLException {
         int idReportAttributes = lastIdReportAttributesId++;
 
         insertReportAttribute(idReportAttributes, "ID_DC", "NUMBER", idDc);
         insertReportAttribute(idReportAttributes, "SPECIES_CODE", "TEXT", speciesCode);
         if(!nameInDocument.isEmpty()){
             insertReportAttribute(idReportAttributes, "NAME_IN_DOCUMENT", "TEXT", nameInDocument);
+        }
+        if(fromParent){
+            insertReportAttribute(idReportAttributes, "FROM_PARENT", "TEXT", "YES");
         }
 
         return idReportAttributes;
@@ -731,14 +780,18 @@ public class SpeciesReportsImporter {
     /**
      * Insert red list attribute for NAME_IN_DOUCMENT; only written if the name is not empty
      * @param nameInDocument The name of the species in the Red List document
+     * @param fromParent The legal text is inherited from parent species (only for subspecies)
      * @return The ID of the inserted record; if the nameInDocument parameter is null returns -1
      * @throws SQLException
      */
-    private int insertRedListReportAttribute(String nameInDocument) throws SQLException {
+    private int insertRedListReportAttribute(String nameInDocument, boolean fromParent) throws SQLException {
         int idReportAttributes = -1;
         if(!nameInDocument.isEmpty()){
             idReportAttributes = lastIdReportAttributesId++;
             insertReportAttribute(idReportAttributes, "NAME_IN_DOCUMENT", "TEXT", nameInDocument);
+        }
+        if(fromParent){
+            insertReportAttribute(idReportAttributes, "FROM_PARENT", "TEXT", "YES");
         }
         return idReportAttributes;
     }
