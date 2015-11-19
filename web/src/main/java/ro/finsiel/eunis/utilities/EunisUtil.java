@@ -67,6 +67,7 @@ public class EunisUtil {
         EunisUtil.legalStatusOrder.put(2327, 400); // Habitats IV
 
         EunisUtil.legalStatusOrder.put(2440, 500); // Birds
+        EunisUtil.legalStatusOrder.put(2482, 550); // Birds GP
         EunisUtil.legalStatusOrder.put(2441, 600); // Birds I
         EunisUtil.legalStatusOrder.put(2456, 700); // Birds II
         EunisUtil.legalStatusOrder.put(2457, 800); // Birds III

@@ -54,6 +54,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         birdsDirectiveIdDc.add(2456);
         birdsDirectiveIdDc.add(2457);
         birdsDirectiveIdDc.add(2440);
+        birdsDirectiveIdDc.add(2482);
     }
 
     /** The argument given. Can be a species number or scientific name */
@@ -443,26 +444,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             } else {
                 otherAgreements++;
             }
-        }
-
-        if(isBird() && !isBirdsDirective()){
-            // add the all-including Birds Directive
-            LegalStatusWrapper legalStatus = new LegalStatusWrapper();
-
-            legalStatus.setLegalText("This species is not mentioned in the annexes, but it is covered by the general protection regime provided by Article 1 of the Directive to all species of birds naturally occurring in the wild state in the European territory of the Member States to which the Treaty applies.");
-            legalStatus.setUrl("http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2010:020:0007:0025:EN:PDF");
-            legalStatus.setIdDc(2440);
-            legalStatus.setFormattedUrl("http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?...");
-            legalStatus.setParentUrl("http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2010:020:0007:0025:EN:PDF");
-            legalStatus.setParentName("Directive 2009/147/EC of the European Parliament and of the Council, of 30 November 2009, on the conservation of wild birds");
-            legalStatus.setParentAlternative("EU Birds Directive");
-            legalStatus.setArea("Europe");
-            legalStatus.setDetailedReference("This species is not mentioned in the annexes, but it is covered by the general protection regime provided by Article 1 of the Directive to all species of birds naturally occurring in the wild state in the European territory of the Member States to which the Treaty applies.");
-
-            DcLinkDTO dcLinkDTO = new DcLinkDTO("2440", "http://ec.europa.eu/environment/nature/legislation/birdsdirective/index_en.htm", null);
-            legalStatus.addMoreInfo(dcLinkDTO);
-
-            legalStatuses.add(legalStatus);
         }
 
         // order the legal status
