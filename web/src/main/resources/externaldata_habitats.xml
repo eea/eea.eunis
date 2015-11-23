@@ -5,8 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">deliveries art17ranges art17distribution habitatdistribution
-  natconcl2012 natarea2012 </entry>
+  <entry key="queries">art17h</entry>
 
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
@@ -415,6 +414,34 @@ WHERE {
 }
 ]]></entry>
 
+
+
+    <entry key="art17h.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art17h.title">Conservation status (2007-2012) of habitats (Habitats Directive, Article 17)</entry>
+    <!-- .summary - use HTML format - i.e. escape & and < -->
+    <entry key="art17h.summary"><![CDATA[Country-level assessment of the conservation status of habitats by country and biogeographical region. All EU Member States are requested by the Habitats Directive (1992) to monitor habitat types and species considered to be of Community interest.
+]]></entry>
+    <entry key="art17h.queryType">SPARQL</entry>
+    <entry key="art17h.idtouse">NATURA_2000</entry>
+    <entry key="art17h.query"><![CDATA[
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
+
+SELECT ?country ?region ?conclusion
+WHERE {
+  ?habitatasm a p:Habitats_regions_ms_level;
+             p:habitat ?habitatURI;
+             p:region ?regionURI;
+             p:country ?countryURI;
+             p:conclusion_assessment  ?conclusionURI .
+  ?habitatURI skos:notation ?habitat_code;
+              rdfs:label ?habitat_name . FILTER ( ?habitat_code = "[IDENTIFIER]" )
+  ?regionURI  rdfs:label ?region .
+  ?conclusionURI  rdfs:label ?conclusion .
+  ?countryURI rdfs:label ?country .
+} ORDER BY ?country ?region
+]]></entry>
 
 
 

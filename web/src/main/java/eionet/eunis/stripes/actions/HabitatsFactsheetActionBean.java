@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import eionet.eunis.dao.IReferencesDao;
 import eionet.eunis.dto.*;
+import eionet.eunis.rdf.LinkedDataQuery;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -159,7 +160,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
         if (factsheet.isAnnexI()) {
             sitesTabActions();
-//            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
 //            conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
         }
 
@@ -314,28 +315,36 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "linkeddata" tab.
-     * 
-     * @param habitatId
-     * @param natureObjectId
-     * 
+     *
+     * @param idHabitat
+     *            - The habitat ID.
      */
-    private void linkeddataTabActions(int habitatId, Integer natureObjectId) {
+    private void linkeddataTabActions(int idHabitat, Integer natObjId) {
         try {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_habitats.xml"));
-            LinkedData fd = new LinkedData(props, natureObjectId, "_linkedDataQueries");
+            LinkedData fd = new LinkedData(props, natObjId, "_linkedDataQueries");
             queries = fd.getQueryObjects();
 
-            if (!StringUtils.isBlank(query)) {
-                fd.executeQuery(query, habitatId);
-                queryResultCols = fd.getCols();
-                queryResultRows = fd.getRows();
-                attribution = fd.getAttribution();
+            // runs all the queries
+            allQueries = new ArrayList<>();
+
+            for(ForeignDataQueryDTO queryDTO : queries){
+                if(queryDTO.getIdToUse() == null) {
+                    fd.executeQuery(queryDTO.getId(), idHabitat);
+                } else if(queryDTO.getIdToUse().equalsIgnoreCase("NATURA_2000")){
+                    fd.executeQuery(queryDTO.getId(), factsheet.getCode2000());
+                }
+
+                LinkedDataQuery q = new LinkedDataQuery(queryDTO, fd.getCols(), fd.getRows(), fd.getAttribution());
+                if(q.getResultRows() != null && q.getResultRows().size() > 0)
+                    allQueries.add(q);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     private void conservationStatusTabActions(int habitatId, Integer natureObjectId) {
         try {
@@ -863,5 +872,16 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     public Chm62edtHabitatPersist getResolution4Parent(){
         return factsheet.getResolution4Parent();
     }
+
+
+
+
+
+    private List<LinkedDataQuery> allQueries;
+
+    public List<LinkedDataQuery> getAllQueries() {
+        return allQueries;
+    }
+
 
 }

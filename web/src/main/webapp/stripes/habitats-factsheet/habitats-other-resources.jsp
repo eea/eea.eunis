@@ -29,4 +29,7 @@
         </c:forEach>
     </div>
 
+    <div>
+        <stripes:layout-render name="/stripes/species-factsheet/species-linkeddata.jsp"/>
+    </div>
 </stripes:layout-definition>

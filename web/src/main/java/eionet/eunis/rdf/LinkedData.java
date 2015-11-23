@@ -96,6 +96,7 @@ public class LinkedData {
                     dto.setQuery(props.getProperty(queryId + ".query"));
                     dto.setQueryType(props.getProperty(queryId + ".querytype"));
                     dto.setEndpoint(props.getProperty(queryId + ".endpoint"));
+                    dto.setIdToUse(props.getProperty(queryId + ".idtouse"));
                     queryObjects.add(dto);
                 }
             }
@@ -112,6 +113,10 @@ public class LinkedData {
         executeQuery(queryId, -1);
     }
 
+    public void executeQuery(String queryId, int id) throws Exception {
+        executeQuery(queryId, id + "");
+    }
+
     /**
      * Executes the given external-data query for the given object id. All occurrences of {@link #IDENTIFIER_PLACEHOLDER} in the
      * query will be replaced by the supplied object id.
@@ -120,7 +125,7 @@ public class LinkedData {
      * @param id The id of the object for which the query is executed.
      * @throws Exception Covers all exceptions that might be thrown.
      */
-    public void executeQuery(String queryId, int id) throws Exception {
+    public void executeQuery(String queryId, String id) throws Exception {
 
         if (StringUtils.isBlank(queryId)) {
             throw new IllegalArgumentException("External data query called with blank queryid and " + String.valueOf(id) + " identifier");
@@ -143,12 +148,17 @@ public class LinkedData {
                     query = query.replace(CONTEXT_PATH_PLACEHOLDER, getContextPath());
                 }
 
-                QueryExecutor executor = new QueryExecutor();
-                executor.executeQuery(endpoint, query);
-                QueryResult result = executor.getResults();
+                try {
+                    QueryExecutor executor = new QueryExecutor();
+                    executor.executeQuery(endpoint, query);
+                    QueryResult result = executor.getResults();
 
-                generateRows(queryId, result);
-                generateCols(queryId, result);
+                    generateRows(queryId, result);
+                    generateCols(queryId, result);
+                } catch (Exception e){
+                    logger.error(e, e);
+                    throw new Exception("Could not execute query");
+                }
             } else {
                 logger.error("Query or endpoint is not defined in linkeddata properties file for: " + queryId);
             }

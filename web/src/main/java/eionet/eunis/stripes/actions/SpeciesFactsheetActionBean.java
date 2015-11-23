@@ -4,6 +4,7 @@ import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.*;
 import eionet.eunis.rdf.LinkedData;
+import eionet.eunis.rdf.LinkedDataQuery;
 import eionet.eunis.stripes.viewdto.SitesByNatureObjectViewDTO;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.JstlFunctions;
@@ -972,11 +973,16 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             queries = fd.getQueryObjects();
 
             // runs all the queries
-            allQueries = new ArrayList<Query>();
+            allQueries = new ArrayList<LinkedDataQuery>();
 
             for(ForeignDataQueryDTO queryDTO : queries){
-                fd.executeQuery(queryDTO.getId(), idSpecies);
-                Query q = new Query(queryDTO, fd.getCols(), fd.getRows(), fd.getAttribution());
+                if(queryDTO.getIdToUse() == null) {
+                    fd.executeQuery(queryDTO.getId(), idSpecies);
+                } else if(queryDTO.getIdToUse().equalsIgnoreCase("NATURA_2000")){
+                    fd.executeQuery(queryDTO.getId(), n2000id);
+                }
+
+                LinkedDataQuery q = new LinkedDataQuery(queryDTO, fd.getCols(), fd.getRows(), fd.getAttribution());
                 if(q.getResultRows() != null && q.getResultRows().size() > 0)
                     allQueries.add(q);
             }
@@ -985,52 +991,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
-    private List<Query> allQueries;
+    private List<LinkedDataQuery> allQueries;
 
-    public List<Query> getAllQueries() {
+    public List<LinkedDataQuery> getAllQueries() {
         return allQueries;
-    }
-
-    public class Query {
-        private ForeignDataQueryDTO query;
-        private List<Map<String, Object>> resultCols;
-        private List<HashMap<String, ResultValue>> resultRows;
-        private String attribution;
-        private String title;
-        private String summary;
-
-        private Query(ForeignDataQueryDTO query, List<Map<String, Object>> resultCols, List<HashMap<String, ResultValue>> resultRows, String attribution) {
-            this.query = query;
-            this.resultCols = resultCols;
-            this.resultRows = resultRows;
-            this.attribution = attribution;
-            this.title = query.getTitle();
-            this.summary = query.getSummary();
-        }
-
-        public ForeignDataQueryDTO getQuery() {
-            return query;
-        }
-
-        public List<Map<String, Object>> getResultCols() {
-            return resultCols;
-        }
-
-        public List<HashMap<String, ResultValue>> getResultRows() {
-            return resultRows;
-        }
-
-        public String getAttribution() {
-            return attribution;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getSummary() {
-            return summary;
-        }
     }
 
     public LinkedHashMap<String, ArrayList<Map<String, Object>>> getConservationStatusQueryResultCols() {
