@@ -434,12 +434,14 @@ ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
     <entry key="art172013crh.title">Conservation status (2007-2012) of habitat types (Habitats Directive, Article 17)</entry>
     <entry key="art172013crh.summary"><![CDATA[Country-level assessment of the conservation status of habitat types by country and biogeographical region. All EU Member States are requested by the Habitats Directive (1992) to monitor habitat types and species considered to be of Community interest.
 ]]></entry>
+    <entry key="art172013crh.link.habitat_name">eunisURI</entry>
     <entry key="art172013crh.query"><![CDATA[
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
 
-SELECT ?habitat_code ?habitat_name ?country ?region ?assessment
+SELECT ?habitat_code ?habitat_name ?country ?region ?assessment ?eunisURI
 WHERE {
   ?habitatasm a p:Habitats_regions_ms_level;
              p:habitat ?habitatURI;
@@ -451,7 +453,13 @@ WHERE {
   ?regionURI  rdfs:label ?region .
   ?conclusionURI  rdfs:label ?assessment .
   ?countryURI rdfs:label ?country .
-} ORDER BY ?habitat_code ?country
+  OPTIONAL {
+    GRAPH <http://eunis.eea.europa.eu/rdf/habitats.rdf.gz> {
+      ?eunisURI a eunis:HabitatType
+    }
+    ?eunisURI eunis:natura2000Code ?habitat_code .
+  }
+} ORDER BY ?habitat_name ?country
 ]]></entry>
 
 
@@ -460,12 +468,14 @@ WHERE {
     <entry key="art172013crs.title">Conservation status (2007-2012) of species (Habitats Directive, Article 17)</entry>
     <entry key="art172013crs.summary"><![CDATA[Country-level assessment of the conservation status of species by country and biogeographical region. All EU Member States are requested by the Habitats Directive (1992) to monitor habitat types and species considered to be of Community interest.
 ]]></entry>
+    <entry key="art172013crs.link.species_name">eunisURI</entry>
     <entry key="art172013crs.query"><![CDATA[
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
 
-SELECT ?species_code ?species_name ?country ?region ?assessment
+SELECT ?species_code ?species_name ?country ?region ?assessment ?eunisURI
 WHERE {
   ?speciesasm a p:Species_regions_ms_level;
           p:speciescode ?species_code;
@@ -476,7 +486,13 @@ WHERE {
   ?countryURI rdfs:label ?country.
   ?conclusionURI  rdfs:label ?assessment .
   ?regionURI  rdfs:label ?region .
-} order by ?species_code ?country
+  OPTIONAL {
+    GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
+      ?eunisURI a eunis:SpeciesSynonym
+    }
+    ?eunisURI eunis:binomialName ?species_name .
+  }
+} ORDER BY ?species_name ?country
 ]]></entry>
 
 

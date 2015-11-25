@@ -228,7 +228,11 @@ public class LinkedData {
                         if (links != null && links.containsKey(key)) {
                             String val = EunisUtil.replaceTags(value.getValue(), true, true);
                             String linkCol = links.get(key);
-                            String link = row.get(linkCol).getValue();
+                            ResultValue linkValue = row.get(linkCol);
+                            String link = null;
+                            if(linkValue != null) {
+                                 link = row.get(linkCol).getValue();
+                            }
                             if (!StringUtils.isBlank(link)) {
                                 link = EunisUtil.replaceTags(link, true, true);
                                 val = "<a href=\"" + link + "\">" + val + "</a>";
