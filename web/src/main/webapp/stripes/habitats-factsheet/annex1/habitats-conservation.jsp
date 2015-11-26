@@ -20,7 +20,7 @@
 
 
      </div>
-     <div class="right-area" style="width: 300px;">
+     <div class="right-area" style="width: 350px;">
          <div>
              <table>
                  <tr><td class="discreet"><div class="legend-color conservation-legend-favorable"> </div> <span class="bold">Favourable</span>: A habitat is in a situation where it is prospering and with good prospects to do so in the future as well</td></tr>
@@ -47,55 +47,58 @@
                  </ul>
              </c:if>
          </div>
-     </div>
 
-
-        <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
-            <div class="table-definition">
+         <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
+             <div class="table-definition">
             <span class="table-definition-target standardButton float-left" style="margin-top: 20px;">
                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Full table details')}
             </span>
 
-            <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
-                <div class="table-definition-body visualClear" style="display:none;">
-                <div style="margin-top:20px">
-                    <p style="font-weight:bold">${eunis:cmsPhrase(actionBean.contentManagement, query.title)}:</p>
-                    <c:set var="queryId" value="${query.id}"/>
+                 <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
+                 <div class="table-definition-body visualClear float-right" style="display:none;">
+                     <div style="margin-top:20px">
+                         <p style="font-weight:bold">${eunis:cmsPhrase(actionBean.contentManagement, query.title)}:</p>
+                         <c:set var="queryId" value="${query.id}"/>
 
-                    <c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) gt 10}">
-                        <div class="scroll-auto" style="height: 400px">
-                    </c:if>
-                        <div >
-                            <%--<span class="pagebanner">${fn:length(actionBean.conservationStatusQueryResultRows[queryId])} item<c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) != 1}">s</c:if> found.</span>--%>
-                            <table class="datatable listing inline-block">
-                                <thead>
-                                <tr>
-                                    <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
-                                        <th class="dt_sortable">
-                                                ${col.property}
-                                        </th>
-                                    </c:forEach>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="row" items="${actionBean.conservationStatusQueryResultRows[queryId]}">
-                                    <tr>
-                                        <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
-                                            <td>${row[col.property]}</td>
-                                        </c:forEach>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    <c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) gt 10}">
-                        </div>
-                    </c:if>
-                </div>
-            </c:forEach>
-            </div>
-            </div>
-        </c:if>
+                         <c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) gt 10}">
+                         <div class="scroll-auto" style="height: 400px">
+                             </c:if>
+                             <div >
+                                     <%--<span class="pagebanner">${fn:length(actionBean.conservationStatusQueryResultRows[queryId])} item<c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) != 1}">s</c:if> found.</span>--%>
+                                 <table class="datatable listing inline-block">
+                                     <thead>
+                                     <tr>
+                                         <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
+                                             <th class="dt_sortable">
+                                                     ${col.property}
+                                             </th>
+                                         </c:forEach>
+                                     </tr>
+                                     </thead>
+                                     <tbody>
+                                     <c:forEach var="row" items="${actionBean.conservationStatusQueryResultRows[queryId]}">
+                                         <tr>
+                                             <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
+                                                 <td>${row[col.property]}</td>
+                                             </c:forEach>
+                                         </tr>
+                                     </c:forEach>
+                                     </tbody>
+                                 </table>
+                             </div>
+                             <c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) gt 10}">
+                         </div>
+                         </c:if>
+                     </div>
+                     </c:forEach>
+                 </div>
+             </div>
+         </c:if>
+
+     </div>
+
+
+
 
     </div>
     </c:when>
