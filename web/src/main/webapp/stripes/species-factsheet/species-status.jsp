@@ -6,7 +6,6 @@
         <c:when test="${not empty actionBean.consStatus}">
                 <!-- species status -->
                 <a name="species-status"></a>
-                <%--<h2 class="visualClear">How is this species doing?</h2>--%>
 
                 <div class="left-area iucn-red-list-area">
                   <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List status of threatened species')}</h3>
@@ -183,19 +182,21 @@
                                 </c:if>
                             </div>
                             <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
-                                <%-- Hidden by #19431 --%>
-                                <%--<span class="table-definition-target standardButton float-left">--%>
-                                    <%--${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}--%>
-                                <%--</span>--%>
+                                <span class="table-definition-target standardButton float-left" style="margin-top: 20px;">
+                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Full table details')}
+                                </span>
                                 <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
-                                    <div class="table-definition-body visualClear">
+                                    <div class="table-definition-body visualClear" style="display:none;">
                                         <div style="margin-top:20px">
                                             <p style="font-weight:bold">${eunis:cmsPhrase(actionBean.contentManagement, query.title)}:</p>
                                             <c:set var="queryId" value="${query.id}"/>
 
-                                            <div style="overflow-x:auto">
-                                                <span class="pagebanner">${fn:length(actionBean.conservationStatusQueryResultRows[queryId])} item<c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) != 1}">s</c:if> found.</span>
-                                                <table style="margin-top:20px" class="datatable listing inline-block">
+                                            <c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) gt 10}">
+                                                <div class="scroll-auto" style="height: 400px">
+                                            </c:if>
+                                                <div style="overflow-x:auto ">
+                                                <%--<span class="pagebanner">${fn:length(actionBean.conservationStatusQueryResultRows[queryId])} item<c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) != 1}">s</c:if> found.</span>--%>
+                                                <table class="datatable listing inline-block">
                                                     <thead>
                                                         <tr>
                                                             <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
@@ -215,10 +216,13 @@
                                                         </c:forEach>
                                                     </tbody>
                                                 </table>
+                                                </div>
+                                            <c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) gt 10}">
+                                                </div>
+                                            </c:if>
                                             </div>
-                                        </div>
-                                    </div>
                                 </c:forEach>
+                                </div>
                             </c:if>
                         </div>
                         <!-- Conservation status other resources overlay -->

@@ -11,7 +11,7 @@
       landings
       derogationsreport
       deliveries
-      art17s
+      <!--art17s-->
        <!--art17ranges art17populations-->
        <!--natconcl2012 natpopul2012-->
 	   <!--butterfliestrend-->
@@ -700,34 +700,6 @@ WHERE {
 
 
 
-
-
-    <entry key="art17s.endpoint">http://semantic.eea.europa.eu/sparql</entry>
-    <entry key="art17s.title">Conservation status (2007-2012) of species (Habitats Directive, Article 17)</entry>
-    <!-- .summary - use HTML format - i.e. escape & and < -->
-    <entry key="art17s.summary"><![CDATA[Country-level assessment of the conservation status of species by country and biogeographical region. All EU Member States are requested by the Habitats Directive (1992) to monitor habitat types and species considered to be of Community interest.
-]]></entry>
-    <entry key="art17s.queryType">SPARQL</entry>
-    <entry key="art17s.idtouse">NATURA_2000</entry>
-    <entry key="art17s.query"><![CDATA[
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
-
-SELECT ?country ?region ?conclusion
-WHERE {
-  ?speciesasm a p:Species_regions_ms_level;
-          p:speciescode ?species_code;
-          p:speciescode `[IDENTIFIER]`;
-          p:region ?regionURI;
-          p:country ?countryURI;
-          p:conclusion_assessment  ?conclusionURI;
-          p:speciesname ?species_name .
-  ?countryURI rdfs:label ?country.
-  ?conclusionURI  rdfs:label ?conclusion .
-  ?regionURI  rdfs:label ?region .
-} order by ?country ?region
-]]></entry>
 
 
 

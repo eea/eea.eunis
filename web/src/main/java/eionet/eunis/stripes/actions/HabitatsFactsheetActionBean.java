@@ -160,8 +160,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
         if (factsheet.isAnnexI()) {
             sitesTabActions();
-            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
-//            conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+//            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+            conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
         }
 
 
@@ -353,10 +353,16 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("conservationstatus_habitats.xml"));
             LinkedData ld = new LinkedData(props, natureObjectId, "_conservationStatusQueries");
             conservationStatusQueries = ld.getQueryObjects();
-            for (int i = 0; i < conservationStatusQueries.size(); i++) {
-                conservationStatusQuery = conservationStatusQueries.get(i).getId();
+            for (ForeignDataQueryDTO conservationStatusQuery1 : conservationStatusQueries) {
+                conservationStatusQuery = conservationStatusQuery1.getId();
                 if (!StringUtils.isBlank(conservationStatusQuery)) {
-                    ld.executeQuery(conservationStatusQuery, habitatId);
+
+                    if (conservationStatusQuery1.getIdToUse() == null) {
+                        ld.executeQuery(conservationStatusQuery, habitatId);
+                    } else if (conservationStatusQuery1.getIdToUse().equalsIgnoreCase("NATURA_2000")) {
+                        ld.executeQuery(conservationStatusQuery, factsheet.getCode2000());
+                    }
+
                     conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
                     conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
 

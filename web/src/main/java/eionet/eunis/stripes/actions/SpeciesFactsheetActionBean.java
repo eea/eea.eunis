@@ -920,7 +920,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             for (ForeignDataQueryDTO conservationStatusQuery1 : conservationStatusQueries) {
                 conservationStatusQuery = conservationStatusQuery1.getId();
                 if (!StringUtils.isBlank(conservationStatusQuery)) {
-                    ld.executeQuery(conservationStatusQuery, idSpecies);
+
+                    if(conservationStatusQuery1.getIdToUse() == null) {
+                        ld.executeQuery(conservationStatusQuery, idSpecies);
+                    } else if(conservationStatusQuery1.getIdToUse().equalsIgnoreCase("NATURA_2000")){
+                        ld.executeQuery(conservationStatusQuery, n2000id);
+                    }
+
                     conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
                     conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
 
