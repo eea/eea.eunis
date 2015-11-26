@@ -459,7 +459,7 @@ WHERE {
     }
     ?eunisURI eunis:natura2000Code ?habitat_code .
   }
-} ORDER BY ?habitat_name ?country
+} ORDER BY ?habitat_code ?country
 ]]></entry>
 
 
