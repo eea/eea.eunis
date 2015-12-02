@@ -9,7 +9,6 @@ import eionet.eunis.dto.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesDomain;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesPersist;
@@ -777,10 +776,28 @@ public class SpeciesFactsheet {
             for(AttributeDto a : dcAttributes){
                 if(a.getName().equals("description"))
                     legalStatus.setDescription(a.getObjectLabel());
-
             }
 
             legalStatus.setIdReportAttributes(report.getIdReportAttributes());
+
+            List<Chm62edtReportAttributesPersist> reportAttributes = new Chm62edtReportAttributesDomain().findCustom("SELECT *" +
+                    " FROM chm62edt_report_attributes AS F" +
+                    " WHERE F.ID_REPORT_ATTRIBUTES='" + report.getIdReportAttributes() + "'");
+
+            List<Chm62edtSpeciesPersist> synonyms = new ArrayList<>();
+            for(Chm62edtReportAttributesPersist attribute : reportAttributes){
+                if(attribute.getName().equalsIgnoreCase("NAME_IN_DOCUMENT")){
+                    legalStatus.setNameInDocument(attribute.getValue());
+
+                }
+                if(attribute.getName().startsWith("SYNONYM_IN_DOCUMENT")){
+                    List<Chm62edtSpeciesPersist> sp = new Chm62edtSpeciesDomain().findWhere("ID_SPECIES = " + attribute.getValue());
+                    if(sp != null && sp.size() == 1){
+                        synonyms.add(sp.get(0));
+                    }
+                }
+            }
+            legalStatus.setSpeciesInDocument(synonyms);
 
         } else {
             legalStatus.setReference("-1");

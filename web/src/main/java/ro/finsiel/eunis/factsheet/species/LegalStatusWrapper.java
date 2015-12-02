@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.factsheet.species;
 
 import eionet.eunis.dto.DcLinkDTO;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
 import ro.finsiel.eunis.utilities.EunisUtil;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class LegalStatusWrapper implements Comparable<LegalStatusWrapper>{
     private Integer idDc;
     private String formattedUrl;
     private String description = "";
+    private String nameInDocument;
+    private List<Chm62edtSpeciesPersist> speciesInDocument;
 
     private String parentUrl = "";
     private String parentName = "";
@@ -29,6 +32,7 @@ public class LegalStatusWrapper implements Comparable<LegalStatusWrapper>{
     private int idReportAttributes = -1;
 
     private List<DcLinkDTO> moreInfo = new ArrayList<DcLinkDTO>();
+
 
 
     /**
@@ -278,6 +282,22 @@ public class LegalStatusWrapper implements Comparable<LegalStatusWrapper>{
         return moreInfo;
     }
 
+    public String getNameInDocument() {
+        return nameInDocument;
+    }
+
+    public void setNameInDocument(String nameInDocument) {
+        this.nameInDocument = nameInDocument;
+    }
+
+    public List<Chm62edtSpeciesPersist> getSpeciesInDocument() {
+        return speciesInDocument;
+    }
+
+    public void setSpeciesInDocument(List<Chm62edtSpeciesPersist> speciesInDocument) {
+        this.speciesInDocument = speciesInDocument;
+    }
+
     /**
      * Implements the ordering of the legal status based on
      * https://taskman.eionet.europa.eu/issues/30232
@@ -298,6 +318,5 @@ public class LegalStatusWrapper implements Comparable<LegalStatusWrapper>{
             return 1;
         }
     }
-
 
 }

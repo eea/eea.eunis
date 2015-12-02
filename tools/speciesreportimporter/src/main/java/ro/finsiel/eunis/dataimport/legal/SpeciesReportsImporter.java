@@ -10,10 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Main class for importer
@@ -655,16 +652,7 @@ public class SpeciesReportsImporter {
      */
     private void insertLegalStatusReport(String idSpecies, String idNatureObject, String idDc, String idGeoscope, String restrictionText, int priority, String annex, String nameInDocument, boolean fromParent) {
         try {
-            int idReportAttributes = insertLegalReportAttribute(idDc, idSpecies, nameInDocument, fromParent);
-
-            int idLegalStatus = -1;
-            if(restrictionText != null || priority == 1){
-                idLegalStatus = insertLegalStatus(annex, priority, restrictionText);
-            }
-
-            int idReportType = insertReportType(idLegalStatus, "LEGAL_STATUS");
-
-            insertReport(idNatureObject, idDc, idGeoscope, idReportAttributes, idReportType);
+            List synonymsInDocument = new ArrayList();
 
             // check that nameInDocument is synonym
             if(isSynonymName(nameInDocument)){
@@ -694,8 +682,10 @@ public class SpeciesReportsImporter {
 
                             if(validName.equals("0") && (related.equalsIgnoreCase("synonym") || related.equalsIgnoreCase("Subspecies")) && link.equalsIgnoreCase(idSpecies)) {
                                 if(debug) System.out.println(" Synonym ok");
+                                synonymsInDocument.add(idSpeciesSynonym);
                             } else if(related.equalsIgnoreCase("misspelling")){
                                 if(debug) System.out.println(" Misspelling ok");
+                                synonymsInDocument.add(idSpeciesSynonym);
                             } else if(idSpeciesSynonym.trim().equalsIgnoreCase(idSpecies.trim())) {
                                 if(debug) System.out.println(" Same species! " + idSpeciesSynonym.trim());
                             } else {
@@ -703,12 +693,26 @@ public class SpeciesReportsImporter {
                             }
 
                         } else if (l.size() > 1) {
-                           System.out.println(" Found too many (" + l.size() + ")");
+                            System.out.println(" Found too many (" + l.size() + ")");
                             // todo still check
                         }
                     }
                 }
             }
+
+
+            int idReportAttributes = insertLegalReportAttribute(idDc, idSpecies, nameInDocument, synonymsInDocument, fromParent);
+
+            int idLegalStatus = -1;
+            if(restrictionText != null || priority == 1){
+                idLegalStatus = insertLegalStatus(annex, priority, restrictionText);
+            }
+
+            int idReportType = insertReportType(idLegalStatus, "LEGAL_STATUS");
+
+            insertReport(idNatureObject, idDc, idGeoscope, idReportAttributes, idReportType);
+
+
 
             if(debug) System.out.println(" Inserted legal report with idDc=" + idDc);
         } catch (SQLException e) {
@@ -762,13 +766,17 @@ public class SpeciesReportsImporter {
      * @return
      * @throws SQLException
      */
-    private int insertLegalReportAttribute(String idDc, String speciesCode, String nameInDocument, boolean fromParent) throws SQLException {
+    private int insertLegalReportAttribute(String idDc, String speciesCode, String nameInDocument, List<String> synonymsInDocument, boolean fromParent) throws SQLException {
         int idReportAttributes = lastIdReportAttributesId++;
 
         insertReportAttribute(idReportAttributes, "ID_DC", "NUMBER", idDc);
         insertReportAttribute(idReportAttributes, "SPECIES_CODE", "TEXT", speciesCode);
         if(!nameInDocument.isEmpty()){
             insertReportAttribute(idReportAttributes, "NAME_IN_DOCUMENT", "TEXT", nameInDocument);
+        }
+        int i=0;
+        for(String synonym : synonymsInDocument){
+            insertReportAttribute(idReportAttributes, "SYNONYM_IN_DOCUMENT_" + i++, "TEXT", synonym);
         }
         if(fromParent){
             insertReportAttribute(idReportAttributes, "FROM_PARENT", "TEXT", "YES");

@@ -81,18 +81,18 @@ public class SpeciesRow extends ExcelRow {
 
     // import result
     private String result = "";
-    private String acap;
-    private String AWarbler;
-    private String GBustard;
-    private String MSeal;
-    private String mouRaptors;
-    private String mouRaptorsName;
-    private String sbCurlew;
-    private String sharksMou;
-    private String eurobatsName;
-    private String helcomRestrictions;
-    private String helcomName;
-    private String birdsDRestrictions;
+    private String acap = "";
+    private String AWarbler = "";
+    private String GBustard = "";
+    private String MSeal = "";
+    private String mouRaptors = "";
+    private String mouRaptorsName = "";
+    private String sbCurlew = "";
+    private String sharksMou = "";
+    private String eurobatsName = "";
+    private String helcomRestrictions = "";
+    private String helcomName = "";
+    private String birdsDRestrictions = "";
 
     public Map<String, RestrictionsRow> getRestrictionsMap() {
         return restrictionsMap;
@@ -139,6 +139,10 @@ public class SpeciesRow extends ExcelRow {
 
     public String getSpeciesName() {
         return speciesName;
+    }
+
+    public String getSpeciesNameNoParantheses(){
+        return speciesName.replaceAll("\\([a-zA-Z]+\\) ","");
     }
 
     public void setSpeciesName(String speciesName) {
