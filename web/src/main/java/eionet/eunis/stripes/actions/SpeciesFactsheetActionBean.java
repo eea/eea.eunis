@@ -927,8 +927,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                         ld.executeQuery(conservationStatusQuery, n2000id);
                     }
 
-                    conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
-                    conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
+                    if(ld.getRows().size() > 0) {
+                        conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
+                        conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
+                    }
 
                     conservationStatusAttribution = ld.getAttribution();
                 }

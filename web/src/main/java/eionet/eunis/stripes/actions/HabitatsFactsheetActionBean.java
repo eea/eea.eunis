@@ -363,8 +363,10 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                         ld.executeQuery(conservationStatusQuery, factsheet.getCode2000());
                     }
 
-                    conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
-                    conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
+                    if(ld.getRows().size() > 0) {
+                        conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
+                        conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
+                    }
 
                     conservationStatusAttribution = ld.getAttribution();
                 }

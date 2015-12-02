@@ -109,7 +109,6 @@ SELECT ?country ?region ?conclusion
 WHERE {
   ?speciesasm a p:Species_regions_ms_level;
           p:speciescode ?species_code;
-          p:speciescode `[IDENTIFIER]`;
           p:region ?regionURI;
           p:country ?countryURI;
           p:conclusion_assessment  ?conclusionURI;
@@ -117,6 +116,7 @@ WHERE {
   ?countryURI rdfs:label ?country.
   ?conclusionURI  rdfs:label ?conclusion .
   ?regionURI  rdfs:label ?region .
+  FILTER(xsd:string(?species_code)="[IDENTIFIER]")
 } order by ?country ?region
 ]]></entry>
 
