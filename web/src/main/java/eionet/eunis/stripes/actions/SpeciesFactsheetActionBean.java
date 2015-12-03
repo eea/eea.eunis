@@ -466,7 +466,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 nobanisLink = link;
                 addToLinks = false;
             }
-            if(link.getName().equalsIgnoreCase("Habitats Directive Art. 17-2006 summary")){
+            if(link.getName().equalsIgnoreCase("Conservation status 2012 - summary (pdf)")){
                 conservationStatusPDF = link;
                 addToLinks = false;
             } else if (link.getName().toLowerCase().contains("experts web tool")){

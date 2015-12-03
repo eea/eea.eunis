@@ -140,7 +140,7 @@
                     </div>
                 </div>
 
-                <div class="right-area conservation-status">
+                <div class="right-area conservation-status" style="width: 500px;">
                     <h3>EU conservation status</h3>
                     <p>Conservation status assesses every six years and for each biogeographical region the condition of habitats and species compared to the favourable status as described in the Habitats Directive. The map shows the 2013 assessments.</p>
                         <iframe id="speciesStatusMap" class="map-border" src="" height="425px" width="100%"></iframe>
@@ -170,7 +170,7 @@
                                 <ul>
                                     <c:if test="${not empty actionBean.conservationStatusPDF}">
                                         <li>
-                                            <a href="${actionBean.conservationStatusPDF.url}">Conservation status 2006 – summary (pdf)</a>
+                                            <a href="${actionBean.conservationStatusPDF.url}">Conservation status 2012 - summary (pdf)</a>
                                         </li>
                                     </c:if>
                                     <c:if test="${not empty actionBean.conservationStatus}">
