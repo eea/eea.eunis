@@ -193,7 +193,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <a href="http://www.eea.europa.eu/data-and-maps/data/european-red-lists-2">
+                      <a href="http://www.eea.europa.eu/data-and-maps/data/european-red-lists-4">
                           <%=cm.cmsPhrase("European Red Lists")%>
                       </a>
                     </td>
@@ -209,6 +209,17 @@
                     </td>
                     <td>
                       <%=cm.cmsPhrase("Natura 2000 is the European Union network of protected sites")%>
+                    </td>
+                  </tr>
+                  </tr>
+                  <tr>
+                    <td>
+                      <a href="http://www.eea.europa.eu/data-and-maps/data/linkages-of-species-and-habitat">
+                          Linkages of species and habitat types to MAES ecosystems
+                      </a>
+                    </td>
+                    <td>
+                        The database contains associations based on butterflies, mammal, reptile and amphibian species listed in European Atlases, all species and habitats considered for reporting under Article 17 of the Habitats Directive and all bird species considered for reporting under Article 12 of the Birds Directive.
                     </td>
                   </tr>
                 </tbody>

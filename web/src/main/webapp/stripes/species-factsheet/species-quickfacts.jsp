@@ -103,7 +103,7 @@
                             <c:if test="${actionBean.protectedByEUDirectives  or actionBean.otherAgreements > 0}">
                             <li>
                                 <a href="${ actionBean.pageUrl }#protected" onclick="openSection('protected');"><span class="bold">${ actionBean.speciesSitesCount }</span></a>
-                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 sites are designated for the species')}.
+                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 sites are designated for the species')}
                             </li>
                             </c:if>
                             <c:if test="${not empty actionBean.habitats}">

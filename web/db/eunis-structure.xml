@@ -2330,5 +2330,25 @@ END
             <column name="season" type="char(1)" defaultValue="NULL"/>
         </addColumn>
     </changeSet>
+    <changeSet id="rev-144" author="ivascu">
+        <addColumn tableName="chm62edt_habitat_description">
+            <column name="species" type="text" defaultValue="NULL"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="rev-145" author="ivascu">
+        <comment>Move the species list out of the habitat description</comment>
+        <sql>
+            update chm62edt_habitat_description set
+            species=substr(description, least(
+            if(locate('Plant text', description), locate('Plant text', description), 999999),
+            if(locate('Invertebrate text', description), locate('Invertebrate text', description), 999999),
+            if(locate('Vertebrate text', description), locate('Vertebrate text', description), 999999))),
+            description=left(description, least(
+            if(locate('Plant text', description), locate('Plant text', description), 999999),
+            if(locate('Invertebrate text', description), locate('Invertebrate text', description), 999999),
+            if(locate('Vertebrate text', description), locate('Vertebrate text', description), 999999)) -1)
+            where description like '%Plant text%' or description like '%Invertebrate text%' or description like '%Vertebrate text%'
+        </sql>
+    </changeSet>
 
 </databaseChangeLog>
