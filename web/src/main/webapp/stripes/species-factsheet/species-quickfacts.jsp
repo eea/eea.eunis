@@ -57,6 +57,9 @@
                 <!-- Textual facts on right -->
     <div class="right-area quickfacts">
         <style>
+            .quickfacts h4 {
+                margin-top: 0;
+            }
             .quickfacts table {
                 width: 100%;
             }
@@ -81,10 +84,8 @@
             .quickfacts table h6 {
                 margin: 0;
             }
-            .quickfacts table ul {
-                margin: 0;
-                margin-left: .5em;
-            }
+
+
             .quickfacts table small {
                 font-size: inherit;
                 font-style: italic;
@@ -92,6 +93,34 @@
                 color: gray;
             }
 
+            .quickfacts .list-inline {
+                font-style: italic;
+            }
+
+            .quickfacts-list {
+                margin: 0 0 0 1em;
+                list-style: none!important;
+            }
+            .quickfacts-list li:before {
+                content: "-";
+                display: inline-block;
+                width: 1em;
+                margin-left: -1em;
+                color: gray;
+            }
+            .list-inline {
+                list-style: none!important;
+                margin: 0;
+            }
+            .list-inline li {
+                display: inline!important;
+            }
+            .list-inline li:before {
+                content: ", ";
+            }
+            .list-inline li:first-child:before {
+                content: "";
+            }
             /* CONCLUSION */
             .conclusion {
                 display: inline-block;
@@ -326,49 +355,57 @@
 
             <c:if test="${not empty actionBean.breedingEcosystems or not empty actionBean.winteringEcosystems}">
                 <tbody>
-                    <th>Habitats</th>
+                <c:if test="${not empty actionBean.breedingEcosystems}">
+                <tr>
+                    <th>Breeding habitats</th>
                     <td>
-                        <c:if test="${not empty actionBean.breedingEcosystems}">
-                        <h6>Breeding</h6>
-                            <ul>
-                            <c:forEach var="ecosystem" items="${actionBean.breedingEcosystems}" varStatus="estatus">
-                                <li>${ecosystem.ecoName}</li>
-                            </c:forEach>
-                            </ul>
-                        </c:if>
-                        <c:if test="${not empty actionBean.winteringEcosystems}">
-                        <h6>Wintering</h6>
-                        <ul>
+                        <ul class="quickfacts-list">
+                        <c:forEach var="ecosystem" items="${actionBean.breedingEcosystems}" varStatus="estatus">
+                            <li>${ecosystem.ecoName}</li>
+                        </c:forEach>
+                        </ul>
+                    </td>
+                </tr>
+                </c:if>
+                <c:if test="${not empty actionBean.winteringEcosystems}">
+                <tr>
+                    <th>Wintering habitats</th>
+                    <td>
+                        <ul class="quickfacts-list">
                             <c:forEach var="ecosystem" items="${actionBean.winteringEcosystems}" varStatus="estatus">
                                 <li>${ecosystem.ecoName}</li>
                             </c:forEach>
                         </ul>
-                        </c:if>
                     </td>
+                </tr>
+                </c:if>
                 </tbody>
             </c:if>
 
             <c:if test="${not empty actionBean.preferredEcosystems or not empty actionBean.suitableEcosystems}">
                 <tbody>
-                <th>Habitats</th>
-                <td>
-                    <c:if test="${not empty actionBean.preferredEcosystems}">
-                        <h6>Preferred</h6>
-                        <ul>
-                            <c:forEach var="ecosystem" items="${actionBean.preferredEcosystems}" varStatus="estatus">
-                                <li>${ecosystem.ecoName}</li>
-                            </c:forEach>
-                        </ul>
-                    </c:if>
-                    <c:if test="${not empty actionBean.suitableEcosystems}">
-                        <h6>May also occur in</h6>
-                        <ul>
-                            <c:forEach var="ecosystem" items="${actionBean.suitableEcosystems}" varStatus="estatus">
-                                <li>${ecosystem.ecoName}</li>
-                            </c:forEach>
-                        </ul>
-                    </c:if>
-                </td>
+                <c:if test="${not empty actionBean.preferredEcosystems}">
+                    <tr>
+                        <th>Most preferred habitats</th>
+                        <td>
+                            <ul class="quickfacts-list">
+                                <c:forEach var="ecosystem" items="${actionBean.preferredEcosystems}" varStatus="estatus">
+                                    <li>${ecosystem.ecoName}</li>
+                                </c:forEach>
+                            </ul>
+                        </td>
+                    </tr>
+                </c:if>
+                <c:if test="${not empty actionBean.suitableEcosystems}">
+                    <tr>
+                        <th><small>May also occur in</small></th>
+                        <td>
+                            <ul class="list-inline">
+                                <c:forEach var="ecosystem" items="${actionBean.suitableEcosystems}" varStatus="estatus"><li>${ecosystem.ecoName}</li></c:forEach>
+                            </ul>
+                        </td>
+                    </tr>
+                </c:if>
                 </tbody>
             </c:if>
 
