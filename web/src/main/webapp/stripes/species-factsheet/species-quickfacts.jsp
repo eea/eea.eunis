@@ -65,9 +65,9 @@
                 vertical-align: top;
                 padding: .5em 0;
             }
-            /*.quickfacts tbody {*/
-                /*border-top: 1px solid #ececec;*/
-            /*}*/
+            .quickfacts tbody {
+                border-top: 1px solid #ececec;
+            }
             .quickfacts table td {
                 padding-left: 1em;
                 padding-bottom: 0;
@@ -256,7 +256,7 @@
                         <c:if test="${actionBean.birdsDirective}">
                             <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">EU Birds Directive</span></a>
                         </c:if>
-                        <c:if test="${actionBean.protectedByEUDirectives and actionBean.otherAgreements>0}"><br/></c:if>
+                        <c:if test="${actionBean.protectedByEUDirectives and actionBean.otherAgreements>0}">and</c:if>
                         <c:if test="${actionBean.otherAgreements > 0}">
                             <a href="${ actionBean.pageUrl }#legal_status" onclick="openSection('legal_status');"><span class="bold">${ actionBean.otherAgreements }</span></a>
                             <c:if test="${actionBean.protectedByEUDirectives and actionBean.otherAgreements gt 0}">other</c:if>
@@ -287,7 +287,7 @@
                 <th>Natura 2000 sites</th>
                 <td>
                     <a href="${ actionBean.pageUrl }#protected" onclick="openSection('protected');"><span class="bold">${ actionBean.speciesSitesCount }</span></a>
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'designated for the species')}
+                        ${eunis:cmsPhrase(actionBean.contentManagement, 'are designated for the species type')}
                 </td>
             </tr>
             </tbody>
@@ -376,7 +376,7 @@
                 <tbody>
                 <tr>
                     <th>
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 code')}
+                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 species code')}
                     </th>
                     <td>${actionBean.n2000id}</td>
                 </tr>

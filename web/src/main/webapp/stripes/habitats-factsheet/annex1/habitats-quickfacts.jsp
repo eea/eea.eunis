@@ -211,15 +211,15 @@
                 </tr>
                 </tbody>
             </c:if>
-            <c:if test="${not empty actionBean.uniqueEcosystems}">
-                <tbody>
-                <th>Occurs in</th>
-                <td>
-                    <c:forEach var="ecosystem" items="${actionBean.uniqueEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if>${ecosystem.ecoName}</c:forEach>
-                    ecosystems
-                </td>
-                </tbody>
-            </c:if>
+            <%--<c:if test="${not empty actionBean.uniqueEcosystems}">--%>
+                <%--<tbody>--%>
+                <%--<th>Occurs in</th>--%>
+                <%--<td>--%>
+                    <%--<c:forEach var="ecosystem" items="${actionBean.uniqueEcosystems}" varStatus="estatus"><c:if test="${not estatus.last and not estatus.first}">, </c:if><c:if test="${estatus.last and not estatus.first}"> and </c:if>${ecosystem.ecoName}</c:forEach>--%>
+                    <%--ecosystems--%>
+                <%--</td>--%>
+                <%--</tbody>--%>
+            <%--</c:if>--%>
 
         </table>
     </div>
