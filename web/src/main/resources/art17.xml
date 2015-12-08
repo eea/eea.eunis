@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Linked data queries for species</comment>
+
+    <!-- -->
+    <entry key="queries">
+        art17species_eu
+        art17habitats_eu
+    </entry>
+
+    <entry key="art17species_eu.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art17species_eu.title">Conservation status (2007-2012) of species (Habitats Directive, Article 17) at EU level
+        level
+    </entry>
+    <entry key="art17species_eu.queryType">SPARQL</entry>
+    <entry key="art17species_eu.idtouse">NATURA_2000</entry>
+    <entry key="art17species_eu.query"><![CDATA[
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
+
+SELECT ?region ?assessment
+WHERE {
+  ?speciesasm a p:Species_regions_eu_level;
+     p:conclusion_assessment ?assessmentURI;
+     p:assessment_speciescode ?species_code;
+     p:region ?regionURI;
+     p:assessment_speciesname ?species.
+  ?assessmentURI rdfs:label ?assessment.
+  ?regionURI rdfs:label ?region.
+  FILTER(xsd:string(?species_code)="[IDENTIFIER]")
+} order by ?region
+]]></entry>
+
+
+
+    <entry key="art17habitats_eu.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art17habitats_eu.title">Conservation status (2007-2012) of habitats (Habitats Directive, Article 17) at EU level
+        level
+    </entry>
+    <entry key="art17habitats_eu.queryType">SPARQL</entry>
+    <entry key="art17habitats_eu.idtouse">NATURA_2000</entry>
+    <entry key="art17habitats_eu.query"><![CDATA[
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
+
+SELECT ?region ?assessment
+WHERE {
+  ?habitatsasm a p:Habitats_regions_eu_level;
+      p:conclusion_assessment ?conclusionURI;
+             p:region ?regionURI;
+      p:habitat ?habitatURI .
+  ?habitatURI skos:notation ?habitat_code;
+              rdfs:label ?habitat_name .
+  ?regionURI  rdfs:label ?region .
+  ?conclusionURI  rdfs:label ?assessment .
+  FILTER ( ?habitat_code = "[IDENTIFIER]" )
+} order by ?region
+]]></entry>
+
+
+</properties>

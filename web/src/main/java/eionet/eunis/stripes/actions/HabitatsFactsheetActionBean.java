@@ -162,6 +162,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             sitesTabActions();
 //            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
             conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+            populateBiogeoAssessment(factsheet.idNatureObject);
         }
 
 
@@ -891,5 +892,41 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return allQueries;
     }
 
+
+    ArrayList<HashMap<String, ResultValue>> biogeoAssessmentRows =
+            new  ArrayList<>();
+
+    public ArrayList<HashMap<String, ResultValue>> getBiogeoAssessmentRows() {
+        return biogeoAssessmentRows;
+    }
+
+    /**
+     * Populates the EU conservation status by biogeographical region using Art17 data
+     * @param natObjId
+     */
+    private void populateBiogeoAssessment(Integer natObjId) {
+
+        List<ForeignDataQueryDTO> biogeoAssessment;
+
+        try {
+
+            Properties props = new Properties();
+            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("art17.xml"));
+            LinkedData ld = new LinkedData(props, natObjId, "force");
+            biogeoAssessment = ld.getQueryObjects();
+
+            for (ForeignDataQueryDTO aBiogeoAssessment : biogeoAssessment) {
+                if(aBiogeoAssessment.getId().equals("art17habitats_eu")){
+                    String syntaxaQuery = aBiogeoAssessment.getId();
+                    if (!StringUtils.isBlank(syntaxaQuery)) {
+                        ld.executeQuery(syntaxaQuery, factsheet.getCode2000());
+                        biogeoAssessmentRows = ld.getRows();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

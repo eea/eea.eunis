@@ -295,6 +295,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // Sets country level and biogeo conservation status
             // TODO The methods executes SPARQL query. Consider caching the results or at least load the content with jQuery
             setConservationStatusDetails(mainIdSpecies, specie.getIdNatureObject());
+            populateBiogeoAssessment(specie.getIdNatureObject());
         }
 
         String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -993,6 +994,42 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 LinkedDataQuery q = new LinkedDataQuery(queryDTO, fd.getCols(), fd.getRows(), fd.getAttribution());
                 if(q.getResultRows() != null && q.getResultRows().size() > 0)
                     allQueries.add(q);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    ArrayList<HashMap<String, ResultValue>> biogeoAssessmentRows =
+            new  ArrayList<>();
+
+    public ArrayList<HashMap<String, ResultValue>> getBiogeoAssessmentRows() {
+        return biogeoAssessmentRows;
+    }
+
+    /**
+     * Populates the EU conservation status by biogeographical region using Art17 data
+     * @param natObjId
+     */
+    private void populateBiogeoAssessment(Integer natObjId) {
+
+        List<ForeignDataQueryDTO> biogeoAssessment;
+
+        try {
+
+            Properties props = new Properties();
+            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("art17.xml"));
+            LinkedData ld = new LinkedData(props, natObjId, "force");
+            biogeoAssessment = ld.getQueryObjects();
+
+            for (ForeignDataQueryDTO aBiogeoAssessment : biogeoAssessment) {
+                if(aBiogeoAssessment.getId().equals("art17species_eu")){
+                    String syntaxaQuery = aBiogeoAssessment.getId();
+                    if (!StringUtils.isBlank(syntaxaQuery)) {
+                        ld.executeQuery(syntaxaQuery, n2000id);
+                        biogeoAssessmentRows = ld.getRows();
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

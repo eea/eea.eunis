@@ -122,6 +122,14 @@
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'habitats')}
                             </li>
                             </c:if>
+                            <c:if test="${not empty actionBean.biogeoAssessmentRows}">
+                                <li>
+                                    Biogeo
+                                    <c:forEach items="${actionBean.biogeoAssessmentRows}" var="bg">
+                                        ${bg['region']} - ${bg['assessment']}
+                                    </c:forEach>
+                                </li>
+                            </c:if>
                             <c:if test="${not empty actionBean.nobanisFactsheetLink}">
                             <li>
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Reported as invasive by')}

@@ -3,6 +3,7 @@ package eionet.eunis.util;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.net.URLEncoder;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -477,6 +478,10 @@ public class JstlFunctions {
         if(url != null && url.length() > 55)
             return url.substring(0,28) + "..." + url.substring(url.length()-20);
         return url;
+    }
+
+    public static int getSize(Collection c){
+        return c.size();
     }
 
 }
