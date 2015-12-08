@@ -20,14 +20,15 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
 
-SELECT ?region ?assessment
+SELECT ?region ?assessment ?code
 WHERE {
   ?speciesasm a p:Species_regions_eu_level;
      p:conclusion_assessment ?assessmentURI;
      p:assessment_speciescode ?species_code;
      p:region ?regionURI;
      p:assessment_speciesname ?species.
-  ?assessmentURI rdfs:label ?assessment.
+  ?assessmentURI rdfs:label ?assessment ;
+     skos:notation ?code .
   ?regionURI rdfs:label ?region.
   FILTER(xsd:string(?species_code)="[IDENTIFIER]")
 } order by ?region
@@ -46,7 +47,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
 
-SELECT ?region ?assessment
+SELECT ?region ?assessment ?code
 WHERE {
   ?habitatsasm a p:Habitats_regions_eu_level;
       p:conclusion_assessment ?conclusionURI;
@@ -55,7 +56,8 @@ WHERE {
   ?habitatURI skos:notation ?habitat_code;
               rdfs:label ?habitat_name .
   ?regionURI  rdfs:label ?region .
-  ?conclusionURI  rdfs:label ?assessment .
+  ?conclusionURI  rdfs:label ?assessment ;
+        skos:notation ?code .
   FILTER ( ?habitat_code = "[IDENTIFIER]" )
 } order by ?region
 ]]></entry>
