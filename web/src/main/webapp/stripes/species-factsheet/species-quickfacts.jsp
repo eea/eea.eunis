@@ -56,183 +56,6 @@
 
                 <!-- Textual facts on right -->
     <div class="right-area quickfacts">
-        <style>
-            .quickfacts h4 {
-                margin-top: 0;
-            }
-            .quickfacts table {
-                width: 100%;
-            }
-            .quickfacts table td,
-            .quickfacts table th {
-                vertical-align: top;
-                padding: .5em 0;
-            }
-            .quickfacts tbody {
-                border-top: 1px solid #ececec;
-            }
-            .quickfacts table td {
-                padding-left: 1em;
-                padding-bottom: 0;
-            }
-            .quickfacts tr:last-child td {
-                padding-bottom: .5em;
-            }
-            .quickfacts table th {
-                width: 14em;
-            }
-            .quickfacts table h6 {
-                margin: 0;
-            }
-
-
-            .quickfacts table small {
-                font-size: inherit;
-                font-style: italic;
-                font-weight: normal;
-                color: gray;
-            }
-
-            .quickfacts .list-inline {
-                font-style: italic;
-            }
-
-            .quickfacts-list {
-                margin: 0 0 0 1em;
-                list-style: none!important;
-            }
-            .quickfacts-list li:before {
-                content: "-";
-                display: inline-block;
-                width: 1em;
-                margin-left: -1em;
-                color: gray;
-            }
-            .list-inline {
-                list-style: none!important;
-                margin: 0;
-            }
-            .list-inline li {
-                display: inline!important;
-            }
-            .list-inline li:before {
-                content: ", ";
-            }
-            .list-inline li:first-child:before {
-                content: "";
-            }
-            /* CONCLUSION */
-            .conclusion {
-                display: inline-block;
-                *zoom: 1;
-                padding: 1px 2px;
-                margin: -2px 0;
-                text-align: center;
-                border-color: transparent;
-                border-width: 1px;
-                border-style: solid;
-                border-radius: 2px;
-                min-height: 1em;
-                min-width: 1em;
-            }
-            /* CONCLUSION TYPES */
-            .FV .conclusion,
-            .FV.conclusion {
-                color: #000;
-                border-color: #639500;
-                background-color: #9aca3b;
-            }
-            .FVU .conclusion,
-            .FVU.conclusion {
-                color: #000;
-                border-color: #639500;
-                background-color: #9aca3b;
-            }
-            .U1 .conclusion,
-            .U1.conclusion {
-                color: #000;
-                border-color: #b05f00;
-                background-color: #e69800;
-            }
-            .U1U .conclusion,
-            .U1U.conclusion {
-                color: #000;
-                border-color: #b05f00;
-                background-color: #e69800;
-            }
-            .U1M .conclusion,
-            .U1M.conclusion {
-                color: #000;
-                border-color: #b05f00;
-                background-color: #e69800;
-            }
-            .U1P .conclusion,
-            .U1P.conclusion {
-                color: #000;
-                border-color: #b05f00;
-                background-color: #e69800;
-            }
-            .U2 .conclusion,
-            .U2.conclusion {
-                color: #000;
-                border-color: #742c2c;
-                background-color: #eb6847;
-            }
-            .U2U .conclusion,
-            .U2U.conclusion {
-                color: #000;
-                border-color: #742c2c;
-                background-color: #eb6847;
-            }
-            .U2M .conclusion,
-            .U2M.conclusion {
-                color: #000;
-                border-color: #742c2c;
-                background-color: #eb6847;
-            }
-            .U2P .conclusion,
-            .U2P.conclusion {
-                color: #000;
-                border-color: #742c2c;
-                background-color: #eb6847;
-            }
-            .XX .conclusion,
-            .XX.conclusion {
-                color: #000;
-                border-color: #888;
-                background-color: #b4b4b4;
-            }
-            .XXU .conclusion,
-            .XXU.conclusion {
-                color: #000;
-                border-color: #888;
-                background-color: #b4b4b4;
-            }
-            .XU .conclusion,
-            .XU.conclusion {
-                color: #000;
-                border-color: #888;
-                background-color: #b4b4b4;
-            }
-            .XUU .conclusion,
-            .XUU.conclusion {
-                color: #000;
-                border-color: #888;
-                background-color: #b4b4b4;
-            }
-            .NA .conclusion,
-            .NA.conclusion {
-                color: #000;
-                border-color: #4774c7;
-                background-color: #78bbee;
-            }
-            .assesm {
-                color: #666666 !important;
-                font-style: italic;
-            }
-
-        </style>
-
 
         <h4>${eunis:cmsPhrase(actionBean.contentManagement, 'Quick facts')}</h4>
 
@@ -316,7 +139,7 @@
                 <th>Natura 2000 sites</th>
                 <td>
                     <a href="${ actionBean.pageUrl }#protected" onclick="openSection('protected');"><span class="bold">${ actionBean.speciesSitesCount }</span></a>
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'are designated for the species type')}
+                        ${eunis:cmsPhrase(actionBean.contentManagement, 'are designated for the species')}
                 </td>
             </tr>
             </tbody>
@@ -359,10 +182,8 @@
                 <tr>
                     <th>Breeding habitats</th>
                     <td>
-                        <ul class="quickfacts-list">
-                        <c:forEach var="ecosystem" items="${actionBean.breedingEcosystems}" varStatus="estatus">
-                            <li>${ecosystem.ecoName}</li>
-                        </c:forEach>
+                        <ul class="list-inline">
+                            <c:forEach var="ecosystem" items="${actionBean.breedingEcosystems}" varStatus="estatus"><li>${ecosystem.ecoName}</li></c:forEach>
                         </ul>
                     </td>
                 </tr>
@@ -371,10 +192,8 @@
                 <tr>
                     <th>Wintering habitats</th>
                     <td>
-                        <ul class="quickfacts-list">
-                            <c:forEach var="ecosystem" items="${actionBean.winteringEcosystems}" varStatus="estatus">
-                                <li>${ecosystem.ecoName}</li>
-                            </c:forEach>
+                        <ul class="list-inline">
+                            <c:forEach var="ecosystem" items="${actionBean.winteringEcosystems}" varStatus="estatus"><li>${ecosystem.ecoName}</li></c:forEach>
                         </ul>
                     </td>
                 </tr>
@@ -388,17 +207,15 @@
                     <tr>
                         <th>Most preferred habitats</th>
                         <td>
-                            <ul class="quickfacts-list">
-                                <c:forEach var="ecosystem" items="${actionBean.preferredEcosystems}" varStatus="estatus">
-                                    <li>${ecosystem.ecoName}</li>
-                                </c:forEach>
+                            <ul class="list-inline">
+                                <c:forEach var="ecosystem" items="${actionBean.preferredEcosystems}" varStatus="estatus"><li>${ecosystem.ecoName}</li></c:forEach>
                             </ul>
                         </td>
                     </tr>
                 </c:if>
                 <c:if test="${not empty actionBean.suitableEcosystems}">
                     <tr>
-                        <th><small>May also occur in</small></th>
+                        <th class="normalfont">May also occur in</th>
                         <td>
                             <ul class="list-inline">
                                 <c:forEach var="ecosystem" items="${actionBean.suitableEcosystems}" varStatus="estatus"><li>${ecosystem.ecoName}</li></c:forEach>
@@ -412,7 +229,7 @@
             <c:if test="${!empty actionBean.n2000id}">
                 <tbody>
                 <tr>
-                    <th>
+                    <th class="normalfont">
                         ${eunis:cmsPhrase(actionBean.contentManagement, 'Natura 2000 species code')}
                     </th>
                     <td>${actionBean.n2000id}</td>
