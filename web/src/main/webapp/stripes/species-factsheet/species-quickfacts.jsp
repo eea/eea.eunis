@@ -133,7 +133,7 @@
             </tbody>
 
 
-            <c:if test="${actionBean.protectedByEUDirectives  or actionBean.otherAgreements gt 0}">
+            <c:if test="${actionBean.habitatsDirectiveII}">
             <tbody>
             <tr>
                 <th>Natura 2000 sites</th>

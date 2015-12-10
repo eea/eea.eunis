@@ -44,6 +44,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     // List of Habitats and Birds annexes
     private static Set<Integer> habitatsDirectiveIdDc = new HashSet<Integer>();
     private static Set<Integer> birdsDirectiveIdDc = new HashSet<Integer>();
+    private Integer habitatsDirectiveIdDcII = 2325;
 
     static {
         habitatsDirectiveIdDc.add(2324);
@@ -194,6 +195,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private List<LegalStatusWrapper> parentLegal;
 
     private Set<EcosystemsPersist> uniqueEcosystems;
+    private boolean habitatsDirectiveII;
 
     /**
      * Default Stripes handler
@@ -438,6 +440,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             legalStatuses.add(legalStatus);
+
+            if(legalStatus.getIdDc().equals(habitatsDirectiveIdDcII)){
+                habitatsDirectiveII = true;
+            }
 
             if(habitatsDirectiveIdDc.contains(legalStatus.getIdDc())){
                 habitatsDirective = true;
@@ -1786,6 +1792,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      */
     public List<EcosystemsPersist> getWinteringEcosystems() {
         return winteringEcosystems;
+    }
+
+    public boolean isHabitatsDirectiveII() {
+        return habitatsDirectiveII;
     }
 }
 
