@@ -58,7 +58,7 @@
                     <th>Natura 2000 sites</th>
                     <td>
                         <a href="${ actionBean.pageUrl }#sites" onclick="openSection('sites');"><span class="bold">${fn:length(actionBean.sites)}</span></a>
-                        are designated for the habitat type
+                        are designated for this habitat type
                     </td>
                 </tr>
                 </tbody>

@@ -139,7 +139,7 @@
                 <th>Natura 2000 sites</th>
                 <td>
                     <a href="${ actionBean.pageUrl }#protected" onclick="openSection('protected');"><span class="bold">${ actionBean.speciesSitesCount }</span></a>
-                        ${eunis:cmsPhrase(actionBean.contentManagement, 'are designated for the species')}
+                        ${eunis:cmsPhrase(actionBean.contentManagement, 'are designated for this species')}
                 </td>
             </tr>
             </tbody>
