@@ -137,10 +137,10 @@
                         the European Commission are also included.
                         </p>
                         <p>
-                        See <a href="/downloads/europe.pdf"><span class="bold">here</span></a> what is Europe from a geographical point of view.
+                        See <a style="border-bottom: 0px" href="/downloads/europe.pdf"><span class="bold"> here</span></a> what is Europe from a geographical point of view.
                         </p>
                         <p>
-                        <a href="${ actionBean.pageUrl }#other_resources" onclick="openSection('other_resources');"><span class="bold">Other resources</span></a> available below may have more information.
+                        <a style="border-bottom: 0px" href="${ actionBean.pageUrl }#other_resources" onclick="openSection('other_resources');"><span class="bold">Other resources</span></a> available below may have more information.
                         </p>
                     </th>
                 </c:otherwise>
