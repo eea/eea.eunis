@@ -26,7 +26,7 @@
                  <tr><td class="discreet"><div class="legend-color conservation-legend-favorable"> </div> <span class="bold">Favourable</span>: A habitat is in a situation where it is prospering and with good prospects to do so in the future as well</td></tr>
                  <tr><td class="discreet"><div class="legend-color conservation-legend-inadequate"> </div> <span class="bold">Unfavourable-Inadequate</span>: A habitat is in a situation where a change in management or policy is required to return the habitat to favourable status but there is no danger of disappearance in the foreseeable future</td></tr>
                  <tr><td class="discreet"><div class="legend-color conservation-legend-bad"> </div> <span class="bold">Unfavourable-Bad</span>: A habitat is in serious danger of disappearing (at least regionally)</td></tr>
-                 <tr><td class="discreet"><div class="legend-color conservation-legend-unknown"> </div> <span class="bold">Unknown</span>: Tthe information available for the habitat type is scarce and does not allow a proper assessment of its conservation status</td></tr>
+                 <tr><td class="discreet"><div class="legend-color conservation-legend-unknown"> </div> <span class="bold">Unknown</span>: The information available for the habitat type is scarce and does not allow a proper assessment of its conservation status</td></tr>
              </table>
          </div>
 
