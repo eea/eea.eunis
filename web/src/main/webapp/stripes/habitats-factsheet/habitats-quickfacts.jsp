@@ -14,33 +14,52 @@
     </div>
 
     <!-- Textual facts on right -->
-    <div class="right-area">
+    <div class="right-area quickfacts">
         <h4>${eunis:cmsPhrase(actionBean.contentManagement, 'Quick facts')}</h4>
-        <div>
-            <ul>
-                <li>
-                    <span class="bold">${eunis:cmsPhrase(actionBean.contentManagement, 'EUNIS habitat type')}</span>
-                    (code <span class="bold">${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')}</span>)
-                </li>
-                <c:if test="${actionBean.resolution4}">
-                    <li>
-                        <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Resolution 4 habitat type</span></a> used for designation of Emerald sites (Bern Convention)
-                    </li>
-                </c:if>
-                <c:if test="${not empty actionBean.resolution4Parent}">
-                    <li>
-                        This habitat type is included in a <span class="bold">Resolution 4 habitat type</span> (Bern convention) at a higher level (<a href="/habitats/${actionBean.resolution4Parent.idHabitat}">${actionBean.resolution4Parent.eunisHabitatCode}</a>)
 
-                    </li>
-                </c:if>
 
-                <c:if test="${actionBean.habitatsDirective}">
-                    <li>
-                        Relation to one or more <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Annex I habitat types</span></a> (EU Habitats Directive)
-                    </li>
-                </c:if>
-            </ul>
-        </div>
+        <table class="table-quickfacts">
+            <tbody>
+                <tr>
+                    <th>${eunis:cmsPhrase(actionBean.contentManagement, 'EUNIS habitat type')}</th>
+                    <td>code <span class="bold">${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')}</span></td>
+                </tr>
+            </tbody>
+
+            <c:if test="${actionBean.resolution4}">
+                <tbody>
+                <tr>
+                    <th>Bern Convention</th>
+                    <td>
+                        <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Resolution 4 habitat type</span></a> (used for designation of Emerald sites)
+                    </td>
+                </tr>
+                </tbody>
+            </c:if>
+            <c:if test="${not empty actionBean.resolution4Parent}">
+                <tbody>
+                    <tr>
+                        <th>Bern Convention</th>
+                        <td>
+                            Included in a <span class="bold">Resolution 4 habitat type</span> at a higher level (<a href="/habitats/${actionBean.resolution4Parent.idHabitat}">${actionBean.resolution4Parent.eunisHabitatCode}</a>)
+                        </td>
+                    </tr>
+                </tbody>
+            </c:if>
+
+            <c:if test="${actionBean.habitatsDirective}">
+                <tbody>
+                    <tr>
+                        <th class="normalfont">
+                            Relation to
+                        </th>
+                        <td>
+                            <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Annex I habitat types</span></a> (EU Habitats Directive)
+                        </td>
+                    </tr>
+                </tbody>
+            </c:if>
+        </table>
     </div>
     <c:if test="${fn:length(actionBean.englishDescription)>=actionBean.descriptionThreshold}">
         <stripes:layout-render name="/stripes/habitats-factsheet/habitats-quickfacts-description.jsp"/>
