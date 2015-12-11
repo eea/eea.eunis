@@ -45,6 +45,9 @@ public class Chm62edtHabitatDescriptionDomain extends AbstractDomain {
                 new StringColumnSpec("DESCRIPTION", "getDescription",
                 "setDescription", null));
         this.addColumnSpec(
+                new StringColumnSpec("SPECIES", "getSpecies",
+                "setSpecies", null));
+        this.addColumnSpec(
                 new StringColumnSpec("OWNER_TEXT", "getOwnerText",
                 "setOwnerText", null));
         this.addColumnSpec(

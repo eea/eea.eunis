@@ -11,6 +11,7 @@
       landings
       derogationsreport
       deliveries
+      <!--art17s-->
        <!--art17ranges art17populations-->
        <!--natconcl2012 natpopul2012-->
 	   <!--butterfliestrend-->
@@ -696,6 +697,10 @@ WHERE {
  ?speciesurl eunis:speciesCode ?speciescode
 }
 ]]></entry>
+
+
+
+
 
 
 </properties>

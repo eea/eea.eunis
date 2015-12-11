@@ -22,6 +22,7 @@ public class ForeignDataQueryDTO implements Serializable {
     private String query;
     private String queryType;
     private String endpoint;
+    private String idToUse;
 
     public String getId() {
         return id;
@@ -69,5 +70,13 @@ public class ForeignDataQueryDTO implements Serializable {
 
     public void setEndpoint(String endpoint) {
         this.endpoint = endpoint;
+    }
+
+    public String getIdToUse() {
+        return idToUse;
+    }
+
+    public void setIdToUse(String idToUse) {
+        this.idToUse = idToUse;
     }
 }

@@ -1,11 +1,7 @@
 package ro.finsiel.eunis.factsheet.species;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.IReferencesDao;
@@ -13,49 +9,7 @@ import eionet.eunis.dto.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
-import ro.finsiel.eunis.jrfTables.Chm62edtAbundanceDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtAbundancePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtAreaLegalTextDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtAreaLegalTextPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtConservationStatusDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtConservationStatusPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtCountryDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtCountryPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtFaithfulnessDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtFaithfulnessPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtFrequenciesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtFrequenciesPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtGroupspeciesPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtLegalStatusDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtLegalStatusPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPictureDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtNatureObjectPicturePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtPopulationUnitDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtPopulationUnitPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportTypeDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportTypePersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportsDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtReportsPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesStatusPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtTaxcodeLeftDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtTaxcodeLeftPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtTaxonomyDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtTaxonomyPersist;
-import ro.finsiel.eunis.jrfTables.Chm62edtTrendDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtTrendPersist;
-import ro.finsiel.eunis.jrfTables.DcIndexDomain;
-import ro.finsiel.eunis.jrfTables.DcIndexPersist;
-import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectDomain;
-import ro.finsiel.eunis.jrfTables.SpeciesNatureObjectPersist;
+import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesDomain;
 import ro.finsiel.eunis.jrfTables.species.VernacularNamesPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.InfoQualityReportTypeDomain;
@@ -822,10 +776,28 @@ public class SpeciesFactsheet {
             for(AttributeDto a : dcAttributes){
                 if(a.getName().equals("description"))
                     legalStatus.setDescription(a.getObjectLabel());
-
             }
 
             legalStatus.setIdReportAttributes(report.getIdReportAttributes());
+
+            List<Chm62edtReportAttributesPersist> reportAttributes = new Chm62edtReportAttributesDomain().findCustom("SELECT *" +
+                    " FROM chm62edt_report_attributes AS F" +
+                    " WHERE F.ID_REPORT_ATTRIBUTES='" + report.getIdReportAttributes() + "'");
+
+            List<Chm62edtSpeciesPersist> synonyms = new ArrayList<>();
+            for(Chm62edtReportAttributesPersist attribute : reportAttributes){
+                if(attribute.getName().equalsIgnoreCase("NAME_IN_DOCUMENT")){
+                    legalStatus.setNameInDocument(attribute.getValue());
+
+                }
+                if(attribute.getName().startsWith("SYNONYM_IN_DOCUMENT")){
+                    List<Chm62edtSpeciesPersist> sp = new Chm62edtSpeciesDomain().findWhere("ID_SPECIES = " + attribute.getValue());
+                    if(sp != null && sp.size() == 1){
+                        synonyms.add(sp.get(0));
+                    }
+                }
+            }
+            legalStatus.setSpeciesInDocument(synonyms);
 
         } else {
             legalStatus.setReference("-1");
@@ -2015,4 +1987,17 @@ public class SpeciesFactsheet {
         String[] names = nameToSearch.split(" ");
         return names[0].trim() + " " + names[1].trim();
     }
+
+    /**
+     * Returns the list of ecosystems of the habitat
+     * @return
+     */
+    public List<EcosystemsPersist> getEcosystems(){
+        List<EcosystemsPersist> results = null;
+
+        results = new EcosystemsDomain().findWhere("ID_NATURE_OBJECT = '" + getSpeciesObject().getIdNatureObject() + "'");
+
+        return results;
+    }
+
 }

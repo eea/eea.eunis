@@ -365,4 +365,16 @@
             ${shortenURL("http://example.com")}
         </example>
     </function>
+
+	<function>
+		<description>
+			Gets the size of a collection
+		</description>
+		<name>getSize</name>
+		<function-class>eionet.eunis.util.JstlFunctions</function-class>
+		<function-signature>int getSize(java.util.Collection)</function-signature>
+		<example>
+			${getSize(new List())}
+		</example>
+	</function>
 </taglib>

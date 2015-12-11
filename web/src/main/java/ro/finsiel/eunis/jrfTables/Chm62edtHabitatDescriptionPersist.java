@@ -35,6 +35,8 @@ public class Chm62edtHabitatDescriptionPersist extends PersistentObject {
 
     private Integer idDc = null;
 
+    private String species = null;
+
     public Chm62edtHabitatDescriptionPersist() {
         super();
     }
@@ -116,5 +118,13 @@ public class Chm62edtHabitatDescriptionPersist extends PersistentObject {
     public void setOwnerText(String ownerText) {
         i_ownerText = ownerText;
         this.markModifiedPersistentState();
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
     }
 }

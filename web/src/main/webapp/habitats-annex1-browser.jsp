@@ -83,7 +83,8 @@
                   <% } else { %>
                     <a title="<%=show%>" id="level_<%=rs.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs.getString("CODE_2000").substring(0,1))%>#level_<%=rs.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
                   <% } %>
-                  <a title="<%=rs.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs.getString("ID_HABITAT")%>"><%=rs.getString("CODE_2000")%> : <%=rs.getString("SCIENTIFIC_NAME")%></a><br/>
+                      <%=rs.getString("CODE_2000")%> : <%=rs.getString("SCIENTIFIC_NAME")%>
+                    <br/>
                   <%
                   //we begin to display the tree
 	              if(expand.length()>0 && Utilities.expandContains(expand,rs.getString("CODE_2000").substring(0,1))) {
@@ -109,7 +110,8 @@
 	                    <% } else { %>
 	                      <a title="<%=show%>" id="level_<%=rs2.getString("CODE_2000")%>" href="habitats-annex1-browser.jsp?expand=<%=Utilities.addToExpanded(expand,rs2.getString("CODE_2000").substring(0,2))%>#level_<%=rs2.getString("CODE_2000")%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
 	                    <% } %>
-	                    <a title="<%=rs2.getString("SCIENTIFIC_NAME")%>" href="habitats/<%=rs2.getString("ID_HABITAT")%>"><%=rs2.getString("CODE_2000")%> : <%=rs2.getString("SCIENTIFIC_NAME")%></a><br/>
+                            <%=rs2.getString("CODE_2000")%> : <%=rs2.getString("SCIENTIFIC_NAME")%>
+                          <br/>
 	<%
 	                  } else {
 	%>

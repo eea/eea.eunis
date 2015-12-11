@@ -22,7 +22,7 @@
                                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Annex')}
                               </th>
                             <th scope="col" style="cursor: pointer;" class="nosort">
-                                ${eunis:cmsPhrase(actionBean.contentManagement, 'Geographical and other restrictions')}
+                               Conditions
                              </th>
                             <th scope="col" style="cursor: pointer;" class="nosort">
                                 ${eunis:cmsPhrase(actionBean.contentManagement, 'More information')}
@@ -44,13 +44,26 @@
                                     <c:set var="oldParent" value="${legal.parentName}"/>
                                 </td>
                                 <td>
+                                    <div>
+                                        <c:choose>
+                                            <c:when test="${not empty legal.description}">
+                                                <a href="/references/${ legal.idDc }/species">${ legal.description }</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="/references/${ legal.idDc }/species">${legal.detailedReference}</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
                                     <c:choose>
-                                        <c:when test="${not empty legal.description}">
-                                            <a href="/references/${ legal.idDc }/species">${ legal.description }</a>
+                                        <%--To be enabled if we need to display the species "name in document" --%>
+                                        <%--<c:when test="${not empty legal.speciesInDocument}">--%>
+                                            <%--(Name in document:--%>
+                                            <%--<c:forEach items="${legal.speciesInDocument}" var="syn" varStatus="svar">--%>
+                                                <%--<a href="/species/${syn.idSpecies}"><span class="italics">${syn.scientificName}</span></a><c:if test="${not svar.last}">, </c:if></c:forEach>)--%>
+                                        <%--</c:when>--%>
+                                        <c:when test="${not empty legal.nameInDocument}">
+                                            (${legal.nameInDocument})
                                         </c:when>
-                                        <c:otherwise>
-                                            <a href="/references/${ legal.idDc }/species">${legal.detailedReference}</a>
-                                        </c:otherwise>
                                     </c:choose>
                                 </td>
 		        				<td>

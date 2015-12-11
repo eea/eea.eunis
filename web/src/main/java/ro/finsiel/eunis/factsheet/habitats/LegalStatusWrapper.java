@@ -3,6 +3,7 @@ package ro.finsiel.eunis.factsheet.habitats;
 import eionet.eunis.dto.DcLinkDTO;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.Map;
 /**
  * Wrapper for the Legal status, used for Habitats Legal display
  */
-public class LegalStatusWrapper {
+public class LegalStatusWrapper implements Comparable<LegalStatusWrapper>{
 
     /**
      * Mapping for habitat relation types to descriptions
@@ -118,5 +119,26 @@ public class LegalStatusWrapper {
 
     public String getReplacedBy() {
         return replacedBy;
+    }
+
+    /**
+     * Implements the ordering of the legal status based on
+     * https://taskman.eionet.europa.eu/issues/30232
+     * @param o The object to compare
+     * @return
+     */
+    @Override
+    public int compareTo(LegalStatusWrapper o) {
+        if(o != null){
+            try {
+                Integer i1 = EunisUtil.legalStatusOrder.get(this.getLegalPersist().getIdDc());
+                Integer i2 = EunisUtil.legalStatusOrder.get(o.getLegalPersist().getIdDc());
+                return i1 - i2;
+            } catch(Exception e){
+                return 0;
+            }
+        } else {
+            return 1;
+        }
     }
 }

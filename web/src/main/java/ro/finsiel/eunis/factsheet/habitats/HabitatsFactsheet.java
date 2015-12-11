@@ -1136,6 +1136,7 @@ public class HabitatsFactsheet {
     }
 
     private String description = "";
+    private String speciesText = "";
 
     /**
      * Retrieve description &amp; owner information for a habitat (from chm62edt_habitat_description) using
@@ -1165,6 +1166,7 @@ public class HabitatsFactsheet {
                                     habitatDescr.getOwnerText(), habitatDescr.getIdDc()));
 
                     description = description + habitatDescr.getDescription();
+                    speciesText = speciesText + habitatDescr.getSpecies();
                 }
             }
         } catch (Exception ex) {
@@ -1976,7 +1978,7 @@ public class HabitatsFactsheet {
                 for (Object specy : speciesList) {
                     HabitatsNatureObjectReportTypeSpeciesPersist specie = (HabitatsNatureObjectReportTypeSpeciesPersist) specy;
                     // #19430 show only the species that are in the habitat descriptions
-                    if(description.contains(specie.getSpeciesScientificName())) {
+                    if(description.contains(specie.getSpeciesScientificName()) || speciesText.contains(specie.getSpeciesScientificName())) {
 
                         List<VernacularNameWrapper> vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObjectSpecies());
                         String englishName = "";
@@ -2188,6 +2190,18 @@ public class HabitatsFactsheet {
         if (null == results) {
             results = new Vector<HabitatsSitesPersist>();
         }
+        return results;
+    }
+
+    /**
+     * Returns the list of ecosystems of the habitat
+     * @return
+     */
+    public List<EcosystemsPersist> getEcosystems(){
+        List<EcosystemsPersist> results = null;
+
+        results = new EcosystemsDomain().findWhere("ID_NATURE_OBJECT = '" + getHabitat().getIdNatureObject() + "'");
+
         return results;
     }
 

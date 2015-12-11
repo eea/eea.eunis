@@ -5,8 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">deliveries art17ranges art17distribution habitatdistribution
-  natconcl2012 natarea2012 </entry>
+  <entry key="queries">art17h</entry>
 
 <!-- -->
 <!-- .endpoint, .title and .query are mandatory for all queries -->
@@ -414,6 +413,7 @@ WHERE {
   }
 }
 ]]></entry>
+
 
 
 

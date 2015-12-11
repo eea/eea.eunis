@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import eionet.eunis.dao.IReferencesDao;
 import eionet.eunis.dto.*;
+import eionet.eunis.rdf.LinkedDataQuery;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -19,6 +20,7 @@ import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.factsheet.habitats.LegalStatusWrapper;
 import ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist;
+import ro.finsiel.eunis.jrfTables.EcosystemsPersist;
 import ro.finsiel.eunis.jrfTables.ReferencesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
@@ -110,7 +112,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private List history = new ArrayList();
     private List otherClassifications = new ArrayList();
 
-    private List legalInfo = null;
+    private List<LegalStatusWrapper> legalInfo = null;
     private Set<String> protectedBy = null;
 
     private String englishDescription = null;
@@ -118,6 +120,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     private List speciesForHabitats = null;
     // cache for legal mentioned in
     private List<MentionedIn> mentionedInList = null;
+
+    private List<EcosystemsPersist> uniqueEcosystems = null;
 
 
 
@@ -157,7 +161,8 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         if (factsheet.isAnnexI()) {
             sitesTabActions();
 //            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
-//            conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+            conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
+            populateBiogeoAssessment(factsheet.idNatureObject);
         }
 
 
@@ -311,28 +316,36 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     /**
      * Populate the member variables used in the "linkeddata" tab.
-     * 
-     * @param habitatId
-     * @param natureObjectId
-     * 
+     *
+     * @param idHabitat
+     *            - The habitat ID.
      */
-    private void linkeddataTabActions(int habitatId, Integer natureObjectId) {
+    private void linkeddataTabActions(int idHabitat, Integer natObjId) {
         try {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_habitats.xml"));
-            LinkedData fd = new LinkedData(props, natureObjectId, "_linkedDataQueries");
+            LinkedData fd = new LinkedData(props, natObjId, "_linkedDataQueries");
             queries = fd.getQueryObjects();
 
-            if (!StringUtils.isBlank(query)) {
-                fd.executeQuery(query, habitatId);
-                queryResultCols = fd.getCols();
-                queryResultRows = fd.getRows();
-                attribution = fd.getAttribution();
+            // runs all the queries
+            allQueries = new ArrayList<>();
+
+            for(ForeignDataQueryDTO queryDTO : queries){
+                if(queryDTO.getIdToUse() == null) {
+                    fd.executeQuery(queryDTO.getId(), idHabitat);
+                } else if(queryDTO.getIdToUse().equalsIgnoreCase("NATURA_2000")){
+                    fd.executeQuery(queryDTO.getId(), factsheet.getCode2000());
+                }
+
+                LinkedDataQuery q = new LinkedDataQuery(queryDTO, fd.getCols(), fd.getRows(), fd.getAttribution());
+                if(q.getResultRows() != null && q.getResultRows().size() > 0)
+                    allQueries.add(q);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     private void conservationStatusTabActions(int habitatId, Integer natureObjectId) {
         try {
@@ -341,12 +354,20 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("conservationstatus_habitats.xml"));
             LinkedData ld = new LinkedData(props, natureObjectId, "_conservationStatusQueries");
             conservationStatusQueries = ld.getQueryObjects();
-            for (int i = 0; i < conservationStatusQueries.size(); i++) {
-                conservationStatusQuery = conservationStatusQueries.get(i).getId();
+            for (ForeignDataQueryDTO conservationStatusQuery1 : conservationStatusQueries) {
+                conservationStatusQuery = conservationStatusQuery1.getId();
                 if (!StringUtils.isBlank(conservationStatusQuery)) {
-                    ld.executeQuery(conservationStatusQuery, habitatId);
-                    conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
-                    conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
+
+                    if (conservationStatusQuery1.getIdToUse() == null) {
+                        ld.executeQuery(conservationStatusQuery, habitatId);
+                    } else if (conservationStatusQuery1.getIdToUse().equalsIgnoreCase("NATURA_2000")) {
+                        ld.executeQuery(conservationStatusQuery, factsheet.getCode2000());
+                    }
+
+                    if(ld.getRows().size() > 0) {
+                        conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
+                        conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
+                    }
 
                     conservationStatusAttribution = ld.getAttribution();
                 }
@@ -781,6 +802,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                         legalStatusWrapper.addMoreInfo(link);
                     }
                 }
+                // Order the results
+                Collections.sort(legalInfo);
+
             } catch (InitializationException e) {
                 legalInfo = new ArrayList<LegalStatusWrapper>();
             }
@@ -831,6 +855,22 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     }
 
     /**
+     * Returns the list of ecosystems of the habitat, filtered to be unique
+     * @return
+     */
+    public List<EcosystemsPersist> getUniqueEcosystems(){
+        if(uniqueEcosystems == null){
+            Set<EcosystemsPersist> uniqueEcosystemsSet = new HashSet<>();
+            uniqueEcosystemsSet.addAll(factsheet.getEcosystems());
+
+            uniqueEcosystems = new ArrayList<>();
+            uniqueEcosystems.addAll(uniqueEcosystemsSet);
+            Collections.sort(uniqueEcosystems);
+        }
+        return uniqueEcosystems;
+    }
+
+    /**
      * Returns the conservation status link
      * @return Object containing the link
      */
@@ -841,4 +881,52 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     public Chm62edtHabitatPersist getResolution4Parent(){
         return factsheet.getResolution4Parent();
     }
+
+
+
+
+
+    private List<LinkedDataQuery> allQueries;
+
+    public List<LinkedDataQuery> getAllQueries() {
+        return allQueries;
+    }
+
+
+    ArrayList<HashMap<String, ResultValue>> biogeoAssessmentRows =
+            new  ArrayList<>();
+
+    public ArrayList<HashMap<String, ResultValue>> getBiogeoAssessmentRows() {
+        return biogeoAssessmentRows;
+    }
+
+    /**
+     * Populates the EU conservation status by biogeographical region using Art17 data
+     * @param natObjId
+     */
+    private void populateBiogeoAssessment(Integer natObjId) {
+
+        List<ForeignDataQueryDTO> biogeoAssessment;
+
+        try {
+
+            Properties props = new Properties();
+            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("art17.xml"));
+            LinkedData ld = new LinkedData(props, natObjId, "force");
+            biogeoAssessment = ld.getQueryObjects();
+
+            for (ForeignDataQueryDTO aBiogeoAssessment : biogeoAssessment) {
+                if(aBiogeoAssessment.getId().equals("art17habitats_eu")){
+                    String syntaxaQuery = aBiogeoAssessment.getId();
+                    if (!StringUtils.isBlank(syntaxaQuery)) {
+                        ld.executeQuery(syntaxaQuery, factsheet.getCode2000());
+                        biogeoAssessmentRows = ld.getRows();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -11,6 +11,7 @@
         </c:if>
 
         <script src="<%=request.getContextPath()%>/script/overlib.js" type="text/javascript"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/script/init.js"></script>
         <script type="text/javascript" src="<%=request.getContextPath()%>/script/map-utils.js"></script>
 
         <script>

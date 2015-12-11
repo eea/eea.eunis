@@ -6,7 +6,6 @@
         <c:when test="${not empty actionBean.consStatus}">
                 <!-- species status -->
                 <a name="species-status"></a>
-                <%--<h2 class="visualClear">How is this species doing?</h2>--%>
 
                 <div class="left-area iucn-red-list-area">
                   <h3>${eunis:cmsPhrase(actionBean.contentManagement, 'IUCN Red List status of threatened species')}</h3>
@@ -141,7 +140,7 @@
                     </div>
                 </div>
 
-                <div class="right-area conservation-status">
+                <div class="right-area conservation-status" style="width: 500px;">
                     <h3>EU conservation status</h3>
                     <p>Conservation status assesses every six years and for each biogeographical region the condition of habitats and species compared to the favourable status as described in the Habitats Directive. The map shows the 2013 assessments.</p>
                         <iframe id="speciesStatusMap" class="map-border" src="" height="425px" width="100%"></iframe>
@@ -152,11 +151,11 @@
 
                     <div class="footer">
                         <table>
-                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-favorable"> </div> <span class="bold">Favourable</span>: A species is in a situation where it is prospering and with good prospects to do so in the future as well</td></tr>
-                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-inadequate"> </div> <span class="bold">Unfavourable-Inadequate</span>: A species is in a situation where a change in management or policy is required to return the species to favourable status but there is no danger of extinction in the foreseeable future</td></tr>
-                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-bad"> </div> <span class="bold">Unfavourable-Bad</span>: A species is in serious danger of becoming extinct (at least regionally)</td></tr>
+                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-favorable"> </div> <span class="bold">Favourable</span>: the species is viable and maintaining itself on a long-term basis, its natural range is not reduced, and it has a sufficient large habitat.</td></tr>
+                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-inadequate"> </div> <span class="bold">Unfavourable-Inadequate</span>: the species is not as critical as being unfavourable-bad, but still requires significant conservation and restoration measure to make it viable in the long-term, or to enlarged its current range, or to improve the quality and availability of its habitat.</td></tr>
+                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-bad"> </div> <span class="bold">Unfavourable-Bad</span>: the species is either not maintaining itself on a long-term basis and is not viable, or its natural range as been or is being drastically reduced, or its habitat is largely insufficient; the species requires major conservation and restoration measures.</td></tr>
                             <tr>
-                                <td colspan="2" class="discreet"><div class="legend-color conservation-legend-unknown"> </div> <span class="bold">Unknown</span>: There is insufficient information available to allow an assessment</td>
+                                <td colspan="2" class="discreet"><div class="legend-color conservation-legend-unknown"> </div> <span class="bold">Unknown</span>: the information available for the species is scarce and does not allow a proper assessment of its conservation status.</td>
                                 <%--<td class="discreet"><div class="legend-color conservation-legend-nodata"> </div> <span class="bold">No data</span></td>--%>
                             </tr>
                         </table>
@@ -171,7 +170,7 @@
                                 <ul>
                                     <c:if test="${not empty actionBean.conservationStatusPDF}">
                                         <li>
-                                            <a href="${actionBean.conservationStatusPDF.url}">Conservation status 2006 – summary (pdf)</a>
+                                            <a href="${actionBean.conservationStatusPDF.url}">Conservation status 2007-2012 - summary</a>
                                         </li>
                                     </c:if>
                                     <c:if test="${not empty actionBean.conservationStatus}">
@@ -183,19 +182,21 @@
                                 </c:if>
                             </div>
                             <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
-                                <%-- Hidden by #19431 --%>
-                                <%--<span class="table-definition-target standardButton float-left">--%>
-                                    <%--${eunis:cmsPhrase(actionBean.contentManagement, 'See full table details')}--%>
-                                <%--</span>--%>
+                                <span class="table-definition-target standardButton float-left" style="margin-top: 20px;">
+                                    ${eunis:cmsPhrase(actionBean.contentManagement, 'Full table details')}
+                                </span>
                                 <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
-                                    <div class="table-definition-body visualClear">
+                                    <div class="table-definition-body visualClear" style="display:none;">
                                         <div style="margin-top:20px">
                                             <p style="font-weight:bold">${eunis:cmsPhrase(actionBean.contentManagement, query.title)}:</p>
                                             <c:set var="queryId" value="${query.id}"/>
 
-                                            <div style="overflow-x:auto">
-                                                <span class="pagebanner">${fn:length(actionBean.conservationStatusQueryResultRows[queryId])} item<c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) != 1}">s</c:if> found.</span>
-                                                <table style="margin-top:20px" class="datatable listing inline-block">
+                                            <c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) gt 10}">
+                                                <div class="scroll-auto" style="height: 400px">
+                                            </c:if>
+                                                <div style="overflow-x:auto ">
+                                                <%--<span class="pagebanner">${fn:length(actionBean.conservationStatusQueryResultRows[queryId])} item<c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) != 1}">s</c:if> found.</span>--%>
+                                                <table class="datatable listing inline-block">
                                                     <thead>
                                                         <tr>
                                                             <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
@@ -215,10 +216,13 @@
                                                         </c:forEach>
                                                     </tbody>
                                                 </table>
+                                                </div>
+                                            <c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) gt 10}">
+                                                </div>
+                                            </c:if>
                                             </div>
-                                        </div>
-                                    </div>
                                 </c:forEach>
+                                </div>
                             </c:if>
                         </div>
                         <!-- Conservation status other resources overlay -->

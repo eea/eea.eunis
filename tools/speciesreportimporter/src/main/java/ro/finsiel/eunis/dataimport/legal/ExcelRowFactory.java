@@ -26,7 +26,7 @@ public class ExcelRowFactory {
         r.setHabitatsRestrictions(getCellValue(row, "D"));
         r.setHabitatsName(getCellValue(row, "E"));
         r.setBirdsD(getCellValue(row, "F"));
-// todo restriction
+        r.setBirdsDRestrictions(getCellValue(row, "G"));
         r.setBirdsName(getCellValue(row, "H"));
         r.setBernConvention(getCellValue(row, "I"));
         r.setBernRestrictions(getCellValue(row, "J"));
@@ -37,28 +37,39 @@ public class ExcelRowFactory {
         r.setBonnConvention(getCellValue(row, "O"));
         r.setBonnRestrictions(getCellValue(row, "P"));
         r.setBonnName(getCellValue(row, "Q"));
-        r.setCites(getCellValue(row, "R"));
-        r.setCitesName(getCellValue(row, "S"));
-        r.setEuTrade(getCellValue(row, "T"));
-        r.setEuTradeName(getCellValue(row, "U"));
-        r.setAewa(getCellValue(row, "V"));
-        r.setAewaName(getCellValue(row, "W"));
 
-        //ACAP  X
-        //raptors Y
-        //anme in raptors Z
+        r.setAcap(getCellValue(row, "R"));
+        r.setAWarbler(getCellValue(row, "Y"));
+        r.setGBustard(getCellValue(row, "Z"));
 
-        r.setEurobats(getCellValue(row, "AA"));
-        r.setAccobams(getCellValue(row, "AB"));
-        r.setAscobans(getCellValue(row, "AC"));
-        r.setWadden(getCellValue(row, "AD"));
-        r.setSpa(getCellValue(row, "AE"));
-        r.setSpaName(getCellValue(row, "AF"));
-        r.setOspar(getCellValue(row, "AG"));
-        r.setOsparName(getCellValue(row, "AH"));
-        r.setHelcom(getCellValue(row, "AI"));
-        r.setRedList(getCellValue(row, "AJ"));
-        r.setRedListName(getCellValue(row, "AK"));
+        r.setMSeal(getCellValue(row, "AA"));
+        r.setMouRaptors(getCellValue(row, "AB"));
+        r.setMouRaptorsName(getCellValue(row, "AC"));
+        r.setSbCurlew(getCellValue(row, "AD"));
+        r.setSharksMou(getCellValue(row, "AE"));
+
+        r.setCites(getCellValue(row, "AG"));
+        r.setCitesName(getCellValue(row, "AH"));
+        r.setEuTrade(getCellValue(row, "AI"));
+        r.setEuTradeName(getCellValue(row, "AJ"));
+        r.setAewa(getCellValue(row, "T"));
+        r.setAewaName(getCellValue(row, "U"));
+
+        r.setEurobats(getCellValue(row, "W"));
+        r.setEurobatsName(getCellValue(row, "X"));
+
+        r.setAccobams(getCellValue(row, "S"));
+        r.setAscobans(getCellValue(row, "V"));
+        r.setWadden(getCellValue(row, "AF"));
+        r.setSpa(getCellValue(row, "AK"));
+        r.setSpaName(getCellValue(row, "AL"));
+        r.setOspar(getCellValue(row, "AM"));
+        r.setOsparName(getCellValue(row, "AN"));
+        r.setHelcom(getCellValue(row, "AO"));
+        r.setHelcomRestrictions(getCellValue(row, "AP"));
+        r.setHelcomName(getCellValue(row, "AQ"));
+        r.setRedList(getCellValue(row, "AR"));
+        r.setRedListName(getCellValue(row, "AS"));
 
         r.setExcelRow(row.getRowNum() + 1);
 
@@ -150,9 +161,10 @@ public class ExcelRowFactory {
         }
         RestrictionsRow r = new RestrictionsRow();
         r.setSpecies(getCellValue(row, "A"));
-        r.setLegalText(getCellValue(row, "D"));
-        r.setRestriction(getCellValue(row, "C"));
         r.setSpeciesValidName(getCellValue(row, "B"));
+        r.setLegalText(getCellValue(row, "C"));
+        r.setRestriction(getCellValue(row, "D"));
+
 
         if(r.getLegalText().isEmpty() || r.getLegalText().contains("Legal text"))
             return null;
@@ -166,17 +178,23 @@ public class ExcelRowFactory {
      * @param column The column (by its letter, like "B")
      * @return The String value, trimmed. Null values are returned as empty String.
      */
-    private String getCellValue(Row row, String column){
+    private String getCellValue(Row row, String column) {
         Cell c = row.getCell(CellReference.convertColStringToIndex(column));
-        if(c!=null){
+        if (c != null) {
             String s = null;
-            try{
+            try {
                 s = c.getStringCellValue();
-            } catch (IllegalStateException ise){
-             ise.printStackTrace();
-               System.out.println("ERROR: Illegal stat on cell " + row.getRowNum() + ", " + column);
+            } catch (IllegalStateException ise) {
+                try {
+                    int value = ((int) c.getNumericCellValue());
+                    if(value != 0){
+                        s = value + "";
+                    }
+                } catch (IllegalStateException ise2) {
+                    System.out.println("ERROR: Illegal state on cell " + row.getRowNum() + ", " + column + " (" + ise2.getMessage() + ")");
+                }
             }
-            if(s == null) {
+            if (s == null) {
                 s = "";
             }
             s = s.trim();

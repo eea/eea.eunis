@@ -4,6 +4,7 @@ import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.*;
 import eionet.eunis.rdf.LinkedData;
+import eionet.eunis.rdf.LinkedDataQuery;
 import eionet.eunis.stripes.viewdto.SitesByNatureObjectViewDTO;
 import eionet.eunis.util.Constants;
 import eionet.eunis.util.JstlFunctions;
@@ -43,6 +44,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     // List of Habitats and Birds annexes
     private static Set<Integer> habitatsDirectiveIdDc = new HashSet<Integer>();
     private static Set<Integer> birdsDirectiveIdDc = new HashSet<Integer>();
+    private Integer habitatsDirectiveIdDcII = 2325;
 
     static {
         habitatsDirectiveIdDc.add(2324);
@@ -54,6 +56,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         birdsDirectiveIdDc.add(2456);
         birdsDirectiveIdDc.add(2457);
         birdsDirectiveIdDc.add(2440);
+        birdsDirectiveIdDc.add(2482);
     }
 
     /** The argument given. Can be a species number or scientific name */
@@ -191,6 +194,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String parentN2k;
     private List<LegalStatusWrapper> parentLegal;
 
+    private Set<EcosystemsPersist> uniqueEcosystems;
+    private boolean habitatsDirectiveII;
+
     /**
      * Default Stripes handler
      * @return Stripes resolution
@@ -261,6 +267,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // populates the external data
             linkeddataTabActions(mainIdSpecies, specie.getIdNatureObject());
 
+            if(isBird()){
+                populateBirdEcosystems();
+            }
+
             // it is a synonym, populate the synonym fields
             if (mainIdSpecies != seniorIdSpecies) {
                 SpeciesFactsheet parent = new SpeciesFactsheet(seniorIdSpecies, seniorIdSpecies);
@@ -287,6 +297,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // Sets country level and biogeo conservation status
             // TODO The methods executes SPARQL query. Consider caching the results or at least load the content with jQuery
             setConservationStatusDetails(mainIdSpecies, specie.getIdNatureObject());
+            populateBiogeoAssessment(specie.getIdNatureObject());
         }
 
         String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -430,6 +441,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             legalStatuses.add(legalStatus);
 
+            if(legalStatus.getIdDc().equals(habitatsDirectiveIdDcII)){
+                habitatsDirectiveII = true;
+            }
+
             if(habitatsDirectiveIdDc.contains(legalStatus.getIdDc())){
                 habitatsDirective = true;
             } else if(birdsDirectiveIdDc.contains(legalStatus.getIdDc())){
@@ -438,6 +453,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 otherAgreements++;
             }
         }
+
+        // order the legal status
+        Collections.sort(legalStatuses);
 
         List<LinkDTO> natureLinks = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(specie.getIdNatureObject());
         links = new ArrayList<LinkDTO>();
@@ -455,7 +473,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 nobanisLink = link;
                 addToLinks = false;
             }
-            if(link.getName().equalsIgnoreCase("Habitats Directive Art. 17-2006 summary")){
+            if(link.getName().equalsIgnoreCase("Conservation status 2012 - summary (pdf)")){
                 conservationStatusPDF = link;
                 addToLinks = false;
             } else if (link.getName().toLowerCase().contains("experts web tool")){
@@ -909,9 +927,17 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             for (ForeignDataQueryDTO conservationStatusQuery1 : conservationStatusQueries) {
                 conservationStatusQuery = conservationStatusQuery1.getId();
                 if (!StringUtils.isBlank(conservationStatusQuery)) {
-                    ld.executeQuery(conservationStatusQuery, idSpecies);
-                    conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
-                    conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
+
+                    if(conservationStatusQuery1.getIdToUse() == null) {
+                        ld.executeQuery(conservationStatusQuery, idSpecies);
+                    } else if(conservationStatusQuery1.getIdToUse().equalsIgnoreCase("NATURA_2000")){
+                        ld.executeQuery(conservationStatusQuery, n2000id);
+                    }
+
+                    if(ld.getRows().size() > 0) {
+                        conservationStatusQueryResultCols.put(conservationStatusQuery, ld.getCols());
+                        conservationStatusQueryResultRows.put(conservationStatusQuery, ld.getRows());
+                    }
 
                     conservationStatusAttribution = ld.getAttribution();
                 }
@@ -962,11 +988,16 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             queries = fd.getQueryObjects();
 
             // runs all the queries
-            allQueries = new ArrayList<Query>();
+            allQueries = new ArrayList<LinkedDataQuery>();
 
             for(ForeignDataQueryDTO queryDTO : queries){
-                fd.executeQuery(queryDTO.getId(), idSpecies);
-                Query q = new Query(queryDTO, fd.getCols(), fd.getRows(), fd.getAttribution());
+                if(queryDTO.getIdToUse() == null) {
+                    fd.executeQuery(queryDTO.getId(), idSpecies);
+                } else if(queryDTO.getIdToUse().equalsIgnoreCase("NATURA_2000")){
+                    fd.executeQuery(queryDTO.getId(), n2000id);
+                }
+
+                LinkedDataQuery q = new LinkedDataQuery(queryDTO, fd.getCols(), fd.getRows(), fd.getAttribution());
                 if(q.getResultRows() != null && q.getResultRows().size() > 0)
                     allQueries.add(q);
             }
@@ -975,52 +1006,46 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
-    private List<Query> allQueries;
+    ArrayList<HashMap<String, ResultValue>> biogeoAssessmentRows =
+            new  ArrayList<>();
 
-    public List<Query> getAllQueries() {
-        return allQueries;
+    public ArrayList<HashMap<String, ResultValue>> getBiogeoAssessmentRows() {
+        return biogeoAssessmentRows;
     }
 
-    public class Query {
-        private ForeignDataQueryDTO query;
-        private List<Map<String, Object>> resultCols;
-        private List<HashMap<String, ResultValue>> resultRows;
-        private String attribution;
-        private String title;
-        private String summary;
+    /**
+     * Populates the EU conservation status by biogeographical region using Art17 data
+     * @param natObjId
+     */
+    private void populateBiogeoAssessment(Integer natObjId) {
 
-        private Query(ForeignDataQueryDTO query, List<Map<String, Object>> resultCols, List<HashMap<String, ResultValue>> resultRows, String attribution) {
-            this.query = query;
-            this.resultCols = resultCols;
-            this.resultRows = resultRows;
-            this.attribution = attribution;
-            this.title = query.getTitle();
-            this.summary = query.getSummary();
-        }
+        List<ForeignDataQueryDTO> biogeoAssessment;
 
-        public ForeignDataQueryDTO getQuery() {
-            return query;
-        }
+        try {
 
-        public List<Map<String, Object>> getResultCols() {
-            return resultCols;
-        }
+            Properties props = new Properties();
+            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("art17.xml"));
+            LinkedData ld = new LinkedData(props, natObjId, "force");
+            biogeoAssessment = ld.getQueryObjects();
 
-        public List<HashMap<String, ResultValue>> getResultRows() {
-            return resultRows;
+            for (ForeignDataQueryDTO aBiogeoAssessment : biogeoAssessment) {
+                if(aBiogeoAssessment.getId().equals("art17species_eu")){
+                    String syntaxaQuery = aBiogeoAssessment.getId();
+                    if (!StringUtils.isBlank(syntaxaQuery)) {
+                        ld.executeQuery(syntaxaQuery, n2000id);
+                        biogeoAssessmentRows = ld.getRows();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 
-        public String getAttribution() {
-            return attribution;
-        }
+    private List<LinkedDataQuery> allQueries;
 
-        public String getTitle() {
-            return title;
-        }
-
-        public String getSummary() {
-            return summary;
-        }
+    public List<LinkedDataQuery> getAllQueries() {
+        return allQueries;
     }
 
     public LinkedHashMap<String, ArrayList<Map<String, Object>>> getConservationStatusQueryResultCols() {
@@ -1632,6 +1657,145 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public List<LegalStatusWrapper> getParentLegal() {
         return parentLegal;
+    }
+
+    private List<EcosystemsPersist> allEcosystems = null;
+
+    private List<EcosystemsPersist> getAllEcosystems(){
+        if(allEcosystems == null){
+            allEcosystems = factsheet.getEcosystems();
+        }
+        return allEcosystems;
+    }
+
+    private List<EcosystemsPersist> preferredEcosystems = null;
+    private List<EcosystemsPersist> suitableEcosystems = null;
+
+    /**
+     * Returns preferred ecosystems (unique)
+     * @return
+     */
+    public List<EcosystemsPersist> getPreferredEcosystems(){
+
+        if(preferredEcosystems == null){
+            Set<EcosystemsPersist>preferredEcosystemsSet = new HashSet<>();
+
+            for(EcosystemsPersist ep : getAllEcosystems()){
+                if(ep.getTypeAssoc().equalsIgnoreCase("P")){
+                    preferredEcosystemsSet.add(ep);
+                }
+            }
+            preferredEcosystems = new ArrayList<>();
+            preferredEcosystems.addAll(preferredEcosystemsSet);
+            Collections.sort(preferredEcosystems);
+        }
+        return preferredEcosystems;
+    }
+
+    /**
+     * Returns suitable ecosystems (unique and not in the preferred list)
+     * @return
+     */
+    public List<EcosystemsPersist> getSuitableEcosystems(){
+        if(suitableEcosystems == null){
+            Set<EcosystemsPersist>suitableEcosystemsSet = new HashSet<>();
+            for(EcosystemsPersist ep : getAllEcosystems()){
+                if(ep.getTypeAssoc().equalsIgnoreCase("S")){
+                    suitableEcosystemsSet.add(ep);
+                }
+            }
+            suitableEcosystemsSet.removeAll(getPreferredEcosystems());
+
+            suitableEcosystems = new ArrayList<>();
+            suitableEcosystems.addAll(suitableEcosystemsSet);
+            Collections.sort(suitableEcosystems);
+        }
+        return suitableEcosystems;
+    }
+
+    /**
+     * Checks if the species is a bird
+     * @return
+     */
+    public boolean isBird(){
+        return factsheet.getSpeciesGroup().equalsIgnoreCase("Birds");
+    }
+
+    /**
+     * Breeding ecosystem for Birds
+     */
+    private List<EcosystemsPersist> breedingEcosystems;
+    /**
+     * Wintering ecosystems for Birds
+     */
+    private List<EcosystemsPersist> winteringEcosystems;
+
+    /**
+     * Populates the Breeding/Wintering ecosystems for Birds
+     */
+    private void populateBirdEcosystems(){
+        winteringEcosystems = new ArrayList<>();
+        breedingEcosystems = new ArrayList<>();
+        for(EcosystemsPersist ep : getPreferredEcosystems()){
+            if(ep.getSeason().equalsIgnoreCase("B")){
+                breedingEcosystems.add(ep);
+            }
+            if(ep.getSeason().equalsIgnoreCase("W")){
+                winteringEcosystems.add(ep);
+            }
+        }
+
+
+        // check if the breeding and wintering ecosystems are the same
+        int diff = 0;
+
+        if(breedingEcosystems.size() == winteringEcosystems.size()) {
+            for (EcosystemsPersist wep : winteringEcosystems) {
+                boolean found = false;
+                for(EcosystemsPersist bep : breedingEcosystems){
+                    if(bep.getEcoCode().equalsIgnoreCase(wep.getEcoCode())){
+                        found = true;
+                    }
+                }
+                if(!found){
+                    diff++; break;
+                }
+            }
+        } else {
+            diff = 1;
+        }
+
+        if(diff == 0) {
+            // show only one list as "occurs in"
+            preferredEcosystems = breedingEcosystems;
+            breedingEcosystems = new ArrayList<>();
+            winteringEcosystems = new ArrayList<>();
+        } else {
+            // don't show the preferred list
+            preferredEcosystems = new ArrayList<>();
+        }
+        // do not display suitable
+        suitableEcosystems = new ArrayList<>();
+    }
+
+    /**
+     * Returns the Birds breeding ecosystems; empty if the same as wintering (preferred is used in this case)
+     * @return
+     */
+    public List<EcosystemsPersist> getBreedingEcosystems() {
+        return breedingEcosystems;
+    }
+
+    /**
+     * Returns the Birds wintering ecosystems; empty if the same as breeding (preferred is used in this case)
+     * @return
+     */
+    public List<EcosystemsPersist> getWinteringEcosystems() {
+        return winteringEcosystems;
+    }
+
+    public boolean isHabitatsDirectiveII() {
+        return habitatsDirectiveII;
     }
 }
 

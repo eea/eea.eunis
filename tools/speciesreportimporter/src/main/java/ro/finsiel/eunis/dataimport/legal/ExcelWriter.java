@@ -51,9 +51,11 @@ public class ExcelWriter {
 
         String column = "ZZ";
         if (fileType == ExcelReader.FileType.VERTEBRATES) {
-            column = "AL";
+            column = "AT";
         } else if (fileType == ExcelReader.FileType.PLANTS) {
             column = "AH";
+        } else if (fileType == ExcelReader.FileType.INVERTEBRATES) {
+            column = "R";
         }
 
         int col = CellReference.convertColStringToIndex(column);

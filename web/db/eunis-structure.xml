@@ -2300,4 +2300,55 @@ END
         <dropTable tableName="chm62edt_syntaxa"/>
         <dropTable tableName="chm62edt_syntaxa_source"/>
     </changeSet>
+
+    <changeSet id="rev-141" author="ivascu">
+        <comment>Biogeoregion code length changed (#19215)</comment>
+        <modifyDataType tableName="chm62edt_biogeoregion" columnName="code_eea" newDataType="varchar(6)"/>
+    </changeSet>
+    <changeSet id="rev-142" author="ivascu">
+        <comment>Adds tables for ecosystem data (#19215)</comment>
+        <sql>
+            create table chm62edt_ecosystems(
+            code varchar(100),
+            value varchar(100),
+            maes varchar(5),
+            PRIMARY KEY (code)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+        </sql>
+        <sql>
+            create table chm62edt_nature_object_ecosystem (
+            id_nature_object int,
+            code_eco varchar(30),
+            id_biogeoregion int,
+            type_assoc varchar(10),
+            KEY nat_obj_idx(id_nature_object)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+        </sql>
+    </changeSet>
+    <changeSet id="rev-143" author="ivascu">
+        <addColumn tableName="chm62edt_nature_object_ecosystem">
+            <column name="season" type="char(1)" defaultValue="NULL"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="rev-144" author="ivascu">
+        <addColumn tableName="chm62edt_habitat_description">
+            <column name="species" type="text" defaultValue="NULL"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="rev-145" author="ivascu">
+        <comment>Move the species list out of the habitat description</comment>
+        <sql>
+            update chm62edt_habitat_description set
+            species=substr(description, least(
+            if(locate('Plant text', description), locate('Plant text', description), 999999),
+            if(locate('Invertebrate text', description), locate('Invertebrate text', description), 999999),
+            if(locate('Vertebrate text', description), locate('Vertebrate text', description), 999999))),
+            description=left(description, least(
+            if(locate('Plant text', description), locate('Plant text', description), 999999),
+            if(locate('Invertebrate text', description), locate('Invertebrate text', description), 999999),
+            if(locate('Vertebrate text', description), locate('Vertebrate text', description), 999999)) -1)
+            where description like '%Plant text%' or description like '%Invertebrate text%' or description like '%Vertebrate text%'
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa
+  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa art172013crh art172013crs 
   </entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
@@ -429,30 +429,74 @@ ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
 
 
 
-    <entry key="art172013cr.querytype">SPARQL</entry>
-    <entry key="art172013cr.endpoint">http://semantic.eea.europa.eu/sparql</entry>
-    <entry key="art172013cr.title">Art. 17 2013 Country data</entry>
-    <entry key="art172013cr.summary"><![CDATA[Art. 17 2013 Country data
+
+    <entry key="art172013crh.querytype">SPARQL</entry>
+    <entry key="art172013crh.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art172013crh.title">Conservation status (2007-2012) of habitat types (Habitats Directive, Article 17)</entry>
+    <entry key="art172013crh.summary"><![CDATA[Country-level assessment of the conservation status of habitat types by country and biogeographical region. All EU Member States are requested by the Habitats Directive (1992) to monitor habitat types and species considered to be of Community interest.
 ]]></entry>
-    <entry key="art172013cr.link.species">speciesurl</entry>
-    <entry key="art172013cr.query"><![CDATA[
+    <entry key="art172013crh.link.habitat_name">eunisURI</entry>
+    <entry key="art172013crh.query"><![CDATA[
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/habitats-schema.rdf#>
 
-SELECT ?habitat_code ?habitat_name ?region_code ?region_name ?conclusion_future
+SELECT ?habitat_code ?habitat_name ?country ?region ?assessment ?eunisURI
 WHERE {
-  ?habitatasm a p:Habitats_regions_eu_level;
+  ?habitatasm a p:Habitats_regions_ms_level;
              p:habitat ?habitatURI;
              p:region ?regionURI;
-             p:conclusion_future ?conclusionURI .
-  ?conclusionURI rdfs:label ?conclusion_future .
+             p:country ?countryURI;
+             p:conclusion_assessment  ?conclusionURI .
   ?habitatURI skos:notation ?habitat_code;
               rdfs:label ?habitat_name .
-  ?regionURI skos:notation ?region_code;
-              rdfs:label ?region_name
-} ORDER BY ?habitat_code ?region_code
+  ?regionURI  rdfs:label ?region .
+  ?conclusionURI  rdfs:label ?assessment .
+  ?countryURI rdfs:label ?country .
+  OPTIONAL {
+    GRAPH <http://eunis.eea.europa.eu/rdf/habitats.rdf.gz> {
+      ?eunisURI a eunis:HabitatType
+    }
+    ?eunisURI eunis:natura2000Code ?habitat_code .
+  }
+} ORDER BY ?habitat_code ?country
 ]]></entry>
+
+
+    <entry key="art172013crs.querytype">SPARQL</entry>
+    <entry key="art172013crs.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art172013crs.title">Conservation status (2007-2012) of species (Habitats Directive, Article 17)</entry>
+    <entry key="art172013crs.summary"><![CDATA[Country-level assessment of the conservation status of species by country and biogeographical region. All EU Member States are requested by the Habitats Directive (1992) to monitor habitat types and species considered to be of Community interest.
+]]></entry>
+    <entry key="art172013crs.link.species_name">eunisURI</entry>
+    <entry key="art172013crs.query"><![CDATA[
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX p: <http://eunis.eea.europa.eu/rdf/art17r2012/property/>
+PREFIX eunis: <http://eunis.eea.europa.eu/rdf/species-schema.rdf#>
+
+SELECT ?species_code ?species_name ?country ?region ?assessment ?eunisURI
+WHERE {
+  ?speciesasm a p:Species_regions_ms_level;
+          p:speciescode ?species_code;
+          p:country ?countryURI;
+          p:region ?regionURI;
+          p:conclusion_assessment  ?conclusionURI;
+          p:speciesname ?species_name .
+  ?countryURI rdfs:label ?country.
+  ?conclusionURI  rdfs:label ?assessment .
+  ?regionURI  rdfs:label ?region .
+  OPTIONAL {
+    GRAPH <http://eunis.eea.europa.eu/rdf/species.rdf.gz> {
+      ?eunisURI a eunis:SpeciesSynonym
+    }
+    ?eunisURI eunis:binomialName ?species_name .
+  }
+} ORDER BY ?species_name ?country
+]]></entry>
+
+
 
 
 </properties>

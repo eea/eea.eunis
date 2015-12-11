@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.factsheet.species;
 
 import eionet.eunis.dto.DcLinkDTO;
+import ro.finsiel.eunis.jrfTables.Chm62edtSpeciesPersist;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
  *
  * @author finsiel
  */
-public class LegalStatusWrapper {
+public class LegalStatusWrapper implements Comparable<LegalStatusWrapper>{
     private String legalText = "n/a";
     private String url = "n/a";
     private String detailedReference = "n/a";
@@ -20,6 +22,8 @@ public class LegalStatusWrapper {
     private Integer idDc;
     private String formattedUrl;
     private String description = "";
+    private String nameInDocument;
+    private List<Chm62edtSpeciesPersist> speciesInDocument;
 
     private String parentUrl = "";
     private String parentName = "";
@@ -28,6 +32,7 @@ public class LegalStatusWrapper {
     private int idReportAttributes = -1;
 
     private List<DcLinkDTO> moreInfo = new ArrayList<DcLinkDTO>();
+
 
 
     /**
@@ -276,4 +281,42 @@ public class LegalStatusWrapper {
     public List<DcLinkDTO> getMoreInfo() {
         return moreInfo;
     }
+
+    public String getNameInDocument() {
+        return nameInDocument;
+    }
+
+    public void setNameInDocument(String nameInDocument) {
+        this.nameInDocument = nameInDocument;
+    }
+
+    public List<Chm62edtSpeciesPersist> getSpeciesInDocument() {
+        return speciesInDocument;
+    }
+
+    public void setSpeciesInDocument(List<Chm62edtSpeciesPersist> speciesInDocument) {
+        this.speciesInDocument = speciesInDocument;
+    }
+
+    /**
+     * Implements the ordering of the legal status based on
+     * https://taskman.eionet.europa.eu/issues/30232
+     * @param o The object to compare
+     * @return
+     */
+    @Override
+    public int compareTo(LegalStatusWrapper o) {
+        if(o != null){
+            Integer i1 = EunisUtil.legalStatusOrder.get(this.getIdDc());
+            Integer i2 = EunisUtil.legalStatusOrder.get(o.getIdDc());
+            if(i1!=null && i2 != null)
+                return i1 - i2;
+            else {
+                return 0;
+            }
+        } else {
+            return 1;
+        }
+    }
+
 }

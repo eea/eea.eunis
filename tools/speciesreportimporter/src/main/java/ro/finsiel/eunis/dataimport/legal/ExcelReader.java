@@ -50,7 +50,7 @@ public class ExcelReader {
         ExcelRowFactory erf = new ExcelRowFactory();
 
         String type = sheet.getRow(0).getCell(0).getStringCellValue();
-        if(type.equalsIgnoreCase("VERTEBRATES")){
+        if(type.equalsIgnoreCase("VERTEBRATES") || type.equalsIgnoreCase("Phylum Chordata")){
             fileType = FileType.VERTEBRATES;
         } else if(type.equalsIgnoreCase("INVERTEBRATES")){
             fileType = FileType.INVERTEBRATES;
