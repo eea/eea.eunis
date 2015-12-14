@@ -96,10 +96,9 @@
             </tbody>
             </c:if>
 
-            <tbody>
-            <tr>
-                <c:choose>
-                <c:when test="${fn:length(actionBean.legalStatuses) gt 0}">
+            <c:if test="${fn:length(actionBean.legalStatuses) gt 0}">
+                <tbody>
+                <tr>
                     <th>Protected by</th>
                     <td>
                         <c:if test="${actionBean.habitatsDirective}">
@@ -122,31 +121,9 @@
                             </c:choose>
                         </c:if>
                     </td>
-                </c:when>
-                <c:otherwise>
-                    <th colspan="2" class="normalfont">
-                        <p>
-                        The EUNIS species component has very limited information about
-                        this species.
-                        </p>
-                        <p>
-                        The main focus of the EUNIS species component is to provide
-                        relevant information about the European species protected
-                        by Directives, Conventions and Agreements. The species
-                        assessed in the European Red Lists prepared by the IUCN for
-                        the European Commission are also included.
-                        </p>
-                        <p>
-                        See <a style="border-bottom: 0px" href="/downloads/europe.pdf"><span class="bold"> here</span></a> what is Europe from a geographical point of view.
-                        </p>
-                        <p>
-                        <a style="border-bottom: 0px" href="${ actionBean.pageUrl }#other_resources" onclick="openSection('other_resources');"><span class="bold">Other resources</span></a> available below may have more information.
-                        </p>
-                    </th>
-                </c:otherwise>
-                </c:choose>
-            </tr>
-            </tbody>
+                </tr>
+                </tbody>
+            </c:if>
 
 
             <c:if test="${actionBean.habitatsDirectiveII}">
@@ -251,6 +228,25 @@
                     <td>${actionBean.n2000id}</td>
                 </tr>
                 </tbody>
+            </c:if>
+
+            <c:if test="${fn:length(actionBean.legalStatuses) eq 0}">
+            <tbody>
+                <tr>
+                    <th colspan="2" class="normalfont">
+                        <p>The EUNIS species component has very limited information about this species.</p>
+                        <p>The main focus of the EUNIS species component is to provide relevant information about the European species protected
+                            by Directives, Conventions and Agreements. The species assessed in the European Red Lists prepared by the IUCN for
+                            the European Commission are also included.</p>
+                        <p>
+                            See <a style="border-bottom: 0px" href="/downloads/europe.pdf"><span class="bold"> here</span></a> what is Europe from a geographical point of view.
+                        </p>
+                        <p>
+                            <a style="border-bottom: 0px" href="${ actionBean.pageUrl }#other_resources" onclick="openSection('other_resources');"><span class="bold">Other resources</span></a> available below may have more information.
+                        </p>
+                    </th>
+                </tr>
+            </tbody>
             </c:if>
         </table>
     </div>
