@@ -94,7 +94,7 @@ WHERE {
 
 
     <entry key="art17s.endpoint">http://semantic.eea.europa.eu/sparql</entry>
-    <entry key="art17s.title">Conservation status (2007-2012) of species (Habitats Directive, Article 17)</entry>
+    <entry key="art17s.title">Conservation status (2007-2012) of species (Habitats Directive, Article 17) by EU Member State</entry>
     <!-- .summary - use HTML format - i.e. escape & and < -->
     <entry key="art17s.summary"><![CDATA[Country-level assessment of the conservation status of species by country and biogeographical region. All EU Member States are requested by the Habitats Directive (1992) to monitor habitat types and species considered to be of Community interest.
 ]]></entry>

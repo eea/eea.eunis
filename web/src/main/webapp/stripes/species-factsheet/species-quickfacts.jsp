@@ -84,7 +84,7 @@
             <tbody>
             <tr>
                 <th rowspan="${eunis:getSize(actionBean.biogeoAssessmentRows)}">
-                    EU conservation status <small>by biogeographical region</small>
+                    <a href="${ actionBean.pageUrl }#threat_status" onclick="openSection('threat_status');">EU conservation status</a> <small>by biogeographical region</small>
                 </th>
                 <c:forEach items="${actionBean.biogeoAssessmentRows}" var="bg" varStatus="stat">
                     <c:if test="${not stat.first}"><tr></c:if>

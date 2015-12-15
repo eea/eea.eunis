@@ -142,7 +142,11 @@
 
                 <div class="right-area conservation-status" style="width: 500px;">
                     <h3>EU conservation status</h3>
-                    <p>Conservation status assesses every six years and for each biogeographical region the condition of habitats and species compared to the favourable status as described in the Habitats Directive. The map shows the 2013 assessments.</p>
+                    <p>Conservation status assesses every six years and for each biogeographical
+                        region the condition of habitats and species compared to the favourable status
+                        as described in the Habitats Directive. The map shows the 2007-2012
+                        assessments as reported by EU Member State. Assessments are further
+                        detailed in the summary document available behind the link below.</p>
                         <iframe id="speciesStatusMap" class="map-border" src="" height="425px" width="100%"></iframe>
 
                     <script>
