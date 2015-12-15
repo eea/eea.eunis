@@ -36,7 +36,7 @@
                  <ul>
                      <c:if test="${not empty actionBean.conservationStatusPDF}">
                          <li>
-                             <a href="${actionBean.conservationStatusPDF.url}">Conservation status 2006 – summary</a>
+                             <a href="${actionBean.conservationStatusPDF.url}">Conservation Status 2007-2012 – summary</a>
                          </li>
                      </c:if>
                      <c:if test="${not empty actionBean.conservationStatus}">

@@ -296,7 +296,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             links = new ArrayList<LinkDTO>();
             for(LinkDTO link : natureLinks){
                 boolean addToLinks = true;
-                if(link.getName().equalsIgnoreCase("Habitats Directive Art. 17-2006 summary")){
+                if(link.getName().equalsIgnoreCase("Conservation Status 2007-2012 – summary")){
                     conservationStatusPDF = link;
                     addToLinks = false;
                 } else if (link.getName().toLowerCase().startsWith("conservation status")){
