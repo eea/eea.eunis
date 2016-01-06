@@ -5,8 +5,11 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa art172013crh art172013crs 
-  </entry>
+  <!--
+  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa art172013crh art172013crs</entry>
+  Natura 2000 species temporarily removed.
+  -->
+  <entry key="queries">art17delv2012s euringcodes estatcodes n2000habitats habides syntaxa art172013crh art172013crs</entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
   <entry key="n2000habitats.title">Natura 2000 codelist of Annex I habitats (SDF field: 3.1)</entry>
