@@ -100,6 +100,8 @@ public class LinkedData {
                     queryObjects.add(dto);
                 }
             }
+
+            Collections.sort(queryObjects);
         }
     }
 

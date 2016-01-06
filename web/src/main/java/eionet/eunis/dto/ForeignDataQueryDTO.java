@@ -9,7 +9,7 @@ import org.simpleframework.xml.Root;
  * @author Risto Alt
  */
 @Root
-public class ForeignDataQueryDTO implements Serializable {
+public class ForeignDataQueryDTO implements Serializable, Comparable<ForeignDataQueryDTO> {
 
     /**
      * serial.
@@ -78,5 +78,13 @@ public class ForeignDataQueryDTO implements Serializable {
 
     public void setIdToUse(String idToUse) {
         this.idToUse = idToUse;
+    }
+
+    @Override
+    public int compareTo(ForeignDataQueryDTO o) {
+        if(this.getTitle() != null && o.getTitle() != null){
+            return this.getTitle().compareTo(o.getTitle());
+        }
+        return 0;
     }
 }

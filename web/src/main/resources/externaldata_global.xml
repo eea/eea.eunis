@@ -5,7 +5,7 @@
 <!-- -->
 <!-- The list of queries in this file. Separated by whitespace. -->
 <!-- -->
-  <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa art172013crh art172013crs 
+  <entry key="queries">art17delv2012s euringcodes estatcodes n2000habitats habides syntaxa art172013crh art172013crs
   </entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
