@@ -368,10 +368,11 @@ public class Natura2000ParserCallbackV2 {
         String speciesResident = values.getFromCurrent("Resident");
         String speciesStaging = values.getFromCurrent("Staging");
         String speciesBreeding = getPopulation(values);
+        String sensitiveInfo = values.getFromCurrent("sensitiveInfo");
 
         String ecoInfo = speciesSourceCode.get(values.getFromCurrent("speciesGroup"));
 
-        if (speciesCode != null) {
+        if (speciesCode != null && (sensitiveInfo == null || sensitiveInfo.equalsIgnoreCase("false"))) {
             String speciesIdNatObject = getSpeciesNatObjectId(speciesCode);
 
             if (speciesIdNatObject != null && speciesIdNatObject.length() > 0) {
