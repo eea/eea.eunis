@@ -27,7 +27,7 @@ public class SitesSDFUpdateActionBean extends AbstractStripesAction  {
         Date d1 = new Date();
         // downloads the data and runs the import
         try {
-            URL url = new URL("http://natura2000.eea.europa.eu/Natura2000/SDFXML.aspx?site=" + idsite + "&release=4&form=Clean");
+            URL url = new URL("http://natura2000.eea.europa.eu/Natura2000/SDFXML.aspx?site=" + idsite + "&release=5&form=Clean");
 
             System.out.println(d1 + " Trying to update SDF for site " + idsite + " from URL " + url);
 
