@@ -142,6 +142,9 @@
 
                 <div class="right-area conservation-status" style="width: 500px;">
                     <h3>EU conservation status</h3>
+
+                    <c:choose>
+                    <c:when test="${actionBean.habitatsDirective}">
                     <p>Conservation status assesses every six years and for each biogeographical
                         region the condition of habitats and species compared to the favourable status
                         as described in the Habitats Directive. The map shows the 2007-2012
@@ -228,10 +231,18 @@
                                 </c:forEach>
                                 </div>
                             </c:if>
+
+
                         </div>
                         <!-- Conservation status other resources overlay -->
 
                     </div>
+
+                    </c:when>
+                        <c:otherwise>
+                            <p>The EU conservation status is assessed for species mentioned in the EU Habitats Directive annexes. The EU Habitats Directive does not cover this species.</p>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
         </c:when>
         <c:otherwise>
