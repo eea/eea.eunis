@@ -802,3 +802,8 @@ table.globalQuery.syntaxa th.definition {
   font-weight: normal !important;
   font-style: normal !important;
 }
+
+/*workaround for EEA template padding change*/
+#portal-column-content {
+  padding: 0 !important;
+}
