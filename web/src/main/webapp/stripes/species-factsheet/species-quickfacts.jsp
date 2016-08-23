@@ -138,16 +138,16 @@
             </tbody>
             </c:if>
 
-            <c:if test="${not empty actionBean.nobanisFactsheetLink}">
+            <c:if test="${not empty actionBean.nobanisLink}">
             <tbody>
                 <tr>
                     <th>
                         ${eunis:cmsPhrase(actionBean.contentManagement, 'Reported as invasive by')}
                     </th>
                     <td>
-                        <span class="bold"><a href="${actionBean.nobanisLink.url}">NOBANIS</a></span>,
+                        <span class="bold"><a href="${actionBean.nobanisLink.url}">NOBANIS</a></span><c:if test="${not empty actionBean.nobanisFactsheetLink}">,
                         <small>see also
-                        <span class="bold"><a href="${actionBean.nobanisFactsheetLink.url}">fact sheet</a></span></small>
+                        <span class="bold"><a href="${actionBean.nobanisFactsheetLink.url}">fact sheet</a></span></small></c:if>
                     </td>
                 </tr>
             </tbody>
