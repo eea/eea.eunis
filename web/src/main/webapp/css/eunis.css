@@ -806,4 +806,5 @@ table.globalQuery.syntaxa th.definition {
 /*workaround for EEA template padding change*/
 #portal-column-content {
   padding: 0 !important;
+  background-color: white;
 }
