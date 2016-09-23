@@ -193,12 +193,13 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
         String SQL = "";
         String condition = " AND A.ID_DC = " + idDc;
 
-        SQL = "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME,H.AUTHOR, H.ID_GROUP_SPECIES, CS.COMMON_NAME, CS.SCIENTIFIC_NAME   "
+        SQL = "SELECT DISTINCT H.ID_SPECIES,H.SCIENTIFIC_NAME,H.AUTHOR, H.ID_GROUP_SPECIES, CS.COMMON_NAME, CS.SCIENTIFIC_NAME, H.TYPE_RELATED_SPECIES, K.LOOKUP_TYPE, ra.value "
                         + "FROM chm62edt_species H "
                         + "INNER JOIN chm62edt_reports B ON H.ID_NATURE_OBJECT=B.ID_NATURE_OBJECT "
                         + "INNER JOIN chm62edt_report_type K ON B.ID_REPORT_TYPE = K.ID_REPORT_TYPE "
                         + "INNER JOIN dc_index A ON B.ID_DC = A.ID_DC "
                         + "INNER JOIN chm62edt_group_species CS ON CS.ID_GROUP_SPECIES = H.ID_GROUP_SPECIES "
+                        + "left outer join chm62edt_report_attributes ra on B.ID_REPORT_ATTRIBUTES = ra.id_report_attributes and ra.name='NAME_IN_DOCUMENT'"
                         + "WHERE 1=1 "
                         + condition
                         + // Note: 'SPECIES_GEO' isn't used in chm62edt_report_type
@@ -213,6 +214,8 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
                 String groupId = rs.getString(4);
                 String groupCommonName = rs.getString(5);
                 String groupScientificName = rs.getString(6);
+                String lookupType = rs.getString(7);
+                String nameInDocument = rs.getString(9);
 
                 ReferenceSpeciesDTO specie = new ReferenceSpeciesDTO();
                 specie.setId(speciesId);
@@ -221,7 +224,9 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
                 specie.setGroupSpeciesId(Integer.parseInt(groupId));
                 specie.setGroupCommonName(groupCommonName);
                 specie.setGroupScientificName(groupScientificName);
-                
+                specie.setLookupType(lookupType);
+                specie.setNameInDocument(nameInDocument);
+
                 results.add(specie);
             }
         });

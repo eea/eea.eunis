@@ -14,6 +14,8 @@ public class ReferenceSpeciesDTO {
     private int groupSpeciesId;
     private String groupCommonName;
     private String groupScientificName;
+    private String lookupType;
+    private String nameInDocument;
 
     public String getId() {
         return id;
@@ -63,4 +65,19 @@ public class ReferenceSpeciesDTO {
         this.groupScientificName = groupScientificName;
     }
 
+    public String getLookupType() {
+        return lookupType;
+    }
+
+    public void setLookupType(String lookupType) {
+        this.lookupType = lookupType;
+    }
+
+    public String getNameInDocument() {
+        return nameInDocument;
+    }
+
+    public void setNameInDocument(String nameInDocument) {
+        this.nameInDocument = nameInDocument;
+    }
 }

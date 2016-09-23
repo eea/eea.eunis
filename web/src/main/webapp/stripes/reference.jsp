@@ -140,7 +140,11 @@
                             <tr>
                                 <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}"
                                     style="text-align: left;">
-                                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Species name')}
+                                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Recommended species name')}
+                                </th>
+                                <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}"
+                                    style="text-align: left;">
+                                        ${eunis:cmsPhrase(actionBean.contentManagement, 'Name as used in text')}
                                 </th>
                                 <th title="${eunis:cmsPhrase(actionBean.contentManagement, 'Sort results on this column')}"
                                     style="text-align: left;">
@@ -158,6 +162,9 @@
                                 <tr>
                                     <td>
                                         <a href="species/${spe.id}"><span class="italics">${spe.name}</span><c:if test="${not empty spe.author}"> ${spe.author}</c:if></a>
+                                    </td>
+                                    <td>
+                                        <c:if test="${not empty spe.nameInDocument}"><span class="italics">${spe.nameInDocument}</span></c:if>
                                     </td>
                                     <td>
                                             ${spe.groupCommonName}
