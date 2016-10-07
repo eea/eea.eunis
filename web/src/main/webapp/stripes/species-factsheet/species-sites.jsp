@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <script>
-                    addReloadOnDisplay("speciesSitesPane", "protectionMap", "http://maps.eea.europa.eu/Filtermap/v1/?webmap=eabde2bcab204d0f854fdbfc1b3a6be6&SpeciesCode=${actionBean.n2000id}");
+                    addReloadOnDisplay("speciesSitesPane", "protectionMap", "http://maps.eea.europa.eu/Filtermap/v1/?webmap=eabde2bcab204d0f854fdbfc1b3a6be6&SpeciesCode=${actionBean.n2000id}&zoomTo=true");
                 </script>
 
 
