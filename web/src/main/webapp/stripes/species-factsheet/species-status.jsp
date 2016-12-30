@@ -243,6 +243,21 @@
                             <p>The EU conservation status is assessed for species mentioned in the EU Habitats Directive annexes. The EU Habitats Directive does not cover this species.</p>
                         </c:otherwise>
                     </c:choose>
+
+                    <c:if test="${not empty actionBean.art12status}">
+                        <fieldset>
+                            <legend><strong>Population status categories for bird species under the Birds Directive</strong></legend>
+                            <table class="legend-table">
+                                <tr class="discreet"><td><div class="a12threat-status-Secure legend-color"> </div> Secure</td> </tr>
+                                <tr class="discreet"><td><div class="a12threat-status-NearThreatened legend-color"> </div> Near Threatened, declining or depleted</td></tr>
+                                <tr class="discreet"><td><div class="a12threat-status-Threatened legend-color"> </div> Threatened (i.e. vulnerable, endangered, critically endangered, regionally extinct)</td></tr>
+                                <tr class="discreet"><td><div class="a12threat-status-Unknown legend-color"> </div> Unknown or not evaluated</td></tr>
+                            </table>
+                        </fieldset>
+                    </c:if>
+
+
+
                 </div>
         </c:when>
         <c:otherwise>

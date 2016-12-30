@@ -197,6 +197,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private Set<EcosystemsPersist> uniqueEcosystems;
     private boolean habitatsDirectiveII;
 
+    private String art12status = null;
+
     /**
      * Default Stripes handler
      * @return Stripes resolution
@@ -269,6 +271,9 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
             if(isBird()){
                 populateBirdEcosystems();
+
+                art12status = getNatObjectAttribute(specie.getIdNatureObject(), "art12_status");
+
             }
 
             // it is a synonym, populate the synonym fields
@@ -1797,5 +1802,18 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     public boolean isHabitatsDirectiveII() {
         return habitatsDirectiveII;
     }
+
+    public String getArt12status() {
+        return art12status;
+    }
+
+    public String getArt12statusProper(){
+        if(art12status != null) {
+            if(art12status.equalsIgnoreCase("NearThreatened"))
+                return "Near threatened";
+        }
+        return art12status;
+    }
+
 }
 

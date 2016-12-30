@@ -808,3 +808,32 @@ table.globalQuery.syntaxa th.definition {
   padding: 0 !important;
   background-color: white;
 }
+
+
+
+
+
+/* Art12 Secure status */
+.a12threat-status-Secure {
+  background-color: rgb(177, 199, 72);
+}
+
+/* Art12 Threatened status */
+.a12threat-status-Threatened {
+  background-color: rgb(233, 64, 80);
+}
+
+/* Art12 NearThreatened status */
+.a12threat-status-NearThreatened, .a12threat-status-Declining, .a12threat-status-Depleted {
+  background-color: rgb(255, 214, 0);
+}
+
+/* Art12 Extinct status */
+.a12threat-status-Extinct {
+  background-color: rgb(255, 255, 255);
+}
+
+/* Art12 Unknown status */
+.a12threat-status-Unknown {
+  background-color: rgb(187, 189, 192);
+}
