@@ -499,6 +499,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
         }
 
+        if(nobanisFactsheetLink == null && nobanisLink != null) {
+            links.add(nobanisLink);
+            nobanisLink.setDescription("European Network on Invasive Alien Species");
+        }
+
         LinkDTO gbifLink = new LinkDTO();
         links.add(gbifLink);
         gbifLink.setDescription("Global Biodiversity Information Facility");

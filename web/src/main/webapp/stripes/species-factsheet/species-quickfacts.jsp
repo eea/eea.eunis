@@ -149,7 +149,7 @@
             </tbody>
             </c:if>
 
-            <c:if test="${not empty actionBean.nobanisLink}">
+            <c:if test="${not empty actionBean.nobanisLink and not empty actionBean.nobanisFactsheetLink}">
             <tbody>
                 <tr>
                     <th>
