@@ -37,9 +37,10 @@
                 </li>
             </c:forEach>
         </ul></li></ul>
-        <c:if test="${not empty actionBean.parentN2k}">
-            <p>Natura 2000 code: <span class="bold">${actionBean.parentN2k}</span></p>
-        </c:if>
+
+    </c:if>
+    <c:if test="${not empty actionBean.n2000id}">
+        <p>Natura 2000 code: <span class="bold">${actionBean.n2000id}</span></p>
     </c:if>
 
     All the information associated to this invalid name can be found on the page of the species or subspecies with the valid name.

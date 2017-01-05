@@ -193,7 +193,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     private int otherAgreements = 0;
 
-    private String parentN2k;
     private List<LegalStatusWrapper> parentLegal;
 
     private Set<EcosystemsPersist> uniqueEcosystems;
@@ -281,8 +280,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // it is a synonym, populate the synonym fields
             if (mainIdSpecies != seniorIdSpecies) {
                 SpeciesFactsheet parent = new SpeciesFactsheet(seniorIdSpecies, seniorIdSpecies);
-
-                parentN2k = parent.getSpeciesNatureObject().getNatura2000Code();
 
                 List<LegalStatusWrapper> parentLegalTemp = parent.getLegalStatus();
                 parentLegal = new ArrayList<LegalStatusWrapper>();
@@ -1244,10 +1241,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         return n2000id;
     }
 
-    public void setN2000id(String n2000id) {
-        this.n2000id = n2000id;
-    }
-
     public String getWormsid() {
         return wormsid;
     }
@@ -1670,10 +1663,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
      */
     public int getOtherAgreements() {
         return otherAgreements;
-    }
-
-    public String getParentN2k() {
-        return parentN2k;
     }
 
     public List<LegalStatusWrapper> getParentLegal() {
