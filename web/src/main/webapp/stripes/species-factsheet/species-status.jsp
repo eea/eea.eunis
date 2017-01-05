@@ -267,6 +267,7 @@
                             </fieldset>
                         </c:when>
                         <c:otherwise>
+                            <h3>EU conservation status</h3>
                             <p>The EU conservation status is assessed for species mentioned in the EU Habitats Directive annexes. The EU Habitats Directive does not cover this species.</p>
                         </c:otherwise>
                     </c:choose>
