@@ -106,6 +106,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     LinkDTO nobanisFactsheetLink = null;
     LinkDTO conservationStatusPDF = null;
     LinkDTO conservationStatus = null;
+    List<LinkDTO> art12expert = new ArrayList<>();
+    List<LinkDTO> art12factsheet = new ArrayList<>();
 
     /** List of conservation statuses. */
     private List<NationalThreatWrapper> consStatus;
@@ -478,7 +480,16 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 nobanisLink = link;
                 addToLinks = false;
             }
-            if(link.getName().equalsIgnoreCase("Conservation status 2012 - summary (pdf)")){
+
+            if(link.getName().startsWith("Art.12 ")){
+                if (link.getName().toLowerCase().contains("experts web tool")){
+                    art12expert.add(link);
+                } else {
+                    art12factsheet.add(link);
+                }
+                link.setName(link.getName().replace("Art.12 ", ""));
+                addToLinks = false;
+            } else if(link.getName().equalsIgnoreCase("Conservation status 2012 - summary (pdf)")){
                 conservationStatusPDF = link;
                 addToLinks = false;
             } else if (link.getName().toLowerCase().contains("experts web tool")){
@@ -1820,5 +1831,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         return art12status;
     }
 
+    public List<LinkDTO> getArt12expert() {
+        return art12expert;
+    }
+
+    public List<LinkDTO> getArt12factsheet() {
+        return art12factsheet;
+    }
 }
 

@@ -141,10 +141,11 @@
                 </div>
 
                 <div class="right-area conservation-status" style="width: 500px;">
-                    <h3>EU conservation status</h3>
+
 
                     <c:choose>
                     <c:when test="${actionBean.habitatsDirective}">
+                        <h3>EU conservation status</h3>
                     <p>Conservation status assesses every six years and for each biogeographical
                         region the condition of habitats and species compared to the favourable status
                         as described in the Habitats Directive. The map shows the 2007-2012
@@ -239,24 +240,36 @@
                     </div>
 
                     </c:when>
+                        <c:when test="${not empty actionBean.art12status}">
+                            <h3>EU population status</h3>
+
+                            <p>The EU population status assessment was carried out at the species level.
+                                The EU status assessment can cover several subspecies/subspecific units.
+                                For more information, please consult the species fact sheet and link below.
+                            </p>
+                            <ul>
+                                <c:forEach var="lnk" items="${actionBean.art12factsheet}">
+                                    <li><a href="${lnk.url}">${lnk.name}</a></li>
+                                </c:forEach>
+                                <c:forEach var="lnk" items="${actionBean.art12expert}">
+                                    <li><a href="${lnk.url}">${lnk.name}</a></li>
+                                </c:forEach>
+                            </ul>
+
+                            <fieldset>
+                                <legend><strong>Population status categories for bird species under the Birds Directive</strong></legend>
+                                <table class="legend-table">
+                                    <tr class="discreet"><td><div class="a12threat-status-Secure legend-color"> </div> Secure</td> </tr>
+                                    <tr class="discreet"><td><div class="a12threat-status-NearThreatened legend-color"> </div> Near Threatened, declining or depleted</td></tr>
+                                    <tr class="discreet"><td><div class="a12threat-status-Threatened legend-color"> </div> Threatened (i.e. vulnerable, endangered, critically endangered, regionally extinct)</td></tr>
+                                    <tr class="discreet"><td><div class="a12threat-status-Unknown legend-color"> </div> Unknown or not evaluated</td></tr>
+                                </table>
+                            </fieldset>
+                        </c:when>
                         <c:otherwise>
                             <p>The EU conservation status is assessed for species mentioned in the EU Habitats Directive annexes. The EU Habitats Directive does not cover this species.</p>
                         </c:otherwise>
                     </c:choose>
-
-                    <c:if test="${not empty actionBean.art12status}">
-                        <fieldset>
-                            <legend><strong>Population status categories for bird species under the Birds Directive</strong></legend>
-                            <table class="legend-table">
-                                <tr class="discreet"><td><div class="a12threat-status-Secure legend-color"> </div> Secure</td> </tr>
-                                <tr class="discreet"><td><div class="a12threat-status-NearThreatened legend-color"> </div> Near Threatened, declining or depleted</td></tr>
-                                <tr class="discreet"><td><div class="a12threat-status-Threatened legend-color"> </div> Threatened (i.e. vulnerable, endangered, critically endangered, regionally extinct)</td></tr>
-                                <tr class="discreet"><td><div class="a12threat-status-Unknown legend-color"> </div> Unknown or not evaluated</td></tr>
-                            </table>
-                        </fieldset>
-                    </c:if>
-
-
 
                 </div>
         </c:when>
