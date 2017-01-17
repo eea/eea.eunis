@@ -816,24 +816,29 @@ table.globalQuery.syntaxa th.definition {
 /* Art12 Secure status */
 .a12threat-status-Secure {
   background-color: rgb(177, 199, 72);
+  border-color: #639500;
 }
 
 /* Art12 Threatened status */
 .a12threat-status-Threatened {
   background-color: rgb(233, 64, 80);
+  border-color: #742c2c;
 }
 
 /* Art12 NearThreatened status */
 .a12threat-status-NearThreatened, .a12threat-status-Declining, .a12threat-status-Depleted {
   background-color: rgb(255, 214, 0);
+  border-color: #745A00;
 }
 
 /* Art12 Extinct status */
 .a12threat-status-Extinct {
   background-color: rgb(255, 255, 255);
+  border-color: #888;
 }
 
 /* Art12 Unknown status */
 .a12threat-status-Unknown {
   background-color: rgb(187, 189, 192);
+  border-color: #888;
 }

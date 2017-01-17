@@ -82,9 +82,9 @@
             <c:if test="${not empty actionBean.art12status}">
             <tbody>
             <tr>
-                <th>EU Population status</th>
+                <th><a href="${ actionBean.pageUrl }#threat_status" onclick="openSection('threat_status');">EU Population status</a></th>
                 <td>
-                    <div class="a12threat-status-${actionBean.art12status} legend-color"> </div> ${actionBean.art12statusProper}
+                    <div class="a12threat-status-${actionBean.art12status} conclusion"> </div> ${actionBean.art12statusProper}
                 </td>
             </tr>
             </tbody>
