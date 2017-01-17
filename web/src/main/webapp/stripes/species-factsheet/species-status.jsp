@@ -102,42 +102,10 @@
                             </div>
                         </c:if>
                     </div>
-                    <fieldset>
-                        <legend><strong>IUCN Red List Category</strong></legend>
-                        <table class="legend-table">
-                            <tr class="discreet">
-                                <td><div class="threat-status-ne legend-color" style="width: 8px; height: 8px;"> </div> Not Evaluated</td>
-                                <td><div class="threat-status-nt legend-color"> </div> Near Threatened</td>
-                                <td><div class="threat-status-re legend-color"> </div> Regionally Extinct</td>
-                            </tr>
-                            <tr class="discreet">
-                                <td><div class="threat-status-na legend-color"> </div> Not Applicable</td>
-                                <td><div class="threat-status-vu legend-color"> </div> Vulnerable</td>
-                                <td><div class="threat-status-ew legend-color"> </div> Extinct in the Wild</td>
-                            </tr>
-                            <tr class="discreet">
-                                <td><div class="threat-status-dd legend-color"> </div> Data Deficient</td>
-                                <td><div class="threat-status-en legend-color"> </div> Endangered</td>
-                                <td><div class="threat-status-ex legend-color"> </div> Extinct</td>
-                            </tr>
-                            <tr class="discreet">
-                                <td><div class="threat-status-lc legend-color"> </div> Least Concern</td>
-                                <td><div class="threat-status-cr legend-color"> </div> Critically Endangered</td>
-                                <td> </td>
-                            </tr>
-                        </table>
-                    </fieldset>
-                    <div class="discreet">
-                        Sources:
-                        <ul>
-                            <li>
-                                <a href="http://ec.europa.eu/environment/nature/conservation/species/redlist/">European Red List</a>
-                            </li>
-                            <li>
-                                <a href="http://www.iucnredlist.org/technical-documents/categories-and-criteria">IUCN Red List Categories and Criteria</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <c:if test="${empty actionBean.art12status}">
+                        <%--shows the legend underneath the status if there is no art 12 legend--%>
+                        <stripes:layout-render name="/stripes/species-factsheet/species-status-rl-legend.jsp"/>
+                    </c:if>
                 </div>
 
                 <div class="right-area conservation-status" style="width: 500px;">
@@ -256,15 +224,7 @@
                                 </c:forEach>
                             </ul>
 
-                            <fieldset>
-                                <legend><strong>Population status categories for bird species under the Birds Directive</strong></legend>
-                                <table class="legend-table">
-                                    <tr class="discreet"><td><div class="a12threat-status-Secure legend-color"> </div> Secure</td> </tr>
-                                    <tr class="discreet"><td><div class="a12threat-status-NearThreatened legend-color"> </div> Near Threatened, declining or depleted</td></tr>
-                                    <tr class="discreet"><td><div class="a12threat-status-Threatened legend-color"> </div> Threatened (i.e. vulnerable, endangered, critically endangered, regionally extinct)</td></tr>
-                                    <tr class="discreet"><td><div class="a12threat-status-Unknown legend-color"> </div> Unknown or not evaluated</td></tr>
-                                </table>
-                            </fieldset>
+
                         </c:when>
                         <c:otherwise>
                             <h3>EU conservation status</h3>
@@ -273,6 +233,25 @@
                     </c:choose>
 
                 </div>
+            <c:if test="${not empty actionBean.art12status}">
+                <%--shows both legends aligned--%>
+                <div style="width: 100%; float: left;">
+                    <div class="left-area iucn-red-list-area">
+                        <stripes:layout-render name="/stripes/species-factsheet/species-status-rl-legend.jsp"/>
+                    </div>
+                    <div class="right-area conservation-status">
+                        <fieldset>
+                            <legend><strong>Population status categories for bird species under the Birds Directive</strong></legend>
+                            <table class="legend-table">
+                                <tr class="discreet"><td><div class="a12threat-status-Secure legend-color"> </div> Secure</td> </tr>
+                                <tr class="discreet"><td><div class="a12threat-status-NearThreatened legend-color"> </div> Near Threatened, declining or depleted</td></tr>
+                                <tr class="discreet"><td><div class="a12threat-status-Threatened legend-color"> </div> Threatened (i.e. vulnerable, endangered, critically endangered, regionally extinct)</td></tr>
+                                <tr class="discreet"><td><div class="a12threat-status-Unknown legend-color"> </div> Unknown or not evaluated</td></tr>
+                            </table>
+                        </fieldset>
+                    </div>
+                </div>
+            </c:if>
         </c:when>
         <c:otherwise>
             ${eunis:cmsPhrase(actionBean.contentManagement, 'This species has not yet been assessed for the IUCN Red List')}

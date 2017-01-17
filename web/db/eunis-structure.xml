@@ -2351,4 +2351,9 @@ END
         </sql>
     </changeSet>
 
+    <changeSet id="rev-146" author="ivascu">
+        <comment>Modified the link text length to accomodate Art 12 data</comment>
+        <sql>alter table chm62edt_nature_object_links modify linktext varchar(200)</sql>
+    </changeSet>
+
 </databaseChangeLog>

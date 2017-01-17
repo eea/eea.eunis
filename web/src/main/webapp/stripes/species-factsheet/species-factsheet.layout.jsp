@@ -91,7 +91,7 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
                                     <%-- Threat status and conservation status --%>
                                 <div class="eea-accordion-panel" style="clear: both;" id="threat-accordion">
                                     <a id="threat_status" ></a>
-                                    <h2 class="notoc eea-icon-right-container">Threat and conservation status</h2>
+                                    <h2 class="notoc eea-icon-right-container">Threat and <c:choose><c:when test="${not empty actionBean.art12status}">EU population</c:when><c:otherwise>conservation</c:otherwise></c:choose> status</h2>
                                     <div class="pane" id="speciesStatusPane">
                                         <stripes:layout-render name="/stripes/species-factsheet/species-status.jsp"/>
                                     </div>
