@@ -137,7 +137,7 @@
             </c:if>
 
 
-            <c:if test="${actionBean.habitatsDirectiveII}">
+            <c:if test="${actionBean.habitatsDirectiveII or actionBean.speciesSitesCount gt 0}">
             <tbody>
             <tr>
                 <th>Natura 2000 sites</th>
