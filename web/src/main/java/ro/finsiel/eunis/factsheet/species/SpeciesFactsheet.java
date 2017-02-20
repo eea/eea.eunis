@@ -1564,7 +1564,7 @@ public class SpeciesFactsheet {
         String where = "";
         where += " ID_OBJECT IN ( " + syn + " )";
         where += " AND NATURE_OBJECT_TYPE='Species'";
-        where += " AND (SOURCE LIKE 'Saxifraga%' OR SOURCE LIKE 'Otars%' OR SOURCE LIKE 'LIFE%')";
+        where += " AND (SOURCE LIKE 'Saxifraga%' OR SOURCE LIKE 'Otars%' OR SOURCE LIKE 'LIFE%' OR SOURCE LIKE 'Axel Hochkirch')";
         if (mainPic) {
             where += " AND MAIN_PIC = 1";
         }
