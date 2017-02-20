@@ -479,7 +479,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             }
 
             if(link.getName().startsWith("Art.12 ")){
-                if (link.getName().toLowerCase().contains("experts web tool")){
+                if (link.getName().toLowerCase().contains("experts web viewer")){
                     art12expert.add(link);
                 } else {
                     art12factsheet.add(link);
@@ -489,7 +489,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             } else if(link.getName().equalsIgnoreCase("Conservation status 2012 - summary (pdf)")){
                 conservationStatusPDF = link;
                 addToLinks = false;
-            } else if (link.getName().toLowerCase().contains("experts web tool")){
+            } else if (link.getName().toLowerCase().contains("experts web viewer")){
                 conservationStatus = link;
                 addToLinks = false;
             }

@@ -2356,4 +2356,17 @@ END
         <sql>alter table chm62edt_nature_object_links modify linktext varchar(200)</sql>
     </changeSet>
 
+    <changeSet id="rev-147" author="ivascu">
+        <comment>Changes the Art 12/ Conservation links to match #82402</comment>
+        <sql>
+            update chm62edt_nature_object_links set linktext =
+            REPLACE(linktext, 'Population status and trends 2013 - Experts web tool','Population status and trends 2008-2012 – experts web viewer')
+            where linktext like '%Population status and trends 2013 - Experts web tool%';
+
+            update chm62edt_nature_object_links set linktext =
+            REPLACE(linktext, 'Conservation status 2013 - Experts web tool','Conservation status 2007-2012 - experts web viewer')
+            where linktext like '%Conservation status 2013 - Experts web tool%';
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

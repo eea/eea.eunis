@@ -211,9 +211,11 @@
                         <c:when test="${not empty actionBean.art12status}">
                             <h3>EU population status</h3>
 
-                            <p>The EU population status assessment was carried out at the species level.
-                                The EU status assessment can cover several subspecies/subspecific units.
-                                For more information, please consult the species fact sheet and link below.
+                            <p>The status of the population at the EU level was evaluated at the species level;
+                                this was based on the reports delivered by Member States under Article 12 of the
+                                Birds Directive (see fact sheet below). The EU status assessment can cover several
+                                subspecies/subspecific population units. For more information, please consult the
+                                species fact sheet and link below.
                             </p>
                             <ul>
                                 <c:forEach var="lnk" items="${actionBean.art12factsheet}">
