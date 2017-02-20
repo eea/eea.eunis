@@ -799,7 +799,11 @@ public class SpeciesReportsImporter {
             insertReportAttribute(idReportAttributes, "NAME_IN_DOCUMENT", "TEXT", nameInDocument);
         }
         if(fromParent){
-            insertReportAttribute(idReportAttributes, "FROM_PARENT", "TEXT", "YES");
+            try {
+                insertReportAttribute(idReportAttributes, "FROM_PARENT", "TEXT", "YES");
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
         return idReportAttributes;
     }
@@ -837,6 +841,9 @@ public class SpeciesReportsImporter {
         // fix for CR/PE (Critically Endangered, Possibly Extinct) - should be treated as Critically Endangered (CR)
         conservationStatusCode.put("CR/PE", conservationStatusCode.get("CR"));
         conservationStatusCode.put("CR (PE)", conservationStatusCode.get("CR"));
+        conservationStatusCode.put("LC*", conservationStatusCode.get("LC"));
+        conservationStatusCode.put("VU*", conservationStatusCode.get("VU"));
+        conservationStatusCode.put("NT*", conservationStatusCode.get("NT"));
     }
 
     /**

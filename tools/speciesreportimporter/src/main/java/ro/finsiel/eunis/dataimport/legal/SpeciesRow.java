@@ -601,6 +601,7 @@ public class SpeciesRow extends ExcelRow {
     }
 
     public void setSharksMou(String sharksMou) {
+        if(sharksMou.equals("1\"")) sharksMou = "1";
         this.sharksMou = sharksMou;
     }
 
