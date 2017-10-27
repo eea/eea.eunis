@@ -199,4 +199,6 @@ public class EunisActionBeanContext extends ActionBeanContext {
         return getApplicationProperty("DIST_ARCGIS_CSS");
     }
 
+    public String getNatura2000MapId(){ return getApplicationProperty("NATURA2000_MAP_ID"); }
+
 }
