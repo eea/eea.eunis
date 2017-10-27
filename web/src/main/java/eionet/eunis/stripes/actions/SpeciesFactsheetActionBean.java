@@ -520,13 +520,13 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         String gbifId = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_GBIF);
         if(Utilities.isEmptyString(gbifId)){
             try {
-                gbifLink.setUrl("http://data.gbif.org/species/" + URLEncoder.encode(specie.getScientificName().replaceAll("\\.", ""), "UTF-8"));
+                gbifLink.setUrl("https://www.gbif.org/species/" + URLEncoder.encode(specie.getScientificName().replaceAll("\\.", ""), "UTF-8"));
                 gbifLink.setName("GBIF search");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
         } else {
-            gbifLink.setUrl("http://data.gbif.org/species/" + gbifId);
+            gbifLink.setUrl("https://www.gbif.org/species/" + gbifId);
         }
 
         if(!Utilities.isEmptyString(wormsid)){
