@@ -19,7 +19,6 @@
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 
 <jsp:include page="required-head.jsp" />
-<script type="text/javascript" language="JavaScript" src="https://cdn.ravenjs.com/3.20.0/raven.min.js"></script>
 
 <script type="text/javascript" language="JavaScript" src="<%=request.getContextPath()%>/script/msg-<%=SessionManager.getCurrentLanguage()%>.js"></script>
 <script type="text/javascript" language="JavaScript" src="<%=request.getContextPath()%>/script/header.js"></script>
