@@ -159,7 +159,7 @@ public class LinkedData {
                     generateCols(queryId, result);
                 } catch (Exception e){
                     logger.error(e, e);
-                    throw new Exception("Could not execute query");
+                    throw new Exception("Could not execute query " + query + " for endpoint " + endpoint, e);
                 }
             } else {
                 logger.error("Query or endpoint is not defined in linkeddata properties file for: " + queryId);

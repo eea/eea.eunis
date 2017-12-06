@@ -100,7 +100,7 @@
                 <c:forEach items="${actionBean.biogeoAssessmentRows}" var="bg" varStatus="stat">
                     <c:if test="${not stat.first}"><tr></c:if>
                     <td>
-                        <span class="conclusion ${bg['code']}"></span> ${bg['region']} - <small>${bg['assessment']}</small>
+                        <span class="conclusion ${bg.code}"></span> ${bg.region} - <small>${bg.assessment}</small>
                     </td>
                     </tr>
                 </c:forEach>

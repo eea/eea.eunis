@@ -19,9 +19,7 @@ import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.factsheet.habitats.DescriptionWrapper;
 import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.factsheet.habitats.LegalStatusWrapper;
-import ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist;
-import ro.finsiel.eunis.jrfTables.EcosystemsPersist;
-import ro.finsiel.eunis.jrfTables.ReferencesDomain;
+import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
@@ -162,7 +160,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             sitesTabActions();
 //            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
             conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
-            populateBiogeoAssessment(factsheet.idNatureObject);
+            populateBiogeoAssessment(factsheet.getCode2000());
         }
 
 
@@ -883,49 +881,26 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     }
 
 
-
-
-
     private List<LinkedDataQuery> allQueries;
 
     public List<LinkedDataQuery> getAllQueries() {
         return allQueries;
     }
 
+    List<Chm62edtArt17CachePersist> biogeoAssessmentRows = new  ArrayList<>();
 
-    ArrayList<HashMap<String, ResultValue>> biogeoAssessmentRows =
-            new  ArrayList<>();
-
-    public ArrayList<HashMap<String, ResultValue>> getBiogeoAssessmentRows() {
+    public List<Chm62edtArt17CachePersist> getBiogeoAssessmentRows() {
         return biogeoAssessmentRows;
     }
 
     /**
-     * Populates the EU conservation status by biogeographical region using Art17 data
-     * @param natObjId
+     * Populates the EU conservation status by biogeographical region using Art17 data (cached from sparql)
+     * @param code2000 Habitat code 2000
      */
-    private void populateBiogeoAssessment(Integer natObjId) {
-
-        List<ForeignDataQueryDTO> biogeoAssessment;
-
-        try {
-
-            Properties props = new Properties();
-            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("art17.xml"));
-            LinkedData ld = new LinkedData(props, natObjId, "force");
-            biogeoAssessment = ld.getQueryObjects();
-
-            for (ForeignDataQueryDTO aBiogeoAssessment : biogeoAssessment) {
-                if(aBiogeoAssessment.getId().equals("art17habitats_eu")){
-                    String syntaxaQuery = aBiogeoAssessment.getId();
-                    if (!StringUtils.isBlank(syntaxaQuery)) {
-                        ld.executeQuery(syntaxaQuery, factsheet.getCode2000());
-                        biogeoAssessmentRows = ld.getRows();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void populateBiogeoAssessment(String code2000) {
+        if(code2000 != null) {
+            biogeoAssessmentRows = new Chm62edtArt17CacheDomain().findWhere(
+                    "code2000='" + code2000 + "' and object_type='H'");
         }
     }
 

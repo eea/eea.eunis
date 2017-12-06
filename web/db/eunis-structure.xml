@@ -2369,4 +2369,22 @@ END
         </sql>
     </changeSet>
 
+    <changeSet id="rev-148" author="ivascu">
+        <comment>Added a cache for Art 17 assessments (from sparql queries)</comment>
+        <sql>
+            CREATE TABLE chm62edt_art17cache (
+            code2000 VARCHAR(8),
+            object_type VARCHAR(2),
+            region VARCHAR(100),
+            code VARCHAR(10),
+            assessment VARCHAR(100)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="rev-149" author="ivascu">
+        <comment>Index for art17 cache</comment>
+        <sql>ALTER TABLE chm62edt_art17cache ADD INDEX art17cache_idx (object_type, code2000);</sql>
+    </changeSet>
+
 </databaseChangeLog>

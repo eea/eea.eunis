@@ -301,7 +301,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // Sets country level and biogeo conservation status
             // TODO The methods executes SPARQL query. Consider caching the results or at least load the content with jQuery
             setConservationStatusDetails(mainIdSpecies, specie.getIdNatureObject());
-            populateBiogeoAssessment(specie.getIdNatureObject());
+
+            populateBiogeoAssessment(specie.getNatura2000Code());
         }
 
         String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -1024,39 +1025,20 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
-    ArrayList<HashMap<String, ResultValue>> biogeoAssessmentRows =
-            new  ArrayList<>();
+    List<Chm62edtArt17CachePersist> biogeoAssessmentRows = new  ArrayList<>();
 
-    public ArrayList<HashMap<String, ResultValue>> getBiogeoAssessmentRows() {
+    public List<Chm62edtArt17CachePersist> getBiogeoAssessmentRows() {
         return biogeoAssessmentRows;
     }
 
     /**
-     * Populates the EU conservation status by biogeographical region using Art17 data
-     * @param natObjId
+     * Populates the EU conservation status by biogeographical region using Art17 data (cached from sparql)
+     * @param code2000 Species code 2000
      */
-    private void populateBiogeoAssessment(Integer natObjId) {
-
-        List<ForeignDataQueryDTO> biogeoAssessment;
-
-        try {
-
-            Properties props = new Properties();
-            props.loadFromXML(getClass().getClassLoader().getResourceAsStream("art17.xml"));
-            LinkedData ld = new LinkedData(props, natObjId, "force");
-            biogeoAssessment = ld.getQueryObjects();
-
-            for (ForeignDataQueryDTO aBiogeoAssessment : biogeoAssessment) {
-                if(aBiogeoAssessment.getId().equals("art17species_eu")){
-                    String syntaxaQuery = aBiogeoAssessment.getId();
-                    if (!StringUtils.isBlank(syntaxaQuery)) {
-                        ld.executeQuery(syntaxaQuery, n2000id);
-                        biogeoAssessmentRows = ld.getRows();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void populateBiogeoAssessment(String code2000) {
+        if(code2000 != null) {
+            biogeoAssessmentRows = new Chm62edtArt17CacheDomain().findWhere(
+                    "code2000='" + code2000 + "' and object_type='S'");
         }
     }
 
