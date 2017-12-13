@@ -54,14 +54,14 @@
                     </div>
                 </div>
                 <script>
-                    addReloadOnDisplay("speciesSitesPane", "protectionMap", "http://maps.eea.europa.eu/Filtermap/v1/?webmap=${actionBean.context.natura2000MapId}&SpeciesCode=${actionBean.n2000id}&zoomTo=true");
+                    addReloadOnDisplay("speciesSitesPane", "protectionMap", "https://maps.eea.europa.eu/Filtermap/v1/?webmap=${actionBean.context.natura2000MapId}&SpeciesCode=${actionBean.n2000id}&zoomTo=true");
                 </script>
 
 
 		        <script type="text/javascript">
 
 		            function setMapSiteId(sitecode){
-		            	document.getElementById('protectionMap').src='http://maps.eea.europa.eu/Filtermap/v1/?webmap=${actionBean.context.natura2000MapId}&SpeciesCode=${actionBean.n2000id}&zoomtofeat=SITECODE='+sitecode;
+		            	document.getElementById('protectionMap').src='https://maps.eea.europa.eu/Filtermap/v1/?webmap=${actionBean.context.natura2000MapId}&SpeciesCode=${actionBean.n2000id}&zoomtofeat=SITECODE='+sitecode;
 		            }
 
 		        </script>

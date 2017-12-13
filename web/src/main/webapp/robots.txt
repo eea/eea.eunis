@@ -1,4 +1,8 @@
 User-agent: *
 Disallow: /reports/
+Disallow: /documnents/
 Disallow: /species-taxonomic-browser.jsp
+Disallow: /habitats-code-browser.jsp
+Disallow: /habitats-annex1-browser.jsp
+Disallow: /habitats-emerald-browser.jsp
 Sitemap: http://eunis.eea.europa.eu/sitemap-index.jsp
