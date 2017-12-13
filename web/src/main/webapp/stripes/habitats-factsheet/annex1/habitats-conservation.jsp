@@ -19,7 +19,7 @@
         </div>
 
         <script>
-            addReloadOnDisplay("conservationPane", "habitatStatusMap", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=e7e4c618f20344a8a148c5f63ec8766b&Code=${actionBean.factsheet.code2000}");
+            addReloadOnDisplay("conservationPane", "habitatStatusMap", "https://maps.eea.europa.eu/Filtermap/v1/?webmap=e7e4c618f20344a8a148c5f63ec8766b&Code=${actionBean.factsheet.code2000}");
         </script>
 
 

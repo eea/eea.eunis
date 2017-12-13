@@ -50,17 +50,17 @@
 	   		<thead>
 			    <tr>
 			        <th scope="col" style="cursor: pointer;"><img
-			                src="http://www.eea.europa.eu/arrowBlank.gif"
+			                src="https://www.eea.europa.eu/arrowBlank.gif"
 			                height="6" width="9">
 			                ${eunis:cmsPhrase(actionBean.contentManagement, 'Scientific name')}
 			                ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
-							<img src="http://www.eea.europa.eu/arrowUp.gif" height="6" width="9"></th>
+							<img src="https://www.eea.europa.eu/arrowUp.gif" height="6" width="9"></th>
 			        <th scope="col" style="cursor: pointer;"><img
-			                src="http://www.eea.europa.eu/arrowBlank.gif"
+			                src="https://www.eea.europa.eu/arrowBlank.gif"
 			                height="6" width="9">
 			                ${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}
 							${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
-					<img src="http://www.eea.europa.eu/arrowBlank.gif" height="6" width="9"></th>
+					<img src="https://www.eea.europa.eu/arrowBlank.gif" height="6" width="9"></th>
 			    </tr>
 			</thead>
 	   		

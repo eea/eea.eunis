@@ -6,7 +6,7 @@
 		<!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 		<title>${actionBean.pageTitle}</title>
-		<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.3/js/dojo/dijit/themes/claro/claro.css"/>
+		<link rel="stylesheet" type="text/css" href="https://serverapi.arcgisonline.com/jsapi/arcgis/2.3/js/dojo/dijit/themes/claro/claro.css"/>
 		<style>
 			html, body { height: 98%; width: 98%; margin: 0; padding: 5px; }
 			#rightPane{
@@ -17,7 +17,7 @@
 			}
 		</style>
 		<script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
-		<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.3"></script>
+		<script type="text/javascript" src="https://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.3"></script>
 		<script type="text/javascript">
 		//<![CDATA[
 			dojo.require("dijit.layout.BorderContainer");
@@ -33,11 +33,11 @@
 				var initialExtent = new esri.geometry.Extent({"xmin":-3549139.09145218,"ymin":4871361.38436808,"xmax":5129676.02317436,"ymax":11227551.8207187,"spatialReference":{"wkid":102100}});
 				map = new esri.Map("map", { extent: initialExtent});
 				//Add the terrain service to the map. View the ArcGIS Online site for services http://arcgisonline/home/search.html?t=content&f=typekeywords:service    
-				var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer");
+				var basemap = new esri.layers.ArcGISTiledMapServiceLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer");
 				map.addLayer(basemap);
 
-				n2000layer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer");
-				cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("http://discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
+				n2000layer = new esri.layers.ArcGISDynamicMapServiceLayer("https://bio.discomap.eea.europa.eu/ArcGIS/rest/services/Bio/Natura2000_Dyna_WM/MapServer");
+				cddalayer = new esri.layers.ArcGISDynamicMapServiceLayer("https://bio.discomap.eea.europa.eu/ArcGIS/rest/services/Bio/CDDA_Dyna_WGS84/MapServer");
        
 				//add the legend
 				dojo.connect(map,'onLayersAddResult',function(results){

@@ -33,7 +33,7 @@
 
         <p>The European nature information system, EUNIS, brings together European data from several databases and organisations into three interlinked modules on sites, species and habitat types.</p>
 
-        <p>The EUNIS information system is part of the European <a href="http://www.eea.europa.eu/themes/biodiversity/dc">Biodiversity data centre (BDC)</a> and it is a contribution to the knowledge base for implementing the EU and global biodiversity strategies and the <a href="http://ec.europa.eu/environment/newprg/">7th Environmental Action Programme</a>.</p>
+        <p>The EUNIS information system is part of the European <a href="https://www.eea.europa.eu/themes/biodiversity/dc">Biodiversity data centre (BDC)</a> and it is a contribution to the knowledge base for implementing the EU and global biodiversity strategies and the <a href="http://ec.europa.eu/environment/newprg/">7th Environmental Action Programme</a>.</p>
 
         <p>The EUNIS information system provides access to the publicly available data in the EUNIS database. The information includes:</p>
         <ul><li>Data on species, habitat types and designated sites compiled in the framework of Natura 2000 (EU Habitats and Birds Directives);</li>
@@ -86,11 +86,11 @@
 
                     The sites module of EUNIS uses data from the following databases:
                     <ul><li>
-                        <a href="http://www.eea.europa.eu/data-and-maps/data/ds_resolveuid/52E54BF3-ACDB-4959-9165-F3E4469BE610">Natura 2000 data - the European network of protected sites</a>
+                        <a href="https://www.eea.europa.eu/data-and-maps/data/ds_resolveuid/52E54BF3-ACDB-4959-9165-F3E4469BE610">Natura 2000 data - the European network of protected sites</a>
                     </li><li>
-                        <a href="http://www.eea.europa.eu/data-and-maps/data/ds_resolveuid/29430BDF-9AFB-4F1A-A529-7B4EF6D680D7">Nationally designated areas (protected areas) (CDDA)</a>
+                        <a href="https://www.eea.europa.eu/data-and-maps/data/ds_resolveuid/29430BDF-9AFB-4F1A-A529-7B4EF6D680D7">Nationally designated areas (protected areas) (CDDA)</a>
                     </li><li>
-                        <a href="http://www.coe.int/t/dg4/cultureheritage/nature/diploma/default_en.asp">European Nature Diploma Areas (Council of Europe)</a>
+                        <a href="https://www.coe.int/t/dg4/cultureheritage/nature/diploma/default_en.asp">European Nature Diploma Areas (Council of Europe)</a>
                     </li></ul>
                 </div>
             </div>

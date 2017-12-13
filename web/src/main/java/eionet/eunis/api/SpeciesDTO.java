@@ -21,7 +21,7 @@ public class SpeciesDTO implements Serializable {
      * serial.
      */
     private static final long serialVersionUID = 1L;
-    private static final String PREFIX = "http://eunis.eea.europa.eu/species/";
+    private static final String PREFIX = "https://eunis.eea.europa.eu/species/";
 	
     private int speciesId;
 	

@@ -233,12 +233,12 @@ h2 {
 }
 
 .table-definition-target {
-  background: url("http://www.eea.europa.eu/accordion_down.png") no-repeat scroll 94% center #346F83;
+  background: url("https://www.eea.europa.eu/accordion_down.png") no-repeat scroll 94% center #346F83;
   padding-right: 2.5em;
 }
 
 .table-definition-target.opened {
-  background: url("http://www.eea.europa.eu/accordion_up.png") no-repeat scroll 94% center #346F83;
+  background: url("https://www.eea.europa.eu/accordion_up.png") no-repeat scroll 94% center #346F83;
 }
 
 
@@ -315,7 +315,7 @@ div.overlay-iframe {
 /* default close button positioned on upper-left corner */
 div.overlaybg div.close,
 div.overlay .close {
-  background-image: url(http://eea.europa.eu/++resource++plone.app.jquerytools.pb_close.png);
+  background-image: url(https://eea.europa.eu/++resource++plone.app.jquerytools.pb_close.png);
   position: absolute;
   left: -14px;
   top: -14px;

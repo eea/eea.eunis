@@ -199,13 +199,13 @@
 
     <context-param>
         <param-name>EEA_MAP_SERVER</param-name>
-        <param-value>http://map.eea.europa.eu</param-value>
+        <param-value>https://map.eea.europa.eu</param-value>
         <description>Address of the EEA map server</description>
     </context-param>
 
     <context-param>
         <param-name>EEA_HOME</param-name>
-        <param-value>http://www.eea.europa.eu/</param-value>
+        <param-value>https://www.eea.europa.eu/</param-value>
         <description>Address of the EEA server</description>
     </context-param>
 

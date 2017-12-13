@@ -32,7 +32,7 @@
 						layers:"gbif:tabDensityLayer",
 						styles: "",
 						exceptions: "application%2Fvnd.ogc.se_inimage",
-						filter: "<Filter><PropertyIsEqualTo><PropertyName>url</PropertyName><Literal><![CDATA[http://data.gbif.org/maplayer/taxon/${actionBean.gbifCode}]]></Literal></PropertyIsEqualTo></Filter>",
+						filter: "<Filter><PropertyIsEqualTo><PropertyName>url</PropertyName><Literal><![CDATA[https://data.gbif.org/maplayer/taxon/${actionBean.gbifCode}]]></Literal></PropertyIsEqualTo></Filter>",
 
 						//changing values
 						bbox:extent.xmin + "," + extent.ymin + "," + extent.xmax + "," + extent.ymax,
@@ -40,7 +40,7 @@
 						width: width,
 						height: height
 					};
-					callback("http://ogc.gbif.org/wms?" + dojo.objectToQuery(params));
+					callback("https://ogc.gbif.org/wms?" + dojo.objectToQuery(params));
 				}
 			})
 
@@ -73,7 +73,7 @@
 						height: height
 					};
 
-					callback("http://www.fao.org/figis/geoserver/wms?" + dojo.objectToQuery(params));
+					callback("https://www.fao.org/figis/geoserver/wms?" + dojo.objectToQuery(params));
 				}
 			})
 

@@ -32,7 +32,7 @@
                 <span class="discreet">
                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Source')}:
                     <c:if test="${actionBean.resolution4}"><br></c:if>
-                    <a href="http://www.eea.europa.eu/data-and-maps/data/eunis-habitat-classification">EUNIS habitat classification</a>
+                    <a href="https://www.eea.europa.eu/data-and-maps/data/eunis-habitat-classification">EUNIS habitat classification</a>
                     <c:if test="${actionBean.resolution4}">
                         <br>
                         <a href="https://wcd.coe.int/ViewDoc.jsp?id=2352519&Site=&BackColorInternet=B9BDEE&BackColorIntranet=FFCD4F&BackColorLogged=FFC679">Interpretation Manual of the habitats targeted by Resolution No. 4</a>

@@ -122,7 +122,7 @@
                         <iframe id="speciesStatusMap" class="map-border" src="" height="425px" width="100%"></iframe>
 
                     <script>
-                        addReloadOnDisplay("speciesStatusPane", "speciesStatusMap", "http://discomap.eea.europa.eu/map/Filtermap/?webmap=f50de51b438446499382664f9620081f&Code=${actionBean.n2000id}");
+                        addReloadOnDisplay("speciesStatusPane", "speciesStatusMap", "https://maps.eea.europa.eu/Filtermap/v1/?webmap=e7e4c618f20344a8a148c5f63ec8766b&Code=${actionBean.n2000id}");
                     </script>
 
                     <div class="footer">
