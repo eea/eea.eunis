@@ -329,7 +329,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             vernNamesCount = vernNames.size();
             speciesSites = factsheet.getSitesForSpecies();
             speciesSitesCount = speciesSites.size();
-            habitatsCount = factsheet.getHabitatsForSpecies().size();
+            habitatsCount = factsheet.countHabitats();
             
             for (VernacularNameWrapper vernName : vernNames){
                 if (vernName.getLanguageCode().toLowerCase().equals("en")){

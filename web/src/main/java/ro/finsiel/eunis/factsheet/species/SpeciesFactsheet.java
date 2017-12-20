@@ -205,8 +205,29 @@ public class SpeciesFactsheet {
     }
 
     /**
+     * Count the habitats - about the same as getHabitatsForSpecies().size() but way faster
+     * @return
+     */
+    public int countHabitats() {
+        String synonymsIDs =
+                getSpeciesSynonymsCommaSeparated(getSpeciesNatureObject().getIdNatureObject(), getSpeciesNatureObject()
+                        .getIdSpecies());
+
+        List habitats =
+                new HabitatsNatureObjectReportTypeSpeciesDomain()
+                        .findWhere("H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND C.ID_NATURE_OBJECT IN ( " + synonymsIDs
+                                + " ) GROUP BY H.ID_NATURE_OBJECT");
+        if (habitats != null) {
+            return habitats.size();
+        } else {
+            return 0;
+        }
+    }
+
+    /**
      * Get all the habitats where this species is found .
      *
+     * @deprecated The data is not needed right now, only the count = countHabitats()
      * @return A List of SpeciesHabitatWrapper objects.
      */
     public List getHabitatsForSpecies() {
