@@ -556,6 +556,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/species_code2000/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
         <url-pattern>/sites-factsheet.jsp</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -573,6 +577,10 @@
     <servlet-mapping>
         <servlet-name>StripesDispatcher</servlet-name>
         <url-pattern>/habitats/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/habitats_code2000/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StripesDispatcher</servlet-name>
