@@ -8,6 +8,7 @@ import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
+import org.openrdf.query.algebra.Join;
 
 
 /**
@@ -62,7 +63,16 @@ public class HabitatsNatureObjectReportTypeSpeciesDomain extends AbstractDomain 
                 "setIdReportAttributes"));
         natureObjectReportType.addJoinColumn(
                 new IntegerJoinColumn("ID_REPORT_TYPE", "setIdReportType"));
+
+        JoinTable reportAttributes = new JoinTable("chm62edt_report_attributes AT",
+                "ID_REPORT_ATTRIBUTES", "ID_REPORT_ATTRIBUTES");
+        reportAttributes.addJoinColumn(new StringJoinColumn("VALUE", "setValue"));
+
+        natureObjectReportType.addJoinTable(reportAttributes);
+
         this.addJoinTable(natureObjectReportType);
+
+
 
         JoinTable species = new JoinTable("chm62edt_species C",
                 "ID_NATURE_OBJECT", "ID_NATURE_OBJECT");

@@ -2,7 +2,7 @@
 <%@ include file="/stripes/common/taglibs.jsp"%>
 <stripes:layout-definition>
     <c:choose>
-    <c:when test="${!empty actionBean.factsheet.otherClassifications}">
+    <c:when test="${!empty actionBean.otherClassifications}">
         <table class="listing fullwidth" style="display: table">
             <col style="width:30%"/>
             <col style="width:15%"/>

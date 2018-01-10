@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import eionet.eunis.dao.IReferencesDao;
 import eionet.eunis.dto.*;
 import eionet.eunis.rdf.LinkedDataQuery;
+import eionet.eunis.stripes.actions.beans.SpeciesBean;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -121,7 +122,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     private List<EcosystemsPersist> uniqueEcosystems = null;
 
+    private List<SpeciesBean> diagnosticSpecies;
+    private List<SpeciesBean> constantSpecies;
+    private List<SpeciesBean> dominantSpecies;
 
+    private boolean resolution4Relation = false;
 
     /**
      * RDF output is served from elsewhere.
@@ -201,8 +206,16 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             populateSyntaxa(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
         }
 
-        if(factsheet.isAnnexI()){
+        if(factsheet.isEunis2017()) {
+            diagnosticSpecies = factsheet.getEunis2017Species("Habitat diagnostic species");
+            constantSpecies = factsheet.getEunis2017Species("Habitat constant species");
+            dominantSpecies = factsheet.getEunis2017Species("Habitat dominant species");
+        }
+
+        if(factsheet.isAnnexI()) {
             return new ForwardResolution("/stripes/habitats-factsheet/annex1/habitats-factsheet-annex1.layout.jsp");
+        } else if(factsheet.isEunis2017()) {
+            return new ForwardResolution("/stripes/habitats-factsheet/eunis2017/habitats-factsheet-eunis2017.layout.jsp");
         } else {
             return new ForwardResolution("/stripes/habitats-factsheet/habitats-factsheet.layout.jsp");
         }
@@ -798,6 +811,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                     // populate the more info section from the annex links
                     for(DcLinkDTO link : dcLinks){
                         legalStatusWrapper.addMoreInfo(link);
+                        if(link.getIdDc().equals("2442")) {
+                            resolution4Relation = true;
+                        }
                     }
                 }
                 // Order the results
@@ -904,4 +920,19 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+    public List<SpeciesBean> getDiagnosticSpecies() {
+        return diagnosticSpecies;
+    }
+
+    public List<SpeciesBean> getConstantSpecies() {
+        return constantSpecies;
+    }
+
+    public List<SpeciesBean> getDominantSpecies() {
+        return dominantSpecies;
+    }
+
+    public boolean isResolution4Relation() {
+        return resolution4Relation;
+    }
 }

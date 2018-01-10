@@ -37,6 +37,8 @@ public class OtherClassificationPersist extends PersistentObject {
   private Integer sortOrder = null;
   private Integer idDc = null;
 
+  private String comment;
+
   public OtherClassificationPersist() {
     super();
   }
@@ -166,4 +168,12 @@ public class OtherClassificationPersist extends PersistentObject {
     public void setIdDc(Integer idDc) {
         this.idDc = idDc;
     }
+
+  public String getComment() {
+    return comment;
+  }
+
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
 }

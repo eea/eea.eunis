@@ -36,6 +36,7 @@ public class OtherClassificationDomain extends AbstractDomain {
     this.addColumnSpec(new StringColumnSpec("TITLE", "getTitle", "setTitle", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("RELATION_TYPE", "getRelationType", "setRelationType", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("CODE", "getCode", "setCode", DEFAULT_TO_NULL));
+    this.addColumnSpec(new StringColumnSpec("COMMENT", "getComment", "setComment", DEFAULT_TO_NULL));
 
     JoinTable classCode = new JoinTable("chm62edt_class_code B", "ID_CLASS_CODE", "ID_CLASS_CODE");
     classCode.addJoinColumn(new StringJoinColumn("NAME", "setName"));

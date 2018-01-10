@@ -70,6 +70,10 @@ public class Chm62edtHabitatDomain extends AbstractDomain {
                 new StringColumnSpec("ORIGINALLY_PUBLISHED_CODE",
                 "getOriginallyPublishedCode", "setOriginallyPublishedCode",
                 DEFAULT_TO_NULL));
+        this.addColumnSpec(
+                new StringColumnSpec("HABITAT_TYPE",
+                "getHabitatType", "setHabitatType",
+                DEFAULT_TO_NULL));
     }
 
     /**

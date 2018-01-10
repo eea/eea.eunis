@@ -23,6 +23,7 @@ public class HabitatsNatureObjectReportTypeSpeciesPersist extends PersistentObje
     private Integer IdReportType = null;
     private String groupName = null;
     private Integer idNatureObjectSpecies = null;
+    private String value = null;
 
     public HabitatsNatureObjectReportTypeSpeciesPersist() {
         super();
@@ -130,5 +131,9 @@ public class HabitatsNatureObjectReportTypeSpeciesPersist extends PersistentObje
 
     public void setIdNatureObjectSpecies(Integer idNatureObjectSpecies) {
         this.idNatureObjectSpecies = idNatureObjectSpecies;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }

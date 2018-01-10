@@ -22,6 +22,11 @@
                 <th scope="col">
                         ${eunis:cmsPhrase(actionBean.contentManagement, 'Relationship type')}
                 </th>
+                <c:if test="${actionBean.factsheet.eunis2017}">
+                    <th scope="col">
+                            ${eunis:cmsPhrase(actionBean.contentManagement, 'Comment')}
+                    </th>
+                </c:if>
             </tr>
             </thead>
             <tbody>
@@ -41,6 +46,11 @@
                         <td>
                                 ${eunis:execMethodParamString('ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet', 'mapHabitatsRelations', classif.relationType)}
                         </td>
+                        <c:if test="${actionBean.factsheet.eunis2017}">
+                            <td>
+                                    ${classif.comment}
+                            </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
             </tbody>

@@ -81,6 +81,8 @@ public class Chm62edtHabitatPersist extends PersistentObject {
 
     private String originallyPublishedCode = null;
 
+    private String habitatType = null;
+
     public Chm62edtHabitatPersist() {
         super();
     }
@@ -319,5 +321,13 @@ public class Chm62edtHabitatPersist extends PersistentObject {
         default:
             return getEunisHabitatCode();
         }
+    }
+
+    public String getHabitatType() {
+        return habitatType;
+    }
+
+    public void setHabitatType(String habitatType) {
+        this.habitatType = habitatType;
     }
 }

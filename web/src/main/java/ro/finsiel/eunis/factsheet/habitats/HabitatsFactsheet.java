@@ -3,9 +3,6 @@ package ro.finsiel.eunis.factsheet.habitats;
 
 import java.util.*;
 
-import eionet.eunis.dao.DaoFactory;
-import eionet.eunis.dao.IReferencesDao;
-import eionet.eunis.dto.DcIndexDTO;
 import eionet.eunis.stripes.actions.beans.SpeciesBean;
 import eionet.eunis.util.Constants;
 import net.sf.jrf.exceptions.DatabaseException;
@@ -17,17 +14,13 @@ import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.*;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesPersist;
-import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsDomain;
-import ro.finsiel.eunis.jrfTables.sites.factsheet.SiteHabitatsPersist;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesDomain;
 import ro.finsiel.eunis.jrfTables.species.habitats.HabitatsNatureObjectReportTypeSpeciesPersist;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
-import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.SortList;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.search.species.SpeciesSearchUtility;
 import ro.finsiel.eunis.search.species.VernacularNameWrapper;
-import ro.finsiel.eunis.search.species.factsheet.HabitatsSpeciesWrapper;
 import eionet.eunis.dto.PictureDTO;
 import ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria;
 
@@ -137,12 +130,13 @@ public class HabitatsFactsheet {
     /**
      * Defines an EUNIS habitat.
      */
-    public static final Integer EUNIS_HABITAT = 0;
+    public static final String EUNIS_HABITAT = "EUNIS";
+    public static final String EUNIS_2017_HABITAT = "EUNIS2017";
 
     /**
      * Defines an ANNEX I habitat.
      */
-    public static final Integer ANNEX_I_HABITAT = 1;
+    public static final String ANNEX_I_HABITAT = "ANNEX1";
 
     /**
      * Habitat ID for the habitat we're constructing the factsheet.
@@ -1656,7 +1650,7 @@ public class HabitatsFactsheet {
     /**
      * Mapping between relation simbols an human readable text.
      *
-     * @param relation Relation (supported are: '<', ">', '=', '#', '?', 's').
+     * @param relation Relation (supported are: '<', ">', '=', '#', '?', 's', 'c').
      * @return Decoded relation, in human readable language (narrower, wider, same, overlap, not defined, source).
      */
     public static String mapHabitatsRelations(String relation) {
@@ -1683,6 +1677,9 @@ public class HabitatsFactsheet {
         }
         if (relation.equalsIgnoreCase("")) {
             return "n/a";
+        }
+        if(relation.equalsIgnoreCase("c")) {
+            return "complex";
         }
         return relation;
     }
@@ -1750,15 +1747,6 @@ public class HabitatsFactsheet {
     }
 
     /**
-     * This methods finds if an habitat is EUNIS or ANNEX I.
-     *
-     * @return EUNIS_HABITAT or ANNEX_I_HABITAT.
-     */
-    public Integer getHabitatType() {
-        return Utilities.getHabitatType(habitat.getCodeAnnex1(), habitat.getCode2000());
-    }
-
-    /**
      * Check if this habitat is EUNIS.
      *
      * @return true if EUNIS.
@@ -1770,16 +1758,10 @@ public class HabitatsFactsheet {
         return (idHabitat <= 10000);
     }
 
-    /**
-     * Check if habitat is EUNIS.
-     *
-     * @param idHab habitat ID
-     * @return True for EUNIS habitats
-     */
-    public static boolean isEunis(String idHab) {
-        int id = Utilities.checkedStringToInt(idHab, -1);
-
-        return (id <= 10000);
+    public boolean isEunis2017() {
+        if(habitat.getHabitatType() != null && habitat.getHabitatType().equalsIgnoreCase(EUNIS_2017_HABITAT))
+            return true;
+        return false;
     }
 
     /**
@@ -1788,7 +1770,7 @@ public class HabitatsFactsheet {
      * @return true if ANNEX I.
      */
     public boolean isAnnexI() {
-        return 0 == ANNEX_I_HABITAT.compareTo(getHabitatType());
+        return 0 == ANNEX_I_HABITAT.compareTo(habitat.getHabitatType());
     }
 
     /**
@@ -1954,6 +1936,44 @@ public class HabitatsFactsheet {
         return result;
     }
 
+    public List<SpeciesBean> getEunis2017Species(String type){
+        List<HabitatsNatureObjectReportTypeSpeciesPersist> speciesList = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
+                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND H.ID_NATURE_OBJECT = "
+                        + idNatureObject
+                        + " and AT.value = '" + type + "' GROUP BY C.ID_NATURE_OBJECT ORDER BY C.SCIENTIFIC_NAME");
+
+        List<SpeciesBean> result = new ArrayList<>();
+        if(speciesList != null) {
+            for(HabitatsNatureObjectReportTypeSpeciesPersist species : speciesList) {
+                String englishName = getVernacularSpeciesName(species.getIdNatureObjectSpecies());
+
+                SpeciesBean speciesBean = new SpeciesBean(SpeciesBean.SpeciesType.SITE, species.getSpeciesScientificName(),
+                        englishName, species.getGroupName(), species, null, "", species.getIdNatureObjectSpecies());
+
+                result.add(speciesBean);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Retreieve the english name of the species
+     * @param idNatureObject
+     * @return
+     */
+    private String getVernacularSpeciesName(Integer idNatureObject) {
+        List<VernacularNameWrapper> vernNames = SpeciesSearchUtility.findVernacularNames(idNatureObject);
+        String englishName = "";
+        for (VernacularNameWrapper vernName : vernNames) {
+            if (vernName.getLanguageCode().toLowerCase().equals("en")) {
+                englishName = vernName.getName();
+                break;
+            }
+        }
+        return englishName;
+    }
+
     /**
      * Retrieve the species living in this habitat.
      *
@@ -1962,6 +1982,7 @@ public class HabitatsFactsheet {
     public List getSpeciesForHabitats() {
         Vector results = new Vector();
         List speciesList = null;
+        String type = "Species mentioned in habitat definition as characterising";
 
         try {
 
@@ -1973,21 +1994,14 @@ public class HabitatsFactsheet {
             speciesList = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
                     "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND H.ID_NATURE_OBJECT = "
                     + idNatureObject
-                    + " GROUP BY C.ID_NATURE_OBJECT ORDER BY C.SCIENTIFIC_NAME");
+                    + "  and AT.value not in('Habitat diagnostic species','Habitat constant species','Habitat dominant species') GROUP BY C.ID_NATURE_OBJECT ORDER BY C.SCIENTIFIC_NAME");
             if (speciesList != null) {
                 for (Object specy : speciesList) {
                     HabitatsNatureObjectReportTypeSpeciesPersist specie = (HabitatsNatureObjectReportTypeSpeciesPersist) specy;
                     // #19430 show only the species that are in the habitat descriptions
-                    if(description.contains(specie.getSpeciesScientificName()) || speciesText.contains(specie.getSpeciesScientificName())) {
+                    if(description.toUpperCase().contains(specie.getSpeciesScientificName().toUpperCase()) || speciesText.toUpperCase().contains(specie.getSpeciesScientificName().toUpperCase())) {
 
-                        List<VernacularNameWrapper> vernNames = SpeciesSearchUtility.findVernacularNames(specie.getIdNatureObjectSpecies());
-                        String englishName = "";
-                        for (VernacularNameWrapper vernName : vernNames) {
-                            if (vernName.getLanguageCode().toLowerCase().equals("en")) {
-                                englishName = vernName.getName();
-                                break;
-                            }
-                        }
+                        String englishName = getVernacularSpeciesName(specie.getIdNatureObjectSpecies());
 
                         SpeciesBean speciesBean = new SpeciesBean(SpeciesBean.SpeciesType.SITE, specie.getSpeciesScientificName(),
                                 englishName, specie.getGroupName(), specie, null, "", specie.getIdNatureObjectSpecies());

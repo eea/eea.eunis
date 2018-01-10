@@ -9,6 +9,9 @@
                 <c:when test="${actionBean.factsheet.annexI}">
                     <a href="habitats-annex1-browser.jsp">Habitat Annex I Directive hierarchical view</a>
                 </c:when>
+                <c:when test="${actionBean.factsheet.eunis2017}">
+                    <a href="habitats-code-browser-2017.jsp">EUNIS habitat classification 2017</a>
+                </c:when>
                 <c:otherwise>
                     <a href="habitats-code-browser.jsp">EUNIS habitat classification 2012</a>
                 </c:otherwise>

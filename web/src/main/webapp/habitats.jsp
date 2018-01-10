@@ -120,6 +120,15 @@
                       </td>
                     </tr>
                     <tr>
+                        <td>
+                            <img alt="<%=cm.cmsPhrase("EUNIS habitat types hierarchical view, REVISED")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("EUNIS habitat types hierarchical view, REVISED")%>
+                            <a href="habitats-code-browser-2017.jsp"><strong><%=cm.cmsPhrase("EUNIS habitat types hierarchical view, REVISED")%></strong></a>
+                        </td>
+                        <td>
+                            <%=cm.cmsPhrase("Visualization of revised groups of EUNIS habitat type classification")%>
+                        </td>
+                    </tr>
+                    <tr>
                       <td>
                         <img alt="<%=cm.cmsPhrase("ANNEX I habitat types hierarchical view")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_ANNEXhierarchy")%>
                         <a href="habitats-annex1-browser.jsp"><strong><%=cm.cmsPhrase("ANNEX I habitat types hierarchical view")%></strong></a>

@@ -2387,4 +2387,17 @@ END
         <sql>ALTER TABLE chm62edt_art17cache ADD INDEX art17cache_idx (object_type, code2000);</sql>
     </changeSet>
 
+    <changeSet id="rev-150" author="ivascu">
+        <comment>Added habitat type column to simplify identification</comment>
+        <sql>ALTER TABLE chm62edt_habitat ADD habitat_type varchar(20);</sql>
+        <sql>ALTER TABLE chm62edt_habitat ADD index htype_idx(habitat_type);</sql>
+        <sql>UPDATE chm62edt_habitat set habitat_type='EUNIS' where id_habitat &lt; 10000;</sql>
+        <sql>UPDATE chm62edt_habitat set habitat_type='ANNEX1' where id_habitat >= 10000;</sql>
+    </changeSet>
+
+    <changeSet id="rev-151" author="ivascu">
+        <comment>Added comment column to habitat classification</comment>
+        <sql>alter table chm62edt_habitat_class_code add comment varchar(100);</sql>
+    </changeSet>
+
 </databaseChangeLog>
