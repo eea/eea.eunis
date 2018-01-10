@@ -584,6 +584,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StripesDispatcher</servlet-name>
+        <url-pattern>/habitats_codeEUNIS/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StripesDispatcher</servlet-name>
         <url-pattern>/habitats-factsheet.jsp</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
