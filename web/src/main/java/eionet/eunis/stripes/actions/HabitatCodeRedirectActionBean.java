@@ -26,7 +26,8 @@ public class HabitatCodeRedirectActionBean extends AbstractStripesAction {
         if(r != null && r.size()>0) {
             url = "/habitats/" + r.get(0).getIdHabitat();
         } else {
-            message = "Sorry, no habitat type has been found in the database with Habitat EUNIS code '" + code + "'. Please ensure that you are using the correct code (the 'EUNIS habitat type code' in the factsheet's quick facts).";
+
+            message = "Sorry, no habitat type has been found in the database with EUNIS habitat classification code '" + code + "'. Please ensure that you are using the correct habitat code.";
 
             getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
             return new ForwardResolution("/stripes/habitats-error.jsp");
