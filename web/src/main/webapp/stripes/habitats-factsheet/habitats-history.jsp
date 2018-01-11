@@ -38,10 +38,28 @@
                             </a>
                         </td>
                         <td>
-                                ${eunis:formatString(classif.code, '&nbsp;')}
+                            <c:choose>
+                                <c:when test="${classif.idDc eq 2416}">
+                                    <a href="/habitats_codeEUNIS/${classif.code}">
+                                        ${eunis:formatString(classif.code, '&nbsp;')}
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    ${eunis:formatString(classif.code, '&nbsp;')}
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                         <td>
-                                ${eunis:bracketsToItalics(eunis:replaceTags(eunis:formatString(classif.title, '&nbsp;')))}
+                            <c:choose>
+                                <c:when test="${classif.idDc eq 2416}">
+                                    <a href="/habitats_codeEUNIS/${classif.code}">
+                                        ${eunis:bracketsToItalics(eunis:replaceTags(eunis:formatString(classif.title, '&nbsp;')))}
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    ${eunis:bracketsToItalics(eunis:replaceTags(eunis:formatString(classif.title, '&nbsp;')))}
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                         <td>
                                 ${eunis:execMethodParamString('ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet', 'mapHabitatsRelations', classif.relationType)}

@@ -34,7 +34,7 @@
           <h1>
             EUNIS habitat types hierarchical view - revised groups
           </h1>
-		Two revised groups are currently available. The EUNIS classification review is on-going and more groups will become available
+		Two revised groups are currently available. The EUNIS classification review is on-going and more groups will become available.
 <!-- MAIN CONTENT -->
                   <br/>
             <%

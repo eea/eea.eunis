@@ -100,11 +100,16 @@
                                 <c:choose>
                                     <c:when test="${not empty legal.legalPersist.relatedIdHabitat}">
                                         <a href="/habitats/${legal.legalPersist.relatedIdHabitat}">
-                                            ${legal.legalPersist.title}
+                                            ${eunis:bracketsToItalics(legal.legalPersist.title)}
+                                        </a>
+                                    </c:when>
+                                    <c:when test="${legal.legalPersist.idDc eq 2442}">
+                                        <a href="/habitats_codeEUNIS/${legal.legalPersist.code}">
+                                                ${eunis:bracketsToItalics(legal.legalPersist.title)}
                                         </a>
                                     </c:when>
                                     <c:otherwise>
-                                        ${legal.legalPersist.title}
+                                        ${eunis:bracketsToItalics(legal.legalPersist.title)}
                                     </c:otherwise>
                                 </c:choose>
                             </td>
@@ -112,6 +117,11 @@
                                 <c:choose>
                                     <c:when test="${not empty legal.legalPersist.relatedIdHabitat}">
                                         <a href="/habitats/${legal.legalPersist.relatedIdHabitat}">
+                                            ${legal.legalPersist.code}
+                                        </a>
+                                    </c:when>
+                                    <c:when test="${legal.legalPersist.idDc eq 2442}">
+                                        <a href="/habitats_codeEUNIS/${legal.legalPersist.code}">
                                             ${legal.legalPersist.code}
                                         </a>
                                     </c:when>
