@@ -842,3 +842,115 @@ table.globalQuery.syntaxa th.definition {
   background-color: rgb(187, 189, 192);
   border-color: #888;
 }
+
+.table-quickfacts td {
+  background: blue;
+}
+.photoAlbumEntry {
+  width: 300px;
+}
+
+
+/*Indicator species*/
+
+.species-container {
+  background: #F0F0F0;
+    position: relative;
+    margin-top: 4rem;
+}
+
+.species-container .photoAlbumEntryWrapper {
+  background: transparent;
+  height: 188px;
+  max-height: none;
+  position: relative;
+    border-bottom:3px solid black;
+}
+
+.species-container .diagnostic-species,
+.species-container .constant-species,
+.species-container .dominant-species {
+  display: inline-block;
+  width: 280px;
+  margin: 20px;
+  border-radius: 10px;
+  margin-left: 20px!important;
+  min-width: unset!important;
+  overflow: hidden;
+  box-shadow: 5px 5px 8px 0px rgba(18,18,18,0.4);
+}
+
+.species-container span.photoAlbumEntryTitle {
+  background: white;
+  margin-top: 0;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    font-weight:300;
+}
+
+.species-container .photoAlbumEntryWrapper img {
+  vertical-align: middle;
+  max-width: 100%;
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.species-container .diagnostic-wrapper,
+.species-container .constant-wrapper,
+.species-container .dominant-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.species-container .photoAlbumEntryTitle {
+  font-weight:300;
+}
+
+
+.species-container .species-header {
+    position: absolute;
+    bottom: 100%;
+    left: 170px;
+    background: #006599;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    width: 170px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+.species-container .species-header:first-of-type {
+    left:0;
+    border-top-left-radius: 5px;
+}
+
+.species-container .species-header:nth-child(3) {
+    left: 340px;
+    border-top-right-radius:5px;
+}
+
+.species-container .species-header.tab-visible {
+    background: #F0F0F0;
+    color: #006599;
+}
+
+.species-container .tab-body {
+    display: none;
+}
+
+.species-container .tab-body.tab-visible {
+    display: flex;
+}
+
+.species-container .tab-body > div:nth-child(n+7) {
+ display: none;
+}
