@@ -23,6 +23,22 @@
                         </span>
                     </div>
                 </c:forEach>
+               <div>
+                   <table>
+                       <thead>
+                       <tr><th>Species scientific name</th></tr>
+                       <tr><th>English common name</th></tr>
+                       <tr><th>Species group</th></tr>
+                       </thead>
+                   <c:forEach items="${actionBean.diagnosticSpecies}" var="specie">
+                        <tr>
+                            <td><a href="/species/${specie.source.idSpecies}">${specie.commonName}</a></td>
+                            <td>${specie.scientificName}</td>
+                            <td>${specie.group}</td>
+                        </tr>
+                   </c:forEach>
+                   </table>
+               </div>
             </div>
             <div tab="2" id="pagination2" class="constant-wrapper tab-body">
             <c:forEach items="${actionBean.constantSpecies}" var="specie">
@@ -39,6 +55,23 @@
                     </span>
                 </div>
             </c:forEach>
+
+                <div>
+                    <table>
+                        <thead>
+                        <tr><th>Species scientific name</th></tr>
+                        <tr><th>English common name</th></tr>
+                        <tr><th>Species group</th></tr>
+                        </thead>
+                        <c:forEach items="${actionBean.constantSpecies}" var="specie">
+                            <tr>
+                                <td><a href="/species/${specie.source.idSpecies}">${specie.commonName}</a></td>
+                                <td>${specie.scientificName}</td>
+                                <td>${specie.group}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
             </div>
             <div tab="3" id="pagination3" class="dominant-wrapper tab-body">
                 <c:forEach items="${actionBean.dominantSpecies}" var="specie">
@@ -55,6 +88,23 @@
                         </span>
                     </div>
                 </c:forEach>
+
+                <div>
+                    <table>
+                        <thead>
+                        <tr><th><a href="/species/${specie.source.idSpecies}">Species scientific name</a></th></tr>
+                        <tr><th>English common name</th></tr>
+                        <tr><th>Species group</th></tr>
+                        </thead>
+                        <c:forEach items="${actionBean.dominantSpecies}" var="specie">
+                            <tr>
+                                <td>${specie.commonName}</td>
+                                <td>${specie.scientificName}</td>
+                                <td>${specie.group}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
             </div>
         </div>
         <script>
