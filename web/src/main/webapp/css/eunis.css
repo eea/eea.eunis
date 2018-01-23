@@ -1246,3 +1246,27 @@ table.globalQuery.syntaxa th.definition {
     width: 90%;
   }
 }
+
+@media (min-width: 768px){
+  .species-container .species-header {
+    transform: scale(0.8);
+    margin-bottom: -4px;
+    left: 119px;
+  }
+  .species-container .species-header:first-of-type {
+    left:-17px;
+  }
+  .species-container .species-header:nth-child(3) {
+    left: 254px;
+  }
+
+  .view-switch {
+    transform: scale(0.8);
+    margin-bottom: -4px;
+  }
+  .pagination-controls {
+    transform: scale(0.8);
+    margin-bottom: -4px;
+    right: -16.5px;
+  }
+}
