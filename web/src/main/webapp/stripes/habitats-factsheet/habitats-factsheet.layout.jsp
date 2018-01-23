@@ -85,6 +85,6 @@
     <!-- END MAIN CONTENT -->
 </stripes:layout-component>
 <stripes:layout-component name="foot">
-    <%--TODO: js for species --%>
+    <script src="<%=request.getContextPath()%>/script/species-controls.js" type="text/javascript"></script>
 </stripes:layout-component>
 </stripes:layout-render>

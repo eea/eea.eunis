@@ -1172,8 +1172,8 @@ table.globalQuery.syntaxa th.definition {
     border-top-left-radius: 5px;
 }
 
-.pagination-controls #prev {
-    border-top-left-radius: 5px;
+.pagination-controls #next {
+    border-top-right-radius: 5px;
 }
 
 .species-container .btn {
@@ -1209,7 +1209,7 @@ table.globalQuery.syntaxa th.definition {
   }
   .species-container .pagination-controls {
     top: 13px;
-    right: 0;
+    right: -2px;
     bottom: unset;
   }
 
