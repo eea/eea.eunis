@@ -123,7 +123,7 @@
                     if (pages > 1) {
                         var current_page_number = 1
                         var next_button = "<button id='next' class='btn'>→</button>"
-                        var prev_button = "<button id='prev ' class='btn disabled'>←</button>"
+                        var prev_button = "<button id='prev' class='btn disabled'>←</button>"
                         var pages_number = "<span class='max_page'>"+ pages +"</span>"
                         var current_page ="<span class='current_page'>"+ current_page_number +"</span>"
                         var pages_wrapper = "<span class='pagination-controls'> "+prev_button+"<span class='page_number_wrapper'>"+ current_page +"/"+ pages_number +"</span>"+ next_button +"</span>"
