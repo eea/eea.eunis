@@ -871,7 +871,7 @@ table.globalQuery.syntaxa th.definition {
 .species-container .constant-species,
 .species-container .dominant-species {
   display: inline-block;
-  width: 280px;
+  width: 280px!important;
   margin: 20px;
   border-radius: 10px;
   margin-left: 20px!important;
@@ -901,7 +901,7 @@ table.globalQuery.syntaxa th.definition {
 .species-container .diagnostic-wrapper,
 .species-container .constant-wrapper,
 .species-container .dominant-wrapper{
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -951,6 +951,23 @@ table.globalQuery.syntaxa th.definition {
     display: flex;
 }
 
-.species-container .tab-body > div:nth-child(n+7) {
+.species-container .tab-body > div:nth-child(n+8) {
  display: none;
+}
+
+.species-container .pagination-controls {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+}
+
+.species-container .pagination-controls .btn {
+  padding: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity:0.8;
 }
