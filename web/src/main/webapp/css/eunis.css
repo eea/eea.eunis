@@ -935,13 +935,13 @@ table.globalQuery.syntaxa th.definition {
     left: 170px;
     background: #006599;
     padding: 10px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     width: 170px;
     text-align: center;
     color: white;
-    height:45px;
-    padding-top: 14px;
+    height:40px;
+    padding-top: 13px;
     cursor: pointer;
 }
 
@@ -990,17 +990,17 @@ table.globalQuery.syntaxa th.definition {
     filter: grayscale(100%);
 }
 
-.table-striped th {
+.table-striped.modified th {
     background: #006699;
     color: #fff;
     padding: .8rem;
 }
 
-.table-striped {
+.table-striped.modified {
     margin-top: 1rem;
 }
 
-.table-striped td {
+.table-striped.modified td {
     padding: .8rem;
 }
 
@@ -1009,13 +1009,17 @@ table.globalQuery.syntaxa th.definition {
     width: 100%;
 }
 
-.table-striped td,
-.table-striped th {
-    font-size: 15px;
+.table-striped.modified td,
+.table-striped.modified th {
+    font-size: 13px;
 }
 
-.table-striped tr {
+.table-striped.modified tr {
     width: 100%;
+}
+
+.table-striped.modified th a {
+  color: white;
 }
 
 .view-switch {
@@ -1049,7 +1053,7 @@ table.globalQuery.syntaxa th.definition {
     border: none;
     margin: -1px;
     margin-left: -2px;
-    height: 45px;
+    height: 40px;
     margin-bottom: 0;
 }
 
@@ -1070,11 +1074,11 @@ table.globalQuery.syntaxa th.definition {
     content: '';
     background: url(/images/species-controls/table-selected.svg);
     width: 55%;
-    height: 50%;
+    height: 44%;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-55%, -50%);
+    transform: translate(-50%, -50%);
     background-size: cover;
 }
 
@@ -1082,18 +1086,18 @@ table.globalQuery.syntaxa th.definition {
     content: '';
     background: url('/images/species-controls/table.svg');
     width: 55%;
-    height: 50%;
+    height: 44%;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-55%, -50%);
+    transform: translate(-50%, -50%);
     background-size: cover;
 }
 
 .view-switch .btn-list:before {
     content: '';
     background: url('/images/species-controls/list-selected.svg');
-    width: 50%;
+    width: 46%;
     height: 50%;
     position: absolute;
     top: 50%;
@@ -1105,7 +1109,7 @@ table.globalQuery.syntaxa th.definition {
 .view-switch .btn-list.selected:before {
     content: '';
     background: url('/images/species-controls/list.svg');
-    width: 50%;
+    width: 46%;
     height: 50%;
     position: absolute;
     top: 50%;
@@ -1124,14 +1128,14 @@ table.globalQuery.syntaxa th.definition {
     cursor: pointer;
     width: 60px;
     border: none;
-    height: 45px;
+    height: 40px;
 }
 
 .pagination-controls #prev:before {
     content: '';
     background: url('/images/species-controls/left-arrow.svg');
-    width: 50%;
-    height: 52%;
+    width: 40%;
+    height: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1142,8 +1146,8 @@ table.globalQuery.syntaxa th.definition {
 .pagination-controls #next:before {
     content: '';
     background: url('/images/species-controls/right-arrow.svg');
-    width: 50%;
-    height: 52%;
+    width: 40%;
+    height: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1157,7 +1161,7 @@ table.globalQuery.syntaxa th.definition {
 
 .pagination-controls .page_number_wrapper {
     background: #006699;
-    padding: 11px;
+    padding: 9px;
     font-size: 16px;
     font-weight: 500;
     text-align: center;

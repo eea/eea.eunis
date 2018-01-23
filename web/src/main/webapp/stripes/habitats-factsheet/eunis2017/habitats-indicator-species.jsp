@@ -26,7 +26,7 @@
                         <button class="btn btn-table"></button>
                         <button class="btn btn-list selected"></button>
                     </span>
-                    <table class="table-striped table-full display-hidden">
+                    <table class="table-striped modified table-full display-hidden">
                         <thead>
                         <tr><th>Species scientific name</th>
                         <th>English common name</th>
@@ -59,7 +59,7 @@
                         <button class="btn btn-table"></button>
                         <button class="btn btn-list selected"></button>
                     </span>
-                    <table class="table-striped table-full display-hidden">
+                    <table class="table-striped modified table-full display-hidden">
                         <thead>
                         <tr><th>Species scientific name</th>
                         <th>English common name</th>
@@ -92,7 +92,7 @@
                         <button class="btn btn-table"></button>
                         <button class="btn btn-list selected"></button>
                     </span>
-                    <table class="table-striped table-full display-hidden">
+                    <table class="table-striped modified table-full display-hidden">
                         <thead>
                         <tr><th><a href="/species/${specie.source.idSpecies}">Species scientific name</a></th>
                         <th>English common name</th>
