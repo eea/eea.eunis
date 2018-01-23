@@ -23,16 +23,20 @@
                         </span>
                         </div>
                     </c:forEach>
-                    <table>
+                    <span class="view-switch">
+                        <button class="btn btn-table"></button>
+                        <button class="btn btn-list selected"></button>
+                    </span>
+                    <table class="table-striped table-full display-hidden">
                         <thead>
-                        <tr><th>Species scientific name</th></tr>
-                        <tr><th>English common name</th></tr>
-                        <tr><th>Species group</th></tr>
+                        <tr><th>Species scientific name</th>
+                        <th>English common name</th>
+                        <th>Species group</th></tr>
                         </thead>
                         <c:forEach items="${actionBean.diagnosticSpecies}" var="specie">
                             <tr>
-                                <td><a href="/species/${specie.source.idSpecies}">${specie.commonName}</a></td>
                                 <td>${specie.scientificName}</td>
+                                <td><a href="/species/${specie.source.idSpecies}">${specie.commonName}</a></td>
                                 <td>${specie.group}</td>
                             </tr>
                         </c:forEach>
@@ -53,17 +57,20 @@
                     </span>
                         </div>
                     </c:forEach>
-
-                    <table>
+                    <span class="view-switch">
+                        <button class="btn btn-table"></button>
+                        <button class="btn btn-list selected"></button>
+                    </span>
+                    <table class="table-striped table-full display-hidden">
                         <thead>
-                        <tr><th>Species scientific name</th></tr>
-                        <tr><th>English common name</th></tr>
-                        <tr><th>Species group</th></tr>
+                        <tr><th>Species scientific name</th>
+                        <th>English common name</th>
+                        <th>Species group</th></tr>
                         </thead>
                         <c:forEach items="${actionBean.constantSpecies}" var="specie">
                             <tr>
-                                <td><a href="/species/${specie.source.idSpecies}">${specie.commonName}</a></td>
                                 <td>${specie.scientificName}</td>
+                                <td><a href="/species/${specie.source.idSpecies}">${specie.commonName}</a></td>
                                 <td>${specie.group}</td>
                             </tr>
                         </c:forEach>
@@ -84,17 +91,20 @@
                         </span>
                         </div>
                     </c:forEach>
-
-                    <table>
+                    <span class="view-switch">
+                        <button class="btn btn-table"></button>
+                        <button class="btn btn-list selected"></button>
+                    </span>
+                    <table class="table-striped table-full display-hidden">
                         <thead>
-                        <tr><th><a href="/species/${specie.source.idSpecies}">Species scientific name</a></th></tr>
-                        <tr><th>English common name</th></tr>
-                        <tr><th>Species group</th></tr>
+                        <tr><th><a href="/species/${specie.source.idSpecies}">Species scientific name</a></th>
+                        <th>English common name</th>
+                        <th>Species group</th></tr>
                         </thead>
                         <c:forEach items="${actionBean.dominantSpecies}" var="specie">
                             <tr>
-                                <td>${specie.commonName}</td>
                                 <td>${specie.scientificName}</td>
+                                <td>${specie.commonName}</td>
                                 <td>${specie.group}</td>
                             </tr>
                         </c:forEach>
@@ -184,6 +194,26 @@
                         $(children[i]).css('display','block')
                     }
                 })
+            </script>
+            <script>
+                var view_switch = $('.view-switch .btn')
+                view_switch.click(function (e) {
+                    var parent = $(e.target).parent();
+                    var grandparent = $(parent).parent();
+                    $(parent).find('.btn').removeClass('selected')
+                    $(e.target).addClass('selected')
+                    if($(e.target).hasClass('btn-list')){
+                        $(grandparent).find('table').addClass('display-hidden');
+                        $(grandparent).find('.species-item').removeClass('display-hidden')
+                        $(grandparent).find('.pagination-controls').removeClass('display-hidden')
+                    }
+                    else {
+                        $(grandparent).find('table').removeClass('display-hidden');
+                        $(grandparent).find('.species-item').addClass('display-hidden')
+                        $(grandparent).find('.pagination-controls').addClass('display-hidden')
+                    }
+                })
+//                display-hidden
             </script>
         </c:when>
         <c:otherwise>

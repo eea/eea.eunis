@@ -850,67 +850,65 @@ table.globalQuery.syntaxa th.definition {
   width: 300px;
 }
 
-
 /*Indicator species*/
 
 .species-container {
-  background: #F0F0F0;
+    background: #F0F0F0;
     position: relative;
     margin-top: 4rem;
 }
 
 .species-container .photoAlbumEntryWrapper {
-  background: transparent;
-  height: 145px;
-  max-height: none;
-  position: relative;
-    border-bottom:3px solid black;
+    background: transparent;
+    height: 145px;
+    max-height: none;
+    position: relative;
+    border-bottom: 3px solid black;
 }
 
 .species-container .diagnostic-species,
 .species-container .constant-species,
 .species-container .dominant-species {
-  display: inline-block;
-  width: calc(25% - 2rem);
-  margin: 1rem;
-  margin-bottom: 25px;
-  border-radius: 10px;
-  min-width: unset!important;
-  overflow: hidden;
-  box-shadow: 5px 5px 8px 0px rgba(18,18,18,0.4);
+    display: inline-block;
+    width: calc(25% - 2rem);
+    margin: 1rem;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    min-width: unset !important;
+    overflow: hidden;
+    box-shadow: 5px 5px 8px 0px rgba(18, 18, 18, 0.4);
 }
 
 .species-container span.photoAlbumEntryTitle {
-  background: white;
-  margin-top: 0;
-  font-size: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-    font-weight:300;
+    background: white;
+    margin-top: 0;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
 }
 
 .species-container .photoAlbumEntryWrapper img {
-  vertical-align: middle;
-  max-width: 100%;
-  position: absolute;
-  width: 100%;
-  top: 0;
+    vertical-align: middle;
+    max-width: 100%;
+    position: absolute;
+    width: 100%;
+    top: 0;
 }
 
 .species-container .diagnostic-wrapper,
 .species-container .constant-wrapper,
-.species-container .dominant-wrapper{
-  display: block;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+.species-container .dominant-wrapper {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .species-container .photoAlbumEntryTitle {
-  font-weight:300;
+    font-weight: 300;
 }
-
 
 .species-container .species-header {
     position: absolute;
@@ -926,16 +924,14 @@ table.globalQuery.syntaxa th.definition {
     cursor: pointer;
 }
 
-
-
 .species-container .species-header:first-of-type {
-    left:0;
+    left: 0;
     border-top-left-radius: 5px;
 }
 
 .species-container .species-header:nth-child(3) {
     left: 340px;
-    border-top-right-radius:5px;
+    border-top-right-radius: 5px;
 }
 
 .species-container .species-header.tab-visible {
@@ -952,22 +948,209 @@ table.globalQuery.syntaxa th.definition {
 }
 
 .species-container .tab-body > div:nth-child(n+10) {
- display: none;
+    display: none;
 }
 
 .species-container .pagination-controls {
-  position: absolute;
-  bottom: 100%;
-  right: 0;
+    position: absolute;
+    bottom: 100%;
+    right: 0;
 }
 
 .species-container .pagination-controls .btn {
-  padding: 10px;
-  font-size: 15px;
-  font-weight: 500;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .disabled {
-  pointer-events: none;
-  opacity:0.8;
+    pointer-events: none;
+    opacity: 0.8;
+    filter: grayscale(100%);
+}
+
+.table-striped th {
+    background: #006699;
+    color: #fff;
+    padding: .8rem;
+}
+
+.table-striped {
+    margin-top: 1rem;
+}
+
+.table-striped td {
+    padding: .8rem;
+}
+
+.table-full {
+    display: table !important;
+    width: 100%;
+}
+
+.table-striped td,
+.table-striped th {
+    font-size: 15px;
+}
+
+.table-striped tr {
+    width: 100%;
+}
+
+.view-switch {
+    position: absolute;
+    bottom: 100%;
+    left: 610px;
+}
+
+.display-hidden {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: fixed;
+    z-index: -999;
+}
+
+.view-switch button {
+    background: #006599;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    width: 60px;
+    border: none;
+    margin: -1px;
+    margin-left: -2px;
+    height: 45px;
+    margin-bottom: 0;
+}
+
+.view-switch button.selected {
+    background: #F0F0F0;
+    color: #006599;
+}
+
+.view-switch .btn-table {
+    border-top-left-radius: 5px;
+}
+
+.view-switch .btn-list {
+    border-top-right-radius: 5px;
+}
+
+.view-switch .btn-table:before {
+    content: '';
+    background: url(/images/species-controls/table-selected.svg);
+    width: 55%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-55%, -50%);
+    background-size: cover;
+}
+
+.view-switch .btn-table.selected:before {
+    content: '';
+    background: url('/images/species-controls/table.svg');
+    width: 55%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-55%, -50%);
+    background-size: cover;
+}
+
+.view-switch .btn-list:before {
+    content: '';
+    background: url('/images/species-controls/list-selected.svg');
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+}
+
+.view-switch .btn-list.selected:before {
+    content: '';
+    background: url('/images/species-controls/list.svg');
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+}
+
+.pagination-controls button {
+    background: #F0F0F0;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    width: 60px;
+    border: none;
+    height: 45px;
+}
+
+.pagination-controls #prev:before {
+    content: '';
+    background: url('/images/species-controls/left-arrow.svg');
+    width: 50%;
+    height: 52%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+}
+
+.pagination-controls #next:before {
+    content: '';
+    background: url('/images/species-controls/right-arrow.svg');
+    width: 50%;
+    height: 52%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+}
+
+.species-container .btn {
+    position: relative;
+}
+
+.pagination-controls .page_number_wrapper {
+    background: #006699;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    width: 60px;
+    border: none;
+    height: 53px;
+}
+
+.pagination-controls #prev {
+    border-top-left-radius: 5px;
+}
+
+.pagination-controls #prev {
+    border-top-left-radius: 5px;
 }
