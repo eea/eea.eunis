@@ -4,9 +4,9 @@
     <c:choose>
         <c:when test="${(not empty actionBean.diagnosticSpecies) or (not empty actionBean.constantSpecies) or (not empty actionBean.dominantSpecies)}">
             <div class="species-container">
-                <div displayed="6" trigger_for="1" class="species-header tab-visible">Diagnostic species</div>
-                <div displayed="6" trigger_for="2" class="species-header">Constant species</div>
-                <div displayed="6" trigger_for="3" class="species-header">Dominant species</div>
+                <div displayed="8" trigger_for="1" class="species-header tab-visible">Diagnostic species</div>
+                <div displayed="8" trigger_for="2" class="species-header">Constant species</div>
+                <div displayed="8" trigger_for="3" class="species-header">Dominant species</div>
 
                 <div tab="1" id="pagination1" class="diagnostic-wrapper tab-body tab-visible">
                     <c:forEach items="${actionBean.diagnosticSpecies}" var="specie">
@@ -119,7 +119,7 @@
             <script>
                 $('.tab-body').each(function (index, item) {
                     var children = $(this).children('div')
-                    var pages = Math.ceil(children.length / 6)
+                    var pages = Math.ceil(children.length / 8)
                     if (pages > 1) {
                         var current_page_number = 1
                         var next_button = "<button id='next' class='btn'>→</button>"
@@ -141,7 +141,7 @@
                     tab_displayed.each(function (index,item) {
                         if(tab_index === $(item).attr('trigger_for')) {
                             current_displayed = parseInt($(item).attr('displayed'))
-                            $(item).attr('displayed', current_displayed + 6)
+                            $(item).attr('displayed', current_displayed + 8)
                         }
                     })
                     var count_wrapper = $(parent).find('.current_page')[0]
@@ -153,7 +153,7 @@
                     for (var i=0; i<current_displayed; i++) {
                         $(children[i]).css('display','none')
                     }
-                    for (var i = current_displayed; i<current_displayed + 6; i++){
+                    for (var i = current_displayed; i<current_displayed + 8; i++){
                         $(children[i]).css('display','block')
                     }
                 })
@@ -168,7 +168,7 @@
                     tab_displayed.each(function (index,item) {
                         if(tab_index === $(item).attr('trigger_for')) {
                             current_displayed = parseInt($(item).attr('displayed'))
-                            $(item).attr('displayed', current_displayed - 6)
+                            $(item).attr('displayed', current_displayed - 8)
                         }
                     })
                     var count_wrapper = $(parent).find('.current_page')[0]
@@ -177,10 +177,10 @@
                         $(this).addClass('disabled')
                     }
                     $(parent).find('#next').removeClass('disabled')
-                    for (var i=current_displayed; i > current_displayed - 6; i--) {
+                    for (var i=current_displayed; i > current_displayed - 8; i--) {
                         $(children[i]).css('display','none')
                     }
-                    for (var i = current_displayed - 6; i >= current_displayed - 12 ; i--){
+                    for (var i = current_displayed - 8; i > current_displayed - 16 ; i--){
                         $(children[i]).css('display','block')
                     }
                 })
