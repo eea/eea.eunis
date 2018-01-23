@@ -84,4 +84,7 @@
     </c:choose>
     <!-- END MAIN CONTENT -->
 </stripes:layout-component>
+<stripes:layout-component name="foot">
+    <%--TODO: js for species --%>
+</stripes:layout-component>
 </stripes:layout-render>
