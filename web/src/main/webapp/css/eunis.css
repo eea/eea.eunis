@@ -863,9 +863,7 @@ table.globalQuery.syntaxa th.definition {
     border-bottom: 3px solid black;
 }
 
-.species-container .diagnostic-species,
-.species-container .constant-species,
-.species-container .dominant-species {
+.species-container .species-item {
     display: inline-block;
     width: calc(25% - 2rem);
     margin: 1rem;
@@ -916,9 +914,7 @@ table.globalQuery.syntaxa th.definition {
   margin-top:5px;
 }
 
-.species-container .diagnostic-wrapper,
-.species-container .constant-wrapper,
-.species-container .dominant-wrapper {
+.species-container .tab-body {
     display: block;
     justify-content: center;
     align-items: center;
