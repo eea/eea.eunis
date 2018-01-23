@@ -17,10 +17,9 @@
                         </a>
                         </span>
                             <span class="photoAlbumEntryTitle">
-                            ${specie.commonName}
-
-                            <span class="italics">${specie.scientificName} </span>
-                        </span>
+                                <span class="photo-subtitle">${specie.group}</span>
+                                <span class="italics">${specie.scientificName} </span>
+                            </span>
                         </div>
                     </c:forEach>
                     <span class="view-switch">
@@ -51,10 +50,9 @@
                     </a>
                     </span>
                             <span class="photoAlbumEntryTitle">
-                        ${specie.commonName}
-
-                        <span class="italics">${specie.scientificName} </span>
-                    </span>
+                                <span class="photo-subtitle">${specie.group}</span>
+                                <span class="italics">${specie.scientificName} </span>
+                            </span>
                         </div>
                     </c:forEach>
                     <span class="view-switch">
@@ -85,10 +83,9 @@
                         </a>
                         </span>
                             <span class="photoAlbumEntryTitle">
-                            ${specie.commonName}
-
-                            <span class="italics">${specie.scientificName} </span>
-                        </span>
+                                <span class="photo-subtitle">${specie.group}</span>
+                                <span class="italics">${specie.scientificName} </span>
+                            </span>
                         </div>
                     </c:forEach>
                     <span class="view-switch">
