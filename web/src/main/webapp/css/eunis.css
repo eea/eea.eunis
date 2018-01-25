@@ -852,7 +852,7 @@ table.globalQuery.syntaxa th.definition {
 .species-container {
     background: #F0F0F0;
     position: relative;
-    margin-top: 4rem;
+    margin-top: 2.5rem;
 }
 
 .species-container .photoAlbumEntryWrapper {
@@ -877,7 +877,7 @@ table.globalQuery.syntaxa th.definition {
 .species-container span.photoAlbumEntryTitle {
     background: white;
     margin-top: 0;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 20px;
     text-align: center;
     display: flex;
@@ -895,6 +895,7 @@ table.globalQuery.syntaxa th.definition {
 .species-container .photoAlbumEntryWrapper img {
     vertical-align: middle;
     max-width: 100%;
+    margin-top: 1px;
     position: absolute;
     width: 100%;
     top: 0;
@@ -1251,6 +1252,7 @@ table.globalQuery.syntaxa th.definition {
   .species-container .species-header {
     transform: scale(0.8);
     margin-bottom: -4px;
+    font-size: 16px;
     left: 119px;
   }
   .species-container .species-header:first-of-type {
