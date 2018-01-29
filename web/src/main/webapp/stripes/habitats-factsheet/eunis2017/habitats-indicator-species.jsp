@@ -34,8 +34,8 @@
                         </thead>
                         <c:forEach items="${actionBean.diagnosticSpecies}" var="specie">
                             <tr>
-                                <td>${specie.scientificName}</td>
-                                <td><a href="/species/${specie.source.idSpecies}">${specie.commonName}</a></td>
+                                <td><a href="/species/${specie.source.idSpecies}">${specie.scientificName}</a></td>
+                                <td>${specie.commonName}</td>
                                 <td>${specie.group}</td>
                             </tr>
                         </c:forEach>
@@ -67,8 +67,8 @@
                         </thead>
                         <c:forEach items="${actionBean.constantSpecies}" var="specie">
                             <tr>
-                                <td>${specie.scientificName}</td>
-                                <td><a href="/species/${specie.source.idSpecies}">${specie.commonName}</a></td>
+                                <td><a href="/species/${specie.source.idSpecies}">${specie.scientificName}</a></td>
+                                <td>${specie.commonName}</td>
                                 <td>${specie.group}</td>
                             </tr>
                         </c:forEach>
@@ -94,13 +94,13 @@
                     </span>
                     <table class="table-striped modified table-full display-hidden">
                         <thead>
-                        <tr><th><a href="/species/${specie.source.idSpecies}">Species scientific name</a></th>
+                        <tr><th>Species scientific name</th>
                         <th>English common name</th>
                         <th>Species group</th></tr>
                         </thead>
                         <c:forEach items="${actionBean.dominantSpecies}" var="specie">
                             <tr>
-                                <td>${specie.scientificName}</td>
+                                <td><a href="/species/${specie.source.idSpecies}">${specie.scientificName}</a></td>
                                 <td>${specie.commonName}</td>
                                 <td>${specie.group}</td>
                             </tr>
