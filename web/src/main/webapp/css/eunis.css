@@ -872,6 +872,7 @@ table.globalQuery.syntaxa th.definition {
     min-width: unset !important;
     overflow: hidden;
     box-shadow: 5px 5px 8px 0px rgba(18, 18, 18, 0.4);
+    height: 100%;
 }
 
 .species-container span.photoAlbumEntryTitle {
@@ -918,7 +919,6 @@ table.globalQuery.syntaxa th.definition {
 .species-container .tab-body {
     display: block;
     justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
 }
 
@@ -1271,4 +1271,8 @@ table.globalQuery.syntaxa th.definition {
     margin-bottom: -4px;
     right: -16.5px;
   }
+  .big-container {
+    min-height:518px;
+  }
 }
+

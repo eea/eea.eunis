@@ -19,6 +19,18 @@ $('.species-header').click(function() {
 $('.tab-body').each(function (index, item) {
     var children = $(this).children('div')
     var pages = Math.ceil(children.length / 8)
+    if(children.length > 4){
+        $('.tab-body').addClass('big-container')
+    }
+    if(children.length == 0) {
+        var tab_index = parseInt($(this).attr('tab'));
+        $(this).parent().find('[trigger_for="'+tab_index+'"]').remove();
+        $(this).remove();
+        if(tab_index == 1) {
+            $('.tab-body[tab="'+tab_index+1+'"]').addClass('tab-visible')
+            $('.species-header[trigger_for="'+tab_index+1+'"]').addClass('tab-visible')
+        }
+    }
     if (pages > 1) {
         var current_page_number = 1
         var next_button = "<button id='next' class='btn'>→</button>"
@@ -49,10 +61,10 @@ $('body').on('click', '#next', function () {
         $(this).addClass('disabled')
     }
     $(parent).find('#prev').removeClass('disabled')
-    for (var i=0; i<current_displayed; i++) {
+    for (var i=0; i<= current_displayed; i++) {
         $(children[i]).css('display','none')
     }
-    for (var i = current_displayed; i<current_displayed + 8; i++){
+    for (var i = current_displayed + 1; i<= current_displayed + 8; i++){
         $(children[i]).css('display','block')
     }
 })
@@ -76,10 +88,10 @@ $('body').on('click', '#prev', function () {
         $(this).addClass('disabled')
     }
     $(parent).find('#next').removeClass('disabled')
-    for (var i=current_displayed; i > current_displayed - 8; i--) {
+    for (var i=current_displayed; i >= current_displayed - 8; i--) {
         $(children[i]).css('display','none')
     }
-    for (var i = current_displayed - 8; i > current_displayed - 16 ; i--){
+    for (var i = current_displayed - 8; i >= current_displayed - 15 ; i--){
         $(children[i]).css('display','block')
     }
 })

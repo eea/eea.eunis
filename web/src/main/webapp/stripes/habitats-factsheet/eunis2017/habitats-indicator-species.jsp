@@ -4,9 +4,9 @@
     <c:choose>
         <c:when test="${(not empty actionBean.diagnosticSpecies) or (not empty actionBean.constantSpecies) or (not empty actionBean.dominantSpecies)}">
             <div class="species-container">
-                <div displayed="8" trigger_for="1" class="species-header tab-visible">Diagnostic species</div>
-                <div displayed="8" trigger_for="2" class="species-header">Constant species</div>
-                <div displayed="8" trigger_for="3" class="species-header">Dominant species</div>
+                <div displayed="7" trigger_for="1" class="species-header tab-visible">Diagnostic species</div>
+                <div displayed="7" trigger_for="2" class="species-header">Constant species</div>
+                <div displayed="7" trigger_for="3" class="species-header">Dominant species</div>
 
                 <div tab="1" id="pagination1" class="diagnostic-wrapper tab-body tab-visible">
                     <c:forEach items="${actionBean.diagnosticSpecies}" var="specie">

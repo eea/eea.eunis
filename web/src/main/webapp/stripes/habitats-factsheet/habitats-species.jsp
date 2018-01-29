@@ -4,7 +4,7 @@
     <c:choose>
         <c:when test="${not empty actionBean.species}">
             <div class="species-container">
-                <div style="display: none" displayed="8" trigger_for="1" class="species-header tab-visible">Species</div>
+                <div style="display: none" displayed="7" trigger_for="1" class="species-header tab-visible">Species</div>
 
                 <div tab="1" id="pagination1" class="diagnostic-wrapper tab-body tab-visible">
                     <c:forEach items="${actionBean.species}" var="specie">
