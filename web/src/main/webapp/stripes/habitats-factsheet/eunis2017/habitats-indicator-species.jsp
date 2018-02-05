@@ -22,6 +22,7 @@
                             </span>
                         </div>
                     </c:forEach>
+                    <p class="species-header-text">Diagnostic species occur concentrated in the habitat in question, but are absent or rare in other habitats. They are good positive indicators of the habitat, but they do not need to occur in every location of the habitat.</p>
                     <span class="view-switch">
                         <button class="btn btn-table"></button>
                         <button class="btn btn-list selected"></button>
@@ -42,6 +43,7 @@
                     </table>
                 </div>
                 <div tab="2" id="pagination2" class="constant-wrapper tab-body">
+
                     <c:forEach items="${actionBean.constantSpecies}" var="specie">
                         <div class="constant-species species-item">
                     <span class="photoAlbumEntryWrapper">
@@ -55,6 +57,7 @@
                             </span>
                         </div>
                     </c:forEach>
+                    <p class="species-header-text">Constant species occur frequently in the habitat, but they may include generalist species that are also frequent in other habitats.</p>
                     <span class="view-switch">
                         <button class="btn btn-table"></button>
                         <button class="btn btn-list selected"></button>
@@ -88,6 +91,7 @@
                             </span>
                         </div>
                     </c:forEach>
+                    <p class="species-header-text">Dominant species are those that often reach high cover in the habitat, thus determining the habitat physiognomy.</p>
                     <span class="view-switch">
                         <button class="btn btn-table"></button>
                         <button class="btn btn-list selected"></button>
@@ -107,6 +111,7 @@
                         </c:forEach>
                     </table>
                 </div>
+                <p class="species-footer-text">Please note that a maximum of 20 species of each indicator category is shown.</p>
             </div>
         </c:when>
         <c:otherwise>

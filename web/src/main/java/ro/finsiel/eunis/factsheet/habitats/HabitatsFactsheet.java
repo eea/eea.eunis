@@ -3,6 +3,7 @@ package ro.finsiel.eunis.factsheet.habitats;
 
 import java.util.*;
 
+import eionet.eunis.stripes.actions.beans.OrderedSpeciesBean;
 import eionet.eunis.stripes.actions.beans.SpeciesBean;
 import eionet.eunis.util.Constants;
 import net.sf.jrf.exceptions.DatabaseException;
@@ -1936,23 +1937,29 @@ public class HabitatsFactsheet {
         return result;
     }
 
-    public List<SpeciesBean> getEunis2017Species(String type){
+    public List<OrderedSpeciesBean> getEunis2017Species(String type){
         List<HabitatsNatureObjectReportTypeSpeciesPersist> speciesList = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
                 "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND H.ID_NATURE_OBJECT = "
                         + idNatureObject
-                        + " and AT.value = '" + type + "' GROUP BY C.ID_NATURE_OBJECT ORDER BY C.SCIENTIFIC_NAME");
+                        + " and AT.name = '" + type + "' GROUP BY C.ID_NATURE_OBJECT ORDER BY C.SCIENTIFIC_NAME");
 
-        List<SpeciesBean> result = new ArrayList<>();
+        List<OrderedSpeciesBean> result = new ArrayList<>();
         if(speciesList != null) {
             for(HabitatsNatureObjectReportTypeSpeciesPersist species : speciesList) {
                 String englishName = getVernacularSpeciesName(species.getIdNatureObjectSpecies());
+                int order = 0;
+                try {
+                    order = Integer.parseInt(species.getValue());
+                } catch (NumberFormatException e){}
 
-                SpeciesBean speciesBean = new SpeciesBean(SpeciesBean.SpeciesType.SITE, species.getSpeciesScientificName(),
-                        englishName, species.getGroupName(), species, null, "", species.getIdNatureObjectSpecies());
+                OrderedSpeciesBean speciesBean = new OrderedSpeciesBean(SpeciesBean.SpeciesType.SITE, species.getSpeciesScientificName(),
+                        englishName, species.getGroupName(), species, null, "", species.getIdNatureObjectSpecies(),  order);
 
                 result.add(speciesBean);
             }
         }
+
+        Collections.sort(result);
 
         return result;
     }

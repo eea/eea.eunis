@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import eionet.eunis.dao.IReferencesDao;
 import eionet.eunis.dto.*;
 import eionet.eunis.rdf.LinkedDataQuery;
+import eionet.eunis.stripes.actions.beans.OrderedSpeciesBean;
 import eionet.eunis.stripes.actions.beans.SpeciesBean;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -122,9 +123,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     private List<EcosystemsPersist> uniqueEcosystems = null;
 
-    private List<SpeciesBean> diagnosticSpecies;
-    private List<SpeciesBean> constantSpecies;
-    private List<SpeciesBean> dominantSpecies;
+    private List<OrderedSpeciesBean> diagnosticSpecies;
+    private List<OrderedSpeciesBean> constantSpecies;
+    private List<OrderedSpeciesBean> dominantSpecies;
 
     private boolean resolution4Relation = false;
 
@@ -920,15 +921,15 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
-    public List<SpeciesBean> getDiagnosticSpecies() {
+    public List<OrderedSpeciesBean> getDiagnosticSpecies() {
         return diagnosticSpecies;
     }
 
-    public List<SpeciesBean> getConstantSpecies() {
+    public List<OrderedSpeciesBean> getConstantSpecies() {
         return constantSpecies;
     }
 
-    public List<SpeciesBean> getDominantSpecies() {
+    public List<OrderedSpeciesBean> getDominantSpecies() {
         return dominantSpecies;
     }
 

@@ -920,6 +920,7 @@ table.globalQuery.syntaxa th.definition {
     display: block;
     justify-content: center;
     flex-wrap: wrap;
+    padding-top: 3rem;
 }
 
 .species-container .photoAlbumEntryTitle {
@@ -1206,7 +1207,10 @@ table.globalQuery.syntaxa th.definition {
     border-top-right-radius: 5px;
   }
   .tab-body {
-    padding-top: 70px;
+    padding-top: 200px !important;
+  }
+  .species-header-text {
+    top: 5rem !important;
   }
   .species-container .pagination-controls {
     top: 13px;
@@ -1269,10 +1273,26 @@ table.globalQuery.syntaxa th.definition {
   .pagination-controls {
     transform: scale(0.8);
     margin-bottom: -4px;
-    right: -16.5px;
+    right: -16.5px !important;
   }
   .big-container {
     min-height:518px;
   }
 }
 
+.species-header-text {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  margin: 0;
+  right: 1rem;
+  font-weight: 400;
+  text-align: left;
+}
+
+.species-footer-text {
+
+  padding: 0 1rem 1rem 1rem;
+  font-weight: 400;
+  text-align: left;
+}

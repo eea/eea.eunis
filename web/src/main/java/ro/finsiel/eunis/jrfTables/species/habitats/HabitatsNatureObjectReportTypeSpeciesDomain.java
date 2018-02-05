@@ -66,7 +66,8 @@ public class HabitatsNatureObjectReportTypeSpeciesDomain extends AbstractDomain 
 
         JoinTable reportAttributes = new JoinTable("chm62edt_report_attributes AT",
                 "ID_REPORT_ATTRIBUTES", "ID_REPORT_ATTRIBUTES");
-        reportAttributes.addJoinColumn(new StringJoinColumn("VALUE", "setValue"));
+        reportAttributes.addJoinColumn(new StringJoinColumn("VALUE",  "setValue"));
+        reportAttributes.addJoinColumn(new StringJoinColumn("NAME", "setAttrName"));
 
         natureObjectReportType.addJoinTable(reportAttributes);
 
