@@ -131,7 +131,7 @@
             </c:if>
             <c:if test="${ actionBean.typeCDDA}">
                 <p class="discreet">${eunis:cmsPhrase(actionBean.contentManagement, 'Source and more information')}:
-                <a href="http://www.eea.europa.eu/data-and-maps/data/ds_resolveuid/adc3b1a11bd54cd7b3adefa19fe11fdf">
+                <a href="http://www.eea.europa.eu/data-and-maps/data/ds_resolveuid/c24610c33ca343a8ad51d289ef4c9f4c">
                 ${eunis:cmsPhrase(actionBean.contentManagement, 'Nationally designated areas (CDDA)')}
                 </a></p>
             </c:if>

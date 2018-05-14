@@ -156,7 +156,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="http://www.eea.europa.eu/data-and-maps/data/nationally-designated-areas-national-cdda-9">
+                            <a href="http://www.eea.europa.eu/data-and-maps/data/ds_resolveuid/c24610c33ca343a8ad51d289ef4c9f4c">
                                 <%=cm.cmsPhrase("Nationally designated areas (CDDA)")%>
                             </a>
                         </td>
