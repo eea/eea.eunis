@@ -174,7 +174,7 @@
                             </div>
 
                             <script>
-                                addReloadOnDisplay("sitesMapPane", "interactive-map-iframe", "http://maps.eea.europa.eu/EEABasicViewer/v3/index.html?appid=07661dc8a5bc446fafcfe918c91a1b1b&displaylegend=true&embed=true");
+                                addReloadOnDisplay("sitesMapPane", "interactive-map-iframe", "https://maps.eea.europa.eu/wab/ProtectedSites_EUNIS/?find=${actionBean.idsite}");
                             </script>
                         </div>
                         <div class="eea-accordion-panel" style="clear: both;" id="other-resources-accordion">
