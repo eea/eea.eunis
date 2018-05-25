@@ -28,7 +28,7 @@ public class UtilitiesTest {
     @Test
     public void stringParameter() {
         StringBuffer urlString = Utilities.writeURLParameter("category", "Mosses & Liverworts");
-        assertEquals("&amp;category=Mosses & Liverworts", urlString.toString());
+        assertEquals("&amp;category=Mosses &amp; Liverworts", urlString.toString());
     }
 
     /**

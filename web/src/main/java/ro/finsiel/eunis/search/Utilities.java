@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.log4j.Logger;
 
 import ro.finsiel.eunis.WebContentManagement;
@@ -499,9 +500,9 @@ public final class Utilities {
             return urlString;
         }
         urlString.append("&amp;");
-        urlString.append(paramName);
+        urlString.append(StringEscapeUtils.escapeXml(paramName));
         urlString.append("=");
-        urlString.append(paramValue);
+        urlString.append(StringEscapeUtils.escapeXml(paramValue));
         return urlString;
     }
 
@@ -532,16 +533,10 @@ public final class Utilities {
      * @return The representation of the paramName/Value pair
      */
     public static StringBuffer writeURLParameter(String paramName, Integer paramValue) {
-        StringBuffer urlString = new StringBuffer();
-
-        if (null == paramName || null == paramValue) {
-            return urlString;
+        if(paramValue == null){
+            return new StringBuffer();
         }
-        urlString.append("&amp;");
-        urlString.append(paramName);
-        urlString.append("=");
-        urlString.append(paramValue);
-        return urlString;
+        return writeURLParameter(paramName, paramValue + "");
     }
 
     /**
@@ -553,16 +548,7 @@ public final class Utilities {
      * @return The representation of the paramName/Value pair
      */
     public static StringBuffer writeURLParameter(String paramName, int paramValue) {
-        StringBuffer urlString = new StringBuffer();
-
-        if (null == paramName) {
-            return urlString;
-        }
-        urlString.append("&amp;");
-        urlString.append(paramName);
-        urlString.append("=");
-        urlString.append(paramValue);
-        return urlString;
+        return writeURLParameter(paramName, paramValue + "");
     }
 
     /**
@@ -574,16 +560,7 @@ public final class Utilities {
      * @return The representation of the paramName/Value pair
      */
     public static StringBuffer writeURLParameter(String paramName, float paramValue) {
-        StringBuffer urlString = new StringBuffer();
-
-        if (null == paramName) {
-            return urlString;
-        }
-        urlString.append("&amp;");
-        urlString.append(paramName);
-        urlString.append("=");
-        urlString.append(paramValue);
-        return urlString;
+        return writeURLParameter(paramName, paramValue + "");
     }
 
     /**
@@ -595,16 +572,10 @@ public final class Utilities {
      * @return The representation of the paramName/Value pair
      */
     public static StringBuffer writeURLParameter(String paramName, Boolean paramValue) {
-        StringBuffer urlString = new StringBuffer();
-
-        if (null == paramName || null == paramValue) {
-            return urlString;
+        if(paramValue == null){
+            return new StringBuffer();
         }
-        urlString.append("&amp;");
-        urlString.append(paramName);
-        urlString.append("=");
-        urlString.append(paramValue);
-        return urlString;
+        return writeURLParameter(paramName, paramValue + "");
     }
 
     /**
@@ -645,10 +616,10 @@ public final class Utilities {
         }
         paramValue = treatURLSpecialCharacters(paramValue);
         formString.append("<input type=\"hidden\" name=\"");
-        formString.append(paramName);
+        formString.append(StringEscapeUtils.escapeXml(paramName));
         formString.append("\"");
         formString.append(" value=\"");
-        formString.append(paramValue);
+        formString.append(StringEscapeUtils.escapeXml(paramValue));
         formString.append("\" />");
         return formString;
     }
@@ -664,18 +635,10 @@ public final class Utilities {
      *         overload this method to accept String, Integers and Booleans as well
      */
     public static StringBuffer writeFormParameter(String paramName, Integer paramValue) {
-        StringBuffer formString = new StringBuffer();
-
         if (null == paramName || null == paramValue) {
-            return formString;
+            return new StringBuffer();
         }
-        formString.append("<input type=\"hidden\" name=\"");
-        formString.append(paramName);
-        formString.append("\"");
-        formString.append(" value=\"");
-        formString.append(paramValue);
-        formString.append("\" />");
-        return formString;
+        return writeFormParameter(paramName, paramValue + "");
     }
 
     /**
@@ -689,18 +652,7 @@ public final class Utilities {
      *         overload this method to accept String, Integers and Booleans as well
      */
     public static StringBuffer writeFormParameter(String paramName, int paramValue) {
-        StringBuffer formString = new StringBuffer();
-
-        if (null == paramName) {
-            return formString;
-        }
-        formString.append("<input type=\"hidden\" name=\"");
-        formString.append(paramName);
-        formString.append("\"");
-        formString.append(" value=\"");
-        formString.append(paramValue);
-        formString.append("\" />");
-        return formString;
+        return writeFormParameter(paramName, paramValue + "");
     }
 
     /**
@@ -714,18 +666,7 @@ public final class Utilities {
      *         overload this method to accept String, Integers and Booleans as well
      */
     public static StringBuffer writeFormParameter(String paramName, float paramValue) {
-        StringBuffer formString = new StringBuffer();
-
-        if (null == paramName) {
-            return formString;
-        }
-        formString.append("<input type=\"hidden\" name=\"");
-        formString.append(paramName);
-        formString.append("\"");
-        formString.append(" value=\"");
-        formString.append(paramValue);
-        formString.append("\" />");
-        return formString;
+        return writeFormParameter(paramName, paramValue + "");
     }
 
     /**
@@ -739,18 +680,10 @@ public final class Utilities {
      *         overload this method to accept String, Integers and Booleans as well
      */
     public static StringBuffer writeFormParameter(String paramName, Boolean paramValue) {
-        StringBuffer formString = new StringBuffer();
-
         if (null == paramName || null == paramValue) {
-            return formString;
+            return new StringBuffer();
         }
-        formString.append("<input type=\"hidden\" name=\"");
-        formString.append(paramName);
-        formString.append("\"");
-        formString.append(" value=\"");
-        formString.append(paramValue);
-        formString.append("\" />");
-        return formString;
+        return writeFormParameter(paramName, paramValue + "");
     }
 
     /**
