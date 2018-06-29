@@ -17,6 +17,7 @@
                 ro.finsiel.eunis.jrfTables.species.VernacularNamesPersist,
                 ro.finsiel.eunis.WebContentManagement,
                 java.util.ArrayList"%>
+<%@ page import="org.apache.commons.lang.StringEscapeUtils" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -79,7 +80,7 @@
         <%=cm.cmsPhrase("Species common name")%>
       </u>
       <em><%=Utilities.ReturnStringRelatioOp(oper)%></em>
-      <strong><%=formBean.getVernacularName()%></strong>
+      <strong><%=StringEscapeUtils.escapeXml(formBean.getVernacularName())%></strong>
       <br />
       <br />
       <div id="tab">

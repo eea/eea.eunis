@@ -26,6 +26,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Vector" %>
 <%@ page import="eionet.eunis.util.JstlFunctions" %>
+<%@ page import="org.apache.commons.lang.StringEscapeUtils" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.names.NameBean" scope="page">
   <jsp:setProperty name="formBean" property="*" />
@@ -136,10 +137,10 @@
                               if (newName) {
                                 String searchDescription = "";
                                 if(!formBean.getOldName().equalsIgnoreCase(formBean.getSearchString())) {
-                                  searchDescription = cm.cms("no_match_was_found_for") + " <strong>" + formBean.getOldName() + "</strong>.&nbsp;";
-                                  searchDescription += cm.cms("the_closest_phonetic_match") + " <strong>" + formBean.getSearchString() + "</strong>";
+                                  searchDescription = cm.cms("no_match_was_found_for") + " <strong>" + StringEscapeUtils.escapeXml(formBean.getOldName()) + "</strong>.&nbsp;";
+                                  searchDescription += cm.cms("the_closest_phonetic_match") + " <strong>" + StringEscapeUtils.escapeXml(formBean.getSearchString()) + "</strong>";
                                 } else {
-                                  searchDescription += cm.cms("the_closest_phonetic_match") + " <strong>" + formBean.getSearchString() + "</strong>";
+                                  searchDescription += cm.cms("the_closest_phonetic_match") + " <strong>" + StringEscapeUtils.escapeXml(formBean.getSearchString()) + "</strong>";
                                 }
                             %>
                             <%=searchDescription%>

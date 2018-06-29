@@ -24,6 +24,7 @@
                  java.util.List" %>
 <%@ page import="java.util.Vector" %>
 <%@ page import="eionet.eunis.util.JstlFunctions" %>
+<%@ page import="org.apache.commons.lang.StringEscapeUtils" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.habitats.legal.LegalBean" scope="request">
   <jsp:setProperty name="formBean" property="*" />
@@ -105,7 +106,7 @@
                         '<strong><%=scientName%>'
                         <%=realSearch%>
                         <%=cm.cmsPhrase(", protected by ")%>
-                        '<%=formBean.getLegalText()%>'
+                        '<%=StringEscapeUtils.escapeXml(formBean.getLegalText())%>'
                         <%=cm.cmsPhrase("legal text")%>
                       </strong>
                       </td>

@@ -14,6 +14,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@page import="ro.finsiel.eunis.jrfTables.species.references.SpeciesBooksDomain"%>
 <%@page import="ro.finsiel.eunis.jrfTables.species.references.SpeciesBooksPersist"%><%@ page import="java.util.ArrayList"%>
+<%@ page import="org.apache.commons.lang.StringEscapeUtils" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
   <head>
@@ -62,7 +63,7 @@
 <%=cm.cmsPhrase("List of values for")%>:
 <u><%=cm.cmsPhrase("Species scientific name")%></u>
 <em><%=Utilities.ReturnStringRelatioOp(Utilities.checkedStringToInt(formBean.getRelationOp(), Utilities.OPERATOR_CONTAINS))%></em>
-<strong><%=formBean.getScientificName()%></strong>
+<strong><%=StringEscapeUtils.escapeXmlformBean.getScientificName())%></strong>
 <br />
 <br />
 <%

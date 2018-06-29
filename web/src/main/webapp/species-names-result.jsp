@@ -21,6 +21,7 @@
                  ro.finsiel.eunis.search.species.names.NameBean,
                  ro.finsiel.eunis.jrfTables.Chm62edtSoundexPersist,
                  ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain"%>
+<%@ page import="org.apache.commons.lang.StringEscapeUtils" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.species.names.NameBean" scope="page">
@@ -185,7 +186,7 @@
                       										if(newName){
               											%>
                          											<%=cm.cmsPhrase("No match was found for ")%>
-                         											<strong><%=Utilities.treatURLSpecialCharacters(formBean.getScientificName())%></strong>.&nbsp;
+                         											<strong><%=StringEscapeUtils.escapeXml(formBean.getScientificName())%></strong>.&nbsp;
                          											<%=cm.cmsPhrase("The closest matches are listed below: ")%>
               											<%
                     										}	

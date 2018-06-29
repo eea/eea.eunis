@@ -22,6 +22,7 @@
                  ro.finsiel.eunis.search.sites.SitesSearchCriteria,
                  ro.finsiel.eunis.jrfTables.Chm62edtSoundexPersist,
                  ro.finsiel.eunis.jrfTables.Chm62edtSoundexDomain"%>
+<%@ page import="org.apache.commons.lang.StringEscapeUtils" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <jsp:useBean id="formBean" class="ro.finsiel.eunis.search.sites.names.NameBean" scope="page">
   <jsp:setProperty name="formBean" property="*"/>
@@ -189,12 +190,12 @@
                 String searchDescription = "";
                 if(!formBean.getOldName().equalsIgnoreCase(formBean.getEnglishName()))
                 {
-                  searchDescription = cm.cms( "no_match_was_found_for") + " <strong>"+formBean.getOldName()+"</strong>.&nbsp;";
-                  searchDescription += cm.cms( "phonetic_match" ) + ": <strong>"+formBean.getEnglishName()+"</strong>";
+                  searchDescription = cm.cms( "no_match_was_found_for") + " <strong>"+ StringEscapeUtils.escapeXml(formBean.getOldName())+"</strong>.&nbsp;";
+                  searchDescription += cm.cms( "phonetic_match" ) + ": <strong>"+StringEscapeUtils.escapeXml(formBean.getEnglishName())+"</strong>";
                 }
                 else
                 {
-                  searchDescription += cm.cms( "phonetic_match" ) + ": <strong>"+formBean.getEnglishName()+"</strong>";
+                  searchDescription += cm.cms( "phonetic_match" ) + ": <strong>"+StringEscapeUtils.escapeXml(formBean.getEnglishName())+"</strong>";
                 }
           %>
                 <%=searchDescription%>
