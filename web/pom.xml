@@ -516,7 +516,11 @@
             <artifactId>jasperreports</artifactId>
             <version>${jasper.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.samaxes.stripes</groupId>
+            <artifactId>stripesafe</artifactId>
+            <version>1.0.1</version>
+        </dependency>
     </dependencies>
 
 </project>

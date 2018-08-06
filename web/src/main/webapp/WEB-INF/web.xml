@@ -486,7 +486,7 @@
         </init-param>
         <init-param>
           <param-name>Extension.Packages</param-name>
-          <param-value>eionet.eunis.stripes.extensions</param-value>
+          <param-value>eionet.eunis.stripes.extensions, com.samaxes.stripes.xss</param-value>
         </init-param>
         <init-param>
             <param-name>ActionBeanContext.Class</param-name>
