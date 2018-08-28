@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.text.MessageFormat;
@@ -16,11 +15,16 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.StringUtils;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLContexts;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import ro.finsiel.eunis.jrfTables.Chm62edtLanguageDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtLanguagePersist;
 import ro.finsiel.eunis.jrfTables.EunisISOLanguagesDomain;
@@ -31,6 +35,10 @@ import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import eionet.eunis.util.Pair;
 import ro.finsiel.eunis.utilities.SQLUtilities;
+
+import javax.net.ssl.SSLContext;
+
+import static org.apache.http.conn.ssl.SSLSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER;
 
 
 /**
@@ -827,14 +835,32 @@ public class WebContentManagement implements java.io.Serializable {
 
         if (StringUtils.isNotBlank(url)) {
             try {
-                HttpClient client = new HttpClient();
-                HttpMethod get = new GetMethod(url);
 
-                client.executeMethod(get);
-                result = new Pair<Integer, String>();
-                result.setId(get.getStatusCode());
-                if (get.getStatusCode() != 404) {
-                    result.setValue(get.getResponseBodyAsString());
+
+                SSLContext sslContext = SSLContexts.custom()
+                    .useTLS()
+                    .build();
+
+                SSLConnectionSocketFactory f = new SSLConnectionSocketFactory(
+                    sslContext,
+                    new String[]{"TLSv1.1", "TLSv1.2"},
+                    null,
+                    BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+
+                HttpClient httpClient = HttpClients.custom()
+                    .setSSLSocketFactory(f).build();
+
+                HttpGet get = new HttpGet(url);
+
+                HttpResponse response = httpClient.execute(get);
+
+                result = new Pair<>();
+                result.setId(response.getStatusLine().getStatusCode());
+                if (response.getStatusLine().getStatusCode() != 404) {
+                    HttpEntity entity = response.getEntity();
+                    if(entity != null) {
+                        result.setValue(EntityUtils.toString(entity));
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
