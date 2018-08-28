@@ -23,7 +23,6 @@ import java.util.Properties;
  */
 public class InitServlet  extends HttpServlet {
     public void init() {
-        System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
         Settings.loadSettings(this);
         refreshArt17();
     }
