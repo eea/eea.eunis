@@ -146,7 +146,7 @@
                     <tbody>
                     <tr>
                         <td>
-                            <a href="http://www.eea.europa.eu/data-and-maps/data/natura-7">
+                            <a href="https://www.eea.europa.eu/data-and-maps/data/natura-9">
                                 <%=cm.cmsPhrase("Natura 2000 data")%>
                             </a>
                         </td>
@@ -156,7 +156,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="http://www.eea.europa.eu/data-and-maps/data/ds_resolveuid/c24610c33ca343a8ad51d289ef4c9f4c">
+                            <a href="https://www.eea.europa.eu/data-and-maps/data/nationally-designated-areas-national-cdda-12">
                                 <%=cm.cmsPhrase("Nationally designated areas (CDDA)")%>
                             </a>
                         </td>
