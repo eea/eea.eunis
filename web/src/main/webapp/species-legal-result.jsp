@@ -428,7 +428,7 @@
             %>
                             <td>
             <%
-                                if(null != specie.getUrl().replaceAll("#",""))
+                                if(null != specie.getUrl() && null != specie.getUrl().replaceAll("#",""))
                                 {
                                   String sFormattedURL = Utilities.formatString(specie.getUrl()).replaceAll("#","");
                                   if(sFormattedURL.length()>30)
@@ -510,7 +510,7 @@
             %>
                             <td>
             <%
-                                if(null != specie.getUrl().replaceAll("#",""))
+                                if(null != specie.getUrl() && null != specie.getUrl().replaceAll("#",""))
                                 {
                                   String sFormattedURL = Utilities.formatString(specie.getUrl()).replaceAll("#","");
                                   if(sFormattedURL.length()>30)
