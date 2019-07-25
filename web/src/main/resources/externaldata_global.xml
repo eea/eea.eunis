@@ -9,7 +9,7 @@
   <entry key="queries">art17delv2012s euringcodes estatcodes n2000birds n2000other n2000habitats habides syntaxa art172013crh art172013crs</entry>
   Natura 2000 species temporarily removed.
   -->
-  <entry key="queries">art17delv2012s euringcodes estatcodes n2000habitats habides syntaxa art172013crh art172013crs</entry>
+  <entry key="queries">art17delv2012s euringcodes estatcodes n2000habitats syntaxa art172013crh art172013crs</entry>
 
   <entry key="n2000habitats.querytype">SQL</entry>
   <entry key="n2000habitats.title">Natura 2000 codelist of Annex I habitats (SDF field: 3.1)</entry>
@@ -102,7 +102,7 @@ WHERE s.ID_GROUP_SPECIES<>5 ORDER BY a.OBJECT
 
 
   <entry key="syntaxa.querytype">SPARQL</entry>
-  <entry key="syntaxa.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="syntaxa.endpoint">https://semantic.eea.europa.eu/sparql</entry>
   <entry key="syntaxa.title">Vegetation syntaxa crosswalks to EUNIS habitat classification (Schaminée et al, 2012)</entry>
   <entry key="syntaxa.attribution"><![CDATA[Schaminée, J.H.J., Chytrý, M., Hennekens, S.M., Mucina, L., Rodwell, J.S. & Tichý, L. (2012): <a href="/references/2460">Development of vegetation syntaxa crosswalks to EUNIS habitat classification and related data sets</a>]]></entry>
   <entry key="syntaxa.summary"><![CDATA[The crosswalks are cross-references between widely accepted European habitats (i.e. the EUNIS habitats classification) and phytosociological definitions of vegetation types (i.e. syntaxa).
@@ -137,7 +137,7 @@ ORDER BY ?name
 ]]></entry>
 
   <entry key="nutscodes.querytype">SPARQL</entry>
-  <entry key="nutscodes.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="nutscodes.endpoint">https://semantic.eea.europa.eu/sparql</entry>
   <entry key="nutscodes.title">NUTS regions (including historic codes)</entry>
   <entry key="nutscodes.summary"><![CDATA[This is a list of NUTS codes queried as external data from EEA's Semantic Data Service.]]></entry>
   <entry key="nutscodes.query"><![CDATA[
@@ -157,7 +157,7 @@ WHERE {
 
 
   <entry key="estatcodes.querytype">SPARQL</entry>
-  <entry key="estatcodes.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="estatcodes.endpoint">https://semantic.eea.europa.eu/sparql</entry>
   <entry key="estatcodes.title">Eurostat fishes code list with EUNIS species matches</entry>
   <entry key="estatcodes.summary"><![CDATA[The Eurostat code list is primarily used for fishery statistics.
 The 3-alpha identifier is a unique code made of three letters that is widely used for the exchange of data with national correspondents and among fishery agencies.]]></entry>
@@ -434,7 +434,7 @@ ORDER BY SPECIES_GROUP, FAMILY, s.SCIENTIFIC_NAME
 
 
     <entry key="art172013crh.querytype">SPARQL</entry>
-    <entry key="art172013crh.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art172013crh.endpoint">https://semantic.eea.europa.eu/sparql</entry>
     <entry key="art172013crh.title">Conservation status (2007-2012) of habitat types (Habitats Directive, Article 17)</entry>
     <entry key="art172013crh.summary"><![CDATA[Country-level assessment of the conservation status of habitat types by country and biogeographical region. All EU Member States are requested by the Habitats Directive (1992) to monitor habitat types and species considered to be of Community interest.
 ]]></entry>
@@ -468,7 +468,7 @@ WHERE {
 
 
     <entry key="art172013crs.querytype">SPARQL</entry>
-    <entry key="art172013crs.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art172013crs.endpoint">https://semantic.eea.europa.eu/sparql</entry>
     <entry key="art172013crs.title">Conservation status (2007-2012) of species (Habitats Directive, Article 17)</entry>
     <entry key="art172013crs.summary"><![CDATA[Country-level assessment of the conservation status of species by country and biogeographical region. All EU Member States are requested by the Habitats Directive (1992) to monitor habitat types and species considered to be of Community interest.
 ]]></entry>

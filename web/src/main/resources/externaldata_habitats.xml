@@ -326,7 +326,7 @@ WHERE {
 
 
 
-  <entry key="habitatdistribution.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="habitatdistribution.endpoint">https://semantic.eea.europa.eu/sparql</entry>
   <entry key="habitatdistribution.title">Countries having this habitat type</entry>
   <entry key="habitatdistribution.summary">Data collected by the European Commission and ETC/BD in 2002 and 2005</entry>
   <entry key="habitatdistribution.query"><![CDATA[
@@ -369,7 +369,7 @@ WHERE {
 <!-- -->
 <!-- Syntaxa crosswalk query -->
 <!-- -->
-  <entry key="syntaxa.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="syntaxa.endpoint">https://semantic.eea.europa.eu/sparql</entry>
   <entry key="syntaxa.title">Crosswalk from EUNIS habitat types to phytosociological syntaxa</entry>
   <entry key="syntaxa.summary"><![CDATA[The European Vegetation Survey developed an overview of European vegetation units,
 syntaxa, providing a standardising tool in classifying vegetation types across Europe.]]></entry>

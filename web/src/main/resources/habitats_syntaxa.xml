@@ -17,7 +17,7 @@
 <!-- Syntaxa crosswalk query -->
 <!-- -->
   <entry key="syntaxa.querytype">SPARQL</entry>
-  <entry key="syntaxa.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="syntaxa.endpoint">https://semantic.eea.europa.eu/sparql</entry>
   <entry key="syntaxa.title">Relation to vegetation types (syntaxa)</entry>
   <entry key="syntaxa.summary"><![CDATA[The European Vegetation Survey developed an overview of European vegetation units,
 syntaxa, providing a standardising tool in classifying vegetation types across Europe.]]></entry>

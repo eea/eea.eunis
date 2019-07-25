@@ -11,7 +11,7 @@
         art17habitats_full_eu
     </entry>
 
-    <entry key="art17species_eu.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art17species_eu.endpoint">https://semantic.eea.europa.eu/sparql</entry>
     <entry key="art17species_eu.title">Conservation status (2007-2012) of species (Habitats Directive, Article 17) at EU level
         level
     </entry>
@@ -38,7 +38,7 @@ WHERE {
 
 
 
-    <entry key="art17species_full_eu.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art17species_full_eu.endpoint">https://semantic.eea.europa.eu/sparql</entry>
     <entry key="art17species_full_eu.title">Conservation status (2007-2012) of species (Habitats Directive, Article 17) at EU level (all species)wina
 
     </entry>
@@ -64,7 +64,7 @@ WHERE {
 
 
 
-    <entry key="art17habitats_eu.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art17habitats_eu.endpoint">https://semantic.eea.europa.eu/sparql</entry>
     <entry key="art17habitats_eu.title">Conservation status (2007-2012) of habitats (Habitats Directive, Article 17) at EU level
         level
     </entry>
@@ -92,7 +92,7 @@ WHERE {
 
 
 
-    <entry key="art17habitats_full_eu.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+    <entry key="art17habitats_full_eu.endpoint">https://semantic.eea.europa.eu/sparql</entry>
     <entry key="art17habitats_full_eu.title">Conservation status (2007-2012) of habitats (Habitats Directive, Article 17) at EU (all habitats)
     </entry>
     <entry key="art17habitats_full_eu.queryType">SPARQL</entry>

@@ -36,7 +36,7 @@
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/species/4055"/>
     <void:exampleResource rdf:resource="http://eunis.eea.europa.eu/sites/UK930012"/>
     <void:uriSpace>http://eunis.eea.europa.eu/</void:uriSpace>
-    <void:sparqlEndpoint rdf:resource="http://semantic.eea.europa.eu/sparql"/>
+    <void:sparqlEndpoint rdf:resource="https://semantic.eea.europa.eu/sparql"/>
     <void:subset rdf:resource="#biogeoregions"/>
     <void:subset rdf:resource="#countries"/>
     <void:subset rdf:resource="#countrybiogeo"/>

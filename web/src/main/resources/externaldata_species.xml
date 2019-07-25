@@ -387,7 +387,7 @@ WHERE {
 <!-- -->
 <!-- Landings of fishery products -->
 <!-- -->
-  <entry key="landings.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="landings.endpoint">https://semantic.eea.europa.eu/sparql</entry>
   <entry key="landings.title">Landings of fishery products</entry>
   <entry key="landings.attribution"><![CDATA[<a href="http://ec.europa.eu/eurostat">Eurostat</a>
 ]]></entry>
@@ -484,7 +484,7 @@ WHERE {
 <!-- -->
 <!-- Birdlife population distribution -->
 <!-- -->
-  <entry key="birdlifedistribution.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="birdlifedistribution.endpoint">https://semantic.eea.europa.eu/sparql</entry>
   <entry key="birdlifedistribution.title">Population distribution from "Birds in Europe" editions 1 and 2</entry>
   <entry key="birdlifedistribution.summary"><![CDATA[These publications present a thorough and detailed
  review of the conservation status of European birds. Based on detailed breeding
@@ -566,7 +566,7 @@ WHERE {
 <!-- -->
 <!-- Birdlife population trend -->
 <!-- -->
-  <entry key="birdlifetrend.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="birdlifetrend.endpoint">https://semantic.eea.europa.eu/sparql</entry>
   <entry key="birdlifetrend.title">Population trends from "Birds in Europe" editions 1 and 2</entry>
   <entry key="birdlifetrend.summary"><![CDATA[These publications present a thorough and detailed
  review of the conservation status of European birds. Based on detailed breeding
@@ -640,7 +640,7 @@ WHERE {
 <!-- -->
 <!-- Population trends from Butterfly Conservation Europe -->
 <!-- -->
-  <entry key="butterfliestrend.endpoint">http://semantic.eea.europa.eu/sparql</entry>
+  <entry key="butterfliestrend.endpoint">https://semantic.eea.europa.eu/sparql</entry>
   <entry key="butterfliestrend.title">Population trends from Butterfly Conservation Europe</entry>
   <entry key="butterfliestrend.summary"><![CDATA[The Red Data Book (1999) presents the first comprehensive
  review of the status of butterflies across Europe and a new Red List for the
