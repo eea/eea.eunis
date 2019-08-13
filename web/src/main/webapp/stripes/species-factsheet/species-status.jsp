@@ -23,7 +23,7 @@
                                     <c:when test="${!empty actionBean.consStatusWO and !(statusCodeWO eq 'ne')}">
                                         <c:choose>
                                             <c:when test="${!empty actionBean.redlistLink}">
-                                                <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/0">
+                                                <a href="https://apiv3.iucnredlist.org/api/v3/taxonredirect/${actionBean.redlistLink}">
                                             </c:when>
                                             <c:otherwise>
                                                 <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">
@@ -50,7 +50,7 @@
 
                                             <c:choose>
                                                 <c:when test="${!empty actionBean.redlistLink and !(statusCodeEU eq 'ne')}">
-                                                    <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/1">
+                                                    <a href="https://apiv3.iucnredlist.org/api/v3/taxonredirect/${actionBean.redlistLink}">
                                                 </c:when>
                                                 <c:otherwise>
                                                     <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">
@@ -77,7 +77,7 @@
                                             <c:when test="${not empty actionBean.consStatusE25 and !(statusCodeE25 eq 'ne')}">
                                                 <c:choose>
                                                     <c:when test="${!empty actionBean.redlistLink}">
-                                                        <a href="http://www.iucnredlist.org/apps/redlist/details/${actionBean.redlistLink}/1">
+                                                        <a href="https://apiv3.iucnredlist.org/api/v3/taxonredirect/${actionBean.redlistLink}">
                                                     </c:when>
                                                     <c:otherwise>
                                                         <a href="http://www.iucnredlist.org/apps/redlist/search/external?text=${eunis:treatURLSpecialCharacters(actionBean.specie.scientificName)}&amp;mode=">
