@@ -49,7 +49,10 @@
                                         <c:when test="${not empty actionBean.consStatusEU and !(statusCodeEU eq 'ne')}">
 
                                             <c:choose>
-                                                <c:when test="${!empty actionBean.redlistLink and !(statusCodeEU eq 'ne')}">
+                                                <c:when test="${!empty actionBean.redlistLink and !empty actionBean.redlistLinkEurope and !(statusCodeEU eq 'ne')}">
+                                                    <a href="https://www.iucnredlist.org/species/${actionBean.redlistLink}/${actionBean.redlistLinkEurope}">
+                                                </c:when>
+                                                <c:when test="${!empty actionBean.redlistLink}">
                                                     <a href="https://apiv3.iucnredlist.org/api/v3/taxonredirect/${actionBean.redlistLink}">
                                                 </c:when>
                                                 <c:otherwise>
@@ -76,6 +79,9 @@
                                         <c:choose>
                                             <c:when test="${not empty actionBean.consStatusE25 and !(statusCodeE25 eq 'ne')}">
                                                 <c:choose>
+                                                    <c:when test="${!empty actionBean.redlistLink and !empty actionBean.redlistLinkEurope}">
+                                                        <a href="https://www.iucnredlist.org/species/${actionBean.redlistLink}/${actionBean.redlistLinkEurope}">
+                                                    </c:when>
                                                     <c:when test="${!empty actionBean.redlistLink}">
                                                         <a href="https://apiv3.iucnredlist.org/api/v3/taxonredirect/${actionBean.redlistLink}">
                                                     </c:when>

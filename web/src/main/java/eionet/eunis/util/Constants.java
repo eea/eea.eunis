@@ -27,6 +27,7 @@ public interface Constants {
     public static final String SAME_SPECIES_ITIS = "sameSpeciesITIS"; // www.itis.gov
     public static final String SAME_SPECIES_NCBI = "sameSpeciesNCBI"; // www.ncbi.nlm.nih.gov
     public static final String SAME_SPECIES_REDLIST = "sameSpeciesRedlist"; // IUCN Red list
+    public static final String SAME_SPECIES_REDLIST_EUROPE = "sameSpeciesRedlistEurope"; // IUCN Red list for Europe
     public static final String SAME_SPECIES_FIFAO = "sameSpeciesFIFAO"; // FAO aquatic species distribution
 
     // Same Synonym

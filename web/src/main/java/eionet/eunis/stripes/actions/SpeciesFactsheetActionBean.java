@@ -87,6 +87,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
     private String kingdomname;
     /** IUCN Redlist number */
     private String redlistLink;
+    private String redlistLinkEurope;
     private String scientificNameURL;
     private String speciesName;
     /** World Register of Marine Species - also has seals etc. */
@@ -754,6 +755,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                             : scientificName);
 
             redlistLink = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST);
+            redlistLinkEurope = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SPECIES_REDLIST_EUROPE);
 
             // World Register of Marine Species - also has seals etc.
             wormsid = getNatObjectAttribute(specie.getIdNatureObject(), Constants.SAME_SYNONYM_WORMS);
@@ -1808,6 +1810,10 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
 
     public List<LinkDTO> getArt12factsheet() {
         return art12factsheet;
+    }
+
+    public String getRedlistLinkEurope() {
+        return redlistLinkEurope;
     }
 }
 
