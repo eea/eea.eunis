@@ -328,9 +328,9 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
   // Load saved search
   if(request.getParameter("loadCriteria") != null && request.getParameter("loadCriteria").equalsIgnoreCase("yes"))
   {
-	  String rfw = (String)request.getParameter("fromWhere");
-	  String rcn = (String)request.getParameter("criterianame");
-	  String rsn = (String)request.getParameter("siteName");
+	  String rfw = request.getParameter("fromWhere");
+	  String rcn = request.getParameter("criterianame");
+	  String rsn = request.getParameter("siteName");
 %>
 <jsp:include page="load-save-combined-search.jsp">
   <jsp:param name="fromWhere" value="<%=rfw%>"/>

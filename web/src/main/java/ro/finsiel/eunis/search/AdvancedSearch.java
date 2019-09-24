@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.search;
 
 
+import org.apache.commons.lang.StringEscapeUtils;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import java.sql.ResultSet;
@@ -267,6 +268,10 @@ public class AdvancedSearch {
         Connection con = null;
         Statement ps = null;
 
+        IdSession = StringEscapeUtils.escapeXml(IdSession);
+        NatureObject = StringEscapeUtils.escapeXml(NatureObject);
+        IdNatureObject = StringEscapeUtils.escapeXml(IdNatureObject);
+
         try {
             con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
             ps = con.createStatement();
@@ -425,6 +430,11 @@ public class AdvancedSearch {
         Connection con = null;
         PreparedStatement ps = null;
 
+        IdNode = StringEscapeUtils.escapeXml(IdNode);
+        IdSession = StringEscapeUtils.escapeXml(IdSession);
+        NatureObject = StringEscapeUtils.escapeXml(NatureObject);
+
+
         try {
             
             con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
@@ -480,6 +490,11 @@ public class AdvancedSearch {
         Connection con = null;
         PreparedStatement ps = null;
 
+        IdNode = StringEscapeUtils.escapeXml(IdNode);
+        IdSession = StringEscapeUtils.escapeXml(IdSession);
+        NatureObject = StringEscapeUtils.escapeXml(NatureObject);
+        FirstValue = StringEscapeUtils.escapeXml(FirstValue);
+
         try {
             
             con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
@@ -511,6 +526,11 @@ public class AdvancedSearch {
         String SQL = "";
         Connection con = null;
         PreparedStatement ps = null;
+
+        IdNode = StringEscapeUtils.escapeXml(IdNode);
+        IdSession = StringEscapeUtils.escapeXml(IdSession);
+        NatureObject = StringEscapeUtils.escapeXml(NatureObject);
+        LastValue = StringEscapeUtils.escapeXml(LastValue);
 
         try {
             
@@ -742,7 +762,7 @@ public class AdvancedSearch {
                 result += "<em>" + rs.getString("OPERATOR") + "</em> ";
                 result += "<u>" + rs.getString("FIRST_VALUE") + "</u>";
                 if (rs.getString("OPERATOR").equalsIgnoreCase("Between")) {
-                    result += " <em>AND</em> <u>" + rs.getString("LAST_VALUE")
+                    result += " <em>AND</em> <u>" +  rs.getString("LAST_VALUE")
                             + "</u>";
                 }
             }
@@ -888,6 +908,11 @@ public class AdvancedSearch {
         ResultSet rs = null;
         String IdNodeNew = "";
 
+        IdNode = StringEscapeUtils.escapeXml(IdNode);
+        IdSession = StringEscapeUtils.escapeXml(IdSession);
+        NatureObject = StringEscapeUtils.escapeXml(NatureObject);
+        Attribute = StringEscapeUtils.escapeXml(Attribute);
+
         try {
             
             con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
@@ -992,6 +1017,10 @@ public class AdvancedSearch {
         Connection con = null;
         PreparedStatement ps = null;
 
+        IdNode = StringEscapeUtils.escapeXml(IdNode);
+        IdSession = StringEscapeUtils.escapeXml(IdSession);
+        NatureObject = StringEscapeUtils.escapeXml(NatureObject);
+
         try {
             
             con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
@@ -1046,6 +1075,10 @@ public class AdvancedSearch {
         String SQL = "";
         Connection con = null;
         PreparedStatement ps = null;
+
+        IdSession = StringEscapeUtils.escapeXml(IdSession);
+        NatureObject = StringEscapeUtils.escapeXml(NatureObject);
+        Attribute = StringEscapeUtils.escapeXml(Attribute);
 
         try {
             
