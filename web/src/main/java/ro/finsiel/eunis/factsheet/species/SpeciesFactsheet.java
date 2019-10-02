@@ -1585,7 +1585,7 @@ public class SpeciesFactsheet {
         String where = "";
         where += " ID_OBJECT IN ( " + syn + " )";
         where += " AND NATURE_OBJECT_TYPE='Species'";
-        where += " AND (SOURCE LIKE 'Saxifraga%' OR SOURCE LIKE 'Otars%' OR SOURCE LIKE 'LIFE%' OR SOURCE LIKE 'Axel Hochkirch')";
+        where += " AND VISIBLE=1";
         if (mainPic) {
             where += " AND MAIN_PIC = 1";
         }
@@ -1717,29 +1717,26 @@ public class SpeciesFactsheet {
      * @return List<ClassificationDTO>.
      */
     public List<ClassificationDTO> getClassifications() {
-        List<ClassificationDTO> classifications = new ArrayList<ClassificationDTO>();
+        List<ClassificationDTO> classifications = new ArrayList<>();
+        String currentId = getSpeciesObject().getIdTaxcode();
 
-        List<Chm62edtTaxcodePersist> list =
-                new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY = '" + getSpeciesObject().getIdTaxcode() + "'");
-        if (list != null && list.size() > 0) {
-            Chm62edtTaxcodePersist t = list.get(0);
-            String str = t.getTaxonomyTree();
-            StringTokenizer st = new StringTokenizer(str, ",");
-            int i = 0;
-
-            while (st.hasMoreTokens()) {
-                StringTokenizer sts = new StringTokenizer(st.nextToken(), "*");
-                String classificationId = sts.nextToken();
-                String classificationLevel = sts.nextToken();
-                String classificationName = sts.nextToken();
-
-                ClassificationDTO classif = new ClassificationDTO();
-                classif.setId(classificationId);
-                classif.setLevel(classificationLevel);
-                classif.setName(classificationName);
-                classifications.add(classif);
-            }
+        while(classifications.size()<=10) {
+            List<Chm62edtTaxcodePersist> list =
+                new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY = '" + currentId + "'");
+             if (list != null && list.size() > 0) {
+                 Chm62edtTaxcodePersist t = list.get(0);
+                 ClassificationDTO classif = new ClassificationDTO();
+                 classifications.add(0, classif);
+                 classif.setId(currentId);
+                 classif.setLevel(StringUtils.capitalize(t.getTaxonomicLevel()));
+                 classif.setName(t.getTaxonomicName());
+                 if(t.getIdTaxcodeParent().equalsIgnoreCase(currentId)) {
+                     break;
+                 }
+                 currentId = t.getIdTaxcodeParent();
+             }
         }
+
         return classifications;
     }
 

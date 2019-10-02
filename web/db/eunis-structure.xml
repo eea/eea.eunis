@@ -2400,4 +2400,18 @@ END
         <sql>alter table chm62edt_habitat_class_code add comment varchar(100);</sql>
     </changeSet>
 
+    <changeSet id="rev-152" author="ivascu">
+        <comment>Added visibility flag to pictures</comment>
+        <sql>alter table chm62edt_nature_object_picture add visible numeric(2) default 1;</sql>
+    </changeSet>
+    <changeSet id="rev-153" author="ivascu">
+        <comment>Set species picture visibility only to the allowed ones</comment>
+        <sql>update chm62edt_nature_object_picture set visible=0 where nature_object_type='Species' and not(SOURCE LIKE 'Saxifraga%' OR SOURCE LIKE 'Otars%' OR SOURCE LIKE 'LIFE%' OR SOURCE LIKE 'Axel Hochkirch')</sql>
+    </changeSet>
+
+    <changeSet id="rev-154" author="ivascu">
+        <comment>Added a "package" field to the pictures so we can manage the pictures better when the rights of use change</comment>
+        <sql>alter table chm62edt_nature_object_picture add package varchar(20);</sql>
+    </changeSet>
+
 </databaseChangeLog>
