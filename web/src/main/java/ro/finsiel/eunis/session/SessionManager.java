@@ -386,67 +386,88 @@ public final class SessionManager implements java.io.Serializable {
      */
     public boolean login(String username, String password, HttpServletRequest request) {
         logout();
-        this.username = username;
-        this.password = password;
-        this.authenticated = true;
-        loadUserPreferences();
-        // log the login process to database
+        // authenticated = false...
+        boolean result = false;
 
-        Connection conn = null;
-        PreparedStatement ps = null;
-        // update last login date
         try {
-            conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
-            UserPersist user = findUser(username);
-
-            if (user == null) {
-                ps = conn.prepareStatement(
-                        "INSERT INTO eunis_users (USERNAME) VALUES ('"
-                        + username + "')");
-                ps.execute();
-                ps.close();
-                ps = conn.prepareStatement(
-                        "INSERT INTO eunis_users_roles (USERNAME, ROLENAME) VALUES ('"
-                        + username + "','Guest')");
-                ps.execute();
-                ps.close();
-            }
-
-            ps = conn.prepareStatement(
-            "UPDATE eunis_users SET LOGIN_DATE=? WHERE USERNAME=?");
-            ps.setTimestamp(1, new java.sql.Timestamp(new Date().getTime()));
-            ps.setString(2, username);
-            ps.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            SQLUtilities.closeAll(conn, ps, null);
+            DirectoryService.sessionLogin(username, password);
+            result = true;
+            // final String encryptedPassword = EncryptPassword.encrypt( password );
+            // result = encryptedPassword.equalsIgnoreCase( user.getPassword() );
+        } catch (DirServiceException ex) {
+            result = false;
+            ex.printStackTrace();
+        } catch (SecurityException ex) {
+            result = false;
+            ex.printStackTrace();
         }
+        if (result) {
+            this.username = username;
+            this.password = password;
+            this.authenticated = true;
+            loadUserPreferences();
+            // log the login process to database
 
-        if (null != request) {
-            String sessionID = request.getSession().getId();
-            String ipAddr = request.getRemoteAddr();
-            long longTime = new Date().getTime();
-
+            Connection conn = null;
+            PreparedStatement ps = null;
+            // update last login date
             try {
                 conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
-                ps = conn.prepareStatement(
-                "INSERT INTO eunis_session_log (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
+                UserPersist user = findUser(username);
 
-                ps.setString(1, sessionID);
+                if (user == null) {
+                    ps = conn.prepareStatement(
+                            "INSERT INTO eunis_users (USERNAME) VALUES ('"
+                            + username + "')");
+                    ps.execute();
+                    ps.close();
+                    ps = conn.prepareStatement(
+                            "INSERT INTO eunis_users_roles (USERNAME, ROLENAME) VALUES ('"
+                            + username + "','Guest')");
+                    ps.execute();
+                    ps.close();
+                }
+
+                ps = conn.prepareStatement(
+                "UPDATE eunis_users SET LOGIN_DATE=? WHERE USERNAME=?");
+                ps.setTimestamp(1, new java.sql.Timestamp(new Date().getTime()));
                 ps.setString(2, username);
-                ps.setTimestamp(3, new java.sql.Timestamp(longTime));
-                ps.setTimestamp(4, new java.sql.Timestamp(longTime));
-                ps.setString(5, ipAddr);
                 ps.execute();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 SQLUtilities.closeAll(conn, ps, null);
             }
+
+            if (null != request) {
+                String sessionID = request.getSession().getId();
+                String ipAddr = request.getRemoteAddr();
+                long longTime = new Date().getTime();
+
+                try {
+                    conn = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
+                    ps = conn.prepareStatement(
+                    "INSERT INTO eunis_session_log (ID_SESSION, USERNAME, START, END, IP_ADDRESS) VALUES (?, ?, ?, ?, ?)");
+
+                    ps.setString(1, sessionID);
+                    ps.setString(2, username);
+                    ps.setTimestamp(3, new java.sql.Timestamp(longTime));
+                    ps.setTimestamp(4, new java.sql.Timestamp(longTime));
+                    ps.setString(5, ipAddr);
+                    ps.execute();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    SQLUtilities.closeAll(conn, ps, null);
+                }
+            } else {
+                System.out.println(
+                "SessionManager::login(...) - request object was null.");
+            }
         } else {
             System.out.println(
-            "SessionManager::login(...) - request object was null.");
+                    "Could not log user '" + username
+                    + "'. Password does not match.");
         }
         return authenticated;
     }
