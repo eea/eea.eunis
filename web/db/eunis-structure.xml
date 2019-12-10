@@ -2414,4 +2414,10 @@ END
         <sql>alter table chm62edt_nature_object_picture add package varchar(20);</sql>
     </changeSet>
 
+    <changeSet id="rev-155" author="ivascu">
+        <comment>Indexed picture visible column</comment>
+        <sql>ALTER TABLE chm62edt_nature_object_picture
+            ADD INDEX idx_nop_visible (visible);</sql>
+    </changeSet>
+
 </databaseChangeLog>
