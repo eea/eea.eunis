@@ -13,7 +13,7 @@
                     <a href="habitats-code-browser-2017.jsp">EUNIS habitat classification 2017</a>
                 </c:when>
                 <c:otherwise>
-                    <a href="habitats-code-browser.jsp">EUNIS habitat classification 2012</a>
+                    <a href="habitats-code-browser.jsp">EUNIS habitat classification 2012 amended 2019</a>
                 </c:otherwise>
             </c:choose>
 
