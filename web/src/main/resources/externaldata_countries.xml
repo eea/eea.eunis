@@ -17,7 +17,7 @@
 <!-- -->
 <!-- Deliveries query -->
 <!-- -->
-  <entry key="sites.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="sites.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="sites.title">Number of SCIs and SACs by biogeographical region</entry>
   <entry key="sites.summary"><![CDATA[According to reporting carried out in EU 25 for the period 2001-2006,
 compiled as part of the Habitats Directive - Article 17 reporting process.

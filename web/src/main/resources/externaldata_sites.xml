@@ -17,7 +17,7 @@
 <!-- -->
 <!-- Deliveries query -->
 <!-- -->
-  <entry key="deliveries.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="deliveries.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="deliveries.title">Reportnet deliveries</entry>
   <entry key="deliveries.summary">Files delivered through Reportnet with relevance to this site.</entry>
 

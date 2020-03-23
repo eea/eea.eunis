@@ -28,7 +28,7 @@
 <!-- -->
 <!-- Deliveries query -->
 <!-- -->
-  <entry key="deliveries.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="deliveries.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="deliveries.title">Reportnet deliveries</entry>
   <entry key="deliveries.summary">Files delivered through Reportnet with relevance to this species.</entry>
 <!-- Links are defined as {queryId}.link.{labelColumn}={linkColumn} -->
@@ -83,7 +83,7 @@ WHERE {
 
 
 
-  <entry key="art17ranges.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="art17ranges.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="art17ranges.title">Ranges for this species reported under Article 17, Habitats Directive</entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="art17ranges.summary"><![CDATA[Assessments on the conservation status of the habitat types
@@ -139,7 +139,7 @@ WHERE {
 
 
 
-  <entry key="art17populations.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="art17populations.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="art17populations.title">Population distribution reported under Article 17, Habitats Directive</entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="art17populations.summary"><![CDATA[Assessments on the conservation status of the habitat types
@@ -190,7 +190,7 @@ WHERE {
 ]]></entry>
 
 
-  <entry key="natconcl2012.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="natconcl2012.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="natconcl2012.title">Conclusions for this species reported in 2013 under Article 17, Habitats Directive</entry>
   <entry key="natconcl2012.attribution"><![CDATA[
 <div style="font-size:130%; background-color: #ff8080;border:1px solid gray;margin:1em 3em;padding:0.5em;text-align:center">Unvalidated data: country deliveries</div>
@@ -272,7 +272,7 @@ WHERE {
 ]]></entry>
 
 
-  <entry key="natpopul2012.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="natpopul2012.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="natpopul2012.title">Populations for this species reported in 2013 under Article 17, Habitats Directive</entry>
   <entry key="natpopul2012.attribution"><![CDATA[
 <div style="font-size:130%; background-color: #ff8080;border:1px solid gray;margin:1em 3em;padding:0.5em;text-align:center">Unvalidated data: country deliveries</div>
@@ -347,7 +347,7 @@ WHERE {
 }
 ]]></entry>
 
-  <entry key="derogationsreport.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="derogationsreport.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="derogationsreport.title">Summary of derogations for species</entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="derogationsreport.summary">EU member states are required to report derogations from protection efforts of species.</entry>

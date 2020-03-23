@@ -17,7 +17,7 @@
 <!-- -->
 <!-- Deliveries query -->
 <!-- -->
-  <entry key="deliveries.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="deliveries.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="deliveries.title">Reportnet deliveries</entry>
   <entry key="deliveries.summary">Files delivered through Reportnet with relevance to this habitat type.</entry>
 
@@ -72,7 +72,7 @@ WHERE {
 <!-- .endpoint, .title and .query are mandatory for all queries -->
 <!-- .summary - use HTML format - i.e. escape & and < -->
 <!-- -->
-  <entry key="art17distribution.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="art17distribution.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="art17distribution.title">Distributions for this habitat type reported under Article 17, Habitats Directive</entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="art17distribution.summary"><![CDATA[Assessments on the conservation status of the habitat types 
@@ -123,7 +123,7 @@ FILTER(?rdfType IN (art17:Habitattypesummary, art17:HabitatTypeManualAssessment)
 ]]></entry>
 
 
-  <entry key="art17ranges.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="art17ranges.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="art17ranges.title">Ranges for this habitat type reported under Article 17, Habitats Directive</entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="art17ranges.summary"><![CDATA[Assessments on the conservation status of the habitat types 
@@ -176,7 +176,7 @@ FILTER(?rdfType IN (art17:Habitattypesummary, art17:HabitatTypeManualAssessment)
 ]]></entry>
 
 
-  <entry key="natconcl2012.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="natconcl2012.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="natconcl2012.title">Conclusions for this habitat type reported in 2013 under Article 17, Habitats Directive</entry>
   <entry key="natconcl2012.attribution"><![CDATA[
 <div style="font-size:130%; background-color: #ff8080;border:1px solid gray;margin:1em 3em;padding:0.5em;text-align:center">Unvalidated data: country deliveries</div>
@@ -255,7 +255,7 @@ WHERE {
 }
 ]]></entry>
 
-  <entry key="natarea2012.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="natarea2012.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="natarea2012.title">Surface areas for this habitat type reported in 2013 under Article 17, Habitats Directive</entry>
   <entry key="natarea2012.attribution"><![CDATA[
 <div style="font-size:130%; background-color: #ff8080;border:1px solid gray;margin:1em 3em;padding:0.5em;text-align:center">Unvalidated data: country deliveries</div>

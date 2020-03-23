@@ -202,7 +202,7 @@ ORDER BY OBJECT
 ]]></entry>
 
   <entry key="habides.querytype">SPARQL</entry>
-  <entry key="habides.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="habides.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="habides.title">Species object of derogations under the Birds and the Habitats Directives</entry>
   <entry key="habides.summary"><![CDATA[Species object of derogations under the Birds Directive Article 9 and the Habitats Directive Article 16.
 The Member States mentioned are only those which used the electronic reporting of derogations (HABIDES).
@@ -231,7 +231,7 @@ ORDER BY ?species
 
 
   <entry key="art17delv2012s.querytype">SPARQL</entry>
-  <entry key="art17delv2012s.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="art17delv2012s.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="art17delv2012s.title">Conservation status reports (2007-2012) of species and habitat types (Habitats Directive, Article 17)</entry>
   <entry key="art17delv2012s.summary"><![CDATA[Assessments on the conservation status of the habitat types 
    and species of Community interest have been carried out in EU 27 for the period 2007-2012, 

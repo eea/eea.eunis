@@ -11,7 +11,7 @@
 <!-- .summary - use HTML format - i.e. escape & and < -->
 <!-- -->
 
-  <entry key="conservationstatusBio.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="conservationstatusBio.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="conservationstatusBio.title">Biogeographical assessment of the conservation status of the habitat types</entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="conservationstatusBio.summary"><![CDATA[Biogeographical assessments on the conservation status of the habitat types
@@ -47,7 +47,7 @@ WHERE {
 }
 ]]></entry>
 
-  <entry key="conservationstatusCountry.endpoint">http://cr.eionet.europa.eu/sparql</entry>
+  <entry key="conservationstatusCountry.endpoint">https://cr.eionet.europa.eu/sparql</entry>
   <entry key="conservationstatusCountry.title">Country-level assessment of the conservation status of the habitat types</entry>
 <!-- .summary - use HTML format - i.e. escape & and < -->
   <entry key="conservationstatusCountry.summary"><![CDATA[Country-level assessments on the conservation status of the habitat types
