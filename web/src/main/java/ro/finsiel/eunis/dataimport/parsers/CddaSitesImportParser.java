@@ -3,6 +3,7 @@ package ro.finsiel.eunis.dataimport.parsers;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,10 +16,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import ro.finsiel.eunis.dataimport.ImportJobListener;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 
@@ -26,6 +30,8 @@ import ro.finsiel.eunis.utilities.SQLUtilities;
  *
  */
 public class CddaSitesImportParser extends DefaultHandler {
+
+    private static Log logger = LogFactory.getLog(CddaSitesImportParser.class);
 
     private InputStream inputStream;
 
@@ -50,6 +56,7 @@ public class CddaSitesImportParser extends DefaultHandler {
     private String chngYear;
     private String lat;
     private String lon;
+    private String marinePercentage; //MARINE_PERCENT
 
     private boolean newSite = false;
 
@@ -141,6 +148,9 @@ public class CddaSitesImportParser extends DefaultHandler {
             if (qName.equalsIgnoreCase("LON")) {
                 lon = buf.toString().trim();
             }
+            if (qName.equalsIgnoreCase("CDDA_Marine_percentage")) {
+                marinePercentage = buf.toString().trim();
+            }
 
             if (qName.equalsIgnoreCase("CDDA_sites")) { // record name
 
@@ -167,6 +177,18 @@ public class CddaSitesImportParser extends DefaultHandler {
                     }
                 }
 
+                BigDecimal marinePerc = null;
+
+                if(marinePercentage != null) {
+                    try {
+                        marinePerc = new BigDecimal(marinePercentage);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                        logger.warn(e, e);
+                    }
+                }
+
                 if (!newSite) {
                     preparedStatementSitesUpdate.setString(1, siteCodeNat);
                     preparedStatementSitesUpdate.setString(2, desigAbbr);
@@ -179,7 +201,8 @@ public class CddaSitesImportParser extends DefaultHandler {
                     preparedStatementSitesUpdate.setString(9, lat);
                     preparedStatementSitesUpdate.setString(10, lon);
                     preparedStatementSitesUpdate.setInt(11, geoscopeId);
-                    preparedStatementSitesUpdate.setString(12, siteCode);
+                    preparedStatementSitesUpdate.setBigDecimal(12, marinePerc);
+                    preparedStatementSitesUpdate.setString(13, siteCode);
                     preparedStatementSitesUpdate.addBatch();
                 } else {
                     preparedStatementNatObject.setString(1, siteNatureObjectId);
@@ -199,6 +222,7 @@ public class CddaSitesImportParser extends DefaultHandler {
                     preparedStatementSites.setString(11, lon);
                     preparedStatementSites.setInt(12, geoscopeId);
                     preparedStatementSites.setString(13, siteNatureObjectId);
+                    preparedStatementSites.setBigDecimal(14, marinePerc);
                     preparedStatementSites.addBatch();
                 }
 
@@ -233,6 +257,7 @@ public class CddaSitesImportParser extends DefaultHandler {
                 chngYear = null;
                 lat = null;
                 lon = null;
+                marinePercentage = null;
             }
         } catch (Exception e) {
             throw new RuntimeException(e.toString(), e);
@@ -263,14 +288,14 @@ public class CddaSitesImportParser extends DefaultHandler {
             String querySites = "INSERT INTO chm62edt_sites (ID_SITE, NATIONAL_CODE, ID_DESIGNATION, "
                     + "NAME, AREA, IUCNAT, NUTS, DESIGNATION_DATE, UPDATE_DATE, "
                     + "LATITUDE, LONGITUDE,"
-                    + "SOURCE_DB, ID_GEOSCOPE, ID_NATURE_OBJECT) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,'CDDA_NATIONAL',?,?)";
+                    + "SOURCE_DB, ID_GEOSCOPE, ID_NATURE_OBJECT, MARINE_PERCENT) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,'CDDA_NATIONAL',?,?,?)";
 
             this.preparedStatementSites = con.prepareStatement(querySites);
 
             String querySitesUpdate = "UPDATE chm62edt_sites SET NATIONAL_CODE=?, ID_DESIGNATION=?, "
                     + "NAME=?, AREA=?, IUCNAT=?, NUTS=?, DESIGNATION_DATE=?, UPDATE_DATE=?, "
-                    + "LATITUDE=?, LONGITUDE=?, SOURCE_DB='CDDA_NATIONAL', ID_GEOSCOPE=? "
+                    + "LATITUDE=?, LONGITUDE=?, SOURCE_DB='CDDA_NATIONAL', ID_GEOSCOPE=?, MARINE_PERCENT=? "
                     + "WHERE ID_SITE = ?";
 
             this.preparedStatementSitesUpdate = con.prepareStatement(

@@ -20,5 +20,6 @@
         <CDDA_Coordinates_code>01</CDDA_Coordinates_code>
         <CDDA_Resolution_code>05</CDDA_Resolution_code>
         <CDDA_Dissemination_code>01</CDDA_Dissemination_code>
+        <CDDA_Marine_percentage>20.1</CDDA_Marine_percentage>
     </CDDA_sites>
 </dataroot>

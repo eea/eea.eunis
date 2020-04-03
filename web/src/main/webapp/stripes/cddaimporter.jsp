@@ -57,6 +57,7 @@ Code rural L. 236-12 et R. 236-84 et R. 236-95.&lt;/Law&gt;
 		&lt;CDDA_Coordinates_code&gt;00&lt;/CDDA_Coordinates_code&gt;
 		&lt;CDDA_Resolution_code&gt;01&lt;/CDDA_Resolution_code&gt;
 		&lt;CDDA_Dissemination_code&gt;01&lt;/CDDA_Dissemination_code&gt;
+		&lt;CDDA_Marine_percentage&gt;01&lt;/CDDA_Marine_percentage&gt;
 	&lt;/CDDA_sites&gt;
       </pre>
 

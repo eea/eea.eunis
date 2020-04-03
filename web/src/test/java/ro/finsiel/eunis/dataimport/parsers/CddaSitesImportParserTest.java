@@ -45,6 +45,10 @@ public class CddaSitesImportParserTest {
             result = sqlUtilities.ExecuteSQL("select count(1) from chm62edt_nature_object where ORIGINAL_CODE='184031'");
             Assert.assertEquals("1", result);
 
+            result = sqlUtilities.ExecuteSQL("select id_nature_object from chm62edt_nature_object where ORIGINAL_CODE='184031'");
+            result = sqlUtilities.ExecuteSQL("select MARINE_PERCENT from chm62edt_sites where id_nature_object=" + result);
+            Assert.assertEquals("20.10", result);
+
         } catch(Exception e){
             e.printStackTrace();
             Assert.assertTrue(false);
