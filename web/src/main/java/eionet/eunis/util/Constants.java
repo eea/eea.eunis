@@ -123,4 +123,7 @@ public interface Constants {
 
     public static final Integer RESOLUTION4 = 2467;
     public static final Integer ANNEX1 = 2324;
+
+    public static final int IAS_ANNEX = 2485;
+    public static final int IAS_REGULATION = 2484;
 }

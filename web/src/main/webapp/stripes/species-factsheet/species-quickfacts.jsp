@@ -107,7 +107,7 @@
             </tbody>
             </c:if>
 
-            <c:if test="${fn:length(actionBean.legalStatuses) gt 0}">
+            <c:if test="${fn:length(actionBean.legalStatuses) gt 0 and actionBean.otherAgreements gt 0}">
                 <tbody>
                 <tr>
                     <th>Protected by</th>

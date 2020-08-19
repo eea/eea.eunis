@@ -455,6 +455,8 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 habitatsDirective = true;
             } else if(birdsDirectiveIdDc.contains(legalStatus.getIdDc())){
                 birdsDirective = true;
+            } else if(legalStatus.getIdDc() == Constants.IAS_REGULATION || legalStatus.getIdDc() == Constants.IAS_ANNEX ) {
+                // don't count as protection the IAS regulation
             } else {
                 otherAgreements++;
             }
