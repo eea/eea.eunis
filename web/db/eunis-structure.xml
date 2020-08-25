@@ -2429,18 +2429,24 @@ END
 
             update chm62edt_habitat set level=level-1 where habitat_type='EUNIS2017' and eunis_habitat_code like 'S3-6%' and length(eunis_habitat_code) > 4;
 
+            create temporary table habitat1 as select * from chm62edt_habitat;
+            alter table habitat1 add index h1i0(id_habitat);
+            alter table habitat1 add index h1i1(eunis_habitat_code);
+            alter table habitat1 add index h1i2(level, habitat_type);
+            alter table habitat1 add index h1i3(code_2000);
+
             update chm62edt_habitat h1 set id_habitat_parent =
-            (select id_habitat from chm62edt_habitat h2 where replace(h2.eunis_habitat_code,'-','') = left(replace(h1.eunis_habitat_code,'-',''), length(replace(h1.eunis_habitat_code,'-',''))-1) and h2.level = h1.level - 1
+            (select id_habitat from habitat1 h2 where replace(h2.eunis_habitat_code,'-','') = left(replace(h1.eunis_habitat_code,'-',''), length(replace(h1.eunis_habitat_code,'-',''))-1) and h2.level = h1.level - 1
             and h2.habitat_type = h1.habitat_type)
             where habitat_type='EUNIS2017';
 
             update chm62edt_habitat h1 set id_habitat_parent =
-            (select id_habitat from chm62edt_habitat h2 where replace(h2.eunis_habitat_code,'.','') = left(replace(h1.eunis_habitat_code,'.',''), length(replace(h1.eunis_habitat_code,'.',''))-1) and h2.level = h1.level - 1
+            (select id_habitat from habitat1 h2 where replace(h2.eunis_habitat_code,'.','') = left(replace(h1.eunis_habitat_code,'.',''), length(replace(h1.eunis_habitat_code,'.',''))-1) and h2.level = h1.level - 1
             and h2.habitat_type = h1.habitat_type)
             where habitat_type='EUNIS';
 
             update chm62edt_habitat h1 set id_habitat_parent =
-            (select id_habitat from chm62edt_habitat h2 where
+            (select id_habitat from habitat1 h2 where
             ((h1.level > 2 and h2.code_2000 = rpad( left(h1.code_2000, h1.level -1), 4, '0'))
             or
             (h1.level = 2 and h2.code_2000 = left(h1.code_2000, h1.level -1))
