@@ -83,6 +83,10 @@ public class Chm62edtHabitatPersist extends PersistentObject {
 
     private String habitatType = null;
 
+    private Integer idHabitatParent;
+
+    private String eeaCode;
+
     public Chm62edtHabitatPersist() {
         super();
     }
@@ -329,5 +333,21 @@ public class Chm62edtHabitatPersist extends PersistentObject {
 
     public void setHabitatType(String habitatType) {
         this.habitatType = habitatType;
+    }
+
+    public Integer getIdHabitatParent() {
+        return idHabitatParent;
+    }
+
+    public void setIdHabitatParent(Integer idHabitatParent) {
+        this.idHabitatParent = idHabitatParent;
+    }
+
+    public String getEeaCode() {
+        return eeaCode;
+    }
+
+    public void setEeaCode(String eeaCode) {
+        this.eeaCode = eeaCode;
     }
 }

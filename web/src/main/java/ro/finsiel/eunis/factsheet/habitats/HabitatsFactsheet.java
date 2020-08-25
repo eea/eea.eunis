@@ -2226,4 +2226,29 @@ public class HabitatsFactsheet {
         return results;
     }
 
+    /**
+     * Get all the ancestors of the current habitat based on parent id
+     * @return
+     */
+    public List<Chm62edtHabitatPersist> getAncestors() {
+        List<Chm62edtHabitatPersist> result = new ArrayList<>();
+        Chm62edtHabitatPersist current = habitat;
+
+        while (current != null ||  result.size() > 10) {
+            List list = new Chm62edtHabitatDomain().findWhere(
+                    "ID_HABITAT='" + current.getIdHabitatParent() + "'");
+
+            if (list.size() > 0) {
+                current = (Chm62edtHabitatPersist) list.get(0);
+                result.add(current);
+            } else{
+                current = null;
+            }
+        }
+
+        Collections.reverse(result);
+
+        return result;
+    }
+
 }

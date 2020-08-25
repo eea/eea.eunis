@@ -74,6 +74,14 @@ public class Chm62edtHabitatDomain extends AbstractDomain {
                 new StringColumnSpec("HABITAT_TYPE",
                 "getHabitatType", "setHabitatType",
                 DEFAULT_TO_NULL));
+
+        this.addColumnSpec(
+                new IntegerColumnSpec("ID_HABITAT_PARENT", "getIdHabitatParent",
+                        "setIdHabitatParent", DEFAULT_TO_NULL));
+
+        this.addColumnSpec(
+                new StringColumnSpec("EEA_CODE", "getEeaCode",
+                        "setEeaCode", DEFAULT_TO_NULL));
     }
 
     /**

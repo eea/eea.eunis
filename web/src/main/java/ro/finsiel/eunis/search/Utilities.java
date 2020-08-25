@@ -12,14 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Random;
-import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,6 +46,7 @@ import ro.finsiel.eunis.search.species.taxcode.TaxonomyDTO;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import ro.finsiel.eunis.utilities.TableColumns;
 import eionet.eunis.util.Constants;
+import ro.finsiel.eunis.utilities.TheOneConnectionPool;
 
 
 /**
@@ -62,6 +56,14 @@ import eionet.eunis.util.Constants;
  * @author finsiel
  */
 public final class Utilities {
+    // mapping for creating habitat tree
+    private static Map<String, String> typeColumnMap;
+    static {
+        typeColumnMap = new HashMap<>();
+        typeColumnMap.put("ANNEX1", "CODE_2000");
+        typeColumnMap.put("EUNIS", "EUNIS_HABITAT_CODE");
+        typeColumnMap.put("EUNIS2017", "EUNIS_HABITAT_CODE");
+    }
 
     /**
      * Defines an EUNIS habitat.
@@ -2539,6 +2541,10 @@ public final class Utilities {
 
     // Utility methods for habitats-eunis-browser, species-taxonomic-browser.jsp, habitats-annex1-browser.jsp START
 
+    public static String removeFromExpanded(String expand, int idCurrent) {
+        return removeFromExpanded(expand, ""+idCurrent);
+    }
+
     public static String removeFromExpanded(String expand, String idCurrent) {
         StringBuffer ret = new StringBuffer();
         String[] st = expand.split(",");
@@ -2577,6 +2583,10 @@ public final class Utilities {
             ret.deleteCharAt(index);
         }
         return ret.toString();
+    }
+
+    public static String addToExpanded(String expand, int idCurrent) {
+        return addToExpanded(expand, "" + idCurrent);
     }
 
     public static String addToExpanded(String expand, String idCurrent) {
@@ -2789,6 +2799,223 @@ public final class Utilities {
         }
 
         return filterSQL;
+    }
+
+    public static HabitatTree buildTree(String expand, String type) {
+        HabitatTree root = new HabitatTree();
+        expand = StringEscapeUtils.escapeXml(expand);
+        // first add all root stuff
+
+        try {
+            Connection c = TheOneConnectionPool.getConnection();
+
+            // get the top one
+            PreparedStatement ps = c.prepareStatement("select id_habitat, scientific_name, " + typeColumnMap.get(type) + " from chm62edt_habitat where level=1 and habitat_type=? order by " + typeColumnMap.get(type) );
+            ps.setString(1, type);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                HabitatTree habitat = new HabitatTree();
+                habitat.setIdHabitat(rs.getInt(1));
+                habitat.setName(rs.getString(2));
+                habitat.setCode(rs.getString(3));
+                habitat.setHasChildren(true); // all root elements should have children, useless query
+
+                root.getChildren().add(habitat);
+            }
+            rs.close();
+            ps.close();
+
+            String [] expandList = expand.split(",");
+
+            // limits expansion to 100
+            if(expandList.length > 100) {
+                expandList = Arrays.copyOf(expandList, 100);
+            }
+
+            List<HabitatTree> strangeThings = new ArrayList<>();
+
+            for(String expandItem : expandList) {
+                Integer id = checkedStringToInt(expandItem, null);
+                if(id != null) {
+                    HabitatTree habitat = readOne(id, type, c);
+                    if(habitat != null) {
+                        HabitatTree parent = findInTree(root, habitat.getIdHabitat());
+                        if (parent == null) {
+                            strangeThings.add(habitat);
+                        } else {
+                            // populate the node's children
+                            if(parent.equals(habitat)) {
+                                populateChildren(c, parent, type);
+                            } else {
+                                populateChildren(c, habitat, type);
+                            }
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            logger.warn(e, e);
+        }
+            return root;
+    }
+
+    private static HabitatTree readOne(int id, String type, Connection c) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        HabitatTree ht = null;
+
+        try {
+            ps = c.prepareStatement("select h.id_habitat, h.scientific_name, h." + typeColumnMap.get(type) + ", h.id_habitat_parent, (select count(*) from chm62edt_habitat h1 where h1.id_habitat_parent = h.id_habitat) as children from chm62edt_habitat h where h.id_habitat = ? and h.habitat_type=?");
+            ps.setInt(1, id);
+            ps.setString(2, type);
+
+            rs = ps.executeQuery();
+
+            if(rs.next()) {
+                ht = new HabitatTree();
+                ht.setIdHabitat(rs.getInt(1));
+                ht.setName(rs.getString(2));
+                ht.setCode(rs.getString(3));
+                ht.setIdHabitatParent(rs.getInt(4));
+                ht.setHasChildren(rs.getInt(5) > 0);
+            }
+
+        } catch (Exception e) {
+            logger.warn(e, e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                logger.warn(e, e);
+            }
+        }
+
+        return ht;
+    }
+
+    private static void populateChildren(Connection c, HabitatTree leaf, String type) {
+        if(leaf.getChildren().size() > 0) {
+            return;
+        }
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = c.prepareStatement("select h.id_habitat, h.scientific_name, h." + typeColumnMap.get(type) +", h.id_habitat_parent, (select count(*) from chm62edt_habitat h1 where h1.id_habitat_parent = h.id_habitat) as children from chm62edt_habitat h where h.id_habitat_parent = ? and h.habitat_type=? order by h." + typeColumnMap.get(type));
+            ps.setInt(1, leaf.getIdHabitat());
+            ps.setString(2, type);
+
+            rs = ps.executeQuery();
+
+            while(rs.next()) {
+                HabitatTree ht = new HabitatTree();
+                ht.setIdHabitat(rs.getInt(1));
+                ht.setName(rs.getString(2));
+                ht.setCode(rs.getString(3));
+                ht.setIdHabitatParent(rs.getInt(4));
+                ht.setHasChildren(rs.getInt(5) > 0);
+                leaf.getChildren().add(ht);
+            }
+
+        } catch (Exception e) {
+            logger.warn(e, e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                logger.warn(e, e);
+            }
+        }
+    }
+
+    private static HabitatTree findInTree(HabitatTree root, int idHabitat) {
+        if(root.getIdHabitat() != null && root.getIdHabitat() == idHabitat) {
+            return root;
+        } else {
+            for(HabitatTree ht : root.getChildren()) {
+                HabitatTree maybe = findInTree(ht, idHabitat);
+                if(maybe != null) {
+                    return maybe;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Converts the habitat tree in a list for easier display
+     * @param root
+     * @param level
+     * @return
+     */
+    public static List<HabitatTreeList> treeAsList(HabitatTree root, int level) {
+        List<HabitatTreeList> result = new ArrayList<>();
+
+        if(level != 1) {
+            HabitatTreeList htl = new HabitatTreeList(root);
+            htl.setLevel(level);
+            htl.setOpen(root.getChildren().size() > 0);
+            result.add(htl);
+        }
+
+        for(HabitatTree ht : root.getChildren()) {
+            result.addAll(treeAsList(ht, level+1));
+        }
+
+        return result;
+    }
+
+    // remove the id and all its children from the expand list
+    public static String removeFromExpanded(String expand, int idCurrent, HabitatTree root) {
+        List<String> result = new ArrayList<>(Arrays.asList(expand.split(",")));
+        result.remove(""+idCurrent);
+
+        HabitatTree leaf = findInTree(root, idCurrent);
+
+        if(leaf != null) {
+            // also remove all its children
+            List<HabitatTreeList> nodeList = treeAsList(leaf, 1);
+            for(HabitatTreeList htl : nodeList) {
+                result.remove("" + htl.getIdHabitat());
+            }
+        }
+
+        return join(",", result);
+    }
+
+    /**
+     * Join the strings with joinStr in the middle
+     * @param joinStr separator
+     * @param strings list of strings
+     * @return joint strings with separator
+     */
+    public static String join(String joinStr, List<String> strings) {
+        if (strings == null || strings.isEmpty()) {
+            return "";
+        } else if (strings.size() == 1) {
+            return strings.get(0);
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append(strings.get(0));
+            for (int i = 1; i < strings.size(); i++) {
+                sb.append(joinStr).append(strings.get(i));
+            }
+            return sb.toString();
+        }
     }
 
     // Utility methods for habitats-eunis-browser, species-taxonomic-browser.jsp, habitats-annex1-browser.jsp END
