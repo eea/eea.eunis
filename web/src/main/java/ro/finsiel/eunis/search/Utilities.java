@@ -2806,26 +2806,23 @@ public final class Utilities {
         expand = StringEscapeUtils.escapeXml(expand);
         // first add all root stuff
 
-        try {
-            Connection c = TheOneConnectionPool.getConnection();
-
+        try (Connection c = TheOneConnectionPool.getConnection()) {
             // get the top one
-            PreparedStatement ps = c.prepareStatement("select id_habitat, scientific_name, " + typeColumnMap.get(type) + " from chm62edt_habitat where level=1 and habitat_type=? order by " + typeColumnMap.get(type) );
-            ps.setString(1, type);
+            try (PreparedStatement ps = c.prepareStatement("select id_habitat, scientific_name, " + typeColumnMap.get(type) + " from chm62edt_habitat where level=1 and habitat_type=? order by " + typeColumnMap.get(type))) {
+                ps.setString(1, type);
+                ResultSet rs = ps.executeQuery();
 
-            ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    HabitatTree habitat = new HabitatTree();
+                    habitat.setIdHabitat(rs.getInt(1));
+                    habitat.setName(rs.getString(2));
+                    habitat.setCode(rs.getString(3));
+                    habitat.setHasChildren(true); // all root elements should have children, useless query
 
-            while(rs.next()) {
-                HabitatTree habitat = new HabitatTree();
-                habitat.setIdHabitat(rs.getInt(1));
-                habitat.setName(rs.getString(2));
-                habitat.setCode(rs.getString(3));
-                habitat.setHasChildren(true); // all root elements should have children, useless query
-
-                root.getChildren().add(habitat);
+                    root.getChildren().add(habitat);
+                }
+                rs.close();
             }
-            rs.close();
-            ps.close();
 
             String [] expandList = expand.split(",");
 
@@ -2863,12 +2860,11 @@ public final class Utilities {
     }
 
     private static HabitatTree readOne(int id, String type, Connection c) {
-        PreparedStatement ps = null;
         ResultSet rs = null;
         HabitatTree ht = null;
 
-        try {
-            ps = c.prepareStatement("select h.id_habitat, h.scientific_name, h." + typeColumnMap.get(type) + ", h.id_habitat_parent, (select count(*) from chm62edt_habitat h1 where h1.id_habitat_parent = h.id_habitat) as children from chm62edt_habitat h where h.id_habitat = ? and h.habitat_type=?");
+        try (PreparedStatement ps =c.prepareStatement("select h.id_habitat, h.scientific_name, h."+typeColumnMap.get(type) +", h.id_habitat_parent, (select count(*) from chm62edt_habitat h1 where h1.id_habitat_parent = h.id_habitat) as children from chm62edt_habitat h where h.id_habitat = ? and h.habitat_type=?")){
+
             ps.setInt(1, id);
             ps.setString(2, type);
 
@@ -2890,9 +2886,6 @@ public final class Utilities {
                 if (rs != null) {
                     rs.close();
                 }
-                if (ps != null) {
-                    ps.close();
-                }
             } catch (Exception e) {
                 logger.warn(e, e);
             }
@@ -2906,11 +2899,10 @@ public final class Utilities {
             return;
         }
 
-        PreparedStatement ps = null;
         ResultSet rs = null;
 
-        try {
-            ps = c.prepareStatement("select h.id_habitat, h.scientific_name, h." + typeColumnMap.get(type) +", h.id_habitat_parent, (select count(*) from chm62edt_habitat h1 where h1.id_habitat_parent = h.id_habitat) as children from chm62edt_habitat h where h.id_habitat_parent = ? and h.habitat_type=? order by h." + typeColumnMap.get(type));
+        try (PreparedStatement ps = c.prepareStatement("select h.id_habitat, h.scientific_name, h." + typeColumnMap.get(type) + ", h.id_habitat_parent, (select count(*) from chm62edt_habitat h1 where h1.id_habitat_parent = h.id_habitat) as children from chm62edt_habitat h where h.id_habitat_parent = ? and h.habitat_type=? order by h." + typeColumnMap.get(type))){
+
             ps.setInt(1, leaf.getIdHabitat());
             ps.setString(2, type);
 
@@ -2932,9 +2924,6 @@ public final class Utilities {
             try {
                 if (rs != null) {
                     rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
                 }
             } catch (Exception e) {
                 logger.warn(e, e);
