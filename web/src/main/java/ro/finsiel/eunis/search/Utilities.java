@@ -63,6 +63,7 @@ public final class Utilities {
         typeColumnMap.put("ANNEX1", "CODE_2000");
         typeColumnMap.put("EUNIS", "EUNIS_HABITAT_CODE");
         typeColumnMap.put("EUNIS2017", "EUNIS_HABITAT_CODE");
+        typeColumnMap.put("REDLIST", "EEA_CODE");
     }
 
     /**

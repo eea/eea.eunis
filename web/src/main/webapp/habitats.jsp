@@ -146,6 +146,16 @@
                         <%=cm.cmsPhrase("Visualisation of Bern Convention Resolution 4 habitat types (Emerald network)")%>
                       </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <img alt="<%=cm.cmsPhrase("Red List habitat types hierarchical view")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle"/><%=cm.cmsTitle("habitats_main_EUNIShierarchy")%>
+                            <a href="habitats-code-browser-redlist.jsp"><strong><%=cm.cmsPhrase("Red List habitat types hierarchical view")%>
+                            </strong></a>
+                        </td>
+                        <td>
+                            <%=cm.cmsPhrase("Visualisation of Red List habitat types classification")%>
+                        </td>
+                    </tr>
                   </tbody>
                 </table>
             </div>

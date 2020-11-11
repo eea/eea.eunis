@@ -2461,4 +2461,92 @@ END
         </sql>
     </changeSet>
 
+    <changeSet id="redlist-1" author="ivascu">
+        <comment>Red List of Habitats tables</comment>
+        <sql>
+            CREATE TABLE `chm62edt_habitat_redlist` (
+            `id_habitat` int(16) NOT NULL,
+            `category_EU28` varchar(100) DEFAULT NULL,
+            `category_EU28PLUS` varchar(100) DEFAULT NULL,
+            `synthesis` varchar(3500) DEFAULT NULL,
+            `capacity_recover` varchar(2500) DEFAULT NULL,
+            `EU28_trend_quantity` varchar(100) DEFAULT NULL,
+            `EU28PLUS_trend_quantity` varchar(100) DEFAULT NULL,
+            `EU28_trend_quality` varchar(100) DEFAULT NULL,
+            `EU28PLUS_trend_quality` varchar(100) DEFAULT NULL,
+            `conservation_management` varchar(2500) DEFAULT NULL,
+            `map_description` varchar(2500) DEFAULT NULL,
+            `overall_criteria_EU28` varchar(100) DEFAULT NULL,
+            `overall_criteria_EU28_plus` varchar(100) DEFAULT NULL,
+            `confidence_assessment` varchar(100) DEFAULT NULL,
+            `pressures_and_threats` varchar(3500) DEFAULT NULL,
+            `occurrence_ext_EU28_EOO` varchar(100) DEFAULT NULL,
+            `occurrence_ext_EU28PLUS_EOO` varchar(100) DEFAULT NULL,
+            `occurrence_ext_EU28_AOO` varchar(100) DEFAULT NULL,
+            `occurrence_ext_EU28PLUS_AOO` varchar(100) DEFAULT NULL,
+            `occurrence_ext_EU28_area_km2` varchar(100) DEFAULT NULL,
+            `occurrence_ext_EU28PLUS_area_km2` varchar(100) DEFAULT NULL,
+            `occurrence_ext_EU28_comment` varchar(250) DEFAULT NULL,
+            `occurrence_ext_EU28PLUS_comment` varchar(250) DEFAULT NULL,
+            PRIMARY KEY (`id_habitat`),
+            CONSTRAINT `habitat_id` FOREIGN KEY (`id_habitat`) REFERENCES `chm62edt_habitat` (`ID_HABITAT`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+            CREATE TABLE `chm62edt_habitat_redlist_conservation` (
+            `ID_HABITAT` int(16) NOT NULL,
+            `ID_MEASURE` int(11) NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+            CREATE TABLE `chm62edt_habitat_redlist_occurrence` (
+            `id_habitat` int(16) DEFAULT NULL,
+            `EU28_type` varchar(10) DEFAULT NULL,
+            `id_country` int(11) DEFAULT NULL,
+            `present` varchar(100) DEFAULT NULL,
+            `current_area_value` varchar(20) DEFAULT NULL,
+            `trend_quantity` varchar(100) DEFAULT NULL,
+            `trend_quality` varchar(100) DEFAULT NULL,
+            `id_sea` int(11) DEFAULT NULL,
+            KEY `habitat_id_idx` (`id_habitat`),
+            KEY `habitat_country_idx` (`id_country`),
+            CONSTRAINT `habitat_oc_id` FOREIGN KEY (`id_habitat`) REFERENCES `chm62edt_habitat` (`ID_HABITAT`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+            CREATE TABLE `chm62edt_habitat_redlist_threats` (
+            `ID_HABITAT` int(16) NOT NULL,
+            `ID_THREAT` int(11) NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+            CREATE TABLE `chm62edt_redlist_seas` (
+            `ID_SEA` int(11) NOT NULL DEFAULT 0,
+            `SEA_NAME` varchar(250) NOT NULL,
+            PRIMARY KEY (`ID_SEA`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+            CREATE TABLE `chm62edt_redlist_countries` (
+            `ID_COUNTRY` int(11) NOT NULL DEFAULT 0,
+            `COUNTRY_NAME` varchar(250) NOT NULL,
+            `COUNTRY_TYPE` varchar(10) NOT NULL,
+            PRIMARY KEY (`ID_COUNTRY`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+            CREATE TABLE `chm62edt_conservation_measures` (
+            `ID_MEASURE` int(11) NOT NULL DEFAULT 0,
+            `MAIN_CATEGORY` varchar(250) NOT NULL,
+            `SUBCATEGORY` varchar(2500) NOT NULL,
+            PRIMARY KEY (`ID_MEASURE`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+            CREATE TABLE `chm62edt_threats` (
+            `ID_THREAT` int(11) NOT NULL DEFAULT 0,
+            `THREAT_CODE_1` varchar(10) DEFAULT NULL,
+            `MAIN_THREAT` varchar(2500) DEFAULT NULL,
+            `DESCRIPTION` varchar(2500) DEFAULT NULL,
+            `sort_order` char(16) DEFAULT NULL,
+            PRIMARY KEY (`ID_THREAT`),
+            KEY `IDX_THREAT` (`ID_THREAT`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+
+    </changeSet>
+
 </databaseChangeLog>

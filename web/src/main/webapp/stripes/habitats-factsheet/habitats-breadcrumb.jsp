@@ -12,6 +12,9 @@
                 <c:when test="${actionBean.factsheet.eunis2017}">
                     <a href="habitats-code-browser-2017.jsp">EUNIS habitat classification 2017</a>
                 </c:when>
+                <c:when test="${actionBean.factsheet.redList}">
+                    <a href="habitats-code-browser-redlist.jsp">Red List habitat classification</a>
+                </c:when>
                 <c:otherwise>
                     <a href="habitats-code-browser.jsp">EUNIS habitat classification 2012 amended 2019</a>
                 </c:otherwise>
@@ -25,9 +28,15 @@
         <c:forEach items="${actionBean.factsheet.ancestors}" var="other" varStatus="loop">
             <span id="breadcrumbs-${loop.index + 1}" style="display: inline-block;" dir="ltr">
                 <c:if test="${other.idHabitat != '10000'}">
-                    <c:if test="${not empty other.eunisHabitatCode}">
-                        ${other.eunisHabitatCode} -
-                    </c:if>
+                    <c:choose>
+                        <c:when test="${actionBean.factsheet.redList}">
+                            ${other.eeaCode} -
+                        </c:when>
+                        <c:otherwise> <c:if test="${not empty other.eunisHabitatCode}">
+                            ${other.eunisHabitatCode} -
+                        </c:if>
+                        </c:otherwise>
+                    </c:choose>
                     <a href="habitats/${other.idHabitat}">${eunis:bracketsToItalics(eunis:replaceTags(other.scientificName))}</a>
                     <span class="breadcrumbSeparator">
                         &gt;
@@ -36,9 +45,17 @@
             </span>
         </c:forEach>
         <span id="breadcrumbs-current" style="display: inline-block;" dir="ltr">
-            <c:if test="${not empty actionBean.factsheet.eunisHabitatCode}">
-                ${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')} -
-            </c:if>
+            <c:choose>
+                <c:when test="${actionBean.factsheet.redList}">
+                    ${actionBean.factsheet.eeaCode}
+                </c:when>
+            <c:otherwise>
+                <c:if test="${not empty actionBean.factsheet.eunisHabitatCode}">
+                    ${eunis:formatString(actionBean.factsheet.eunisHabitatCode, '')} -
+                </c:if>
+            </c:otherwise>
+            </c:choose>
+
             ${eunis:bracketsToItalics(eunis:replaceTags(actionBean.factsheet.habitatScientificName))}
         </span>
     </div>

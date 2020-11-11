@@ -8,7 +8,6 @@ import eionet.eunis.dao.IReferencesDao;
 import eionet.eunis.dto.*;
 import eionet.eunis.rdf.LinkedDataQuery;
 import eionet.eunis.stripes.actions.beans.OrderedSpeciesBean;
-import eionet.eunis.stripes.actions.beans.SpeciesBean;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -33,6 +32,7 @@ import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.util.Constants;
 import eionet.sparqlClient.helpers.ResultValue;
 import ro.finsiel.eunis.search.species.references.ReferencesSearchCriteria;
+import ro.finsiel.eunis.utilities.EunisUtil;
 
 /**
  * Action bean to handle habitats-factsheet functionality. Data is loaded from
@@ -129,6 +129,16 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     private boolean resolution4Relation = false;
 
+    private Chm62edtHabitatRedlistPersist redlist = null;
+    private List<Chm62edtHabitatOccurrencePersist> redlistOccurrencesEU;
+    private List<Chm62edtHabitatOccurrencePersist> redlistOccurrencesEurope;
+    private List<Chm62edtHabitatOccurrencePersist> redlistOccurrencesSea;
+    private List<Chm62edtHabitatRedlistConservationPersist> redlistConservation;
+    private List<Chm62edtHabitatRedlistThreatsPersist> redlistThreats;
+    private List<PictureDTO> pics;
+    private String descriptionSpecies;
+
+
     /**
      * RDF output is served from elsewhere.
      */
@@ -213,10 +223,34 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             dominantSpecies = factsheet.getEunis2017Species("Habitat dominant species");
         }
 
+        if(factsheet.isRedList()) {
+            redlist = factsheet.getRedlist();
+            redlistOccurrencesEU = factsheet.getRedListOccurrencesEU();
+            redlistOccurrencesEurope = factsheet.getRedListOccurrencesEurope();
+            redlistOccurrencesSea = factsheet.getRedListOccurrencesSea();
+            redlistConservation = factsheet.getRedListConservation();
+            redlistThreats = factsheet.getRedListThreats();
+            setPictures();
+            if(getEnglishDescription().contains("Characteristic species")) {
+                descriptionSpecies = getEnglishDescription().substring(englishDescription.indexOf("Characteristic species"));
+                englishDescription = getEnglishDescription().substring(0, englishDescription.indexOf("Characteristic species"));
+            } else if (getEnglishDescription().contains("Vascular plants")) {
+                descriptionSpecies = getEnglishDescription().substring(englishDescription.indexOf("Vascular plants"));
+                englishDescription = getEnglishDescription().substring(0, englishDescription.indexOf("Vascular plants"));
+            } else if (getEnglishDescription().contains("Charactersitic species")) {
+                descriptionSpecies = getEnglishDescription().substring(englishDescription.indexOf("Charactersitic species"));
+                englishDescription = getEnglishDescription().substring(0, englishDescription.indexOf("Charactersitic species"));
+            }
+
+//                and description not like '%Characteristic species%' and description not like '%Vascular plants%' and description not like '%Charactersitic species%';
+        }
+
         if(factsheet.isAnnexI()) {
             return new ForwardResolution("/stripes/habitats-factsheet/annex1/habitats-factsheet-annex1.layout.jsp");
         } else if(factsheet.isEunis2017()) {
             return new ForwardResolution("/stripes/habitats-factsheet/eunis2017/habitats-factsheet-eunis2017.layout.jsp");
+        } else if (factsheet.isRedList()) {
+            return new ForwardResolution("/stripes/habitats-factsheet/redlist/habitats-factsheet-redlist.layout.jsp");
         } else {
             return new ForwardResolution("/stripes/habitats-factsheet/habitats-factsheet.layout.jsp");
         }
@@ -935,5 +969,55 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
     public boolean isResolution4Relation() {
         return resolution4Relation;
+    }
+
+    public Chm62edtHabitatRedlistPersist getRedlist() {
+        return redlist;
+    }
+
+    public List<Chm62edtHabitatOccurrencePersist> getRedlistOccurrencesEU() {
+        return redlistOccurrencesEU;
+    }
+
+    public List<Chm62edtHabitatOccurrencePersist> getRedlistOccurrencesEurope() {
+        return redlistOccurrencesEurope;
+    }
+    public List<Chm62edtHabitatOccurrencePersist> getRedlistOccurrencesSea() {
+        return redlistOccurrencesSea;
+    }
+
+    public List<Chm62edtHabitatRedlistThreatsPersist> getRedlistThreats() {
+        return redlistThreats;
+    }
+
+    public List<PictureDTO> getPics() {
+        return pics;
+    }
+
+    private void setPictures() {
+        String picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_HABITATS");
+        pics = factsheet.getPictures(picturePath);
+
+        // http://taskman.eionet.europa.eu/issues/17992
+        // display abstract images if no picture available
+
+        if (pics.size() == 0) {
+            // different picture by group
+            PictureDTO pic = new PictureDTO();
+            pic.setFilename(EunisUtil.getDefaultPicture("x"));
+            pic.setDescription("No photo available for this species");
+            pic.setSource("Paco Sánchez Aguado");
+            pic.setPath(picturePath);
+
+            pics.add(pic);
+        }
+    }
+
+    public List<Chm62edtHabitatRedlistConservationPersist> getRedlistConservation() {
+        return redlistConservation;
+    }
+
+    public String getDescriptionSpecies(){
+        return descriptionSpecies;
     }
 }

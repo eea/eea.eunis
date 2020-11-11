@@ -1296,3 +1296,126 @@ table.globalQuery.syntaxa th.definition {
   font-weight: 400;
   text-align: left;
 }
+
+.redlist-table {
+  margin: 5px;
+  display: inline-table !important;
+  width: 280px;
+  font-size: 110%;
+}
+
+.redlist-table td {
+  border: 1px solid;
+  text-align: center;
+  background: #F1F1F1;
+  padding-top: 5px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+}
+
+.trend-table {
+  margin: 5px;
+  display: inline-table !important;
+  width: 280px;
+}
+
+.trend-table td {
+  padding: 3px;
+  text-align: center;
+}
+
+.criteria-table {
+  border-collapse: collapse;
+}
+
+.criteria-table tr {
+  border-bottom: 1px solid #ccc;
+}
+
+.criteria-table td {
+  padding: 4px;
+}
+
+.criteria-table td {
+  padding: 4px;
+}
+
+.criteria-table td:nth-child(1) {
+  font-style: italic;
+
+}
+
+.criteria-table td:nth-child(2) {
+  font-size: 24px;
+  color: #96a3b6;
+  font-weight: bold;
+}
+
+.criteria-indent {
+  padding-left: 2em;
+  text-indent: -2em;
+}
+
+.trend-Increasing {
+  font-size: 16px;
+  color: #53d308;
+  font-weight: bold;
+}
+
+.trend-Decreasing {
+  color: #e20017;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.trend-Stable {
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.arrow {
+  height: 15px;
+  width: 15px;
+}
+
+.rl-CO {
+  color: white;
+  background: black !important;
+}
+
+.rl-CR {
+  color: white;
+  background: #E92B2B !important;
+}
+
+.rl-EN {
+  color: white;
+  background: #FFA317 !important;
+}
+
+.rl-VU {
+  color: white;
+  background: #F7E700 !important;
+}
+
+.rl-NT {
+  color: white;
+  background: #8FBD13 !important;
+}
+
+.rl-LC {
+  color: white;
+  background: #008233 !important;
+}
+
+.rl-DD {
+  color: white;
+  background: #828282 !important;
+}
+
+.rl-NE {
+  color: black;
+  background: white !important;
+}

@@ -134,10 +134,15 @@ public class HabitatsFactsheet {
     public static final String EUNIS_HABITAT = "EUNIS";
     public static final String EUNIS_2017_HABITAT = "EUNIS2017";
 
+
     /**
      * Defines an ANNEX I habitat.
      */
     public static final String ANNEX_I_HABITAT = "ANNEX1";
+
+    // Red List Habitat
+    public static final String REDLIST_HABITAT = "REDLIST";
+
 
     /**
      * Habitat ID for the habitat we're constructing the factsheet.
@@ -2251,4 +2256,79 @@ public class HabitatsFactsheet {
         return result;
     }
 
+    public boolean isRedList() {
+        return REDLIST_HABITAT.equals(habitat.getHabitatType());
+    }
+
+    public String getEeaCode() {
+        return habitat.getEeaCode();
+    }
+
+    public Chm62edtHabitatRedlistPersist getRedlist() {
+
+        List list = new Chm62edtHabitatRedlistDomain().findWhere("ID_HABITAT = '" + habitat.getIdHabitat() + "'");
+        if(list.size() > 0){
+            return (Chm62edtHabitatRedlistPersist) list.get(0);
+        }
+        return null;
+    }
+
+    public List<Chm62edtHabitatOccurrencePersist> getRedListOccurrencesEU(){
+        return new Chm62edtHabitatOccurrenceDomain().findWhere("ID_HABITAT = '" + habitat.getIdHabitat() + "' and COUNTRY_TYPE='EU28'");
+    }
+
+    public List<Chm62edtHabitatOccurrencePersist> getRedListOccurrencesEurope() {
+        return new Chm62edtHabitatOccurrenceDomain().findWhere("ID_HABITAT = '" + habitat.getIdHabitat() + "' and COUNTRY_TYPE='EU28+'");
+    }
+
+    public List<Chm62edtHabitatOccurrencePersist> getRedListOccurrencesSea() {
+        return new Chm62edtHabitatOccurrenceDomain().findWhere("ID_HABITAT = '" + habitat.getIdHabitat() + "' and chm62edt_habitat_redlist_occurrence.ID_SEA is not null");
+    }
+
+    public List<Chm62edtHabitatRedlistThreatsPersist> getRedListThreats() {
+        return new Chm62edtHabitatRedlistThreatsDomain().findWhere("ID_HABITAT = '" + habitat.getIdHabitat() + "' order by SORT_ORDER");
+    }
+    public List<Chm62edtHabitatRedlistConservationPersist> getRedListConservation() {
+        return new Chm62edtHabitatRedlistConservationDomain().findWhere("ID_HABITAT = '" + habitat.getIdHabitat() + "' order by chm62edt_conservation_measures.ID_MEASURE");
+    }
+
+    public List<Chm62edtNatureObjectPicturePersist> getPicturesForHabitat(){
+        Chm62edtNatureObjectPictureDomain nop = new Chm62edtNatureObjectPictureDomain();
+        String where = "";
+        where += " ID_OBJECT IN ( " + habitat.getIdHabitat() + " )";
+        where += " AND NATURE_OBJECT_TYPE='habitat'";
+        where += " AND VISIBLE=1";
+        return nop.findWhere(where);
+    }
+
+    public List<PictureDTO> getPictures(String picturePath) {
+        List<PictureDTO> pics = new ArrayList<PictureDTO>();
+        PictureDTO pic = null;
+        try {
+            List<Chm62edtNatureObjectPicturePersist> pplist = getPicturesForHabitat();
+            if (pplist != null && pplist.size() > 0) {
+                for (Chm62edtNatureObjectPicturePersist pp : pplist) {
+                    String desc = pp.getDescription();
+
+                    if (desc == null || desc.equals("")) {
+                        desc = habitat.getScientificName();
+                    }
+
+                    pic = new PictureDTO();
+                    pic.setFilename(pp.getFileName());
+                    if (!pp.getIdObject().equals(habitat.getIdHabitat().toString())) {
+                        pic.setDescription(desc);
+                    }
+                    pic.setSource(pp.getSource());
+                    pic.setSourceUrl(pp.getSourceUrl());
+                    pic.setPath(picturePath);
+                    pic.setLicense(pp.getLicense());
+                    pics.add(pic);
+                }
+            }
+        } catch (Exception _ex) {
+            _ex.printStackTrace(System.err);
+        }
+        return pics;
+    }
 }
