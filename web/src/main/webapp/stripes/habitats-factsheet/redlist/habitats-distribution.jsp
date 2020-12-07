@@ -104,7 +104,7 @@
                     <thead>
                     <tr>
                         <th width="30%" style="text-align: left; white-space: normal;" class="nosort">
-                            Sea
+                            Seas
                         </th>
                         <th width="15%" style="text-align: left; white-space: normal;" class="nosort">
                             Present or presence uncertain
@@ -122,13 +122,15 @@
                     </thead>
                     <tbody>
 
-                    <c:forEach items="${actionBean.redlistOccurrencesSea}" var="occ">
+                    <c:forEach items="${actionBean.redlistOccurrencesSea}" var="occ" varStatus="stat">
                         <tr>
                             <td>${occ.sea}</td>
-                            <td>${occ.present}</td>
-                            <td>${occ.currentAreaValue}</td>
-                            <td>${occ.trendQuantity}</td>
-                            <td>${occ.trendQuality}</td>
+                            <c:if test="${stat.first}">
+                                <td rowspan="${actionBean.redlistOccurrencesSea.size()}" style="vertical-align: middle">${occ.present}</td>
+                                <td rowspan="${actionBean.redlistOccurrencesSea.size()}" style="vertical-align: middle">${occ.currentAreaValue}</td>
+                                <td rowspan="${actionBean.redlistOccurrencesSea.size()}" style="vertical-align: middle">${occ.trendQuantity}</td>
+                                <td rowspan="${actionBean.redlistOccurrencesSea.size()}" style="vertical-align: middle">${occ.trendQuality}</td>
+                            </c:if>
                         </tr>
                     </c:forEach>
                     </tbody>
