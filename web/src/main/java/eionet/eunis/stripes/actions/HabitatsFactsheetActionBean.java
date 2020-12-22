@@ -1005,8 +1005,10 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             // different picture by group
             PictureDTO pic = new PictureDTO();
             pic.setFilename(EunisUtil.getDefaultPicture("x"));
-            pic.setDescription("No photo available for this species");
+            pic.setDescription("No photo available for this habitat");
             pic.setSource("Paco Sánchez Aguado");
+            picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_SPECIES");
+
             pic.setPath(picturePath);
 
             pics.add(pic);

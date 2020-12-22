@@ -2808,8 +2808,12 @@ public final class Utilities {
         // first add all root stuff
 
         try (Connection c = TheOneConnectionPool.getConnection()) {
+            String orderBy = typeColumnMap.get(type);
+            if ("REDLIST".equals(type)) {
+                orderBy = "if(eea_code like 'BAL%',LPAD(eea_code,8,'0'),eea_code)";
+            }
             // get the top one
-            try (PreparedStatement ps = c.prepareStatement("select id_habitat, scientific_name, " + typeColumnMap.get(type) + " from chm62edt_habitat where level=1 and habitat_type=? order by " + typeColumnMap.get(type))) {
+            try (PreparedStatement ps = c.prepareStatement("select id_habitat, scientific_name, " + typeColumnMap.get(type) + " from chm62edt_habitat where level=1 and habitat_type=? order by " + orderBy)) {
                 ps.setString(1, type);
                 ResultSet rs = ps.executeQuery();
 
@@ -2823,6 +2827,8 @@ public final class Utilities {
                     root.getChildren().add(habitat);
                 }
                 rs.close();
+            } catch (Exception e) {
+                logger.warn(e,e);
             }
 
             String [] expandList = expand.split(",");
@@ -2900,9 +2906,14 @@ public final class Utilities {
             return;
         }
 
+        String orderBy = "h." + typeColumnMap.get(type);
+        if ("REDLIST".equals(type)) {
+            orderBy = "if(eea_code like 'BAL%',LPAD(eea_code,8,'0'),eea_code)";
+        }
+        
         ResultSet rs = null;
 
-        try (PreparedStatement ps = c.prepareStatement("select h.id_habitat, h.scientific_name, h." + typeColumnMap.get(type) + ", h.id_habitat_parent, (select count(*) from chm62edt_habitat h1 where h1.id_habitat_parent = h.id_habitat) as children from chm62edt_habitat h where h.id_habitat_parent = ? and h.habitat_type=? order by h." + typeColumnMap.get(type))){
+        try (PreparedStatement ps = c.prepareStatement("select h.id_habitat, h.scientific_name, h." + typeColumnMap.get(type) + ", h.id_habitat_parent, (select count(*) from chm62edt_habitat h1 where h1.id_habitat_parent = h.id_habitat) as children from chm62edt_habitat h where h.id_habitat_parent = ? and h.habitat_type=? order by " + orderBy)){
 
             ps.setInt(1, leaf.getIdHabitat());
             ps.setString(2, type);

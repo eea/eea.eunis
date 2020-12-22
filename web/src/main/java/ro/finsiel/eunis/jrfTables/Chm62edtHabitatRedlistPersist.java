@@ -118,6 +118,9 @@ public class Chm62edtHabitatRedlistPersist extends PersistentObject  {
     }
 
     public String getEU28TrendQuality() {
+        if("-".equals(EU28TrendQuality)) {
+            return "No occurrence";
+        }
         return EU28TrendQuality;
     }
 
@@ -126,6 +129,9 @@ public class Chm62edtHabitatRedlistPersist extends PersistentObject  {
     }
 
     public String getEU28PlusTrendQuality() {
+        if ("-".equals(EU28PlusTrendQuality)) {
+            return "No occurrence";
+        }
         return EU28PlusTrendQuality;
     }
 
@@ -134,6 +140,9 @@ public class Chm62edtHabitatRedlistPersist extends PersistentObject  {
     }
 
     public String getEU28TrendQuantity() {
+        if ("-".equals(EU28TrendQuantity)) {
+            return "No occurrence";
+        }
         return EU28TrendQuantity;
     }
 
@@ -142,6 +151,9 @@ public class Chm62edtHabitatRedlistPersist extends PersistentObject  {
     }
 
     public String getEU28PlusTrendQuantity() {
+        if ("-".equals(EU28PlusTrendQuantity)) {
+            return "No occurrence";
+        }
         return EU28PlusTrendQuantity;
     }
 

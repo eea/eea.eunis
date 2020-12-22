@@ -32,7 +32,7 @@
 .gv_panel { filter: inherit; position: absolute; top: 0; left: 0; overflow: hidden; z-index: 100; }
 .gv_panel img { position: absolute; }
 
-.gv_overlay { position: absolute; background: #222; color: white; z-index: 200; }
+.gv_overlay { position: absolute; background: rgba(34, 34, 34, 0.84); color: white; z-index: 200; }
 .gv_showOverlay {
     position: absolute;
     width: 20px;
@@ -41,7 +41,7 @@
     cursor: pointer;
     z-index: 200;
 }
-.gv_overlay h4 { color: white; margin: 1em; text-shadow: none !important; font-weight: normal; font-size: 100%; }
+.gv_overlay h4 { color: white; margin: 1em; text-shadow: none !important; font-weight: normal; font-size: 80% !important; }
 .gv_overlay p { color: white; margin: 1em; }
 .gv_overlay a:link  { color: white !important; }
 .gv_overlay a:visited  { color: white !important; }

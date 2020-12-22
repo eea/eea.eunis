@@ -2310,14 +2310,12 @@ public class HabitatsFactsheet {
                 for (Chm62edtNatureObjectPicturePersist pp : pplist) {
                     String desc = pp.getDescription();
 
-                    if (desc == null || desc.equals("")) {
-                        desc = habitat.getScientificName();
-                    }
-
                     pic = new PictureDTO();
                     pic.setFilename(pp.getFileName());
-                    if (!pp.getIdObject().equals(habitat.getIdHabitat().toString())) {
+                    if (!Utilities.isEmptyString(desc)) {
                         pic.setDescription(desc);
+                    } else {
+                        pic.setDescription("European Red List of Habitats 2016");
                     }
                     pic.setSource(pp.getSource());
                     pic.setSourceUrl(pp.getSourceUrl());

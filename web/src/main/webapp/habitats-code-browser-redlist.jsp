@@ -66,8 +66,12 @@
 				<%
 					}
 				%>
-				<a title="<%=h.getName()%>" href="habitats/<%=h.getIdHabitat()%>"><%=h.getCode()%> : <%=JstlFunctions.bracketsToItalics(h.getName())%>
+				<% if (h.hasChildren()) { %>
+				    <%=h.getCode()%> : <%=JstlFunctions.bracketsToItalics(h.getName())%>
+				<% } else { %>
+					<a title="<%=h.getName()%>" href="habitats/<%=h.getIdHabitat()%>"><%=h.getCode()%> : <%=JstlFunctions.bracketsToItalics(h.getName())%>
 				</a>
+				<% } %>
 
 				<br/>
 				<%

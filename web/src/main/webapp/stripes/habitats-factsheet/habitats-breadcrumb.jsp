@@ -37,7 +37,10 @@
                         </c:if>
                         </c:otherwise>
                     </c:choose>
-                    <a href="habitats/${other.idHabitat}">${eunis:bracketsToItalics(eunis:replaceTags(other.scientificName))}</a>
+                    <c:choose>
+                        <c:when test="${actionBean.factsheet.redList}">${eunis:bracketsToItalics(eunis:replaceTags(other.scientificName))}</c:when>
+                        <c:otherwise><a href="habitats/${other.idHabitat}">${eunis:bracketsToItalics(eunis:replaceTags(other.scientificName))}</a></c:otherwise>
+                    </c:choose>
                     <span class="breadcrumbSeparator">
                         &gt;
                     </span>

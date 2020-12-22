@@ -20,6 +20,9 @@
                                     data-description="${pic.source}"
                                 </c:otherwise>
                             </c:choose>
+                            <c:if test="${not empty pic.description}">
+                                title="${pic.description}"
+                            </c:if>
                     />
                 </li>
             </c:forEach>
