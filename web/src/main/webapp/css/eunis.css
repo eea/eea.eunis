@@ -1388,40 +1388,48 @@ table.globalQuery.syntaxa th.definition {
 
 .rl-CO {
   color: white;
+  font-weight: bold;
   background: black !important;
 }
 
 .rl-CR {
   color: white;
+  font-weight: bold;
   background: #E92B2B !important;
 }
 
 .rl-EN {
   color: white;
+  font-weight: bold;
   background: #FFA317 !important;
 }
 
 .rl-VU {
   color: white;
+  font-weight: bold;
   background: #F7E700 !important;
 }
 
 .rl-NT {
   color: white;
+  font-weight: bold;
   background: #8FBD13 !important;
 }
 
 .rl-LC {
   color: white;
+  font-weight: bold;
   background: #008233 !important;
 }
 
 .rl-DD {
   color: white;
+  font-weight: bold;
   background: #828282 !important;
 }
 
 .rl-NE {
   color: black;
+  font-weight: bold;
   background: white !important;
 }
