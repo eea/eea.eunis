@@ -22,6 +22,7 @@ import ro.finsiel.eunis.factsheet.habitats.HabitatsFactsheet;
 import ro.finsiel.eunis.factsheet.habitats.LegalStatusWrapper;
 import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.habitats.factsheet.HabitatLegalPersist;
+import ro.finsiel.eunis.jrfTables.habitats.factsheet.OtherClassificationPersist;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectDomain;
 import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
@@ -110,7 +111,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
 
     private List history = new ArrayList();
-    private List otherClassifications = new ArrayList();
+    private List<OtherClassificationPersist> otherClassifications = new ArrayList<>();
 
     private List<LegalStatusWrapper> legalInfo = null;
     private Set<String> protectedBy = null;
@@ -178,33 +179,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
             populateBiogeoAssessment(factsheet.getCode2000());
         }
-
-
-//        if (tab != null && tab.equals("other")) {
-//            dictionaryLength = dictionary.length;
-//            if (factsheet.isEunis()) {
-//                for (int i = 0; i < dictionary.length; i++) {
-//                    try {
-//                        Integer dictionaryType = dictionary[i];
-//                        String title = factsheet.getOtherInfoDescription(dictionaryType);
-//                        String SQL = factsheet.getSQLForOtherInfo(dictionaryType);
-//                        String noElements = getContext().getSqlUtilities().ExecuteSQL(SQL);
-//
-//                        if (title != null) {
-//                            HabitatFactsheetOtherDTO dto = new HabitatFactsheetOtherDTO();
-//
-//                            dto.setTitle(title);
-//                            dto.setDictionaryType(dictionaryType);
-//                            dto.setNoElements(noElements);
-//                            otherInfo.add(dto);
-//                        }
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }
 
         try {
             history = factsheet.getHistory();
@@ -685,6 +659,22 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             if(s.contains("EU Habitats Directive")) return true;
         }
         return false;
+    }
+
+    public boolean isRelResolution4() {
+        for(String s : getProtectedBy()) {
+            if(s.contains("Resolution 4")) return true;
+        }
+        return false;
+    }
+
+    public String getRelEunis2007() {
+        for(OtherClassificationPersist ocp:otherClassifications) {
+            if(ocp.getIdClassCode() == 37) {
+                return ocp.getCode();
+            }
+        }
+        return null;
     }
 
     /**

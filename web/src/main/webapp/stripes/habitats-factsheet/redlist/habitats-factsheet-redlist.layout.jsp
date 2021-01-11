@@ -96,7 +96,7 @@
                     <div class="eea-accordion-panel" style="clear: both;" id="other-classifications-accordion">
                         <h2 class="notoc eea-icon-right-container">Other classifications</h2>
                         <div class="pane">
-                            <stripes:layout-render name="/stripes/habitats-factsheet/habitats-other-classifications.jsp"/>
+                            <stripes:layout-render name="/stripes/habitats-factsheet/redlist/habitats-other-classifications.jsp"/>
                         </div>
                     </div>
 

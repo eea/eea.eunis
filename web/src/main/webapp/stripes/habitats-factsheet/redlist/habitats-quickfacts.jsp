@@ -76,7 +76,19 @@
             <tbody>
                 <tr>
                     <th>Relation to</th>
-                    <td>TODO</td>
+                    <td>
+                        <ul style="margin: 0 !important">
+                        <c:if test="${actionBean.habitatsDirective}">
+                            <li><a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Annex I habitat types</span></a> (EU Habitats Directive)</li>
+                        </c:if>
+                        <c:if test="${actionBean.relResolution4}">
+                            <li><a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Resolution 4 habitat type</span></a> (Bern Convention)</li>
+                        </c:if>
+                        <c:if test="${not empty actionBean.relEunis2007}">
+                            <li>${actionBean.relEunis2007} - <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">EUNIS habitat classification (2007)</span></a></li>
+                        </c:if>
+                        </ul>
+                    </td>
                 </tr>
             </tbody>
             <tbody>
