@@ -233,12 +233,12 @@ h2 {
 }
 
 .table-definition-target {
-  background: url("https://www.eea.europa.eu/accordion_down.png") no-repeat scroll 94% center #346F83;
+  background: url("https://www.eea.europa.eu/accordion_down.png") no-repeat scroll 97% center #346F83;
   padding-right: 2.5em;
 }
 
 .table-definition-target.opened {
-  background: url("https://www.eea.europa.eu/accordion_up.png") no-repeat scroll 94% center #346F83;
+  background: url("https://www.eea.europa.eu/accordion_up.png") no-repeat scroll 97% center #346F83;
 }
 
 

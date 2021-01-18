@@ -66,11 +66,11 @@
                     </tr>
                     <tr>
                         <th class="normalfont">Europe</th>
-                        <td>${actionBean.redlist.categoryEU28Plus}</td>
+                        <td class="bold">${actionBean.redlist.categoryEU28Plus}</td>
                     </tr>
                     <tr>
                         <th class="normalfont">EU</th>
-                        <td>${actionBean.redlist.categoryEU28}</td>
+                        <td class="bold">${actionBean.redlist.categoryEU28}</td>
                     </tr>
                 </tbody>
             <tbody>
@@ -85,7 +85,7 @@
                             <li><a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">Resolution 4 habitat type</span></a> (Bern Convention)</li>
                         </c:if>
                         <c:if test="${not empty actionBean.relEunis2007}">
-                            <li>${actionBean.relEunis2007} - <a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">EUNIS habitat classification (2007)</span></a></li>
+                            <li><a href="${ actionBean.pageUrl }#legal" onclick="openSection('legal');"><span class="bold">EUNIS habitat classification (2007)</span></a></li>
                         </c:if>
                         </ul>
                     </td>

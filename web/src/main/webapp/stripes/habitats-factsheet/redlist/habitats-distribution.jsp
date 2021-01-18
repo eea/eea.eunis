@@ -4,10 +4,10 @@
     <div>
         <div>
             <div>For each habitat a distribution map was produced from a wide variety of sources indicating known and potential occurrences of the habitat in 10x10 km grids within Europe. Occurrences in grid cells were given in two classes: actual distribution from relatively
-                reliable sources (surveys, expert knowledge), and potential distribution based on models or less reliable indicators.
+                reliable sources (surveys, expert knowledge), and potential distribution based on models or less reliable indicators. Please download the fact sheet to see the map.
             </div>
             <div>
-                MAP
+
             </div>
         </div>
         <h3>Geographic occurrence and trends</h3>
