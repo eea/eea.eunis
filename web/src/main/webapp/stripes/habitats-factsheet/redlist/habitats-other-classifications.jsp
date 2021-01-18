@@ -34,7 +34,16 @@
                             </a>
                         </td>
                         <td>
-                                ${eunis:formatString(classif.code, '&nbsp;')}
+                            <c:choose>
+                                <c:when test="${classif.idDc eq 2356}">
+                                    <a href="/habitats_codeEUNIS/${classif.code}">
+                                            ${eunis:formatString(classif.code, '&nbsp;')}
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    ${eunis:formatString(classif.code, '&nbsp;')}
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                         <td>
                                 ${eunis:bracketsToItalics(eunis:replaceTags(eunis:formatString(classif.title, '&nbsp;')))}
