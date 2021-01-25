@@ -221,12 +221,22 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="http://www.eea.europa.eu/data-and-maps/data/natura-5">
+                                <a href="https://www.eea.europa.eu/ds_resolveuid/DAT-68-en">
                                     <%=cm.cmsPhrase("Natura 2000 data")%>
                                 </a>
                             </td>
                             <td>
                                 <%=cm.cmsPhrase("Natura 2000 is the European Union network of protected sites")%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="https://www.eea.europa.eu/data-and-maps/data/european-red-list-of-habitats">
+                                    <%=cm.cmsPhrase("European Red List of Habitats - enhanced by EEA")%>
+                                </a>
+                            </td>
+                            <td>
+                                <%=cm.cmsPhrase("The European Red List of habitats provides an assessment of the risk of collapse of marine, terrestrial and freshwater natural and semi-natural habitats.")%>
                             </td>
                         </tr>
                         </tbody>

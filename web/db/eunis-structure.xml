@@ -2549,4 +2549,11 @@ END
 
     </changeSet>
 
+    <changeSet id="rev-157" author="ivascu">
+        <comment>Changed the references structure to allow longer URLs</comment>
+        <sql>
+            ALTER TABLE dc_index CHANGE URL URL VARCHAR(1000);
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
