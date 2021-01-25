@@ -3,6 +3,9 @@
 <stripes:layout-definition>
     <c:choose>
         <c:when test="${not empty actionBean.species}">
+            <c:if test="${actionBean.factsheet.redList}">
+                The species shown are mentioned in the Habitat description of the European Red List habitat factsheet (link in the Quick Facts above)
+            </c:if>
             <div class="species-container">
                 <div style="display: none" displayed="7" trigger_for="1" class="species-header tab-visible">Species</div>
 

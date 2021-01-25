@@ -2260,6 +2260,10 @@ public class HabitatsFactsheet {
         return REDLIST_HABITAT.equals(habitat.getHabitatType());
     }
 
+    public boolean isMarine() {
+        return habitat!= null && (habitat.getEeaCode().startsWith("BAL") || habitat.getEeaCode().startsWith("BLS") || habitat.getEeaCode().startsWith("MED") || habitat.getEeaCode().startsWith("NEA"));
+    }
+
     public String getEeaCode() {
         return habitat.getEeaCode();
     }
