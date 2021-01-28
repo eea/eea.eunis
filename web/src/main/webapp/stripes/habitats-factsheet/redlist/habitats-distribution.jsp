@@ -176,6 +176,10 @@
             </tr>
             </tbody>
         </table>
+            <div class="discreet">
+            AOO = the area occupied by a habitat measured in number of 10x10 km grid cells.<br>
+            EOO = the area (km2) of the envelope around all occurrences of a habitat (calculated by a minimum convex polygon).
+            </div>
         </div>
         </div>
     </div>

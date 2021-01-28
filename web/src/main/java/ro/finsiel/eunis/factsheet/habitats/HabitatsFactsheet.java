@@ -2006,7 +2006,7 @@ public class HabitatsFactsheet {
             speciesList = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
                     "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND H.ID_NATURE_OBJECT = "
                     + idNatureObject
-                    + "  and AT.value not in('Habitat diagnostic species','Habitat constant species','Habitat dominant species') GROUP BY C.ID_NATURE_OBJECT ORDER BY C.SCIENTIFIC_NAME");
+                    + "  and AT.value not in('Habitat diagnostic species','Habitat constant species','Habitat dominant species') GROUP BY C.ID_NATURE_OBJECT ORDER BY COMMON_NAME, C.SCIENTIFIC_NAME");
             if (speciesList != null) {
                 for (Object specy : speciesList) {
                     HabitatsNatureObjectReportTypeSpeciesPersist specie = (HabitatsNatureObjectReportTypeSpeciesPersist) specy;

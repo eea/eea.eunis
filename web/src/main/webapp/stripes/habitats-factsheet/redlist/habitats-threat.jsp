@@ -44,7 +44,7 @@
         <div>
 
             <div class="table-definition contain-float">
-            <span class="table-definition-target standardButton float-left" style="margin-top: 20px;">
+            <span class="table-definition-target standardButton float-right" style="margin-top: 20px;">
                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Red List of habitat categories and criteria descriptions')}
             </span>
                 <div class="table-definition-body visualClear" style="display:none;">

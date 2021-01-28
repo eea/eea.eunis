@@ -4,7 +4,7 @@
     <c:choose>
         <c:when test="${not empty actionBean.species}">
             <c:if test="${actionBean.factsheet.redList}">
-                The species shown are mentioned in the Habitat description of the European Red List habitat factsheet (link in the Quick Facts above)
+                The full list of characteristic species and genus are available above from the Summary. The species available in the EUNIS database are shown here.
             </c:if>
             <div class="species-container">
                 <div style="display: none" displayed="7" trigger_for="1" class="species-header tab-visible">Species</div>
@@ -14,7 +14,7 @@
                         <div class="diagnostic-species species-item">
                        <span class="photoAlbumEntryWrapper">
                        <a href="/species/${specie.source.idSpecies}">
-                       <img src="images/species/${specie.source.idSpecies}/thumbnail.jpg" onerror="this.src='images/species/${eunis:getDefaultPicture(specie.group)}';"/>
+                       <img src="images/species/${specie.source.idSpecies}/thumbnail.jpg" onerror="this.src='images/noimage.png';"/>
                        </a>
                        </span>
                             <span class="photoAlbumEntryTitle">
