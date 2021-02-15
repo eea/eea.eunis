@@ -37,7 +37,7 @@
                 <c:otherwise>${eunis:replaceTags(pageTitle)}</c:otherwise>
             </c:choose>
         </title>
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/eunis.css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/eunis.css?v=2" />
         <script>
             // <![CDATA[
             // all the non-local links should display on a new tab; this script sets target=_blank for all non-local links
