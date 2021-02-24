@@ -18,7 +18,7 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
 
     private static final Logger logger = Logger.getLogger(XSSRequestWrapper.class);
 
-    private static Pattern[] patterns = new Pattern[]{
+    private static final Pattern[] patterns = new Pattern[]{
             // Script fragments
             Pattern.compile("<script>(.*?)</script>", Pattern.CASE_INSENSITIVE),
             // src='...'
@@ -44,6 +44,32 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
         super(servletRequest);
     }
 
+    @Override
+    public String getPathInfo() {
+        final String getPathInfo = super.getPathInfo();
+        if (getPathInfo == null || getPathInfo.isEmpty()) {
+            return getPathInfo;
+        }
+
+        String cleanGetPathInfo = getPathInfo;
+
+        // Search for and remove the values that match an XSS vulnerability pattern
+        for (Pattern scriptPattern : patterns) {
+            // logger.error("Pattern examined: " + scriptPattern);
+            Matcher matcher = scriptPattern.matcher(cleanGetPathInfo);
+            if (matcher.find()) {
+                logger.error(String.format("XSS attack prevent: Value [%s] was removed from path [%s]",
+                        matcher.toString(), cleanGetPathInfo));
+                // Empty vulnerability pattern match
+                cleanGetPathInfo = matcher.replaceAll("");
+                // logger.error("Sanitized getPathInfo: " + cleanGetPathInfo);
+            }
+        }
+
+        return cleanGetPathInfo;
+    }
+
+    @SuppressWarnings("unchecked")
     @Override
     public Map<String, String[]> getParameterMap() {
         Map<String, String[]> paramsMap = super.getParameterMap();
@@ -106,6 +132,7 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
 
     private String cleanXSS(String value, String paramName) {
         if (value != null && !value.isEmpty()) {
+            // logger.error(String.format("Parsing %s...", value));
             value = value.replaceAll("\0", "");
 
             // Remove all values that match an XSS pattern
