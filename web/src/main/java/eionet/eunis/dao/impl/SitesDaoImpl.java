@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 import eionet.eunis.dao.ISitesDao;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import ro.finsiel.eunis.dataimport.parsers.CddaSitesImportParser;
 
 
 /**
@@ -20,6 +23,8 @@ import eionet.eunis.dao.ISitesDao;
  * <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
+
+    private static Log logger = LogFactory.getLog(SitesDaoImpl.class);
 
     public SitesDaoImpl() {}
 
@@ -81,6 +86,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                 for (Iterator<String> it = sites.keySet().iterator(); it.hasNext();) {
 
                     String siteId = it.next();
+                    logger.info("Deleting site: " + siteId);
                     String idNatureObject = sites.get(siteId);
 
                     if (idNatureObject == null) {
@@ -240,7 +246,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn(e, e);
         } finally {
             closeAllResources(null, ps7, null);
             closeAllResources(null, ps8, null);
@@ -269,7 +275,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
     }
 
     /**
-     * {@inheritDoc}
+     * Removes the CDDA_NATIONAL sites that are NOT in the current map
      */
     public void deleteSitesCdda(Map<String, String> sites) throws SQLException {
 
@@ -301,7 +307,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
             deleteSites(siteIds);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn(e, e);
         } finally {
             closeAllResources(con, ps, rs);
         }
@@ -332,7 +338,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn(e, e);
         } finally {
             if (ps != null) {
                 ps.close();
@@ -369,7 +375,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn(e, e);
         } finally {
             if (ps != null) {
                 ps.close();
@@ -584,7 +590,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn(e, e);
             throw new SQLException(e.getMessage(), e);
         } finally {
             closeAllResources(null, ps2, rs2);
@@ -637,7 +643,7 @@ public class SitesDaoImpl extends MySqlBaseDao implements ISitesDao {
             psUpdateDesignation.clearParameters();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.warn(e, e);
             throw new SQLException(e.getMessage(), e);
         } finally {
             closeAllResources(con, ps, rs);
