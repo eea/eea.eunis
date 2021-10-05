@@ -19,7 +19,7 @@
         </div>
 
         <script>
-            addReloadOnDisplay("conservationPane", "habitatStatusMap", "https://maps.eea.europa.eu/Filtermap/v1/?webmap=e7e4c618f20344a8a148c5f63ec8766b&Code=${actionBean.factsheet.code2000}");
+            addReloadOnDisplay("conservationPane", "habitatStatusMap", "https://maps.eea.europa.eu/EEAViewer/?appid=fcb24d064e7b4a2b83da7e4cabed3cce&showLayers=HabitatsDirective_ART_17_WMS_version_2020_08_public_6171;HabitatsDirective_ART_17_WMS_version_2020_08_public_6171_0;HabitatsDirective_ART_17_WMS_version_2020_08_public_6171_2&region=%25&zoomto=true&embed=true&habitatcode=${actionBean.factsheet.code2000}");
         </script>
 
 
@@ -38,11 +38,11 @@
              <c:if test="${not empty actionBean.conservationStatusPDF or not empty actionBean.conservationStatus}">
                  Sources:
                  <ul>
-                     <c:if test="${not empty actionBean.conservationStatusPDF}">
-                         <li>
-                             <a href="${actionBean.conservationStatusPDF.url}">Conservation Status 2007-2012 – summary</a>
-                         </li>
-                     </c:if>
+<%--                     <c:if test="${not empty actionBean.conservationStatusPDF}">--%>
+<%--                         <li>--%>
+<%--                             <a href="${actionBean.conservationStatusPDF.url}">Conservation Status 2007-2012 – summary</a>--%>
+<%--                         </li>--%>
+<%--                     </c:if>--%>
                      <c:if test="${not empty actionBean.conservationStatus}">
                          <li>
                              <a href="${actionBean.conservationStatus.url}">${actionBean.conservationStatus.name}</a>
@@ -52,49 +52,43 @@
              </c:if>
          </div>
 
-         <c:if test="${not empty actionBean.conservationStatusQueryResultRows}">
+         <c:if test="${not empty actionBean.conservationByCountry}">
              <div class="table-definition">
             <span class="table-definition-target standardButton float-left" style="margin-top: 20px;">
                     ${eunis:cmsPhrase(actionBean.contentManagement, 'Full table details')}
             </span>
 
-                 <c:forEach items="${actionBean.conservationStatusQueries}" var="query">
                  <div class="table-definition-body visualClear float-right" style="display:none;">
                      <div style="margin-top:20px">
-                         <p style="font-weight:bold">${eunis:cmsPhrase(actionBean.contentManagement, query.title)}:</p>
-                         <c:set var="queryId" value="${query.id}"/>
+                         <p style="font-weight:bold">Conservation status (2013-2018) of habitats (Habitats Directive, Article 17) by EU Member State::</p>
 
-                         <c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) gt 10}">
-                         <div class="scroll-auto" style="height: 400px">
-                             </c:if>
+                         <c:if test="${fn:length(actionBean.conservationByCountry) gt 10}">
+                            <div class="scroll-auto" style="height: 400px">
+                         </c:if>
                              <div >
-                                     <%--<span class="pagebanner">${fn:length(actionBean.conservationStatusQueryResultRows[queryId])} item<c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) != 1}">s</c:if> found.</span>--%>
-                                 <table class="datatable listing inline-block">
-                                     <thead>
-                                     <tr>
-                                         <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
-                                             <th class="dt_sortable">
-                                                     ${col.property}
-                                             </th>
-                                         </c:forEach>
-                                     </tr>
-                                     </thead>
-                                     <tbody>
-                                     <c:forEach var="row" items="${actionBean.conservationStatusQueryResultRows[queryId]}">
+                                     <table class="datatable listing inline-block">
+                                         <thead>
                                          <tr>
-                                             <c:forEach var="col" items="${actionBean.conservationStatusQueryResultCols[queryId]}">
-                                                 <td>${row[col.property]}</td>
-                                             </c:forEach>
+                                             <th class="dt_sortable">Country</th>
+                                             <th class="dt_sortable">Region</th>
+                                             <th class="dt_sortable">Conclusion</th>
                                          </tr>
-                                     </c:forEach>
-                                     </tbody>
-                                 </table>
+                                         </thead>
+                                         <tbody>
+                                         <c:forEach var="row" items="${actionBean.conservationByCountry}">
+                                             <tr>
+                                                 <td>${row.get('area_name_en')}</td>
+                                                 <td>${row.get('region_name')}</td>
+                                                 <td>${row.get('assessment_label')}</td>
+                                             </tr>
+                                         </c:forEach>
+                                         </tbody>
+                                     </table>
                              </div>
-                             <c:if test="${fn:length(actionBean.conservationStatusQueryResultRows[queryId]) gt 10}">
-                         </div>
+                         <c:if test="${fn:length(actionBean.conservationByCountry) gt 10}">
+                            </div>
                          </c:if>
                      </div>
-                     </c:forEach>
                  </div>
              </div>
          </c:if>

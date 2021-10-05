@@ -31,15 +31,15 @@
             </tr>
             </tbody>
 
-            <c:if test="${not empty actionBean.biogeoAssessmentRows}">
+            <c:if test="${not empty actionBean.conservationEU}">
                 <tbody>
                 <tr>
-                    <th rowspan="${eunis:getSize(actionBean.biogeoAssessmentRows)}">
+                    <th rowspan="${eunis:getSize(actionBean.conservationEU)}">
                         EU conservation status <small>by biogeographical region</small>
                     </th>
-                    <c:forEach items="${actionBean.biogeoAssessmentRows}" var="bg" varStatus="stat">
+                    <c:forEach items="${actionBean.conservationEU}" var="bg" varStatus="stat">
                 <c:if test="${not stat.first}"><tr></c:if>
-                    <td><span class="conclusion ${bg.code}"></span> ${bg.region} - <small>${bg.assessment}</small></td>
+                    <td><span class="conclusion ${bg.get('id_assessment')}"></span> ${bg.get('region_name')} - <small>${bg.get('assessment_label')}</small></td>
                 </tr>
                 </c:forEach>
                 </tbody>

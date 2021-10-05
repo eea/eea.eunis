@@ -7,6 +7,7 @@ import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.rdf.LinkedDataQuery;
 import eionet.eunis.stripes.viewdto.SitesByNatureObjectViewDTO;
 import eionet.eunis.util.Constants;
+import eionet.eunis.util.Discodata;
 import eionet.eunis.util.JstlFunctions;
 import eionet.sparqlClient.helpers.ResultValue;
 import net.sf.json.JSONArray;
@@ -303,7 +304,6 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             // TODO The methods executes SPARQL query. Consider caching the results or at least load the content with jQuery
             setConservationStatusDetails(mainIdSpecies, specie.getIdNatureObject());
 
-            populateBiogeoAssessment(specie.getNatura2000Code());
         }
 
         String eeaHome = getContext().getInitParameter("EEA_HOME");
@@ -494,7 +494,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 conservationStatusPDF = link;
                 addToLinks = false;
             } else if (link.getName().toLowerCase().contains("experts web viewer")){
-                conservationStatus = link;
+//                conservationStatus = link;
                 addToLinks = false;
             }
 
@@ -509,6 +509,12 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 transformLinkData(link);
                 links.add(link);
             }
+        }
+
+        if(!Utilities.isEmptyString(specie.getNatura2000Code())) {
+            conservationStatus = new LinkDTO();
+            conservationStatus.setUrl("https://nature-art17.eionet.europa.eu/article17/species/summary/?period=5&subject=" + specie.getScientificName());
+            conservationStatus.setName("Conservation status 2013-2018 - experts web viewer");
         }
 
         if(nobanisFactsheetLink == null && nobanisLink != null) {
@@ -970,6 +976,38 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
+    private JSONArray conservationCache = null;
+
+    public JSONArray getConservationByCountry(){
+        if(conservationCache == null) {
+            JSONObject json = Discodata.readJson(Discodata.encodeQuery("https://discodata.eea.europa.eu/sql?query=", "select * from [EUNIS].[v1r1].[BISE_Species_Conservation_Status_by_MS] where id_eunis='" + specie.getIdSpecies() + "' order by area_name_en"));
+
+            if (json.containsKey("results")) {
+                conservationCache = (JSONArray) json.get("results");
+            } else {
+                conservationCache = new JSONArray();
+            }
+        }
+
+        return conservationCache;
+    }
+
+    private JSONArray conservationEU = null;
+
+    public JSONArray getConservationEU(){
+        if (conservationEU == null) {
+            JSONObject json = Discodata.readJson(Discodata.encodeQuery("https://discodata.eea.europa.eu/sql?query=", "select * from [EUNIS].[v1r1].[BISE_Species_Conservation_Status] where id_eunis='" + specie.getIdSpecies() + "' order by region_name"));
+
+            if (json.containsKey("results")) {
+                conservationEU = (JSONArray) json.get("results");
+            } else {
+                conservationEU = new JSONArray();
+            }
+        }
+
+        return conservationEU;
+    }
+
     /**
      * Returns the site ID list
      * @param sites The sites list
@@ -1029,47 +1067,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
         }
     }
 
-    List<Chm62edtArt17CachePersist> biogeoAssessmentRows = new  ArrayList<>();
-
-    public List<Chm62edtArt17CachePersist> getBiogeoAssessmentRows() {
-        return biogeoAssessmentRows;
-    }
-
-    /**
-     * Populates the EU conservation status by biogeographical region using Art17 data (cached from sparql)
-     * @param code2000 Species code 2000
-     */
-    private void populateBiogeoAssessment(String code2000) {
-        if(code2000 != null) {
-            biogeoAssessmentRows = new Chm62edtArt17CacheDomain().findWhere(
-                    "code2000='" + code2000 + "' and object_type='S'");
-        }
-    }
 
     private List<LinkedDataQuery> allQueries;
 
     public List<LinkedDataQuery> getAllQueries() {
         return allQueries;
-    }
-
-    public LinkedHashMap<String, ArrayList<Map<String, Object>>> getConservationStatusQueryResultCols() {
-        return conservationStatusQueryResultCols;
-    }
-
-    public LinkedHashMap<String, ArrayList<HashMap<String, ResultValue>>> getConservationStatusQueryResultRows() {
-        return conservationStatusQueryResultRows;
-    }
-
-    public List<ForeignDataQueryDTO> getConservationStatusQueries() {
-        return conservationStatusQueries;
-    }
-
-    public String getConservationStatusQuery() {
-        return conservationStatusQuery;
-    }
-
-    public String getConservationStatusAttribution() {
-        return conservationStatusAttribution;
     }
 
     public boolean isRangeLayer() {

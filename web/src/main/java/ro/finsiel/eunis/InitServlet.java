@@ -3,17 +3,12 @@ package ro.finsiel.eunis;
 import eionet.eunis.dto.ForeignDataQueryDTO;
 import eionet.eunis.rdf.LinkedData;
 import eionet.sparqlClient.helpers.ResultValue;
-import net.sf.jrf.domain.PersistentState;
 import org.apache.commons.lang.StringUtils;
-import ro.finsiel.eunis.jrfTables.Chm62edtArt17CacheDomain;
-import ro.finsiel.eunis.jrfTables.Chm62edtArt17CachePersist;
 import ro.finsiel.eunis.utilities.TheOneConnectionPool;
 
 import javax.servlet.http.HttpServlet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;

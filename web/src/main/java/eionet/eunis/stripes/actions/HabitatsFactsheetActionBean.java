@@ -8,6 +8,9 @@ import eionet.eunis.dao.IReferencesDao;
 import eionet.eunis.dto.*;
 import eionet.eunis.rdf.LinkedDataQuery;
 import eionet.eunis.stripes.actions.beans.OrderedSpeciesBean;
+import eionet.eunis.util.Discodata;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -177,7 +180,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             sitesTabActions();
 //            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
             conservationStatusTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
-            populateBiogeoAssessment(factsheet.getCode2000());
         }
 
         try {
@@ -320,12 +322,18 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                     conservationStatusPDF = link;
                     addToLinks = false;
                 } else if (link.getName().toLowerCase().startsWith("conservation status")){
-                    conservationStatus = link;
+//                    conservationStatus = link;
                     addToLinks = false;
                 }
                 if(addToLinks){
                     links.add(link);
                 }
+            }
+
+            if (!Utilities.isEmptyString(factsheet.getCode2000())) {
+                conservationStatus = new LinkDTO();
+                conservationStatus.setUrl("https://nature-art17.eionet.europa.eu/article17/habitat/summary/?period=5&subject=" + factsheet.getCode2000());
+                conservationStatus.setName("Conservation status 2013-2018 - experts web viewer");
             }
 
         } catch (Exception e) {
@@ -928,23 +936,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return allQueries;
     }
 
-    List<Chm62edtArt17CachePersist> biogeoAssessmentRows = new  ArrayList<>();
-
-    public List<Chm62edtArt17CachePersist> getBiogeoAssessmentRows() {
-        return biogeoAssessmentRows;
-    }
-
-    /**
-     * Populates the EU conservation status by biogeographical region using Art17 data (cached from sparql)
-     * @param code2000 Habitat code 2000
-     */
-    private void populateBiogeoAssessment(String code2000) {
-        if(code2000 != null) {
-            biogeoAssessmentRows = new Chm62edtArt17CacheDomain().findWhere(
-                    "code2000='" + code2000 + "' and object_type='H'");
-        }
-    }
-
     public List<OrderedSpeciesBean> getDiagnosticSpecies() {
         return diagnosticSpecies;
     }
@@ -1012,4 +1003,38 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
     public String getDescriptionSpecies(){
         return descriptionSpecies;
     }
+
+
+    private JSONArray conservationCache = null;
+
+    public JSONArray getConservationByCountry() {
+        if (conservationCache == null) {
+            JSONObject json = Discodata.readJson(Discodata.encodeQuery("https://discodata.eea.europa.eu/sql?query=", "select * from [EUNIS].[v1r1].[BISE_Habitat_Conservation_Status_by_MS] where code_2000='" + factsheet.getCode2000() + "' order by area_name_en"));
+
+            if (json.containsKey("results")) {
+                conservationCache = (JSONArray) json.get("results");
+            } else {
+                conservationCache = new JSONArray();
+            }
+        }
+
+        return conservationCache;
+    }
+
+    private JSONArray conservationEU = null;
+
+    public JSONArray getConservationEU() {
+        if (conservationEU == null) {
+            JSONObject json = Discodata.readJson(Discodata.encodeQuery("https://discodata.eea.europa.eu/sql?query=", "select * from [EUNIS].[v1r1].[BISE_Habitat_Conservation_Status] where code_2000='" + factsheet.getCode2000() + "' order by region_name"));
+
+            if (json.containsKey("results")) {
+                conservationEU = (JSONArray) json.get("results");
+            } else {
+                conservationEU = new JSONArray();
+            }
+        }
+
+        return conservationEU;
+    }
+
 }
