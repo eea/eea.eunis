@@ -2556,4 +2556,9 @@ END
         </sql>
     </changeSet>
 
+    <changeSet id="rev-158" author="ivascu">
+        <comment>Removed the art 17 cache after switching to discodata</comment>
+        <sql>drop table chm62edt_art17cache;</sql>
+    </changeSet>
+
 </databaseChangeLog>
