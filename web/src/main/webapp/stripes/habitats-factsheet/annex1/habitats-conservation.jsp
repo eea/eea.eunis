@@ -7,7 +7,7 @@
         <h3>EU conservation status</h3>
         <p>Conservation status assesses every six years and for each biogeographical
             region the condition of habitats and species compared to the favourable status
-            as described in the Habitats Directive. The map shows the 2007-2012
+            as described in the Habitats Directive. The map shows the 2013-2018
             assessments as reported by EU Member State. Assessments are further
             detailed in the summary document available behind the link below.</p>
 
@@ -27,9 +27,9 @@
      <div class="right-area" style="width: 350px;">
          <div>
              <table>
-                 <tr><td class="discreet"><div class="legend-color conservation-legend-favorable"> </div> <span class="bold">Favourable</span>: A habitat is in a situation where it is prospering and with good prospects to do so in the future as well</td></tr>
-                 <tr><td class="discreet"><div class="legend-color conservation-legend-inadequate"> </div> <span class="bold">Unfavourable-Inadequate</span>: A habitat is in a situation where a change in management or policy is required to return the habitat to favourable status but there is no danger of disappearance in the foreseeable future</td></tr>
-                 <tr><td class="discreet"><div class="legend-color conservation-legend-bad"> </div> <span class="bold">Unfavourable-Bad</span>: A habitat is in serious danger of disappearing (at least regionally)</td></tr>
+                 <tr><td class="discreet"><div class="legend-color conservation-legend-favorable"> </div> <span class="bold">Good</span>: A habitat is in a situation where it is prospering and with good prospects to do so in the future as well</td></tr>
+                 <tr><td class="discreet"><div class="legend-color conservation-legend-inadequate"> </div> <span class="bold">Poor</span>: A habitat is in a situation where a change in management or policy is required to return the habitat to favourable status but there is no danger of disappearance in the foreseeable future</td></tr>
+                 <tr><td class="discreet"><div class="legend-color conservation-legend-bad"> </div> <span class="bold">Bad</span>: A habitat is in serious danger of disappearing (at least regionally)</td></tr>
                  <tr><td class="discreet"><div class="legend-color conservation-legend-unknown"> </div> <span class="bold">Unknown</span>: The information available for the habitat type is scarce and does not allow a proper assessment of its conservation status</td></tr>
              </table>
          </div>

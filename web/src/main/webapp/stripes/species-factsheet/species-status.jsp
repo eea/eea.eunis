@@ -122,7 +122,7 @@
                         <h3>EU conservation status</h3>
                     <p>Conservation status assesses every six years and for each biogeographical
                         region the condition of habitats and species compared to the favourable status
-                        as described in the Habitats Directive. The map shows the 2007-2012
+                        as described in the Habitats Directive. The map shows the 2013-2018
                         assessments as reported by EU Member State. Assessments are further
                         detailed in the summary document available behind the link below.</p>
                         <iframe id="speciesStatusMap" class="map-border" src="" height="425px" width="100%"></iframe>
@@ -133,9 +133,9 @@
 
                     <div class="footer">
                         <table>
-                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-favorable"> </div> <span class="bold">Favourable</span>: the species is viable and maintaining itself on a long-term basis, its natural range is not reduced, and it has a sufficient large habitat.</td></tr>
-                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-inadequate"> </div> <span class="bold">Unfavourable-Inadequate</span>: the species is not as critical as being unfavourable-bad, but still requires significant conservation and restoration measure to make it viable in the long-term, or to enlarged its current range, or to improve the quality and availability of its habitat.</td></tr>
-                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-bad"> </div> <span class="bold">Unfavourable-Bad</span>: the species is either not maintaining itself on a long-term basis and is not viable, or its natural range as been or is being drastically reduced, or its habitat is largely insufficient; the species requires major conservation and restoration measures.</td></tr>
+                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-favorable"> </div> <span class="bold">Good</span>: the species is viable and maintaining itself on a long-term basis, its natural range is not reduced, and it has a sufficient large habitat.</td></tr>
+                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-inadequate"> </div> <span class="bold">Poor</span>: the species is not as critical as being unfavourable-bad, but still requires significant conservation and restoration measure to make it viable in the long-term, or to enlarged its current range, or to improve the quality and availability of its habitat.</td></tr>
+                            <tr><td colspan="2" class="discreet"><div class="legend-color conservation-legend-bad"> </div> <span class="bold">Bad</span>: the species is either not maintaining itself on a long-term basis and is not viable, or its natural range as been or is being drastically reduced, or its habitat is largely insufficient; the species requires major conservation and restoration measures.</td></tr>
                             <tr>
                                 <td colspan="2" class="discreet"><div class="legend-color conservation-legend-unknown"> </div> <span class="bold">Unknown</span>: the information available for the species is scarce and does not allow a proper assessment of its conservation status.</td>
                                 <%--<td class="discreet"><div class="legend-color conservation-legend-nodata"> </div> <span class="bold">No data</span></td>--%>
