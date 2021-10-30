@@ -2,6 +2,7 @@ package ro.finsiel.eunis.jrfTables.habitats.names;
 
 import java.util.List;
 
+import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
@@ -112,6 +113,7 @@ public class NamesDomain extends AbstractDomain implements Paginable {
         this.addColumnSpec(new StringColumnSpec("CLASS_REF", "getClassRef", "setClassRef", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("CODE_PART_2", "getCodePart2", "setCodePart2", DEFAULT_TO_NULL));
         this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getHabLevel", "setHabLevel", DEFAULT_TO_NULL));
+        this.addColumnSpec(new StringColumnSpec("HABITAT_TYPE", "getHabitatType", "setHabitatType", DEFAULT_TO_NULL));
 
         this.setTableAlias("A");
         this.setReadOnly(true);
@@ -209,13 +211,13 @@ public class NamesDomain extends AbstractDomain implements Paginable {
         // Filter habitat types (ANNEX / EUNIS / BOTH)
         if (0 != searchPlace.compareTo(NamesDomain.SEARCH_BOTH)) {
             if (0 == searchPlace.compareTo(NamesDomain.SEARCH_EUNIS)) {
-                filterSQL.append(" A.ID_HABITAT>=1 AND A.ID_HABITAT < 10000 AND ");
+                filterSQL.append(" A.ID_HABITAT>=1 AND A.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'  AND ");
             }
             if (0 == searchPlace.compareTo(NamesDomain.SEARCH_ANNEX_I)) {
-                filterSQL.append(" A.ID_HABITAT > 10000 AND ");
+                filterSQL.append(" A.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'  AND ");
             }
         } else {
-            filterSQL.append(" A.ID_HABITAT<>'-1' AND A.ID_HABITAT <> '10000' AND ");
+            filterSQL.append(" A.ID_HABITAT<>'-1' AND A.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  AND ");
         }
 
         int i;

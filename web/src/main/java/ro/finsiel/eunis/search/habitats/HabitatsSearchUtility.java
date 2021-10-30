@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.search.habitats;
 
 
+import eionet.eunis.util.Constants;
 import ro.finsiel.eunis.jrfTables.habitats.names.NamesDomain;
 import ro.finsiel.eunis.jrfTables.habitats.legal.EUNISLegalDomain;
 import ro.finsiel.eunis.jrfTables.habitats.code.CodeDomain;
@@ -63,12 +64,12 @@ public class HabitatsSearchUtility {
         if (null != database) {
             if (0 != database.compareTo(NamesDomain.SEARCH_BOTH)) {
                 if (database.intValue() == NamesDomain.SEARCH_ANNEX_I.intValue()) { // ANNEX I
-                    whereSQL.append(" A.ID_HABITAT >10000 AND ");
+                    whereSQL.append(" A.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "' AND ");
                 } else { // If EUNIS (or other wrong value - defaults to EUNIS)
-                    whereSQL.append(" A.ID_HABITAT >= 1 AND A.ID_HABITAT < 10000 AND ");
+                    whereSQL.append(" A.ID_HABITAT >= 1 AND A.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%' AND ");
                 }
             } else {
-                whereSQL.append(" A.ID_HABITAT <>'-1' AND A.ID_HABITAT <> '10000' AND ");
+                whereSQL.append(" A.ID_HABITAT <>'-1' AND A.ID_HABITAT <> '" + Constants.HABITAT_ANNEX1_ROOT + "' AND ");
             }
         }
         if (useScientific) {
@@ -129,12 +130,12 @@ public class HabitatsSearchUtility {
         if (null != database) {
             if (database.intValue() != NamesDomain.SEARCH_BOTH.intValue()) {
                 if (database.intValue() == NamesDomain.SEARCH_ANNEX_I.intValue()) { // ANNEX I
-                    whereSQL.append(" A.ID_HABITAT >10000 AND ");
+                    whereSQL.append(" A.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "' AND ");
                 } else { // If EUNIS (or other wrong value - defaults to EUNIS)
-                    whereSQL.append(" A.ID_HABITAT>=1 and A.ID_HABITAT<10000 AND ");
+                    whereSQL.append(" A.ID_HABITAT>=1 and A.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%' AND ");
                 }
             } else {
-                whereSQL.append(" A.ID_HABITAT<>'-1' and A.ID_HABITAT<>'10000' AND ");
+                whereSQL.append(" A.ID_HABITAT<>'-1' and A.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "' AND ");
             }
         }
         if (useScientific) {
@@ -179,7 +180,7 @@ public class HabitatsSearchUtility {
         List results = new Vector();
 
         try {
-            results = new Chm62edtHabitatDomain().findWhereOrderBy("LEVEL=1 and ID_HABITAT>=1 and ID_HABITAT < 10000",
+            results = new Chm62edtHabitatDomain().findWhereOrderBy("LEVEL=1 and ID_HABITAT>=1 and HABITAT_TYPE like '"+ Constants.HABITAT_EUNIS +"%'" ,
                     "EUNIS_HABITAT_CODE");
             if (null == results) {
                 results = new Vector();
@@ -291,7 +292,7 @@ public class HabitatsSearchUtility {
                     sql += " AND EUNIS_HABITAT_CODE IS NOT NULL";
                     sql += " AND EUNIS_HABITAT_CODE <> '0' ";
                     sql += " AND TRIM(EUNIS_HABITAT_CODE) <> '' ";
-                    sql += " AND ID_HABITAT>=1 AND ID_HABITAT < 10000 ";
+                    sql += " AND ID_HABITAT>=1 AND HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'  ";
                     sql += " GROUP BY EUNIS_HABITAT_CODE ";
                 }
                 if (database == CodeDomain.SEARCH_ANNEX.intValue()) {
@@ -299,7 +300,7 @@ public class HabitatsSearchUtility {
                     sql += " AND CODE_ANNEX1 IS NOT NULL";
                     sql += " AND CODE_ANNEX1 <> '0' ";
                     sql += " AND TRIM(CODE_ANNEX1) <> '' ";
-                    sql += " AND ID_HABITAT > 10000 ";
+                    sql += " AND HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'  ";
                     sql += " GROUP BY CODE_ANNEX1 ";
                 }
             } else {
@@ -307,7 +308,7 @@ public class HabitatsSearchUtility {
                         + " AND EUNIS_HABITAT_CODE <> '0' AND EUNIS_HABITAT_CODE IS NOT NULL AND TRIM(EUNIS_HABITAT_CODE)<>'') "
                         + " OR (CODE_ANNEX1 " + codePartSQL
                         + " AND CODE_ANNEX1 <> '0' AND CODE_ANNEX1 IS NOT NULL AND TRIM(CODE_ANNEX1)<>'')) ";
-                sql += " AND ID_HABITAT <> '-1' AND ID_HABITAT <> '10000' ";
+                sql += " AND ID_HABITAT <> '-1' AND ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  ";
                 sql += " GROUP BY EUNIS_HABITAT_CODE,CODE_ANNEX1 ";
             }
             try {
@@ -326,7 +327,7 @@ public class HabitatsSearchUtility {
                     sql += " AND A.EUNIS_HABITAT_CODE IS NOT NULL";
                     sql += " AND A.EUNIS_HABITAT_CODE <> '0' ";
                     sql += " AND TRIM(A.EUNIS_HABITAT_CODE) <> '' ";
-                    sql += " AND A.ID_HABITAT > '1' AND A.ID_HABITAT < '10000'";
+                    sql += " AND A.ID_HABITAT > '1' AND A.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%' ";
                     sql += " AND ((A.EUNIS_HABITAT_CODE " + codePartSQL + ")";
                     sql += " OR (B.CODE " + codePartSQL + " AND B.CODE IS NOT NULL AND TRIM(B.CODE)<>''))";
                 }
@@ -334,7 +335,7 @@ public class HabitatsSearchUtility {
                     sql += " AND A.CODE_ANNEX1 IS NOT NULL";
                     sql += " AND A.CODE_ANNEX1 <> '0' ";
                     sql += " AND TRIM(A.CODE_ANNEX1) <> '' ";
-                    sql += " AND A.ID_HABITAT > '10000' ";
+                    sql += " AND A.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'  ";
                     sql += " AND ((A.CODE_ANNEX1 " + codePartSQL + ")";
                     sql += " OR (B.CODE " + codePartSQL + "  AND B.CODE IS NOT NULL AND TRIM(B.CODE)<>''))";
                 }
@@ -344,7 +345,7 @@ public class HabitatsSearchUtility {
                         + " OR (A.CODE_ANNEX1 " + codePartSQL
                         + " AND A.CODE_ANNEX1 <> '0' AND A.CODE_ANNEX1 IS NOT NULL AND TRIM(A.CODE_ANNEX1)<>'')" + " OR (B.CODE "
                         + codePartSQL + "  AND B.CODE IS NOT NULL AND TRIM(B.CODE)<>''))";
-                sql += " AND A.ID_HABITAT <> '-1' AND A.ID_HABITAT <> '10000' ";
+                sql += " AND A.ID_HABITAT <> '-1' AND A.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  ";
             }
             sql += " AND B.ID_CLASS_CODE='" + idClassification + "' ";
             sql += " GROUP BY A.EUNIS_HABITAT_CODE, A.CODE_ANNEX1, B.CODE ";

@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.jrfTables.species.habitats;
 
 
+import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
@@ -220,13 +221,13 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
         filterSQL.append(" AND ");
         if (0 != database.compareTo(ScientificNameDomain.SEARCH_BOTH)) {
             if (0 == database.compareTo(ScientificNameDomain.SEARCH_EUNIS)) {
-                filterSQL.append(" C.ID_HABITAT >= 1 and C.ID_HABITAT < 10000 ");
+                filterSQL.append(" C.ID_HABITAT >= 1 and C.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'  ");
             }
             if (0 == database.compareTo(ScientificNameDomain.SEARCH_ANNEX_I)) {
-                filterSQL.append(" C.ID_HABITAT > 10000 ");
+                filterSQL.append(" C.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'  ");
             }
         } else {
-            filterSQL.append(" C.ID_HABITAT <>'-1' AND C.ID_HABITAT <> '10000' ");
+            filterSQL.append(" C.ID_HABITAT <>'-1' AND C.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  ");
         }
         filterSQL.append(
                 " AND IF(TRIM(C.CODE_2000) <> '',RIGHT(C.CODE_2000,2),1) <> IF(TRIM(C.CODE_2000) <> '','00',2) AND IF(TRIM(C.CODE_2000) <> '',LENGTH(C.CODE_2000),1) = IF(TRIM(C.CODE_2000) <> '',4,1) ");
@@ -383,14 +384,14 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
             if (0 != database.compareTo(ScientificNameDomain.SEARCH_BOTH)) {
                 if (0 == database.compareTo(ScientificNameDomain.SEARCH_EUNIS)) {
                     filterSQL.append(
-                            " C.ID_HABITAT >= 1 and C.ID_HABITAT < 10000 ");
+                            " C.ID_HABITAT >= 1 and C.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'  ");
                 }
                 if (0 == database.compareTo(ScientificNameDomain.SEARCH_ANNEX_I)) {
-                    filterSQL.append(" C.ID_HABITAT > 10000 ");
+                    filterSQL.append(" C.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'  ");
                 }
             } else {
                 filterSQL.append(
-                        "  C.ID_HABITAT <>'-1' AND C.ID_HABITAT <> '10000' ");
+                        "  C.ID_HABITAT <>'-1' AND C.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  ");
             }
 
             String where = criteria.getScientificName();

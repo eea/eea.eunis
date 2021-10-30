@@ -4,6 +4,7 @@ package ro.finsiel.eunis.search.habitats.habitatsByReferences;
 import java.util.List;
 import java.util.Vector;
 
+import eionet.eunis.util.Constants;
 import ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefDomain;
 import ro.finsiel.eunis.jrfTables.habitats.references.HabitatsBooksDomain;
 import ro.finsiel.eunis.search.Utilities;
@@ -168,13 +169,13 @@ public class ReferencesForHabitats {
 
         if (0 != RefDomain.SEARCH_BOTH.compareTo(database)) {
             if (0 == database.compareTo(RefDomain.SEARCH_EUNIS)) {
-                sql.append(" AND C.ID_HABITAT>=1 and C.ID_HABITAT<10000 ");
+                sql.append(" AND C.ID_HABITAT>=1 and C.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'  ");
             }
             if (0 == database.compareTo(RefDomain.SEARCH_ANNEX_I)) {
-                sql.append(" AND C.ID_HABITAT>10000 ");
+                sql.append(" AND C.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'  ");
             }
         } else {
-            sql.append(" AND C.ID_HABITAT<>'-1' and C.ID_HABITAT<>'10000' ");
+            sql.append(" AND C.ID_HABITAT<>'-1' and C.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  ");
         }
 
         if (0 == source.compareTo(RefDomain.SOURCE)) {

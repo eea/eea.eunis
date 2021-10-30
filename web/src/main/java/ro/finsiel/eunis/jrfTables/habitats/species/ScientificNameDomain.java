@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
@@ -89,6 +90,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
         this.addColumnSpec(new StringColumnSpec("CODE_2000", "getCode2000", "setCode2000", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("CODE_ANNEX1", "getCodeAnnex1", "setCodeAnnex1", DEFAULT_TO_NULL));
         this.addColumnSpec(new StringColumnSpec("EUNIS_HABITAT_CODE", "getEunisHabitatCode", "setEunisHabitatCode", DEFAULT_TO_NULL));
+        this.addColumnSpec(new StringColumnSpec("HABITAT_TYPE", "getHabitatType", "setHabitatType", DEFAULT_TO_NULL));
         this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getHabLevel", "setHabLevel", DEFAULT_TO_NULL));
     }
 
@@ -168,13 +170,13 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
         if (searchCriteria.length <= 0) throw new CriteriaMissingException("No criteria set for searching. Search interrupted.");
         if (0 != database.compareTo(ScientificNameDomain.SEARCH_BOTH)) {
             if (0 == database.compareTo(ScientificNameDomain.SEARCH_EUNIS)) {
-                filterSQL.append(" H.ID_HABITAT >= 1 and H.ID_HABITAT<10000 ");
+                filterSQL.append(" H.ID_HABITAT >= 1 and H.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'  ");
             }
             if (0 == database.compareTo(ScientificNameDomain.SEARCH_ANNEX_I)) {
-                filterSQL.append(" H.ID_HABITAT > 10000 ");
+                filterSQL.append(" H.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'  ");
             }
         } else {
-            filterSQL.append("  H.ID_HABITAT <>'-1' AND H.ID_HABITAT <> '10000' ");
+            filterSQL.append("  H.ID_HABITAT <>'-1' AND H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  ");
         }
         for (int i = 0; i < searchCriteria.length; i++) {
             SpeciesSearchCriteria aCriteria = (SpeciesSearchCriteria) searchCriteria[i];

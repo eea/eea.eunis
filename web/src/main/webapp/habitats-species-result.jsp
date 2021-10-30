@@ -327,8 +327,7 @@
                     while(it.hasNext())
                     {
                       ScientificNamePersist habitat = (ScientificNamePersist) it.next();
-                      int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
-                      boolean isEUNIS = idHabitat <= 10000;
+                      boolean isEUNIS = Utilities.isHabitatEunis(habitat.getHabitatType());
                       String eunisCode = habitat.getEunisHabitatCode();
                       //String annexCode = habitat.getCodeAnnex1();
                       String annexCode = habitat.getCode2000();

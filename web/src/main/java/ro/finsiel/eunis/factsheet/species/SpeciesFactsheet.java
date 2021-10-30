@@ -6,6 +6,7 @@ import java.util.*;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.IReferencesDao;
 import eionet.eunis.dto.*;
+import eionet.eunis.util.Constants;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -215,7 +216,7 @@ public class SpeciesFactsheet {
 
         List habitats =
                 new HabitatsNatureObjectReportTypeSpeciesDomain()
-                        .findWhere("H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND C.ID_NATURE_OBJECT IN ( " + synonymsIDs
+                        .findWhere("H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  AND C.ID_NATURE_OBJECT IN ( " + synonymsIDs
                                 + " ) GROUP BY H.ID_NATURE_OBJECT");
         if (habitats != null) {
             return habitats.size();
@@ -242,11 +243,11 @@ public class SpeciesFactsheet {
             // System.out.println("synonymsIDs = " + synonymsIDs);
 
             // habitats = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
-            // "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND C.ID_NATURE_OBJECT = " +
+            // "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  AND C.ID_NATURE_OBJECT = " +
             // getSpeciesNatureObject().getIdNatureObject() + " GROUP BY H.ID_NATURE_OBJECT" );
             habitats =
                     new HabitatsNatureObjectReportTypeSpeciesDomain()
-                            .findWhere("H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND C.ID_NATURE_OBJECT IN ( " + synonymsIDs
+                            .findWhere("H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  AND C.ID_NATURE_OBJECT IN ( " + synonymsIDs
                                     + " ) GROUP BY H.ID_NATURE_OBJECT");
             if (habitats != null) {
                 for (Object habitat1 : habitats) {
@@ -263,13 +264,12 @@ public class SpeciesFactsheet {
 
                     int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -100);
 
-                    // todo: there is also Utilities.getHabitatType()
                     if (idHabitat != -100) {
-                        if (idHabitat >= 1 && idHabitat < 10000) {
+                        if (Utilities.isHabitatEunis(habitat.getHabitatType())) {
                             code = habitat.getEunisHabitatCode();
                             type = SpeciesHabitatWrapper.HABITAT_EUNIS;
                         }
-                        if (idHabitat > 10000) {
+                        if (Utilities.isHabitatAnnex1(habitat.getHabitatType())) {
                             code = habitat.getCode2000();
                             type = SpeciesHabitatWrapper.HABITAT_ANNEX_I;
                         }

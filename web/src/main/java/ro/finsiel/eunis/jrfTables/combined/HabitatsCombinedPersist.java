@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.jrfTables.combined;
 
+import eionet.eunis.util.Constants;
 import net.sf.jrf.domain.PersistentObject;
 
 /**
@@ -30,6 +31,7 @@ public class HabitatsCombinedPersist extends PersistentObject {
   private String i_codePart2 = null;
   /** This is a database field. */
   private Integer i_habLevel = null;
+  private String habitatType = null;
 
   /**
    * Default constructor
@@ -215,4 +217,13 @@ public class HabitatsCombinedPersist extends PersistentObject {
     i_scientificName = scientificName;
     this.markModifiedPersistentState();
   }
+
+  public String getHabitatType() {
+    return habitatType;
+  }
+
+  public void setHabitatType(String habitatType) {
+    this.habitatType = habitatType;
+  }
+
 }

@@ -20,6 +20,7 @@
                  java.sql.ResultSet"%>
 <%@ page import="ro.finsiel.eunis.WebContentManagement"%>
 <%@ page import="ro.finsiel.eunis.search.Utilities" %>
+<%@ page import="eionet.eunis.util.Constants" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="<%=SessionManager.getCurrentLanguage()%>" xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%=SessionManager.getCurrentLanguage()%>">
@@ -592,24 +593,24 @@
        String isGoodHabitat = " IF(TRIM(chm62edt_habitat.CODE_2000) <> '',RIGHT(chm62edt_habitat.CODE_2000,2),1) <> IF(TRIM(chm62edt_habitat.CODE_2000) <> '','00',2) AND IF(TRIM(chm62edt_habitat.CODE_2000) <> '',LENGTH(chm62edt_habitat.CODE_2000),1) = IF(TRIM(chm62edt_habitat.CODE_2000) <> '',4,1) ";
 
       SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM chm62edt_habitat";
-      SQL+=" WHERE  "+isGoodHabitat+" AND  SCIENTIFIC_NAME LIKE '%"+val+"%' AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'10000' ";
+      SQL+=" WHERE  "+isGoodHabitat+" AND  SCIENTIFIC_NAME LIKE '%"+val+"%' AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + " ' ";
       SQL+=" ORDER BY SCIENTIFIC_NAME";
       SQL+=" LIMIT 0,100";
       if(oper.equalsIgnoreCase("Contains")) {
         SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM chm62edt_habitat";
-        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME LIKE '%"+val+"%'  AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'10000' ";
+        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME LIKE '%"+val+"%'  AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "' ";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
       if(oper.equalsIgnoreCase("Equal")) {
         SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM chm62edt_habitat";
-        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME = '"+val+"'  AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'10000' ";
+        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME = '"+val+"'  AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "' ";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }
       if(oper.equalsIgnoreCase("Between")) {
         SQL="SELECT DISTINCT SCIENTIFIC_NAME,CONCAT(IF(CODE_ANNEX1 IS NULL,'',CODE_ANNEX1),IF(EUNIS_HABITAT_CODE IS NULL,'',EUNIS_HABITAT_CODE)) FROM chm62edt_habitat";
-        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME LIKE '%"+val+"%'  AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'10000' ";
+        SQL+=" WHERE  "+isGoodHabitat+" AND SCIENTIFIC_NAME LIKE '%"+val+"%'  AND chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "' ";
         SQL+=" ORDER BY SCIENTIFIC_NAME";
         SQL+=" LIMIT 0,100";
       }

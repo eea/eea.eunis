@@ -51,6 +51,10 @@ public class HabitatsNatureObjectReportTypeSpeciesDomain extends AbstractDomain 
                 new StringColumnSpec("SCIENTIFIC_NAME",
                 "getHabitatScientificName", "setHabitatScientificName",
                 DEFAULT_TO_NULL));
+        this.addColumnSpec(
+                new StringColumnSpec("HABITAT_TYPE",
+                "getHabitatType", "setHabitatType",
+                DEFAULT_TO_NULL));
 
         JoinTable natureObjectReportType = new JoinTable(
                 "chm62edt_nature_object_report_type A", "ID_NATURE_OBJECT",

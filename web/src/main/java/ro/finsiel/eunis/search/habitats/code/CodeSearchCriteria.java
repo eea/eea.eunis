@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.search.habitats.code;
 
 
+import eionet.eunis.util.Constants;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.jrfTables.habitats.code.CodeDomain;
@@ -160,19 +161,19 @@ public class CodeSearchCriteria extends AbstractSearchCriteria {
                     if (sql.length() > 0) {
                         sql.append(" AND ");
                     }
-                    sql.append(" A.ID_HABITAT >=1 AND A.ID_HABITAT < 10000 ");
+                    sql.append(" A.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%' ");
                 }
                 if (0 == database.compareTo(CodeDomain.SEARCH_ANNEX)) {
                     if (sql.length() > 0) {
                         sql.append(" AND ");
                     }
-                    sql.append(" A.ID_HABITAT > 10000 ");
+                    sql.append(" A.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "' ");
                 }
             } else {
                 if (sql.length() > 0) {
                     sql.append(" AND ");
                 }
-                sql.append(" A.ID_HABITAT <>'-1' AND A.ID_HABITAT <>'10000' ");
+                sql.append(" A.ID_HABITAT <>'-1' AND A.ID_HABITAT <>'" + Constants.HABITAT_ANNEX1_ROOT +"' ");
             }
         }
         if (null != criteriaSearch && null != oper && null != criteriaSearch && null != classificationCode) {

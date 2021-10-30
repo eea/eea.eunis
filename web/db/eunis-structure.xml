@@ -2561,4 +2561,16 @@ END
         <sql>drop table chm62edt_art17cache;</sql>
     </changeSet>
 
+    <changeSet id="rev-159" author="ivascu">
+        <comment>Created dictionary table for eunis habitat seas</comment>
+        <sql>
+            CREATE TABLE chm62edt_eunis_seas
+            (
+                ID_EUNIS_SEA char(4) NOT NULL DEFAULT 0,
+                SEA_NAME varchar(250) NOT NULL,
+                PRIMARY KEY (ID_EUNIS_SEA)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            alter table chm62edt_habitat add id_eunis_sea varchar(3);</sql>
+    </changeSet>
+
 </databaseChangeLog>

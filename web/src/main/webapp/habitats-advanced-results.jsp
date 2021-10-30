@@ -238,10 +238,7 @@
                   while (it.hasNext()) {
                     ro.finsiel.eunis.jrfTables.habitats.advanced.DictionaryPersist habitat = (ro.finsiel.eunis.jrfTables.habitats.advanced.DictionaryPersist) it.next();
                     String cssClass = i++ % 2 == 0 ? " class=\"zebraeven\"" : "";
-                    int level = habitat.getHabLevel().intValue();
-                    //boolean isEUNIS = (Utilities.EUNIS_HABITAT.intValue() == (Utilities.getHabitatType(habitat.getCodeAnnex1()).intValue())) ? true : false;
-                    int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
-                    boolean isEUNIS = idHabitat <= 10000;
+                    int level = habitat.getHabLevel();
                 %>
                     <tr<%=cssClass%>>
                       <%if (showLevel) {%>
@@ -251,12 +248,12 @@
                       <%}%>
                       <%if (showEUNISCode) {%>
                       <td>
-                        <%=isEUNIS ? habitat.getEunisHabitatCode() : "&nbsp;"%>
+                        <%=Utilities.isHabitatEunis(habitat.getHabitatType()) ? habitat.getEunisHabitatCode() : "&nbsp;"%>
                       </td>
                       <%}%>
                       <%if (showANNEXCode) {%>
                       <td>
-                        <%=isEUNIS ? "&nbsp;" : habitat.getCodeAnnex1()%>
+                        <%=Utilities.isHabitatAnnex1(habitat.getHabitatType()) ? habitat.getCodeAnnex1() : "&nbsp;" %>
                       </td>
                       <%}%>
                       <%if (showScientificName) {%>

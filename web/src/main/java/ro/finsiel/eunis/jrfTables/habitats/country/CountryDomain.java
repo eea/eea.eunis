@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.jrfTables.habitats.country;
 
+import eionet.eunis.util.Constants;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
@@ -195,13 +196,13 @@ public class CountryDomain extends AbstractDomain implements Paginable {
     filterSQL.append(" AND IF(TRIM(A.CODE_2000) <> '',RIGHT(A.CODE_2000,2),1) <> IF(TRIM(A.CODE_2000) <> '','00',2) AND IF(TRIM(A.CODE_2000) <> '',LENGTH(A.CODE_2000),1) = IF(TRIM(A.CODE_2000) <> '',4,1) ");
     if (0 != database.compareTo(SEARCH_BOTH)) {
       if (0 == database.compareTo(SEARCH_EUNIS)) {
-        filterSQL.append(" AND A.ID_HABITAT >=1 AND A.ID_HABITAT < 10000 ");
+        filterSQL.append(" AND A.ID_HABITAT >=1 AND A.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%' ");
       }
       if (0 == database.compareTo(SEARCH_ANNEX_I)) {
-        filterSQL.append(" AND A.ID_HABITAT >10000 ");
+        filterSQL.append(" AND A.ID_HABITAT A.HABITAT_TYPE = '" + Constants.HABITAT_ANNEX1 + "' ");
       }
     } else
-      filterSQL.append(" AND A.ID_HABITAT <>'-1' AND A.ID_HABITAT <> '10000' ");
+      filterSQL.append(" AND A.ID_HABITAT <>'-1' AND A.ID_HABITAT <> '" + Constants.HABITAT_ANNEX1_ROOT + "' ");
     int i = 0;
     Vector mainSearches = new Vector();
     Vector otherSearches = new Vector();

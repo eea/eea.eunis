@@ -126,4 +126,11 @@ public interface Constants {
 
     public static final int IAS_ANNEX = 2485;
     public static final int IAS_REGULATION = 2484;
+
+    public static final String HABITAT_EUNIS = "EUNIS";
+    public static final String HABITAT_EUNIS_2017 = "EUNIS2017";
+    public static final String HABITAT_ANNEX1 = "ANNEX1";
+    public static final String HABITAT_REDLIST = "REDLIST";
+    public static final int HABITAT_ANNEX1_ROOT = 10000;
 }
+

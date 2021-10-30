@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.search.habitats.sites;
 
 
+import eionet.eunis.util.Constants;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.jrfTables.habitats.sites.HabitatsSitesDomain;
 
@@ -28,13 +29,13 @@ public class SitesWrapper {
         sql.append(" AND ");
         if (0 != database.compareTo(HabitatsSitesDomain.SEARCH_BOTH)) {
             if (0 == database.compareTo(HabitatsSitesDomain.SEARCH_EUNIS)) {
-                sql.append("  C.ID_HABITAT >=1 and C.ID_HABITAT<10000 ");
+                sql.append("  C.ID_HABITAT >=1 and C.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'  ");
             }
             if (0 == database.compareTo(HabitatsSitesDomain.SEARCH_ANNEX_I)) {
-                sql.append(" C.ID_HABITAT>10000 ");
+                sql.append(" C.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'  ");
             }
         } else {
-            sql.append("  C.ID_HABITAT <>'-1' and C.ID_HABITAT<>'10000' ");
+            sql.append("  C.ID_HABITAT <>'-1' and C.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  ");
         }
 
         sql.append(" GROUP BY H.NAME");

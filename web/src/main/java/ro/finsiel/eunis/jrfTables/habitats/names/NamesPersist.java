@@ -31,6 +31,7 @@ public class NamesPersist extends PersistentObject  implements Comparable<NamesP
   private String i_codePart2 = null;
   /** This is a database field. */
   private Integer i_habLevel = null;
+  private String habitatType = null;
 
   /**
    * Default constructor
@@ -221,4 +222,12 @@ public class NamesPersist extends PersistentObject  implements Comparable<NamesP
     public int compareTo(NamesPersist other) {
         return getScientificName().compareTo(other.getScientificName());
     }
+
+  public String getHabitatType() {
+    return habitatType;
+  }
+
+  public void setHabitatType(String habitatType) {
+    this.habitatType = habitatType;
+  }
 }

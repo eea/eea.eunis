@@ -37,6 +37,8 @@ public class ScientificNamePersist extends PersistentObject {
    **/
   private Integer i_habLevel = null;
 
+  private String habitatType = null;
+
   public ScientificNamePersist() {
     super();
   }
@@ -169,5 +171,13 @@ public class ScientificNamePersist extends PersistentObject {
   public void setScientificName(String scientificName) {
     i_scientificName = scientificName;
     this.markModifiedPersistentState();
+  }
+
+  public String getHabitatType() {
+    return habitatType;
+  }
+
+  public void setHabitatType(String habitatType) {
+    this.habitatType = habitatType;
   }
 }

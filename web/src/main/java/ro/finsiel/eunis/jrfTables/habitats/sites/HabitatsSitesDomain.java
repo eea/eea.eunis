@@ -5,6 +5,7 @@ package ro.finsiel.eunis.jrfTables.habitats.sites;
  * Time: 2:52:18 PM
  */
 
+import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
@@ -178,15 +179,15 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
     if (0 != database.compareTo(SEARCH_BOTH)) {
       if (0 == database.compareTo(SEARCH_EUNIS)) {
         if (filterSQL.length() > 0) filterSQL.append(" AND ");
-        filterSQL.append(" H.ID_HABITAT>=1 and H.ID_HABITAT<10000 ");
+        filterSQL.append(" H.ID_HABITAT>=1 and H.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'  ");
       }
       if (0 == database.compareTo(SEARCH_ANNEX_I)) {
         if (filterSQL.length() > 0) filterSQL.append(" AND ");
-        filterSQL.append(" H.ID_HABITAT>10000 ");
+        filterSQL.append(" H.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'  ");
       }
     } else {
       if (filterSQL.length() > 0) filterSQL.append(" AND ");
-      filterSQL.append(" H.ID_HABITAT>=1 and H.ID_HABITAT<>10000 ");
+      filterSQL.append(" H.ID_HABITAT>=1 and H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  ");
     }
     filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "C");
     filterSQL.append(" AND IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ");

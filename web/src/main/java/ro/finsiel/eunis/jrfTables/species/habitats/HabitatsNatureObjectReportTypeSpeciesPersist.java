@@ -25,6 +25,7 @@ public class HabitatsNatureObjectReportTypeSpeciesPersist extends PersistentObje
     private Integer idNatureObjectSpecies = null;
     private String value = null;
     private String attrName = null;
+    private String habitatType = null;
 
     public HabitatsNatureObjectReportTypeSpeciesPersist() {
         super();
@@ -148,5 +149,13 @@ public class HabitatsNatureObjectReportTypeSpeciesPersist extends PersistentObje
 
     public void setAttrName(String attrName) {
         this.attrName = attrName;
+    }
+
+    public String getHabitatType() {
+        return habitatType;
+    }
+
+    public void setHabitatType(String habitatType) {
+        this.habitatType = habitatType;
     }
 }

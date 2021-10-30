@@ -2,6 +2,7 @@ package ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences;
 
 import java.util.List;
 
+import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnoptions.NullableColumnOption;
 import net.sf.jrf.column.columnspecs.DateColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
@@ -86,6 +87,7 @@ public class RefDomain extends AbstractDomain implements Paginable {
         habitat.addJoinColumn(new StringJoinColumn("CODE_2000", "code2000", "setCode2000"));
         habitat.addJoinColumn(new IntegerJoinColumn("LEVEL", "generic_index_07", "setLevel"));
         habitat.addJoinColumn(new StringJoinColumn("DESCRIPTION", "description", "setDescription"));
+        habitat.addJoinColumn(new StringJoinColumn("HABITAT_TYPE", "habitat_type", "setHabitatType"));
         habitatReferences.addJoinTable(habitat);
     }
 
@@ -169,13 +171,13 @@ public class RefDomain extends AbstractDomain implements Paginable {
         filterSQL.append(" AND IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ");
         if (0 != RefDomain.SEARCH_BOTH.compareTo(searchPlace)) {
             if (0 == searchPlace.compareTo(RefDomain.SEARCH_EUNIS)) {
-                filterSQL.append(" AND H.ID_HABITAT>=1 and H.ID_HABITAT<10000 ");
+                filterSQL.append(" AND H.ID_HABITAT>=1 and H.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'  ");
             }
             if (0 == searchPlace.compareTo(RefDomain.SEARCH_ANNEX_I)) {
-                filterSQL.append(" AND H.ID_HABITAT>10000 ");
+                filterSQL.append(" AND H.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'  ");
             }
         } else
-            filterSQL.append(" AND H.ID_HABITAT<>'-1' and H.ID_HABITAT<>'10000' ");
+            filterSQL.append(" AND H.ID_HABITAT<>'-1' and H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  ");
 
         if (0 == source.compareTo(RefDomain.SOURCE)) {
             filterSQL.append(" AND B.HAVE_SOURCE = '1' ");

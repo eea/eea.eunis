@@ -375,8 +375,7 @@
                     //String annexCode = habitat.getAnnex1Code();
                     String annexCode = habitat.getCode2000();
                     int level = habitat.getLevel().intValue();
-                    int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
-                    boolean isEUNIS = (idHabitat > 10000) ? false : true;
+                    boolean isEUNIS = Utilities.isHabitatEunis(habitat.getHabitatType());
                     if (isEUNIS) {
                       annexCode = "";
                     } else {

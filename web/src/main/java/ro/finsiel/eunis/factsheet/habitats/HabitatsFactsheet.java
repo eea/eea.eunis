@@ -129,22 +129,6 @@ public class HabitatsFactsheet {
     public static final Integer OTHER_INFO_SALINITY = 14;
 
     /**
-     * Defines an EUNIS habitat.
-     */
-    public static final String EUNIS_HABITAT = "EUNIS";
-    public static final String EUNIS_2017_HABITAT = "EUNIS2017";
-
-
-    /**
-     * Defines an ANNEX I habitat.
-     */
-    public static final String ANNEX_I_HABITAT = "ANNEX1";
-
-    // Red List Habitat
-    public static final String REDLIST_HABITAT = "REDLIST";
-
-
-    /**
      * Habitat ID for the habitat we're constructing the factsheet.
      */
     private String idHabitat = null;
@@ -1758,16 +1742,11 @@ public class HabitatsFactsheet {
      * @return true if EUNIS.
      */
     public boolean isEunis() {
-        // if (0 == EUNIS_HABITAT.compareTo(getHabitatType())) return true;
-        int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
-
-        return (idHabitat <= 10000);
+        return Utilities.isHabitatEunis(habitat.getHabitatType());
     }
 
     public boolean isEunis2017() {
-        if(habitat.getHabitatType() != null && habitat.getHabitatType().equalsIgnoreCase(EUNIS_2017_HABITAT))
-            return true;
-        return false;
+        return Utilities.isHabitatEunis2017(habitat.getHabitatType());
     }
 
     /**
@@ -1776,7 +1755,7 @@ public class HabitatsFactsheet {
      * @return true if ANNEX I.
      */
     public boolean isAnnexI() {
-        return 0 == ANNEX_I_HABITAT.compareTo(habitat.getHabitatType());
+        return Utilities.isHabitatAnnex1(habitat.getHabitatType());
     }
 
     /**
@@ -1944,7 +1923,7 @@ public class HabitatsFactsheet {
 
     public List<OrderedSpeciesBean> getEunis2017Species(String type){
         List<HabitatsNatureObjectReportTypeSpeciesPersist> speciesList = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
-                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND H.ID_NATURE_OBJECT = "
+                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "' AND H.ID_NATURE_OBJECT = "
                         + idNatureObject
                         + " and AT.name = '" + type + "' GROUP BY C.ID_NATURE_OBJECT ORDER BY C.SCIENTIFIC_NAME");
 
@@ -2004,7 +1983,7 @@ public class HabitatsFactsheet {
             }
 
             speciesList = new HabitatsNatureObjectReportTypeSpeciesDomain().findWhere(
-                    "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND H.ID_NATURE_OBJECT = "
+                    "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "' AND H.ID_NATURE_OBJECT = "
                     + idNatureObject
                     + "  and AT.value not in('Habitat diagnostic species','Habitat constant species','Habitat dominant species') GROUP BY C.ID_NATURE_OBJECT ORDER BY COMMON_NAME, C.SCIENTIFIC_NAME");
             if (speciesList != null) {
@@ -2257,7 +2236,7 @@ public class HabitatsFactsheet {
     }
 
     public boolean isRedList() {
-        return REDLIST_HABITAT.equals(habitat.getHabitatType());
+        return Utilities.isHabitatRedList(habitat.getHabitatType());
     }
 
     public boolean isMarine() {

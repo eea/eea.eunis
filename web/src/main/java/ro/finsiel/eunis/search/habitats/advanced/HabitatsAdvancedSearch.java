@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search.habitats.advanced;
 
 
+import eionet.eunis.util.Constants;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -263,19 +265,19 @@ public class HabitatsAdvancedSearch {
                     if (sOperand.equalsIgnoreCase("Equal")) {
                         if (sValueMin.equalsIgnoreCase("EUNIS")) {
                             // habitatsSQL+="CODE_ANNEX1 IS NULL";
-                            habitatsSQL += "chm62edt_habitat.ID_HABITAT>=1 and  chm62edt_habitat.ID_HABITAT<10000";
+                            habitatsSQL += "chm62edt_habitat.ID_HABITAT>=1 and  chm62edt_habitat.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'";
                         } else {
                             // habitatsSQL+="CODE_ANNEX1 IS NOT NULL";
-                            habitatsSQL += "chm62edt_habitat.ID_HABITAT>10000";
+                            habitatsSQL += "chm62edt_habitat.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "'";
                         }
                     }
                     if (sOperand.equalsIgnoreCase("Contains")) {
                         if (sValueMin.equalsIgnoreCase("EUNIS")) {
                             // habitatsSQL+="CODE_ANNEX1 IS NULL";
-                            habitatsSQL += "chm62edt_habitat.ID_HABITAT >=1 and chm62edt_habitat.ID_HABITAT<10000";
+                            habitatsSQL += "chm62edt_habitat.ID_HABITAT >=1 and chm62edt_habitat.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%'";
                         } else {
                             // habitatsSQL+="CODE_ANNEX1 IS NOT NULL";
-                            habitatsSQL += "chm62edt_habitat.ID_HABITAT>10000";
+                            habitatsSQL += "chm62edt_habitat.HABITAT_TYPE = '" + Constants.HABITAT_ANNEX1 + "' ";
                         }
                     }
                 }
@@ -733,7 +735,7 @@ public class HabitatsAdvancedSearch {
                     }
                 }
 
-                habitatsSQL += " AND (chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'10000') ";
+                habitatsSQL += " AND (chm62edt_habitat.ID_HABITAT<>'-1' AND chm62edt_habitat.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "') ";
                 // execute every attribute query
                 attributesFilter += " AND ID_NATURE_OBJECT IN (" + ExecuteSQL(habitatsSQL, "") + ")";
             } // end for

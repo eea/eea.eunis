@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.jrfTables.habitats.code;
 
+import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
@@ -78,6 +79,7 @@ public class CodeDomain extends AbstractDomain implements Paginable {
     this.addColumnSpec(new StringColumnSpec("CLASS_REF", "getClassRef", "setClassRef", DEFAULT_TO_NULL));
     this.addColumnSpec(new StringColumnSpec("CODE_PART_2", "getCodePart2", "setCodePart2", DEFAULT_TO_NULL));
     this.addColumnSpec(new IntegerColumnSpec("LEVEL", "getHabLevel", "setHabLevel", DEFAULT_TO_NULL));
+    this.addColumnSpec(new StringColumnSpec("HABITAT_TYPE", "getHabitatType", "setHabitatType", DEFAULT_TO_NULL));
 
     JoinTable habClassCode = new JoinTable("chm62edt_habitat_class_code B", "ID_HABITAT", "ID_HABITAT");
     habClassCode.addJoinColumn(new StringJoinColumn("CODE", "setCode"));
@@ -158,7 +160,7 @@ public class CodeDomain extends AbstractDomain implements Paginable {
     StringBuffer filterSQL = new StringBuffer();
     if (searchCriteria.length <= 0) throw new CriteriaMissingException("No criteria set for searching. Search interrupted.");
     // Do not return habitats with ID -1 and ID 10000 because they are special habitats.
-    filterSQL.append(" A.ID_HABITAT<>'-1' AND A.ID_HABITAT<>'10000' AND ");
+    filterSQL.append(" A.ID_HABITAT<>'-1' AND A.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "' AND ");
     int i = 0;
     for (i = 0; i < searchCriteria.length; i++) {
       if (i > 0) filterSQL.append(" AND ");

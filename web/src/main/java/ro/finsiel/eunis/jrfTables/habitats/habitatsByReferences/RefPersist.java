@@ -39,6 +39,7 @@ public class RefPersist extends PersistentObject {
     private Integer level = null;
     private String description = null;
     private String code2000 = null;
+    private String habitatType = null;
 
 
     public RefPersist() {
@@ -234,5 +235,12 @@ public class RefPersist extends PersistentObject {
         this.code2000 = code2000;
     }
 
+    public String getHabitatType() {
+        return habitatType;
+    }
+
+    public void setHabitatType(String habitatType) {
+        this.habitatType = habitatType;
+    }
 }
 

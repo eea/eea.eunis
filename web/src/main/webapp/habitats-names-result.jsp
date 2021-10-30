@@ -408,8 +408,7 @@
                               {
                                 NamesPersist habitat = (NamesPersist) it.next();
                                 int level = habitat.getHabLevel().intValue();
-                                int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
-                                boolean isEUNIS = idHabitat <= 10000;
+                                boolean isEUNIS = Utilities.isHabitatEunis(habitat.getHabitatType());
                                 String eunisCode = habitat.getEunisHabitatCode();
                                 String annexCode = habitat.getCode2000();
                                 if (isEUNIS) {

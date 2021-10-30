@@ -45,7 +45,7 @@
         //isEunis = (0 == Utilities.EUNIS_HABITAT.compareTo(Utilities.getHabitatType(habitat.getCode2000()))) ? true : false;
         int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
         //System.out.println("idHabitat = " + idHabitat);
-        isEUNIS = (idHabitat > 10000) ? false : true;
+        isEUNIS =Utilities.isHabitatEunis(habitat.getHabitatType());
         level = habitat.getHabLevel().intValue();
         //System.out.println("level = " + level);
       }

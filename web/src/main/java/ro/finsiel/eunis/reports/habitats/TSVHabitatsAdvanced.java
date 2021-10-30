@@ -81,7 +81,7 @@ public class TSVHabitatsAdvanced extends AbstractTSVReport
           String level = "";
           int idHabitat = Utilities.checkedStringToInt(habitat.getIdHabitat(), -1);
           if (habitat.getHabLevel() != null) level = habitat.getHabLevel().intValue() + "";
-          boolean isEUNIS = idHabitat <= 10000;
+          boolean isEUNIS = Utilities.isHabitatEunis(habitat.getHabitatType());
 
           Vector<String> row = new Vector<String>();
           // Level

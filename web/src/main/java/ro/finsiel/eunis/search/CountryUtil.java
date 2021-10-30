@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import eionet.eunis.util.Constants;
 import ro.finsiel.eunis.exceptions.RecordNotFoundException;
 import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionPersist;
@@ -590,13 +591,13 @@ public class CountryUtil {
 
         if (0 != database.compareTo(CountryDomain.SEARCH_BOTH)) {
             if (0 == database.compareTo(CountryDomain.SEARCH_EUNIS)) {
-                dbCond += " AND A.ID_HABITAT >=1 AND A.ID_HABITAT < 10000 ";
+                dbCond += " AND A.ID_HABITAT >=1 AND A.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS + "%' ";
             }
             if (0 == database.compareTo(CountryDomain.SEARCH_ANNEX_I)) {
-                dbCond += " AND A.ID_HABITAT >10000 ";
+                dbCond += " AND A.HABITAT_TYPE = '" + Constants.HABITAT_ANNEX1 + "' ";
             }
         } else {
-            dbCond += " AND A.ID_HABITAT <>'-1' AND A.ID_HABITAT <> '10000' ";
+            dbCond += " AND A.ID_HABITAT <>'-1' AND A.ID_HABITAT <> '" + Constants.HABITAT_ANNEX1_ROOT + "' ";
         }
 
         // conditions concern habitats

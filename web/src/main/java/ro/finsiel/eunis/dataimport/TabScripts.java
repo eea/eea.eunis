@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import eionet.eunis.util.Constants;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
@@ -85,7 +86,7 @@ public class TabScripts {
                     "chm62edt_habitat AS H "
                             + "INNER JOIN chm62edt_nature_object_report_type AS R ON H.ID_NATURE_OBJECT = R.ID_NATURE_OBJECT_LINK "
                             + "INNER JOIN chm62edt_species AS A ON R.ID_NATURE_OBJECT = A.ID_NATURE_OBJECT "
-                            + "WHERE H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000'";
+                            + "WHERE H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'";
             updateSpeciesTab(s, con, sqlc, "HABITATS");
 
             // Update LEGAL_INSTRUMENTS tab
@@ -253,7 +254,7 @@ public class TabScripts {
             s = "SELECT DISTINCT A.ID_NATURE_OBJECT FROM chm62edt_habitat AS A "
                     + "JOIN chm62edt_nature_object_report_type AS B ON A.ID_NATURE_OBJECT = B.ID_NATURE_OBJECT_LINK "
                     + "JOIN chm62edt_species AS C ON B.ID_NATURE_OBJECT = C.ID_NATURE_OBJECT "
-                    + "WHERE A.ID_HABITAT <> '-1' AND A.ID_HABITAT <> '10000'";
+                    + "WHERE A.ID_HABITAT <> '-1' AND A.ID_HABITAT <> '" + Constants.HABITAT_ANNEX1_ROOT +"'";
             updateTab(s, con, sqlc, "SPECIES", "chm62edt_tab_page_habitats");
 
             // Update LEGAL_INSTRUMENTS tab

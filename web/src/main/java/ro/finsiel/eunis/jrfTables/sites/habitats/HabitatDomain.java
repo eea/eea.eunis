@@ -5,6 +5,7 @@ package ro.finsiel.eunis.jrfTables.sites.habitats;
  * Time: 10:51:29 AM
  */
 
+import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
@@ -177,13 +178,13 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
     StringBuffer filterSQL = new StringBuffer();
     if (0 != searchPlace.compareTo(SEARCH_BOTH)) {
       if (0 == searchPlace.compareTo(SEARCH_EUNIS)) {
-        filterSQL.append(" AND C.ID_HABITAT >=1 AND C.ID_HABITAT<10000 ");
+        filterSQL.append(" AND C.ID_HABITAT >=1 AND C.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS+ "%' ");
       }
       if (0 == searchPlace.compareTo(SEARCH_ANNEX_I)) {
-        filterSQL.append(" AND C.ID_HABITAT>10000 ");
+        filterSQL.append(" AND C.HABITAT_TYPE='" + Constants.HABITAT_ANNEX1 + "' ");
       }
     } else {
-      filterSQL.append(" AND C.ID_HABITAT <>'-1' AND C.ID_HABITAT<>'10000' ");
+      filterSQL.append(" AND C.ID_HABITAT <>'-1' AND C.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "' ");
     }
     filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "H");
     if (searchCriteria.length <= 0) throw new CriteriaMissingException("No criteria set for searching. Search interrupted.");
@@ -356,13 +357,13 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
       filterSQL = new StringBuffer();
       if (0 != searchPlace.compareTo(SEARCH_BOTH)) {
         if (0 == searchPlace.compareTo(SEARCH_EUNIS)) {
-          filterSQL.append(" C.ID_HABITAT >= 1 AND C.ID_HABITAT < 10000 ");
+          filterSQL.append(" C.ID_HABITAT >= 1 AND C.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS+ "%' ");
         }
         if (0 == searchPlace.compareTo(SEARCH_ANNEX_I)) {
-          filterSQL.append(" C.ID_HABITAT>10000 ");
+          filterSQL.append(" C.HABITAT_TYPE =' " + Constants.HABITAT_ANNEX1 + "' ");
         }
       } else {
-        filterSQL.append(" C.ID_HABITAT <> '-1' AND C.ID_HABITAT <> '10000' ");
+        filterSQL.append(" C.ID_HABITAT <> '-1' AND C.ID_HABITAT <> '" + Constants.HABITAT_ANNEX1_ROOT + "' ");
       }
       filterSQL = Utilities.getConditionForSourceDB(filterSQL, sourceDb, "H");
 

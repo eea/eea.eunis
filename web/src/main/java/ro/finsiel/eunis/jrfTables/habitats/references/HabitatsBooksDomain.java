@@ -3,6 +3,7 @@ package ro.finsiel.eunis.jrfTables.habitats.references;
 import java.util.ArrayList;
 import java.util.List;
 
+import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
@@ -242,13 +243,13 @@ public class HabitatsBooksDomain extends AbstractDomain implements Paginable {
 
         if (0 != SEARCH_BOTH.compareTo(searchPlace)) {
             if (0 == searchPlace.compareTo(HabitatsBooksDomain.SEARCH_EUNIS)) {
-                filterSQL.append(" AND C.ID_HABITAT >=1 AND C.ID_HABITAT < 10000 ");
+                filterSQL.append(" AND C.ID_HABITAT >=1 AND C.HABITAT_TYPE like '" + Constants.HABITAT_EUNIS +"%' ");
             }
             if (0 == searchPlace.compareTo(HabitatsBooksDomain.SEARCH_ANNEX_I)) {
-                filterSQL.append(" AND C.ID_HABITAT >10000 ");
+                filterSQL.append(" AND C.HABITAT_TYPE = '" + Constants.HABITAT_ANNEX1 +"' ");
             }
         } else
-            filterSQL.append(" AND C.ID_HABITAT <>'-1' AND C.ID_HABITAT <> '10000' ");
+            filterSQL.append(" AND C.ID_HABITAT <>'-1' AND C.ID_HABITAT <> '" + Constants.HABITAT_ANNEX1_ROOT + "' ");
 
         for (int i = 0; i < searchCriteria.length; i++) {
             filterSQL.append(" AND ");

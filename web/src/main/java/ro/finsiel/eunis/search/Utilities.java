@@ -1321,13 +1321,13 @@ public final class Utilities {
         String dom = (Utilities.prepareSQLOperator("H.SCIENTIFIC_NAME", search, Utilities.checkedStringToInt(op, Utilities.OPERATOR_CONTAINS))).toString();
 
         List l1 = new HabitatNatureObjectReportTypeDomain().findWhere(
-                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND B.ID_NATURE_OBJECT_LINK IS NULL AND "
+                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  AND B.ID_NATURE_OBJECT_LINK IS NULL AND "
                         + dom + " GROUP BY H.ID_HABITAT");
         List l2 = new HabitatNatureObjectGeoscopeDomain().findWhere(
-                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND B.ID_NATURE_OBJECT_LINK IS NULL AND "
+                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  AND B.ID_NATURE_OBJECT_LINK IS NULL AND "
                         + dom + " GROUP BY H.ID_HABITAT");
         List l3 = new CommonRecordsDomain().findWhere(
-                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'10000' AND " + dom
+                "H.ID_HABITAT<>'-1' AND H.ID_HABITAT<>'" + Constants.HABITAT_ANNEX1_ROOT + "'  AND " + dom
                 + " GROUP BY H.ID_HABITAT");
 
         if (l1 != null) {
@@ -3020,4 +3020,23 @@ public final class Utilities {
     }
 
     // Utility methods for habitats-eunis-browser, species-taxonomic-browser.jsp, habitats-annex1-browser.jsp END
+
+    public static boolean isHabitatEunis(String habitatType) {
+        return Constants.HABITAT_EUNIS.equals(habitatType) || Constants.HABITAT_EUNIS_2017.equals(habitatType);
+    }
+
+    public static boolean isHabitatEunisStrict(String habitatType) {
+        return Constants.HABITAT_EUNIS.equals(habitatType);
+    }
+    public static boolean isHabitatEunis2017(String habitatType) {
+        return Constants.HABITAT_EUNIS_2017.equals(habitatType);
+    }
+
+    public static boolean isHabitatAnnex1(String habitatType) {
+        return Constants.HABITAT_ANNEX1.equals(habitatType);
+    }
+
+    public static boolean isHabitatRedList(String habitatType) {
+        return Constants.HABITAT_REDLIST.equals(habitatType);
+    }
 }

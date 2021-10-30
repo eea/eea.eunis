@@ -66,6 +66,8 @@ public class CodePersist extends PersistentObject {
 
   private String code = null;
 
+  private String habitatType = null;
+
 
   public CodePersist() {
     super();
@@ -292,5 +294,13 @@ public class CodePersist extends PersistentObject {
       default:
         return getEunisHabitatCode();
     }
+  }
+
+  public String getHabitatType() {
+    return habitatType;
+  }
+
+  public void setHabitatType(String habitatType) {
+    this.habitatType = habitatType;
   }
 }
