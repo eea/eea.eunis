@@ -326,9 +326,6 @@
                         HabitatsCombinedPersist habitat = ( HabitatsCombinedPersist )it.next();
                         String cssClass = i++ % 2 == 0 ? " class=\"zebraeven\"" : "";
                         int level = habitat.getHabLevel().intValue();
-                        //boolean isEUNIS = (Utilities.EUNIS_HABITAT.intValue() == (Utilities.getHabitatType(habitat.getCodeAnnex1()).intValue())) ? true : false;
-                        int idHabitat = Utilities.checkedStringToInt( habitat.getIdHabitat(), -1 );
-                        boolean isEUNIS = idHabitat <= 10000;
                     %>
                         <tr<%=cssClass%>>
                     <%
@@ -354,7 +351,7 @@
                         {
                     %>
                           <td>
-                            <%=(isEUNIS) ? habitat.getEunisHabitatCode() : "&nbsp;"%>
+                            <%=(Utilities.isHabitatEunis(habitat.getHabitatType())) ? habitat.getEunisHabitatCode() : "&nbsp;"%>
                           </td>
                     <%
                         }
@@ -364,7 +361,7 @@
                       {
                     %>
                           <td>
-                            <%=(isEUNIS) ? "&nbsp;" : habitat.getCodeAnnex1()%>
+                            <%=(Utilities.isHabitatAnnex1(habitat.getHabitatType())) ? habitat.getCodeAnnex1() : "&nbsp;"%>
                           </td>
                     <%
                       }
