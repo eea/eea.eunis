@@ -54,7 +54,7 @@
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-vegetation.jsp"/>
                         </div>
                     </div>
-                    <c:if test="${actionBean.factsheet.habitat.habLevel eq 3}">
+                    <c:if test="${actionBean.indicatorSpecies}">
                         <div class="eea-accordion-panel" style="clear: both;" id="indicator-species-accordion">
                             <h2 class="notoc eea-icon-right-container">Indicator species</h2>
                             <div class="pane">
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </c:if>
-                    <c:if test="${not (actionBean.factsheet.habitat.habLevel eq 3)}">
+                    <c:if test="${not (actionBean.indicatorSpecies)}">
                     <div class="eea-accordion-panel" style="clear: both;" id="species-accordion">
                         <h2 class="notoc eea-icon-right-container">Species mentioned in habitat description</h2>
                         <div class="pane">

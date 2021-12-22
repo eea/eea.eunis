@@ -948,6 +948,12 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         return dominantSpecies;
     }
 
+    public boolean getIndicatorSpecies(){
+        return (diagnosticSpecies != null && !diagnosticSpecies.isEmpty()) ||
+                (constantSpecies != null && !constantSpecies.isEmpty()) ||
+                (dominantSpecies != null && !dominantSpecies.isEmpty());
+    }
+
     public boolean isResolution4Relation() {
         return resolution4Relation;
     }
