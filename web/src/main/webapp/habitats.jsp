@@ -112,8 +112,8 @@
                     </tr>
                     <tr>
                       <td>
-                        <img alt="<%=cm.cmsPhrase("EUNIS habitat types hierarchical view")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_EUNIShierarchy")%>
-                        <a href="habitats-code-browser.jsp"><strong><%=cm.cmsPhrase("EUNIS habitat types hierarchical view")%></strong></a>
+                        <img alt="<%=cm.cmsPhrase("EUNIS habitat types hierarchical view 2012")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("habitats_main_EUNIShierarchy")%>
+                        <a href="habitats-code-browser.jsp"><strong><%=cm.cmsPhrase("EUNIS habitat types hierarchical view 2012")%></strong></a>
                       </td>
                       <td>
                         <%=cm.cmsPhrase("Visualisation of EUNIS habitat types classification")%>
@@ -121,8 +121,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <img alt="<%=cm.cmsPhrase("EUNIS habitat types hierarchical view, REVISED")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("EUNIS habitat types hierarchical view, REVISED")%>
-                            <a href="habitats-code-browser-2017.jsp"><strong><%=cm.cmsPhrase("EUNIS habitat types hierarchical view, REVISED")%></strong></a>
+                            <img alt="<%=cm.cmsPhrase("EUNIS habitat types hierarchical view 2017 PENDING UPDATE TO 2021")%>" src="images/mini/bulletb.gif" width="6" height="6" style="vertical-align:middle" /><%=cm.cmsTitle("EUNIS habitat types hierarchical view, REVISED")%>
+                            <a href="habitats-code-browser-2017.jsp"><strong><%=cm.cmsPhrase("EUNIS habitat types hierarchical view 2017 PENDING UPDATE TO 2021")%></strong></a>
                         </td>
                         <td>
                             <%=cm.cmsPhrase("Visualization of revised groups of EUNIS habitat type classification")%>
@@ -201,7 +201,7 @@
                         <tbody>
                         <tr>
                             <td>
-                                <a href="http://www.eea.europa.eu/data-and-maps/data/eunis-habitat-classification">
+                                <a href="https://www.eea.europa.eu/data-and-maps/data/eunis-habitat-classification-1">
                                     <%=cm.cmsPhrase("EUNIS habitat classification")%>
                                 </a>
                             </td>
@@ -211,7 +211,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="http://www.eea.europa.eu/data-and-maps/data/article-17-database-habitats-directive-92-43-eec">
+                                <a href="https://www.eea.europa.eu/data-and-maps/data/article-17-database-habitats-directive-92-43-eec-2">
                                     <%=cm.cmsPhrase("Conservation status of habitat types and species")%>
                                 </a>
                             </td>

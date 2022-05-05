@@ -183,7 +183,7 @@
                 <tbody>
                   <tr>
                     <td>
-                      <a href="http://www.eea.europa.eu/data-and-maps/data/article-17-database-habitats-directive-92-43-eec">
+                      <a href="https://www.eea.europa.eu/data-and-maps/data/article-17-database-habitats-directive-92-43-eec-2">
                           <%=cm.cmsPhrase("Conservation status of habitat types and species")%>
                       </a>
                     </td>
@@ -193,8 +193,8 @@
                   </tr>
                   <tr>
                     <td>
-                      <a href="http://www.eea.europa.eu/data-and-maps/data/european-red-lists-4">
-                          <%=cm.cmsPhrase("European Red Lists")%>
+                      <a href="https://www.eea.europa.eu/data-and-maps/data/european-red-lists-7">
+                          <%=cm.cmsPhrase("European Red Lists of Species")%>
                       </a>
                     </td>
                     <td>
@@ -203,7 +203,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <a href="http://www.eea.europa.eu/data-and-maps/data/natura-5">
+                      <a href="https://www.eea.europa.eu/ds_resolveuid/DAT-68-en">
                           <%=cm.cmsPhrase("Natura 2000 data")%>
                       </a>
                     </td>
