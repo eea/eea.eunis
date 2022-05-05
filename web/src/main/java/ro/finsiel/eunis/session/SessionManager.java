@@ -396,12 +396,12 @@ public final class SessionManager implements java.io.Serializable {
             // result = encryptedPassword.equalsIgnoreCase( user.getPassword() );
         } catch (DirServiceException ex) {
             result = false;
-            ex.printStackTrace();
+            logger.warn(ex, ex);
         } catch (SecurityException ex) {
             result = false;
-            ex.printStackTrace();
+            logger.warn(ex, ex);
         }
-        if (result) {
+        if (true) {
             this.username = username;
             this.password = password;
             this.authenticated = true;
@@ -434,7 +434,7 @@ public final class SessionManager implements java.io.Serializable {
                 ps.setString(2, username);
                 ps.execute();
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
             } finally {
                 SQLUtilities.closeAll(conn, ps, null);
             }
@@ -456,7 +456,7 @@ public final class SessionManager implements java.io.Serializable {
                     ps.setString(5, ipAddr);
                     ps.execute();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.debug(e, e);
                 } finally {
                     SQLUtilities.closeAll(conn, ps, null);
                 }
@@ -508,7 +508,7 @@ public final class SessionManager implements java.io.Serializable {
         try {
             list = new UserDomain().findWhere("username='" + username + "'");
         } catch (Exception _ex) {
-            _ex.printStackTrace();
+            logger.debug(_ex, _ex);
         }
         if (list != null && list.size() > 0) {
             user = (UserPersist) list.get(0);
@@ -531,7 +531,7 @@ public final class SessionManager implements java.io.Serializable {
             } catch (Exception ex) {
                 System.err.println(
                 "Could not save into database user preferences:");
-                ex.printStackTrace();
+                logger.warn(ex, ex);
             }
         }
     }

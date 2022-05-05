@@ -7,9 +7,10 @@ import ro.finsiel.eunis.jrfTables.Chm62edtHabitatPersist;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@UrlBinding("/habitats_codeEUNIS/{code}")
+@UrlBinding("/habitats_codeEUNIS/{code}/{type}")
 public class HabitatCodeRedirectActionBean extends AbstractStripesAction {
     private String code;
+    private String type;
     private String message;
 
     /**
@@ -19,7 +20,16 @@ public class HabitatCodeRedirectActionBean extends AbstractStripesAction {
     public Resolution defaultAction() {
 
         // search by EUNIS code
-        List<Chm62edtHabitatPersist> r = new Chm62edtHabitatDomain().findWhere("EUNIS_HABITAT_CODE = '" + code + "'");
+        List<Chm62edtHabitatPersist> r = null;
+        if(type == null || type.equalsIgnoreCase("eunis2007")) {
+            r = new Chm62edtHabitatDomain().findWhere("EUNIS_HABITAT_CODE = '" + code + "' and habitat_type='EUNIS'");
+        } else if (type.equalsIgnoreCase("eunis2017")){
+            r = new Chm62edtHabitatDomain().findWhere("EUNIS_HABITAT_CODE = '" + code + "' and habitat_type='EUNIS2017'");
+        } else if (type.equalsIgnoreCase("redlist")){
+            r = new Chm62edtHabitatDomain().findWhere("EEA_CODE = '" + code + "' and habitat_type='REDLIST'");
+        } else if (type.equalsIgnoreCase("annex1")){
+            r = new Chm62edtHabitatDomain().findWhere("EUNIS_HABITAT_CODE = '" + code + "' and habitat_type='ANNEX1'");
+        }
 
         String url = "/habitats/";
 
@@ -46,6 +56,14 @@ public class HabitatCodeRedirectActionBean extends AbstractStripesAction {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
 
