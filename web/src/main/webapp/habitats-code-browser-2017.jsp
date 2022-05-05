@@ -33,7 +33,7 @@
 		<h1>
 			<%=cm.cmsPhrase("EUNIS habitat type hierarchical view")%>
 		</h1>
-		An update of this page is pending. Heathlands, scrub and tundra and Forest and other wooded land are further updated in the latest revision of the EUNIS classification 2021 available at https://www.eea.europa.eu/data-and-maps/data/eunis-habitat-classification-1. Additional revised groups are available.
+		An update of this page is pending. Heathlands, scrub and tundra and Forest and other wooded land are further updated in the latest revision of the EUNIS classification 2021 available at <a href="https://www.eea.europa.eu/data-and-maps/data/eunis-habitat-classification-1">https://www.eea.europa.eu/data-and-maps/data/eunis-habitat-classification-1</a>. Additional revised groups are available.
 <!-- MAIN CONTENT -->
 		<br/>
 		<%
