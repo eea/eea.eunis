@@ -17,11 +17,11 @@
 <%@ page import="eionet.eunis.util.JstlFunctions" %>
 <jsp:useBean id="SessionManager" class="ro.finsiel.eunis.session.SessionManager" scope="session"/>
 <%
-  WebContentManagement cm = SessionManager.getWebContent();
-  String eeaHome = application.getInitParameter( "EEA_HOME" );
-  String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,eunis_habitat_type_hierarchical_view";
+	WebContentManagement cm = SessionManager.getWebContent();
+	String eeaHome = application.getInitParameter("EEA_HOME");
+	String btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,eunis_habitat_type_hierarchical_view";
 %>
-<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + cm.cms("eunis_habitat_type_hierarchical_view") %>'></c:set>
+<c:set var="title" value='<%= application.getInitParameter("PAGE_TITLE") + "EUNIS habitat types hierarchical view - revised groups" %>'></c:set>
 
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
 	<stripes:layout-component name="head">
@@ -31,15 +31,16 @@
 		<a name="documentContent"></a>
 		<!-- MAIN CONTENT -->
 		<h1>
-			<%=cm.cmsPhrase("EUNIS habitat type hierarchical view (version 2012)")%>
+			<%=cm.cmsPhrase("EUNIS habitat type hierarchical view (marine version 2022 & terrestrial version 2021)")%>
 		</h1>
-		The EUNIS habitat classification is a comprehensive pan-European system; it covers all types of habitats from natural to artificial, from terrestrial to freshwater and marine. In 2019 the classification was further amended to include two new habitats of the revised Resolution 4 of Bern Convention.
+		The EUNIS habitat classification review is on-going. Four groups are pending review: Inland waters, Wetlands, Constructed, industrial and other artificial habitats and Complexes.
+<!-- MAIN CONTENT -->
 		<br/>
 		<%
 			try {
 				String expand = Utilities.formatString(request.getParameter("expand"), "");
 
-				HabitatTree root = Utilities.buildTree(expand, "EUNIS");
+				HabitatTree root = Utilities.buildTree(expand, "EUNIS2017");
 				List<HabitatTreeList> habitats = Utilities.treeAsList(root, 1);
 
 				String hide = cm.cmsPhrase("Hide sublevel habitat types");
@@ -51,6 +52,11 @@
 				for (int i = 0; i < habitats.size(); i++) {
 					HabitatTreeList h = habitats.get(i);
 
+					// this contains a lot of habitat codes under
+					if (h.getCode().equals("M")) {
+						h.setName(h.getName() + " (MA-MG)");
+					}
+
 					HabitatTreeList next = null;
 					if (i < habitats.size() - 1) {
 						next = habitats.get(i + 1);
@@ -58,9 +64,9 @@
 			%>
 			<li>
 				<% if (next != null && next.getLevel() > h.getLevel()) { %>
-				<a title="<%=hide%>" id="level_<%=h.getIdHabitat()%>" href="habitats-code-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand,h.getIdHabitat(), root)%>#level_<%=h.getIdHabitat()%>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
+				<a title="<%=hide%>" id="level_<%=h.getIdHabitat()%>" href="habitats-code-browser-revised.jsp?expand=<%=Utilities.removeFromExpanded(expand,h.getIdHabitat(), root)%>#level_<%=h.getIdHabitat()%>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
 				<% } else if (h.hasChildren()) { %>
-				<a title="<%=show%>" id="level_<%=h.getIdHabitat()%>" href="habitats-code-browser.jsp?expand=<%=Utilities.addToExpanded(expand,h.getIdHabitat())%>#level_<%=h.getIdHabitat()%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
+				<a title="<%=show%>" id="level_<%=h.getIdHabitat()%>" href="habitats-code-browser-revised.jsp?expand=<%=Utilities.addToExpanded(expand,h.getIdHabitat())%>#level_<%=h.getIdHabitat()%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
 				<% } else { %>
 				<img src="images/img_bullet.gif" alt="<%=h.getName()%>"/>
 				<%
