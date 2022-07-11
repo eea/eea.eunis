@@ -468,6 +468,20 @@
     </filter>
 
     <filter>
+        <filter-name>SqlInjectFilter</filter-name>
+        <filter-class>ro.finsiel.eunis.security.SqlInjectFilter</filter-class>
+        <!-- Filter the parameters passed in the foreground, you can manually add or delete, split by "|" -->
+        <init-param>
+            <param-name>sqlInjectStrList</param-name>
+            <param-value>"|'|‘|;|-|--|+|//|/|*|%|#</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>SqlInjectFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>RdfFilter</filter-name>
         <filter-class>eionet.eunis.rdf.RdfFilter</filter-class>
     </filter>

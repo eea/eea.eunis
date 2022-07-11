@@ -38,6 +38,8 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
             // onload(...)=... onload(.*?)=(.*?)
             Pattern.compile("onload=prompt(.*?)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),
             Pattern.compile("onload(.*?)=(.*?)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),
+            Pattern.compile("\"(.*?)>", Pattern.CASE_INSENSITIVE),
+            Pattern.compile("'(.*?)>", Pattern.CASE_INSENSITIVE),
     };
 
     public XSSRequestWrapper(HttpServletRequest servletRequest) {
