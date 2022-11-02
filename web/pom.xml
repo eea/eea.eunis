@@ -8,7 +8,6 @@
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>Eunis Web Module</name>
-    <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -216,6 +215,12 @@
         </testResources>
         <finalName>eunis</finalName>
     </build>
+    <repositories>
+        <repository>
+            <id>jaspersoft-repo</id>
+            <url>https://jaspersoft.jfrog.io/jaspersoft/jaspersoft-repo</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -231,7 +236,7 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>2.4.4</version>
+            <version>2.4.21</version>
         </dependency>
         <dependency>
             <groupId>com.hp.hpl.jena</groupId>
@@ -281,7 +286,7 @@
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>1.7.0</version>
+            <version>1.9.4</version>
         </dependency>
         <dependency>
             <groupId>commons-collections</groupId>
@@ -291,7 +296,7 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.3.6</version>
+            <version>4.5.13</version>
         </dependency>
         <dependency>
             <groupId>commons-httpclient</groupId>
@@ -301,7 +306,7 @@
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
-            <version>1.2.1</version>
+            <version>1.4</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
@@ -402,9 +407,14 @@
             <version>2.0</version>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.12</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>2.16.0</version>
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
@@ -481,7 +491,7 @@
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.6</version>
+            <version>1.13</version>
         </dependency>
         <dependency>
             <groupId>org.openrdf</groupId>
@@ -509,12 +519,12 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.8</version>
+            <version>3.17</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.8</version>
+            <version>3.17</version>
         </dependency>
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
