@@ -17,6 +17,13 @@
         <main.basedir>${project.basedir}/../..</main.basedir>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jaspersoft-repo</id>
+            <url>https://jaspersoft.jfrog.io/jaspersoft/jaspersoft-repo</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>eionet.eunis</groupId>
