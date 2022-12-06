@@ -31,6 +31,7 @@ import ro.finsiel.eunis.jrfTables.species.factsheet.SitesByNatureObjectPersist;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.CountryUtil;
 import ro.finsiel.eunis.search.Utilities;
+import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.rdf.LinkedData;
 import eionet.eunis.util.Constants;
@@ -403,6 +404,26 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String mapUrl;
+
+    public String getMapUrl() {
+        String habitatCode = factsheet.getEunisHabitatCode();
+        String letterCode = habitatCode.split("[0-9]")[0];
+        String mapUrlTemplate = "https://maps.eea.europa.eu/EEAViewer_Portal/?appid=%s&Suit=%s&Plot=%s&zoomTo=true";
+
+        switch (letterCode) {
+            case "MA": return String.format(mapUrlTemplate, "cc8a5a8b8b384dda9e92a447a350fbf0", habitatCode, habitatCode);
+            case "N": return String.format(mapUrlTemplate, "70168d1c05e5414daca1fe077cafac5a", habitatCode, habitatCode);
+            case "R": return String.format(mapUrlTemplate, "e8bb38b834014a2185a7aa34c1c321bb", habitatCode, habitatCode);
+            case "S": return String.format(mapUrlTemplate, "489b8503b8aa4b358bdf3b0079c0eea2", habitatCode, habitatCode);
+            case "T": return String.format(mapUrlTemplate, "fe93e7b639cf47d3a5de1a61e7c63cbc", habitatCode, habitatCode);
+            case "U": return String.format(mapUrlTemplate, "687f6a6b59ee4a33ac1c787cad4ecb36", habitatCode, habitatCode);
+            case "V": return String.format(mapUrlTemplate, "32b6df36b5c6499b98182ce3daa9d764", habitatCode, habitatCode);
+            default: break;
+        }
+        return null;
     }
 
     private String syntaxaAttribution;
