@@ -221,22 +221,18 @@ public class HabitatsFactsheet {
         }
     }
 
-    public boolean getHabitatDistributionMap() {
-
+    public Chm62edtHabitatMapsPersist getHabitatDistributionMap() {
         Chm62edtHabitatMapsPersist ret = null;
-         try {
+        try {
             List list = new Chm62edtHabitatMapsDomain().findWhere(
                     "habitat_code='" + habitat.getEunisHabitatCode() + "'");
-
-            if (list.size() > 0) {
-                ret = ((Chm62edtHabitatMapsPersist) list.get(0)).getDistributionMap();
+            if (!list.isEmpty()) {
+                ret = (Chm62edtHabitatMapsPersist) list.get(0);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace(System.err);
-            ret = null;
+        } catch (Exception e) {
+            logger.warn(e, e);
         }
         return ret;
-
     }
 
     /**

@@ -18,6 +18,8 @@
         }
     </script>
 
+    <script type="text/javascript" src="<%=request.getContextPath()%>/script/map-utils.js"></script>
+
 </stripes:layout-component>
 <stripes:layout-component name="contents">
 
@@ -76,18 +78,19 @@
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-other-classifications.jsp"/>
                         </div>
                     </div>
+                    <div class="eea-accordion-panel" style="clear: both;" id="map-accordion">
+                        <h2 class="notoc eea-icon-right-container">Distribution map</h2>
+                        <div class="pane" id="habitatMapPane">
+                            <stripes:layout-render name="/stripes/habitats-factsheet/habitats-map.jsp"/>
+                        </div>
+                    </div>
                     <div class="eea-accordion-panel" style="clear: both;" id="history-accordion">
                         <h2 class="notoc eea-icon-right-container">History</h2>
                         <div class="pane">
                             <stripes:layout-render name="/stripes/habitats-factsheet/habitats-history.jsp"/>
                         </div>
                     </div>
-                    <div class="eea-accordion-panel" style="clear: both;" id="map-accordion">
-                        <h2 class="notoc eea-icon-right-container">Distribution map</h2>
-                        <div class="pane">
-                            <stripes:layout-render name="/stripes/habitats-factsheet/habitats-map.jsp"/>
-                        </div>
-                    </div>
+
 
                </div>
            </div>

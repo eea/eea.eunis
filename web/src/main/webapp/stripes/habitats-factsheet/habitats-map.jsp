@@ -6,8 +6,12 @@
     <c:choose>
         <c:when test="${not empty actionBean.mapUrl}">
             <div style="overflow-x:auto">
-                <iframe id="interactive-map-iframe" class="map-border" height="650" width="100%" src="${actionBean.mapUrl}"></iframe>
+                <iframe id="interactive-map-iframe" class="map-border" height="650" width="100%" src=""></iframe>
             </div>
+
+            <script>
+                addReloadOnDisplay("habitatMapPane", "interactive-map-iframe", "${actionBean.mapUrl}");
+            </script>
         </c:when>
         <c:otherwise>
             ${eunis:cmsPhrase(actionBean.contentManagement, 'No distribution map available')}
