@@ -743,17 +743,33 @@ public class SpeciesFactsheet {
             // List list = new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='legal_status' AND ID_NATURE_OBJECT='" +
             // getSpeciesNatureObject().getIdNatureObject() + "'");
             // here we are findind also the synonyms....
-            Integer IdNatureObjectSpecie = getSpeciesNatureObject().getIdNatureObject();
-            Integer IdSpecie = getSpeciesNatureObject().getIdSpecies();
+//            Integer IdNatureObjectSpecie = getSpeciesNatureObject().getIdNatureObject();
+//            Integer IdSpecie = getSpeciesNatureObject().getIdSpecies();
+
+            String syn = getSpeciesObject().getIdNatureObject().toString();
+//            List<SpeciesNatureObjectPersist> synonyms = this.getSynonymsIterator();
+//            for(SpeciesNatureObjectPersist s: synonyms){
+//                syn = syn + "," + s.getIdNatureObject().toString();
+//            }
 
             List<Chm62edtReportsPersist> list =
-                    new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='LEGAL_STATUS' AND ID_NATURE_OBJECT IN (" + IdNatureObjectSpecie.toString()
+                    new Chm62edtReportsDomain().findWhere("LOOKUP_TYPE='LEGAL_STATUS' AND ID_NATURE_OBJECT IN (" + syn
                             + ")");
 
                 for (Chm62edtReportsPersist report : list) {
                     LegalStatusWrapper legalStatus = new LegalStatusWrapper();
 
                     populateLegalStatusWrapper(legalStatus, report);
+//                    if(!Objects.equals(report.getIdNatureObject(),getSpeciesObject().getIdNatureObject()) && legalStatus.getNameInDocument() == null) {
+//                        for(SpeciesNatureObjectPersist s: synonyms){
+//                            if(Objects.equals(s.getIdNatureObject(), report.getIdNatureObject())) {
+//                                legalStatus.setNameInDocument(s.getScientificName());
+//                            }
+//                        }
+//                    }
+//                    if(Objects.equals(legalStatus.getNameInDocument(), getSpeciesObject().getScientificName())) {
+//                        legalStatus.setNameInDocument(null);
+//                    }
                     if (!results.contains(legalStatus)) {
                         results.add(legalStatus);
                     }
@@ -809,7 +825,6 @@ public class SpeciesFactsheet {
             for(Chm62edtReportAttributesPersist attribute : reportAttributes){
                 if(attribute.getName().equalsIgnoreCase("NAME_IN_DOCUMENT")){
                     legalStatus.setNameInDocument(attribute.getValue());
-
                 }
                 if(attribute.getName().startsWith("SYNONYM_IN_DOCUMENT")){
                     List<Chm62edtSpeciesPersist> sp = new Chm62edtSpeciesDomain().findWhere("ID_SPECIES = " + attribute.getValue());
@@ -1734,6 +1749,8 @@ public class SpeciesFactsheet {
                      break;
                  }
                  currentId = t.getIdTaxcodeParent();
+             } else {
+                 break;
              }
         }
 

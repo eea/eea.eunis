@@ -1,5 +1,6 @@
 package eionet.eunis.stripes.actions;
 
+import ro.finsiel.eunis.Settings;
 import eionet.eunis.dao.DaoFactory;
 import eionet.eunis.dao.ISpeciesFactsheetDao;
 import eionet.eunis.dto.*;
@@ -252,6 +253,11 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             author = StringEscapeUtils.escapeHtml(factsheet.getSpeciesNatureObject().getAuthor());
 
             specie = factsheet.getSpeciesNatureObject();
+
+            if(specie.getNatura2000Code() != null && specie.getNatura2000Code().length() > 1 && "true".equals(Settings.getSetting("BISE_REDIRECT"))) {
+                // skip the load and redirect to bise
+                return new RedirectResolution("https://biodiversity.europa.eu/species/" + specie.getIdSpecies());
+            }
 
             generalTabActions();
 

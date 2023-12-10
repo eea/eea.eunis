@@ -34,6 +34,12 @@
                 </div>
             </c:when>
             <c:otherwise>
+                <c:if test="${not empty actionBean.factsheet.code2000}">
+                    <div class="advice-msg">
+                        Natura 2000 related content is now shown on the Biodiversity Information System for Europe, BISE.
+                        Please go to <a href="https://biodiversity.europa.eu/habitats/${actionBean.factsheet.code2000}">BISE</a> or use the <a href="https://natura2000.eea.europa.eu/">Natura 2000 map viewer for the latest information</a>.
+                    </div>
+                </c:if>
 
                 <stripes:layout-render name="/stripes/habitats-factsheet/habitats-breadcrumb.jsp"/>
 

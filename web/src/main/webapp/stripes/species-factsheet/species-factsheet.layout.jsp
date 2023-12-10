@@ -49,6 +49,13 @@ String btrail = "eea#" + application.getInitParameter( "EEA_HOME" ) + ",home#ind
         <c:choose>
             <c:when test="${eunis:exists(actionBean.factsheet)}">
 
+                <c:if test="${not empty actionBean.n2000id}">
+                    <div class="advice-msg">
+                    Natura 2000 related content is now shown on the Biodiversity Information System for Europe, BISE.
+                    Please go to <a href="https://biodiversity.europa.eu/species/${actionBean.idSpecies}">BISE</a> or use the <a href="https://natura2000.eea.europa.eu/">Natura 2000 map viewer for the latest information</a>.
+                    </div>
+                </c:if>
+
                 <c:choose>
                     <c:when test="${actionBean.seniorSpecies != null}">
                         <stripes:layout-render name="/stripes/species-factsheet/synonym.jsp"/>

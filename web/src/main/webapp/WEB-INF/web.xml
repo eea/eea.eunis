@@ -38,6 +38,13 @@
         <description>Tomcat installation directory</description>
     </context-param>
 
+
+    <context-param>
+        <param-name>BISE_REDIRECT</param-name>
+        <param-value>${bise.redirect}</param-value>
+        <description>Redirect Natura 2000 to BISE</description>
+    </context-param>
+
     <!-- Static part of the page title (JSPs)-->
     <context-param>
         <param-name>PAGE_TITLE</param-name>

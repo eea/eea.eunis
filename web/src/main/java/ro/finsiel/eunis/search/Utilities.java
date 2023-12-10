@@ -152,6 +152,8 @@ public final class Utilities {
      */
     private static final String IMG_SORT_UNSORTED = "sort_unsorted.gif";
 
+    private static final String TAXONOMY_TREE_SEPARATOR=",";
+
     /**
      * A timer used to do timing performance tests for an object calling method.
      */
@@ -2443,7 +2445,7 @@ public final class Utilities {
             String result = "";
             String str = taxonomyTree;
 
-            StringTokenizer st = new StringTokenizer(str, ",");
+            StringTokenizer st = new StringTokenizer(str, TAXONOMY_TREE_SEPARATOR);
 
             while (st.hasMoreTokens()) {
                 StringTokenizer sts = new StringTokenizer(st.nextToken(), "*");
@@ -2548,18 +2550,18 @@ public final class Utilities {
 
     public static String removeFromExpanded(String expand, String idCurrent) {
         StringBuffer ret = new StringBuffer();
-        String[] st = expand.split(",");
+        String[] st = expand.split(TAXONOMY_TREE_SEPARATOR);
 
         for (int i = 0; i < st.length; i++) {
             String id = st[i];
 
             if (!id.startsWith(idCurrent)) {
                 ret.append(id);
-                ret.append(",");
+                ret.append(TAXONOMY_TREE_SEPARATOR);
             }
         }
         if (ret.length() > 0) {
-            int index = ret.lastIndexOf(",");
+            int index = ret.lastIndexOf(TAXONOMY_TREE_SEPARATOR);
 
             ret.deleteCharAt(index);
         }
@@ -2568,18 +2570,18 @@ public final class Utilities {
 
     public static String removeSpecieFromExpanded(String expand, String idCurrent) {
         StringBuffer ret = new StringBuffer();
-        String[] st = expand.split(",");
+        String[] st = expand.split(TAXONOMY_TREE_SEPARATOR);
 
         for (int i = 0; i < st.length; i++) {
             String id = st[i];
 
             if (!id.equals(idCurrent)) {
                 ret.append(id);
-                ret.append(",");
+                ret.append(TAXONOMY_TREE_SEPARATOR);
             }
         }
         if (ret.length() > 0) {
-            int index = ret.lastIndexOf(",");
+            int index = ret.lastIndexOf(TAXONOMY_TREE_SEPARATOR);
 
             ret.deleteCharAt(index);
         }
@@ -2594,7 +2596,7 @@ public final class Utilities {
         StringBuffer ret = new StringBuffer(expand);
 
         if (expand.length() > 0) {
-            ret.append(",");
+            ret.append(TAXONOMY_TREE_SEPARATOR);
         }
         ret.append(idCurrent);
         return ret.toString();
@@ -2602,7 +2604,7 @@ public final class Utilities {
 
     public static boolean expandContains(String expand, String idCurrent) {
         boolean ret = false;
-        String[] st = expand.split(",");
+        String[] st = expand.split(TAXONOMY_TREE_SEPARATOR);
 
         for (int i = 0; i < st.length; i++) {
             String id = st[i];
@@ -2620,6 +2622,9 @@ public final class Utilities {
         String ret = "";
         String strSQL = "";
         String newLine = "\n";
+
+        expand = StringEscapeUtils.escapeXml(expand);;
+        genus = StringEscapeUtils.escapeXml(genus);
 
         PreparedStatement ps = null;
         ResultSet rs = null;

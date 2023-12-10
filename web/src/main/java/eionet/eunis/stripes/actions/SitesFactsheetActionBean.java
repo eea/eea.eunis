@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import eionet.eunis.stripes.actions.beans.HabitatsBean;
 import eionet.eunis.stripes.actions.beans.SpeciesBean;
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.UrlBinding;
+import eionet.eunis.util.Constants;
+import net.sourceforge.stripes.action.*;
+import ro.finsiel.eunis.Settings;
 
 import ro.finsiel.eunis.factsheet.sites.SiteFactsheet;
 import ro.finsiel.eunis.jrfTables.Chm62edtReportAttributesPersist;
@@ -140,6 +139,11 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
 
         // If the given site exists in the database.
         if (factsheet.exists()) {
+
+            if(isTypeNatura2000() && "true".equals(Settings.getSetting("BISE_REDIRECT"))) {
+                // skip the load
+                return new RedirectResolution("https://biodiversity.europa.eu/sites/natura2000/" + factsheet.getIDSite());
+            }
 
             siteName = factsheet.getSiteObject().getName();
             country = factsheet.getCountry();

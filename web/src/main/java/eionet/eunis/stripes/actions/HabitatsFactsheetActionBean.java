@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+import ro.finsiel.eunis.Settings;
 import eionet.eunis.dao.IReferencesDao;
 import eionet.eunis.dto.*;
 import eionet.eunis.rdf.LinkedDataQuery;
@@ -11,10 +12,7 @@ import eionet.eunis.stripes.actions.beans.OrderedSpeciesBean;
 import eionet.eunis.util.Discodata;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sourceforge.stripes.action.DefaultHandler;
-import net.sourceforge.stripes.action.ForwardResolution;
-import net.sourceforge.stripes.action.Resolution;
-import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.action.*;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -222,7 +220,11 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
 
         if(factsheet.isAnnexI()) {
-            return new ForwardResolution("/stripes/habitats-factsheet/annex1/habitats-factsheet-annex1.layout.jsp");
+            if("true".equals(Settings.getSetting("BISE_REDIRECT"))) {
+                return new RedirectResolution("https://biodiversity.europa.eu/habitats/" + factsheet.getCode2000());
+            } else {
+                return new ForwardResolution("/stripes/habitats-factsheet/annex1/habitats-factsheet-annex1.layout.jsp");
+            }
         } else if(factsheet.isEunis2017()) {
             return new ForwardResolution("/stripes/habitats-factsheet/eunis2017/habitats-factsheet-eunis2017.layout.jsp");
         } else if (factsheet.isRedList()) {
