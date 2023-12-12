@@ -2573,4 +2573,9 @@ END
             alter table chm62edt_habitat add id_eunis_sea varchar(3);</sql>
     </changeSet>
 
+    <changeSet id="rev-160" author="ivascu">
+        <comment>Habitat map types</comment>
+        <sql>CREATE TABLE chm62edt_habitat_maps (habitat_code varchar(16) primary key, habitat_name text, distribution_map int, suitability_map int, probability_map int);</sql>
+    </changeSet>
+
 </databaseChangeLog>

@@ -221,6 +221,20 @@ public class HabitatsFactsheet {
         }
     }
 
+    public Chm62edtHabitatMapsPersist getHabitatDistributionMap() {
+        Chm62edtHabitatMapsPersist ret = null;
+        try {
+            List list = new Chm62edtHabitatMapsDomain().findWhere(
+                    "habitat_code='" + habitat.getEunisHabitatCode() + "'");
+            if (!list.isEmpty()) {
+                ret = (Chm62edtHabitatMapsPersist) list.get(0);
+            }
+        } catch (Exception e) {
+            logger.warn(e, e);
+        }
+        return ret;
+    }
+
     /**
      * Retrieve international names for this habitat.
      *
