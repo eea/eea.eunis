@@ -4,6 +4,7 @@ package ro.finsiel.eunis.dataimport.parsers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -188,12 +189,22 @@ public class CddaSitesImportParser extends DefaultHandler {
                         logger.warn(e, e);
                     }
                 }
+                BigDecimal siteAreaParsed = BigDecimal.ZERO;
+                try {
+                    siteAreaParsed = new BigDecimal(siteArea);
+                    if(siteAreaParsed.compareTo(new BigDecimal(200000000)) > 0) {
+                        // probably an error
+                        siteAreaParsed = siteAreaParsed.divide(new BigDecimal(100000), RoundingMode.HALF_DOWN);
+                    }
+                } catch (Exception e) {
+                    // ignore
+                }
 
                 if (!newSite) {
                     preparedStatementSitesUpdate.setString(1, siteCodeNat);
                     preparedStatementSitesUpdate.setString(2, desigAbbr);
                     preparedStatementSitesUpdate.setString(3, siteName);
-                    preparedStatementSitesUpdate.setString(4, siteArea);
+                    preparedStatementSitesUpdate.setBigDecimal(4, siteAreaParsed);
                     preparedStatementSitesUpdate.setString(5, iucncat);
                     preparedStatementSitesUpdate.setString(6, nuts);
                     preparedStatementSitesUpdate.setString(7, year);
@@ -213,7 +224,7 @@ public class CddaSitesImportParser extends DefaultHandler {
                     preparedStatementSites.setString(2, siteCodeNat);
                     preparedStatementSites.setString(3, desigAbbr);
                     preparedStatementSites.setString(4, siteName);
-                    preparedStatementSites.setString(5, siteArea);
+                    preparedStatementSites.setBigDecimal(5, siteAreaParsed);
                     preparedStatementSites.setString(6, iucncat);
                     preparedStatementSites.setString(7, nuts);
                     preparedStatementSites.setString(8, year);
