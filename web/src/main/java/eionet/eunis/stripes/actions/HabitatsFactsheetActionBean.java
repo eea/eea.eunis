@@ -355,6 +355,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_habitats.xml"));
             LinkedData fd = new LinkedData(props, natObjId, "_linkedDataQueries");
+            fd.setSparqlJsonLocation(getContext().getApplicationProperty("SPARQL_JSON_LOCATION"));
             queries = fd.getQueryObjects();
 
             // runs all the queries
@@ -383,6 +384,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("conservationstatus_habitats.xml"));
             LinkedData ld = new LinkedData(props, natureObjectId, "_conservationStatusQueries");
+            ld.setSparqlJsonLocation(getContext().getApplicationProperty("SPARQL_JSON_LOCATION"));
             conservationStatusQueries = ld.getQueryObjects();
             for (ForeignDataQueryDTO conservationStatusQuery1 : conservationStatusQueries) {
                 conservationStatusQuery = conservationStatusQuery1.getId();
@@ -438,6 +440,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("habitats_syntaxa.xml"));
             LinkedData ld = new LinkedData(props, natureObjectId, "force");
+            ld.setSparqlJsonLocation(getContext().getApplicationProperty("SPARQL_JSON_LOCATION"));
             syntaxaQueries = ld.getQueryObjects();
             for (int i = 0; i < syntaxaQueries.size(); i++) {
                 String syntaxaQuery = syntaxaQueries.get(i).getId();

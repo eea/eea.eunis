@@ -3,13 +3,17 @@
  */
 package eionet.eunis.rdf;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import net.sourceforge.stripes.action.ActionBeanContext;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import org.json.JSONObject;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 import eionet.eunis.dao.DaoFactory;
@@ -34,6 +38,8 @@ public class LinkedData {
     private static final String CONTEXT_PATH_PLACEHOLDER = "[CONTEXT_PATH]";
 
     private static final Logger logger = Logger.getLogger(LinkedData.class);
+
+    private String sparqlJsonLocation = null;
 
     /** All the queries in the properties file. */
     private String[] queries;
@@ -120,8 +126,7 @@ public class LinkedData {
     }
 
     /**
-     * Executes the given external-data query for the given object id. All occurrences of {@link #IDENTIFIER_PLACEHOLDER} in the
-     * query will be replaced by the supplied object id.
+     * Gets original sparql data from the files in sparqlJsonLocation; naming scheme for the files is queryId_id.json.
      *
      * @param queryId The id of the query to execute.
      * @param id The id of the object for which the query is executed.
@@ -134,35 +139,81 @@ public class LinkedData {
         }
         if (props != null && queryId != null) {
 
-            String query = props.getProperty(queryId + ".query");
-            String endpoint = props.getProperty(queryId + ".endpoint");
-            attribution = props.getProperty(queryId + ".attribution");
+            File f = new File(sparqlJsonLocation + queryId + "_" + id + ".json");
 
-            if (!StringUtils.isBlank(query) && !StringUtils.isBlank(endpoint)) {
+            if(f.exists()) {
+                JSONObject jo = new JSONObject(FileUtils.readFileToString(f, String.valueOf(StandardCharsets.UTF_8)));
 
-                // Replace object identifier placeholder in query.
-                if (query.contains(IDENTIFIER_PLACEHOLDER)) {
-                    query = query.replace(IDENTIFIER_PLACEHOLDER, String.valueOf(id));
+                rows = new ArrayList<>();
+
+                links = new HashMap<>();
+                for (String key : props.stringPropertyNames()) {
+                    if (key.startsWith(queryId + ".link.")) {
+                        String linkCol = props.getProperty(key);
+                        links.put(key.substring(key.lastIndexOf(".") + 1), linkCol);
+                    }
                 }
 
-                // Replace webapp context path placeholder in the query.
-                if (query.contains(CONTEXT_PATH_PLACEHOLDER)) {
-                    query = query.replace(CONTEXT_PATH_PLACEHOLDER, getContextPath());
+                for( Object o :jo.getJSONObject("results").getJSONArray("bindings")) {
+                    JSONObject row = (JSONObject) o;
+                    List<String> usedCols = new ArrayList<>();
+                    HashMap<String, ResultValue> newrow = new HashMap<>();
+
+                    for (String key : row.keySet()) {
+                        if(row.has(key) && !row.getJSONObject(key).isEmpty()) {
+                            ResultValue value = new ResultValue((String) ((JSONObject) row.get(key)).get("value"), "literal".equals((String) ((JSONObject) row.get(key)).get("type")));
+
+                            if (!usedCols.contains(key)) {
+                                if (links != null && links.containsKey(key)) {
+                                    String val = EunisUtil.replaceTags(value.getValue(), true, true);
+                                    String linkCol = links.get(key);
+                                    if (row.has(linkCol) && !row.getJSONObject(linkCol).isEmpty()) {
+                                        System.out.println(row.get(linkCol));
+                                        ResultValue linkValue = new ResultValue((String) ((JSONObject) row.get(linkCol)).get("value"), "literal".equals((String) ((JSONObject) row.get(linkCol)).get("type")));
+                                        String link = null;
+                                        if (linkValue != null) {
+                                            link = (String) ((JSONObject) row.get(linkCol)).get("value");
+                                        }
+                                        if (!StringUtils.isBlank(link)) {
+                                            link = EunisUtil.replaceTags(link, true, true);
+                                            val = "<a href=\"" + link + "\">" + val + "</a>";
+                                            value = new ResultValue(val, true);
+                                        } else {
+                                            value = new ResultValue(val, value.isLiteral());
+                                        }
+                                        usedCols.add(linkCol);
+                                        newrow.remove(linkCol);
+                                    }
+                                }
+                                newrow.put(key, value);
+                                usedCols.add(key);
+                            }
+                        }
+                    }
+                    rows.add(newrow);
                 }
 
-                try {
-                    QueryExecutor executor = new QueryExecutor();
-                    executor.executeQuery(endpoint, query);
-                    QueryResult result = executor.getResults();
+                cols = new ArrayList<>();
 
-                    generateRows(queryId, result);
-                    generateCols(queryId, result);
-                } catch (Exception e){
-                    logger.error(e, e);
-                    throw new Exception("Could not execute query " + query + " for endpoint " + endpoint, e);
+                for( Object o :jo.getJSONObject("head").getJSONArray("vars")) {
+                    Map<String, Object> newcol = new HashMap<String, Object>();
+                    String prop = (String) o;
+                    newcol.put("property", prop);
+                    if (columnLabels != null && columnLabels.containsKey(prop)) {
+                        newcol.put("title", columnLabels.get(prop));
+                    } else {
+                        String title = prop.replaceAll("_", " ");
+                        if (title.length() > 1) {
+                            title = Character.toUpperCase(title.charAt(0)) + title.substring(1);
+                        }
+                        newcol.put("title", title);
+                    }
+                    newcol.put("sortable", true);
+
+                    if (rows != null && !rows.isEmpty() && rows.get(0).containsKey(prop)) {
+                        cols.add(newcol);
+                    }
                 }
-            } else {
-                logger.error("Query or endpoint is not defined in linkeddata properties file for: " + queryId);
             }
         }
     }
@@ -435,5 +486,13 @@ public class LinkedData {
         public ArrayList<Map<String, Object>> getCols() {
             return cols;
         }
+    }
+
+    public String getSparqlJsonLocation() {
+        return sparqlJsonLocation;
+    }
+
+    public void setSparqlJsonLocation(String sparqlJsonLocation) {
+        this.sparqlJsonLocation = sparqlJsonLocation;
     }
 }

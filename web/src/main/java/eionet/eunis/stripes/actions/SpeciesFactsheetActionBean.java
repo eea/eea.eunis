@@ -958,6 +958,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("conservationstatus_species.xml"));
             LinkedData ld = new LinkedData(props, natObjId, "_conservationStatusQueries");
+            ld.setSparqlJsonLocation(getContext().getApplicationProperty("SPARQL_JSON_LOCATION"));
             conservationStatusQueries = ld.getQueryObjects();
             for (ForeignDataQueryDTO conservationStatusQuery1 : conservationStatusQueries) {
                 conservationStatusQuery = conservationStatusQuery1.getId();
@@ -1052,6 +1053,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             Properties props = new Properties();
             props.loadFromXML(getClass().getClassLoader().getResourceAsStream("externaldata_species.xml"));
             LinkedData fd = new LinkedData(props, natObjId, "_linkedDataQueries");
+            fd.setSparqlJsonLocation(getContext().getApplicationProperty("SPARQL_JSON_LOCATION"));
             queries = fd.getQueryObjects();
 
             // runs all the queries

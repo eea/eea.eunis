@@ -110,6 +110,7 @@ public class ExternalDataGlobalActionBean extends AbstractStripesAction {
                 try {
                     linkedDataHelper.setActionBeanContext(getContext());
                     if (isSPARQL) {
+                        linkedDataHelper.setSparqlJsonLocation(getContext().getApplicationProperty("SPARQL_JSON_LOCATION"));
                         linkedDataHelper.executeQuery(query, -1);
                     } else if(isSQL){
                         linkedDataHelper.executeSQLQuery(query, getContext().getSqlUtilities());
