@@ -168,7 +168,6 @@ public class LinkedData {
                                     String val = EunisUtil.replaceTags(value.getValue(), true, true);
                                     String linkCol = links.get(key);
                                     if (row.has(linkCol) && !row.getJSONObject(linkCol).isEmpty()) {
-                                        System.out.println(row.get(linkCol));
                                         ResultValue linkValue = new ResultValue((String) ((JSONObject) row.get(linkCol)).get("value"), "literal".equals((String) ((JSONObject) row.get(linkCol)).get("type")));
                                         String link = null;
                                         if (linkValue != null) {
