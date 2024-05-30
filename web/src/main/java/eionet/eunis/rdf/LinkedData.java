@@ -137,14 +137,16 @@ public class LinkedData {
         if (StringUtils.isBlank(queryId)) {
             throw new IllegalArgumentException("External data query called with blank queryid and " + String.valueOf(id) + " identifier");
         }
+
+        rows = new ArrayList<>();
+        cols = new ArrayList<>();
+
         if (props != null && queryId != null) {
 
             File f = new File(sparqlJsonLocation + queryId + "_" + id + ".json");
 
             if(f.exists()) {
                 JSONObject jo = new JSONObject(FileUtils.readFileToString(f, String.valueOf(StandardCharsets.UTF_8)));
-
-                rows = new ArrayList<>();
 
                 links = new HashMap<>();
                 for (String key : props.stringPropertyNames()) {
@@ -191,8 +193,6 @@ public class LinkedData {
                     }
                     rows.add(newrow);
                 }
-
-                cols = new ArrayList<>();
 
                 for( Object o :jo.getJSONObject("head").getJSONArray("vars")) {
                     Map<String, Object> newcol = new HashMap<String, Object>();
