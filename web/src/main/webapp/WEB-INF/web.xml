@@ -44,6 +44,11 @@
         <param-value>${bise.redirect}</param-value>
         <description>Redirect Natura 2000 to BISE</description>
     </context-param>
+    <context-param>
+        <param-name>FME_MAP_TOKEN</param-name>
+        <param-value>${fme.token}</param-value>
+        <description>API oken for FME map access</description>
+    </context-param>
 
     <!-- Static part of the page title (JSPs)-->
     <context-param>
@@ -365,6 +370,10 @@
         <servlet-name>StatisticalResultRedirectServlet</servlet-name>
         <servlet-class>eionet.eunis.servlets.StatisticalResultRedirectServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FMEAuthServlet</servlet-name>
+        <servlet-class>eionet.eunis.servlets.FMEAuthServlet</servlet-class>
+    </servlet>
 
     <!-- Map servlet to URL -->
     <servlet-mapping>
@@ -450,6 +459,11 @@
     <servlet-mapping>
         <servlet-name>DownloadServlet</servlet-name>
         <url-pattern>/rdf/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>FMEAuthServlet</servlet-name>
+        <url-pattern>/fmeAuth</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
