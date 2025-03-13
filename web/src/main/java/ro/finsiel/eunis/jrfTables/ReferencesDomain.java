@@ -141,7 +141,7 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
         return results;
     }
 
-    public List<Integer> getReferencesForHabitat(String idHabitat) {
+    public List<Integer> getReferencesForHabitat(Integer idHabitat) {
         final List<Integer> results = new ArrayList<Integer>();
         String isGoodHabitat = " IF(TRIM(H.CODE_2000) <> '',RIGHT(H.CODE_2000,2),1) <> IF(TRIM(H.CODE_2000) <> '','00',2) AND IF(TRIM(H.CODE_2000) <> '',LENGTH(H.CODE_2000),1) = IF(TRIM(H.CODE_2000) <> '',4,1) ";
 

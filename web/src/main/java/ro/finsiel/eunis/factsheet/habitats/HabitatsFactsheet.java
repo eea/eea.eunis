@@ -131,7 +131,7 @@ public class HabitatsFactsheet {
     /**
      * Habitat ID for the habitat we're constructing the factsheet.
      */
-    private String idHabitat = null;
+    private Integer idHabitat = null;
 
     /**
      * ID nature object for this habitat.
@@ -157,7 +157,7 @@ public class HabitatsFactsheet {
      *
      * @param idHabitat ID of the habitat. This parameter should never be null.
      */
-    public HabitatsFactsheet(String idHabitat) {
+    public HabitatsFactsheet(Integer idHabitat) {
         if (null == idHabitat) {
             habitat = null;
             return;
@@ -1296,7 +1296,7 @@ public class HabitatsFactsheet {
 
             for(Chm62edtHabitatHabitatPersist item : list) {
 
-                List<Integer> references = refDomain.getReferencesForHabitat(item.getIdHabitatLink().toString());
+                List<Integer> references = refDomain.getReferencesForHabitat(item.getIdHabitatLink());
                 if(references.contains(Constants.RESOLUTION4)) {
                     List<Chm62edtHabitatPersist> parentList = new Chm62edtHabitatDomain().findWhere("ID_HABITAT = " + item.getIdHabitatLink());
                     if(parentList.size()>0){
@@ -2111,7 +2111,7 @@ public class HabitatsFactsheet {
      *
      * @return Value for idHabitat, null if this habitat is invalid (none existed in database with id given in ctor)
      */
-    public String getIdHabitat() {
+    public Integer getIdHabitat() {
         return idHabitat;
     }
 
