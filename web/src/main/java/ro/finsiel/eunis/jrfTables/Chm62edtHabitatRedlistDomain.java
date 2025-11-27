@@ -92,8 +92,8 @@ public class Chm62edtHabitatRedlistDomain extends AbstractDomain {
                 new StringColumnSpec("occurrence_ext_EU28_AOO", "getOccurrenceEU28AOO",
                         "setOccurrenceEU28AOO", DEFAULT_TO_NULL));
         this.addColumnSpec(
-                new StringColumnSpec("occurrence_ext_EU28PLUS_AOO", "getOccurrenceEU28PlusEOO",
-                        "setOccurrenceEU28PlusEOO", DEFAULT_TO_NULL));
+                new StringColumnSpec("occurrence_ext_EU28PLUS_AOO", "getOccurrenceEU28PlusAOO",
+                        "setOccurrenceEU28PlusAOO", DEFAULT_TO_NULL));
         this.addColumnSpec(
                 new StringColumnSpec("occurrence_ext_EU28_area_km2", "getOccurrenceEU28Area",
                         "setOccurrenceEU28Area", DEFAULT_TO_NULL));
