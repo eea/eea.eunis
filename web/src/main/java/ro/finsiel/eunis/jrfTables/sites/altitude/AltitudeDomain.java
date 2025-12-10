@@ -5,12 +5,14 @@ package ro.finsiel.eunis.jrfTables.sites.altitude;
  * Time: 2:11:42 PM
  */
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.*;
@@ -29,6 +31,8 @@ public class AltitudeDomain extends AbstractDomain implements Paginable {
   /** Cache the results of a count to avoid overhead queries for counting */
   private Long _resultCount = new Long(-1);
   /** Specifies where to search: SEARCH_EUNIS or SEARCH_ANNEX_I */
+
+  private static final Logger logger = Logger.getLogger(AltitudeDomain.class);
 
   private SourceDb sourceDb = SourceDb.noDatabase();
 
@@ -190,7 +194,7 @@ public class AltitudeDomain extends AbstractDomain implements Paginable {
             filterSQL.insert(0, " ORDER BY ");
         }
     } catch (InitializationException e) {
-      e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+      logger.debug(e, e);   //To change body of catch statement use Options | File Templates.
     } finally {
       return filterSQL;
     }

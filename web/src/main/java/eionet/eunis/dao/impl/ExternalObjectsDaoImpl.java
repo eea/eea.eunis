@@ -11,11 +11,14 @@ import eionet.eunis.dao.IExternalObjectsDao;
 import eionet.eunis.dto.AttributeDto;
 import eionet.eunis.dto.ExternalObjectDTO;
 import eionet.eunis.dto.LinkDTO;
+import org.apache.log4j.Logger;
 
 /**
  * @author Risto Alt <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObjectsDao {
+
+    private static final Logger logger = Logger.getLogger(ExternalObjectsDaoImpl.class);
 
     public ExternalObjectsDaoImpl() {
     }
@@ -53,7 +56,7 @@ public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObj
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             closeAllResources(con, preparedStatement, rs);
         }
@@ -77,7 +80,7 @@ public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObj
                 ps.executeUpdate();
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
             } finally {
                 closeAllResources(con, ps, null);
             }
@@ -105,7 +108,7 @@ public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObj
                 ret.put(name, attr);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             closeAllResources(con, preparedStatement, rs);
         }
@@ -133,7 +136,7 @@ public class ExternalObjectsDaoImpl extends MySqlBaseDao implements IExternalObj
                 ret.add(dto);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             closeAllResources(con, preparedStatement, rs);
         }

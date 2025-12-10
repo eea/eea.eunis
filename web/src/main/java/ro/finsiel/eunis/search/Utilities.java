@@ -1672,7 +1672,7 @@ public final class Utilities {
 
             tas.DeleteSessionData(IdSession);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
     }
 
@@ -1695,7 +1695,7 @@ public final class Utilities {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }
@@ -2186,7 +2186,7 @@ public final class Utilities {
 
             return (new java.sql.Timestamp(d.getTime()));
         } catch (java.text.ParseException e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return null;
     }
@@ -2201,7 +2201,7 @@ public final class Utilities {
 
             return formatter.format(dataIn);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return "";
     }
@@ -2215,7 +2215,7 @@ public final class Utilities {
         try {
             ret = dataIn.substring(0, 4);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return ret;
     }
@@ -2526,15 +2526,15 @@ public final class Utilities {
                     ret += line + "\n";
                 }
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
             } finally {
                 if (in != null) {
                     try {
                         in.close();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        logger.debug(e, e); 
                     }
                 }
             }
@@ -2771,7 +2771,7 @@ public final class Utilities {
             ps.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return ret;
     }

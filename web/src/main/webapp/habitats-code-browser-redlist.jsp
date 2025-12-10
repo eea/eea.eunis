@@ -96,7 +96,7 @@
 		</ul>
 		<%
 			} catch (Exception e) {
-				e.printStackTrace();
+
 				return;
 			}
 		%>

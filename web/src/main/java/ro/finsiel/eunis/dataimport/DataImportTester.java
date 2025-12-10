@@ -200,7 +200,7 @@ public class DataImportTester extends HttpServlet {
                                 retPage = "dataimport/background-tester-started.jsp";
 
                             } catch (SchedulerException se) {
-                                se.printStackTrace();
+                                // se.printStackTrace(); // preparing for decommissioning
                                 errors.add(se.getMessage());
                             }
 

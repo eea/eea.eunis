@@ -193,7 +193,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             history = factsheet.getHistory();
             otherClassifications = factsheet.getOtherClassifications();
         } catch (InitializationException e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
 
         if(factsheet.isEunis()){
@@ -360,7 +360,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
 
     }
@@ -394,7 +394,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                     allQueries.add(q);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
     }
 
@@ -426,7 +426,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
     }
 
@@ -474,7 +474,7 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
     }
 

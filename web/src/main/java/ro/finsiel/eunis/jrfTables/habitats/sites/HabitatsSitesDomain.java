@@ -5,11 +5,13 @@ package ro.finsiel.eunis.jrfTables.habitats.sites;
  * Time: 2:52:18 PM
  */
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.*;
@@ -39,6 +41,8 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
   private Integer searchAttribute = null;
 
   private SourceDb sourceDb = SourceDb.noDatabase();
+
+  private static final Logger logger = Logger.getLogger(HabitatsSitesDomain.class);
 
   /**
    * Normal constructor
@@ -220,7 +224,7 @@ public class HabitatsSitesDomain extends AbstractDomain implements Paginable {
             filterSQL.insert(0, " ORDER BY ");
         }
     } catch (InitializationException e) {
-      e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+      logger.debug(e, e);   //To change body of catch statement use Options | File Templates.
     } finally {
       return filterSQL;
     }

@@ -50,7 +50,7 @@ public class CddaSitesImportParserTest {
             Assert.assertEquals("20.10", result);
 
         } catch(Exception e){
-            e.printStackTrace();
+            logger.debug(e, e);
             Assert.assertTrue(false);
         }
 

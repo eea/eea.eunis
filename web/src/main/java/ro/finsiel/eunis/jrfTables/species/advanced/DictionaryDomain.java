@@ -8,6 +8,7 @@ package ro.finsiel.eunis.jrfTables.species.advanced;
 
 import java.util.List;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
@@ -17,6 +18,7 @@ import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
@@ -36,6 +38,8 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
     private String IdSession = "";
 
     private boolean showInvalidatedSpecies = false;
+
+    private static final Logger logger = Logger.getLogger(DictionaryDomain.class);
 
     /**
      * This is the default constructor and is used only when you want to call the find* methods for this object, for
@@ -226,7 +230,7 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return filterSQL;
     }

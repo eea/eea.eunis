@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.jrfTables.species.names;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.column.columnspecs.CompoundPrimaryKeyColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
@@ -10,6 +11,7 @@ import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
 import net.sf.jrf.join.joincolumns.ShortJoinColumn;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -34,6 +36,8 @@ public class VernacularNameDomain extends AbstractDomain implements Paginable {
     private Long _resultCount = new Long(-1);
 
     private boolean showEUNISInvalidatedSpecies = false;
+
+    private static final Logger logger = Logger.getLogger(VernacularNameDomain.class);
 
     /**
      * Normal constructor
@@ -286,7 +290,7 @@ public class VernacularNameDomain extends AbstractDomain implements Paginable {
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {
-            e.printStackTrace(); // To change body of catch statement use Options | File Templates.
+            logger.debug(e, e);  // To change body of catch statement use Options | File Templates.
         }
         return filterSQL;
     }

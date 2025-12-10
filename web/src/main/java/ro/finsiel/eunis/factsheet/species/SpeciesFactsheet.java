@@ -726,7 +726,7 @@ public class SpeciesFactsheet {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return v;
     }

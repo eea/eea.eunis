@@ -133,7 +133,7 @@ public class SitesFactsheetActionBean extends AbstractStripesAction {
             try {
                 getContext().getResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
             }
         }
 

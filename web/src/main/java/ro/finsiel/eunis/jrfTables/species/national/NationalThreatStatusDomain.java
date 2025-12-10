@@ -6,6 +6,7 @@ package ro.finsiel.eunis.jrfTables.species.national;
  * Time: 10:20:51 AM
  */
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
@@ -15,6 +16,7 @@ import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.Utilities;
@@ -46,6 +48,8 @@ public class NationalThreatStatusDomain extends AbstractDomain implements Pagina
     private Long _choiceCount = new Long(-1);
 
     private boolean showEUNISInvalidatedSpecies = false;
+
+    private static final Logger logger = Logger.getLogger(NationalThreatStatusDomain.class);
 
     /**
      * Normal constructor
@@ -304,7 +308,7 @@ public class NationalThreatStatusDomain extends AbstractDomain implements Pagina
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {
-            e.printStackTrace(); // To change body of catch statement use Options | File Templates.
+            logger.debug(e, e);  // To change body of catch statement use Options | File Templates.
         } finally {
             return filterSQL;
         }

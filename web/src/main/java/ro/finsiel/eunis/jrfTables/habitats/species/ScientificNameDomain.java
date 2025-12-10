@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.jrfTables.GenericDomain;
@@ -31,6 +33,8 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
     public static final Integer SEARCH_EUNIS = new Integer(0);
     public static final Integer SEARCH_ANNEX_I = new Integer(1);
     public static final Integer SEARCH_BOTH = new Integer(2);
+
+    private static final Logger logger = Logger.getLogger(ScientificNameDomain.class);
 
     /** Criterias applied for searching */
     private AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0]; // 0 length means not criteria set
@@ -212,7 +216,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {
-            e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+            logger.debug(e, e);   //To change body of catch statement use Options | File Templates.
         } finally {
             return filterSQL;
         }

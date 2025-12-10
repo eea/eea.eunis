@@ -1,7 +1,9 @@
 package ro.finsiel.eunis.search.habitats.advanced;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import eionet.eunis.util.Constants;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +18,8 @@ import java.util.Vector;
  */
 public class HabitatsAdvancedSearch {
     private int SQL_LIMIT = 1000;
+
+    private static final Logger logger = Logger.getLogger(HabitatsAdvancedSearch.class);
 
     private Vector Tables = new Vector();
     private Vector Operands = new Vector();
@@ -175,7 +179,7 @@ public class HabitatsAdvancedSearch {
             }
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -803,7 +807,7 @@ public class HabitatsAdvancedSearch {
             con.close();
         } catch (Exception e) {
             System.out.println("SQL = " + SQL);
-            e.printStackTrace();
+            logger.debug(e, e); 
             return "";
         }
 

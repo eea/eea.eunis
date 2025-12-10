@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerFactory;
@@ -20,6 +21,8 @@ import ro.finsiel.eunis.utilities.SQLUtilities;
 public class PostImportScripts extends HttpServlet {
 
     private static final long serialVersionUID = -6182473557022340518L;
+
+    private static final Logger logger = Logger.getLogger(PostImportScripts.class);
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String retPage = "dataimport/post-import.jsp";
@@ -114,7 +117,7 @@ public class PostImportScripts extends HttpServlet {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
                 errors.add(e.getMessage());
             }
             if (runBackground == null || !runBackground.equals("on")) {

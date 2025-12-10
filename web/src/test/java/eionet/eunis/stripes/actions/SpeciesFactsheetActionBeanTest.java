@@ -57,7 +57,7 @@ public class SpeciesFactsheetActionBeanTest {
 //        assertTrue(bean.getFactsheet().exists());
 //    }
 //    catch (Exception e){
-//        e.printStackTrace();
+//        logger.debug(e, e);
 //    }
 //    }
 

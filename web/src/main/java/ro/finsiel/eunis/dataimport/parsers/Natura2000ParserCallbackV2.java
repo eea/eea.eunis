@@ -973,4 +973,8 @@ public class Natura2000ParserCallbackV2 {
         preparedStatementNatObjectReportType.setInt(6, idDc);
         preparedStatementNatObjectReportType.executeUpdate();
     }
+
+    public String getSiteCode() {
+        return siteCode;
+    }
 }

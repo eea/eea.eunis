@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search.sites.designations;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsPersist;
 
@@ -14,6 +16,8 @@ import java.util.List;
 public class FactsheetDesignations {
     private String idDesign = null;
     private String geoscope = null;
+
+    private static final Logger logger = Logger.getLogger(FactsheetDesignations.class);
 
     /**
      * Ctor.
@@ -43,7 +47,7 @@ public class FactsheetDesignations {
                 result = (Chm62edtDesignationsPersist) list.get(0);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }

@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.jrfTables.species.country;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.column.columnspecs.*;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
@@ -8,6 +9,7 @@ import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -37,6 +39,8 @@ public class CountryRegionDomain extends AbstractDomain implements Paginable {
     private Long _resultCount = new Long(-1);
 
     boolean showEUNISInvalidatedSpecies = false;
+
+    private static final Logger logger = Logger.getLogger(CountryRegionDomain.class);
 
     /** Custom constructor, to make life easier
      * @param searchCriteria Search criteria used to do the search in this Domain.
@@ -257,7 +261,7 @@ public class CountryRegionDomain extends AbstractDomain implements Paginable {
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {
-            e.printStackTrace(); // To change body of catch statement use Options | File Templates.
+            logger.debug(e, e);  // To change body of catch statement use Options | File Templates.
         } finally {
             return filterSQL;
         }

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
@@ -15,6 +16,7 @@ import net.sf.jrf.join.joincolumns.StringJoinColumn;
 
 import org.apache.commons.lang3.StringUtils;
 
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
@@ -25,6 +27,8 @@ import ro.finsiel.eunis.search.species.names.NameSortCriteria;
 import ro.finsiel.eunis.utilities.EunisUtil;
 
 public class SimilarNameDomain extends AbstractDomain implements Paginable {
+
+    private static final Logger logger = Logger.getLogger(SimilarNameDomain.class);
 
     /** Criterias applied for searching. 0 length means not criteria set */
     private AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0];
@@ -66,7 +70,7 @@ public class SimilarNameDomain extends AbstractDomain implements Paginable {
         try {
             getList();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
     }
 
@@ -287,7 +291,7 @@ public class SimilarNameDomain extends AbstractDomain implements Paginable {
             ret = removeDuplicates(ret);
             cnt = ret.size();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return ret;
     }

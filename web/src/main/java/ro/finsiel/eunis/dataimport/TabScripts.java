@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import eionet.eunis.util.Constants;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.utilities.EunisUtil;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
@@ -14,6 +15,8 @@ public class TabScripts {
 
     // Is executed from command line
     private boolean cmd = false;
+
+    private static final Logger logger = Logger.getLogger(TabScripts.class);
 
     public TabScripts() {
     }
@@ -140,7 +143,7 @@ public class TabScripts {
 
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating species tab information: " + e.getMessage(), cmd, sqlc);
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, ps, null);
         }
@@ -173,7 +176,7 @@ public class TabScripts {
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating linked data tab information: "
                     + e.getMessage(), cmd, sqlUtil);
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, null, null);
         }
@@ -207,7 +210,7 @@ public class TabScripts {
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating species conservation status tab information: "
                     + e.getMessage(), cmd, sqlUtil);
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, null, null);
         }
@@ -283,7 +286,7 @@ public class TabScripts {
 
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating sites tab information: " + e.getMessage(), cmd, sqlc);
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, ps, null);
         }
@@ -431,7 +434,7 @@ public class TabScripts {
 
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating sites tab information: " + e.getMessage(), cmd, sqlc);
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, ps, null);
         }
@@ -678,7 +681,7 @@ public class TabScripts {
             ps.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             // Connection will be closed in parent method
             closeAll(null, ps, rs);

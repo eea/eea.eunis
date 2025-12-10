@@ -67,7 +67,7 @@ if(SessionManager.isAuthenticated() && SessionManager.isUser_management_RIGHT())
           </script>
 <%
         }
-}catch(Exception e){e.printStackTrace();}
+}catch(Exception e){ }
 
 %>
 
@@ -366,7 +366,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
                <%
                   }
                 }
-               } catch(Exception e){e.printStackTrace();}
+               } catch(Exception e){ }
             %>
        </select>
        <%=cm.cmsTitle("users_edit_29")%>
@@ -476,7 +476,7 @@ if(user != null) loginDate = (user.getLoginDate()==null?"":user.getLoginDate());
     </table>
       <%
          }
-         }catch (Exception e) {e.printStackTrace();}
+         }catch (Exception e) { }
       %>
   </td>
 </tr>

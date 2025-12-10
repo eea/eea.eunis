@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.jrfTables.combined;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
@@ -7,6 +8,7 @@ import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.search.Paginable;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.advanced.AdvancedSortCriteria;
@@ -27,6 +29,8 @@ public class SitesCombinedDomain extends AbstractDomain implements Paginable {
   private Long _resultCount = new Long(-1);
 
   private String sid = "";
+
+  private static final Logger logger = Logger.getLogger(SitesCombinedDomain.class);
 
   public SitesCombinedDomain(String sid) {
     this.sid = sid;
@@ -171,7 +175,7 @@ public class SitesCombinedDomain extends AbstractDomain implements Paginable {
             filterSQL.insert(0, " ORDER BY ");
         }
     } catch (InitializationException e) {
-      e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+      logger.debug(e, e);   //To change body of catch statement use Options | File Templates.
     } finally {
       return filterSQL;
     }

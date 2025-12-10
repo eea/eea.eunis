@@ -507,7 +507,7 @@
                   con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                 }
                 catch(Exception e) {
-                  e.printStackTrace();
+
                   return;
                 }
 
@@ -1052,7 +1052,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
                   }
@@ -1104,7 +1104,7 @@
                         con.close();
                       }
                       catch(Exception e) {
-                        e.printStackTrace();
+
                         return;
                       }
 
@@ -1139,7 +1139,7 @@
                         con.close();
                       }
                       catch(Exception e) {
-                        e.printStackTrace();
+
                         return;
                       }
 
@@ -1173,7 +1173,7 @@
                         con.close();
                       }
                       catch(Exception e) {
-                        e.printStackTrace();
+
                         return;
                       }
 
@@ -1261,7 +1261,7 @@
                         con.close();
                       }
                       catch(Exception e) {
-                        e.printStackTrace();
+
                         return;
                       }
                       if(bResults > 0) {
@@ -1326,7 +1326,7 @@
                           con.close();
                         }
                         catch(Exception e) {
-                          e.printStackTrace();
+
                           return;
                         }
                       }
@@ -1362,7 +1362,7 @@
                           con.close();
                         }
                         catch(Exception e) {
-                          e.printStackTrace();
+
                           return;
                         }
                       }
@@ -1407,7 +1407,7 @@
                         con.close();
                       }
                       catch(Exception e) {
-                        e.printStackTrace();
+
                         return;
                       }
 
@@ -1469,7 +1469,7 @@
                         con.close();
                       }
                       catch(Exception e) {
-                        e.printStackTrace();
+
                         return;
                       }
                     }
@@ -1504,7 +1504,7 @@
                         con.close();
                       }
                       catch(Exception e) {
-                        e.printStackTrace();
+
                         return;
                       }
                     }
@@ -1549,7 +1549,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
 
@@ -1615,7 +1615,7 @@
                         con.close();
                       }
                       catch(Exception e) {
-                        e.printStackTrace();
+
                         return;
                       }
                     }
@@ -1652,7 +1652,7 @@
                         con.close();
                       }
                       catch(Exception e) {
-                        e.printStackTrace();
+
                         return;
                       }
                     }
@@ -1698,7 +1698,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
 
@@ -1751,7 +1751,7 @@
                   ps.execute();
                 }
                 catch(Exception e) {
-                  e.printStackTrace();
+
                   return;
                 }
 
@@ -1787,7 +1787,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
 
@@ -1819,7 +1819,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
                   }
@@ -1853,7 +1853,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
                   }
@@ -1892,7 +1892,7 @@
                     con.close();
                   }
                   catch(Exception e) {
-                    e.printStackTrace();
+
                     return;
                   }
 
@@ -1953,7 +1953,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
 
@@ -1985,7 +1985,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
                   }
@@ -2019,7 +2019,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
                   }
@@ -2059,7 +2059,7 @@
                     con.close();
                   }
                   catch(Exception e) {
-                    e.printStackTrace();
+
                     return;
                   }
 
@@ -2122,7 +2122,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
                   }
@@ -2156,7 +2156,7 @@
                       con.close();
                     }
                     catch(Exception e) {
-                      e.printStackTrace();
+
                       return;
                     }
                   }
@@ -2196,7 +2196,7 @@
                     con.close();
                   }
                   catch(Exception e) {
-                    e.printStackTrace();
+
                     return;
                   }
 

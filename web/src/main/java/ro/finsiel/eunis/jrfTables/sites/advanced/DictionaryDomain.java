@@ -1,5 +1,7 @@
 package ro.finsiel.eunis.jrfTables.sites.advanced;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.search.Paginable;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.advanced.AdvancedSortCriteria;
@@ -23,6 +25,8 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
   private Long _resultCount = new Long(-1);
 
   private String IdSession = "";
+
+  private static final Logger logger = Logger.getLogger(DictionaryDomain.class);
 
   public DictionaryDomain() {
     this.sortCriteria = null;
@@ -173,7 +177,7 @@ public class DictionaryDomain extends AbstractDomain implements Paginable {
             filterSQL.insert(0, " ORDER BY ");
         }
     } catch (InitializationException e) {
-      e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+      logger.debug(e, e);   //To change body of catch statement use Options | File Templates.
     } finally {
       return filterSQL;
     }

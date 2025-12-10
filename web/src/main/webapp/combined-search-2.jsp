@@ -480,7 +480,7 @@
                     con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
                   }
                   catch(Exception e) {
-                    e.printStackTrace();
+
                     return;
                   }
 
@@ -502,12 +502,12 @@
                   try {
                     ps = con.prepareStatement(SQL);
                   } catch(SQLException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                       //To change body of catch statement use File | Settings | File Templates.
                   }
                   try {
                     rs = ps.executeQuery();
                   } catch(SQLException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                       //To change body of catch statement use File | Settings | File Templates.
                   }
                   if(rs.isBeforeFirst()) {
                     //if(1==1){

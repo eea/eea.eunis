@@ -54,7 +54,7 @@ public class CountriesActionBean extends AbstractStripesAction{
         try {
             resultList = new Chm62edtCountryDomain().findWhereOrderBy(null, "AREA_NAME_EN");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return new ForwardResolution(RESULT_JSP);

@@ -1,7 +1,9 @@
 package ro.finsiel.eunis.search;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import java.sql.ResultSet;
@@ -22,6 +24,8 @@ public class AdvancedSearch {
     private String SourceDB = "''";
 
     private int resultCount = 0;
+
+    private static final Logger logger = Logger.getLogger(AdvancedSearch.class);
 
     /**
      * Ctor.
@@ -92,7 +96,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -148,7 +152,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -199,7 +203,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -235,7 +239,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -337,7 +341,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
 
         return result;
@@ -376,7 +380,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -416,7 +420,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -474,7 +478,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -513,7 +517,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -550,7 +554,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -637,7 +641,7 @@ public class AdvancedSearch {
 
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
     }
@@ -726,7 +730,7 @@ public class AdvancedSearch {
 
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
     }
@@ -774,7 +778,7 @@ public class AdvancedSearch {
 
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
     }
@@ -812,7 +816,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, null);
         }
@@ -851,7 +855,7 @@ public class AdvancedSearch {
 
             result = this.CreateInitialBranch(IdSession, NatureObject, Attribute);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, null);
         }
@@ -891,7 +895,7 @@ public class AdvancedSearch {
             result = true;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, null);
         }
@@ -1001,7 +1005,7 @@ public class AdvancedSearch {
                 // System.out.println("Unexpected error adding branch!");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
@@ -1061,7 +1065,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, null);
         }
@@ -1143,7 +1147,7 @@ public class AdvancedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, null);
         }
@@ -1326,7 +1330,7 @@ public class AdvancedSearch {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return where;
         } finally {
             SQLUtilities.closeAll(null, null, rsa);
@@ -1665,7 +1669,7 @@ public class AdvancedSearch {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return where;
         } finally {
             SQLUtilities.closeAll(null, null, rsa);
@@ -2015,7 +2019,7 @@ public class AdvancedSearch {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return where;
         }  finally {
             SQLUtilities.closeAll(null, null, rsa);
@@ -2122,7 +2126,7 @@ public class AdvancedSearch {
             }
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
@@ -2154,7 +2158,7 @@ public class AdvancedSearch {
             }
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return "";
         }
 

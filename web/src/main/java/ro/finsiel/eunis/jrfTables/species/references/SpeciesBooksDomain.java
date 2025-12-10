@@ -5,12 +5,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.column.columnoptions.NullableColumnOption;
 import net.sf.jrf.column.columnspecs.DateColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -34,6 +36,8 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
 
     private boolean showInvalidatedSpecies = false;
     private List finalResults = null;
+
+    private static final Logger logger = Logger.getLogger(SpeciesBooksDomain.class);
 
     public SpeciesBooksDomain(AbstractSearchCriteria[] searchCriteria, boolean showInvalidatedSpecies) {
         this.searchCriteria = searchCriteria;
@@ -349,7 +353,7 @@ public class SpeciesBooksDomain extends AbstractDomain implements Paginable {
             }
 
         } catch (InitializationException e) {
-            e.printStackTrace(); // To change body of catch statement use Options | File Templates.
+            logger.debug(e, e);  // To change body of catch statement use Options | File Templates.
         } finally {
             return filterSQL;
         }

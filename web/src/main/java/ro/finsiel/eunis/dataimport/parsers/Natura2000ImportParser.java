@@ -12,6 +12,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -24,6 +26,8 @@ import eionet.eunis.util.Constants;
  *
  */
 public class Natura2000ImportParser extends DefaultHandler {
+
+    private static final Logger logger = Logger.getLogger(Natura2000ImportParser.class);
 
     private BufferedInputStream inputStream;
 
@@ -1041,10 +1045,10 @@ public class Natura2000ImportParser extends DefaultHandler {
             con.commit();
 
             if (siteCode != null) {
-                e.printStackTrace();
+                logger.debug(e, e);
                 errors.add("Error! Site ID: " + siteCode + " Error Message: " + e.getMessage());
             } else {
-                e.printStackTrace();
+                logger.debug(e, e);
                 errors.add("Error Message: " + e.getMessage());
             }
             // throw new IllegalArgumentException(e.getMessage(), e);

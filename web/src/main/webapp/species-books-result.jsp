@@ -37,13 +37,13 @@
   try {
       resultsCount = paginator.countResults();
   } catch (Exception e) {
-      e.printStackTrace();
+
   }
   int pagesCount = 0;
   try {
       pagesCount = paginator.countPages();// This is used in @page include...
   } catch (Exception e) {
-      e.printStackTrace();
+
   }
   int guid = 0;// This is used in @page include...
   // Now extract the results for the current page.
@@ -51,7 +51,7 @@
   try {
       results = paginator.getPage(currentPage);
   } catch (Exception e) {
-      e.printStackTrace();
+
   }
   // Set number criteria for the search result
   int noCriteria = (null == formBean.getCriteriaSearch() ? 0 : formBean.getCriteriaSearch().length);
@@ -310,7 +310,7 @@
                             try
                             {
                                 resultsSpecies = domain.getSpeciesForAReference(book.getId().toString());
-                            } catch(Exception e) {e.printStackTrace();}
+                            } catch(Exception e) { }
 
                             if (resultsSpecies != null && resultsSpecies.size() > 0)
                             {

@@ -14,28 +14,28 @@
                 <thead>
                 <tr>
                     <th scope="col" style="cursor: pointer;"><img
-                            src="https://www.eea.europa.eu/arrowBlank.gif"
+                            src="/template/arrowBlank.gif"
                             height="6" width="9">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Common Name')}
                             ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
 
-                        <img src="https://www.eea.europa.eu/arrowUp.gif"
+                        <img src="/template/arrowUp.gif"
                              height="6" width="9"></th>
                     <th scope="col" style="cursor: pointer;"><img
-                            src="https://www.eea.europa.eu/arrowBlank.gif"
+                            src="/template/arrowBlank.gif"
                             height="6" width="9">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Language')}
                             ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
 
-                        <img src="https://www.eea.europa.eu/arrowBlank.gif"
+                        <img src="/template/arrowBlank.gif"
                              height="6" width="9"></th>
                     <th scope="col" style="cursor: pointer;"><img
-                            src="https://www.eea.europa.eu/arrowBlank.gif"
+                            src="/template/arrowBlank.gif"
                             height="6" width="9">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Reference')}
                             ${eunis:cmsTitle(actionBean.contentManagement, 'sort_results_on_this_column')}
 
-                        <img src="https://www.eea.europa.eu/arrowBlank.gif"
+                        <img src="/template/arrowBlank.gif"
                              height="6" width="9"></th>
                 </tr>
                 </thead>
@@ -82,15 +82,15 @@
                 </colgroup>
                 <thead>
                 <tr>
-                    <th scope="col" style="cursor: pointer;"><img src="https://www.eea.europa.eu/arrowBlank.gif" height="6" width="9">
+                    <th scope="col" style="cursor: pointer;"><img src="/template/arrowBlank.gif" height="6" width="9">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Synonym')}
                             ${eunis:cmsTitle(actionBean.contentManagement, 'sort_by_column')}
 
-                        <img src="https://www.eea.europa.eu/arrowUp.gif" height="6" width="9"></th>
-                    <th scope="col" style="cursor: pointer;"><img src="https://www.eea.europa.eu/arrowBlank.gif" height="6" width="9">
+                        <img src="/template/arrowUp.gif" height="6" width="9"></th>
+                    <th scope="col" style="cursor: pointer;"><img src="/template/arrowBlank.gif" height="6" width="9">
                             ${eunis:cmsPhrase(actionBean.contentManagement, 'Author')}
                             ${eunis:cmsTitle(actionBean.contentManagement, 'sort_by_column')}
-                        <img src="https://www.eea.europa.eu/arrowBlank.gif" height="6" width="9"></th>
+                        <img src="/template/arrowBlank.gif" height="6" width="9"></th>
                 </tr>
                 </thead>
                 <tbody>

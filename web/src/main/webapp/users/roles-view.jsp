@@ -103,7 +103,7 @@ if(roles != null && roles.size() > 0)
   </table>
 <%
 }
-} catch(Exception e){e.printStackTrace();}
+} catch(Exception e){ }
 %>
 </form>
 <%

@@ -44,6 +44,7 @@ public class SqlInjectFilter implements Filter {
         }
 
         if(containsFilteredChars(sql.toString())) {
+            logger.error("Blocked possible injection in " + sql);
             HttpServletResponse r = (HttpServletResponse) response;
             r.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } else{

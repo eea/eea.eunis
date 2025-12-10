@@ -1,5 +1,6 @@
 package ro.finsiel.eunis.jrfTables.habitats.country;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import eionet.eunis.util.Constants;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
@@ -9,6 +10,7 @@ import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.search.Paginable;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -40,6 +42,8 @@ public class CountryDomain extends AbstractDomain implements Paginable {
   public static final Integer SEARCH_EUNIS = new Integer(0);
   public static final Integer SEARCH_ANNEX_I = new Integer(1);
   public static final Integer SEARCH_BOTH = new Integer(2);
+
+  private static final Logger logger = Logger.getLogger(CountryDomain.class);
 
   /** Criterias applied for searching */
   private AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0]; // 0 length means not criteria set
@@ -257,7 +261,7 @@ public class CountryDomain extends AbstractDomain implements Paginable {
             filterSQL.insert(0, " ORDER BY ");
         }
     } catch (InitializationException e) {
-      e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+      logger.debug(e, e);   //To change body of catch statement use Options | File Templates.
     } finally {
       return filterSQL;
     }

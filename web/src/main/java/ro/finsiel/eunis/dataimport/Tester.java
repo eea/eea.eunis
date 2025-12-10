@@ -54,13 +54,13 @@ public class Tester extends DefaultHandler {
             sp.parse(xmlFile, this);
 
         } catch (SAXException se) {
-            se.printStackTrace();
+            // se.printStackTrace(); // preparing for decommissioning
             throw new RuntimeException(se.getMessage(), se);
         } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
+            // pce.printStackTrace(); // preparing for decommissioning
             throw new RuntimeException(pce.getMessage(), pce);
         } catch (IOException ie) {
-            ie.printStackTrace();
+            // ie.printStackTrace(); // preparing for decommissioning
             throw new RuntimeException(ie.getMessage(), ie);
         }
     }

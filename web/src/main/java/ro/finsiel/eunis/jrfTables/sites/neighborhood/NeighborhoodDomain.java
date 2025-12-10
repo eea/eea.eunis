@@ -1,9 +1,11 @@
 package ro.finsiel.eunis.jrfTables.sites.neighborhood;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.search.Paginable;
 import ro.finsiel.eunis.search.AbstractSortCriteria;
 import ro.finsiel.eunis.jrfTables.Chm62edtSitesPersist;
@@ -24,6 +26,8 @@ public class NeighborhoodDomain extends AbstractDomain implements Paginable {
   private Long _resultCount = new Long(-1);
   private AbstractSortCriteria[] sortCriteria = new AbstractSortCriteria[0];
   private String idSite;
+
+  private static final Logger logger = Logger.getLogger(NeighborhoodDomain.class);
 
   /** **/
   public PersistentObject newPersistentObject() {
@@ -167,7 +171,7 @@ public class NeighborhoodDomain extends AbstractDomain implements Paginable {
             filterSQL.insert(0, " ORDER BY ");
         }
     } catch (InitializationException e) {
-      e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+      logger.debug(e, e);   //To change body of catch statement use Options | File Templates.
     } finally {
       return filterSQL;
     }

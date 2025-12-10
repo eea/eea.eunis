@@ -81,7 +81,7 @@ public class SpeciesSearchUtilityTest {
                 runSearch(url);
             } catch (Exception e) {
                 System.out.println(" Search link: " + url);
-                e.printStackTrace();
+                logger.debug(e, e); 
                 assertTrue(false);
             }
         }

@@ -121,7 +121,7 @@ public class HabitatsImporterActionBean extends AbstractStripesAction {
                 showMessage("Successfully imported!");
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
                 handleEunisException(e.getMessage(), Constants.SEVERITY_ERROR);
             }
         } else {

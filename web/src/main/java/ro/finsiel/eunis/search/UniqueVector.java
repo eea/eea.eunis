@@ -1,6 +1,9 @@
 package ro.finsiel.eunis.search;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
+
 import java.util.Vector;
 
 
@@ -11,6 +14,8 @@ import java.util.Vector;
  */
 public class UniqueVector {
     private Vector elements = new Vector();
+
+    private static final Logger logger = Logger.getLogger(UniqueVector.class);
 
     /**
      * Creates a new UniqueVector object.
@@ -115,9 +120,9 @@ public class UniqueVector {
         try {
             element = (String) elements.get(i);
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } catch (ClassCastException e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return element;
     }

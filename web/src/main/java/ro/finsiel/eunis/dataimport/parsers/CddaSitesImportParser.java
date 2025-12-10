@@ -92,13 +92,13 @@ public class CddaSitesImportParser extends DefaultHandler {
             sp.parse(inputStream, this);
 
         } catch (SAXException se) {
-            se.printStackTrace();
+            // se.printStackTrace(); // preparing for decommissioning
             throw new RuntimeException(se.getMessage(), se);
         } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
+            // pce.printStackTrace(); // preparing for decommissioning
             throw new RuntimeException(pce.getMessage(), pce);
         } catch (IOException ie) {
-            ie.printStackTrace();
+            // ie.printStackTrace(); // preparing for decommissioning
             throw new RuntimeException(ie.getMessage(), ie);
         }
     }
@@ -184,7 +184,7 @@ public class CddaSitesImportParser extends DefaultHandler {
                     try {
                         marinePerc = new BigDecimal(marinePercentage);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        logger.debug(e, e); 
 
                         logger.warn(e, e);
                     }
@@ -422,7 +422,7 @@ public class CddaSitesImportParser extends DefaultHandler {
                     "DELETE G FROM chm62edt_nature_object_geoscope AS G, chm62edt_sites AS S WHERE G.ID_NATURE_OBJECT=S.ID_NATURE_OBJECT AND S.SOURCE_DB = 'CDDA_NATIONAL'");
             ps.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             if (ps != null) {
                 ps.close();

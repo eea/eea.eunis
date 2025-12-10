@@ -2,6 +2,7 @@ package ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences;
 
 import java.util.List;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnoptions.NullableColumnOption;
 import net.sf.jrf.column.columnspecs.DateColumnSpec;
@@ -13,6 +14,7 @@ import net.sf.jrf.join.JoinTable;
 import net.sf.jrf.join.joincolumns.IntegerJoinColumn;
 import net.sf.jrf.join.joincolumns.ShortJoinColumn;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -38,6 +40,8 @@ public class RefDomain extends AbstractDomain implements Paginable {
     private Integer searchPlace = SEARCH_EUNIS;
 
     private Integer source = SOURCE;
+
+    private static final Logger logger = Logger.getLogger(RefDomain.class);
 
 
     public RefDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, Integer searchPlace, Integer source) {
@@ -220,7 +224,7 @@ public class RefDomain extends AbstractDomain implements Paginable {
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {
-            e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+            logger.debug(e, e);   //To change body of catch statement use Options | File Templates.
         } finally {
             return filterSQL;
         }

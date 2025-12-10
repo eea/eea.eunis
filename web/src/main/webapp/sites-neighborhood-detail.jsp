@@ -77,7 +77,7 @@
     pagesCount = paginator.countPages();
     sites = paginator.getPage(currentPage);
   } catch (Exception e) {
-    e.printStackTrace();
+
   }
   String eeaHome = application.getInitParameter( "EEA_HOME" );
   String location = "eea#" + eeaHome + ",home#index.jsp,sites#sites.jsp,sites_neighborhood_location#sites-neighborhood.jsp,sites_neighborhood_detail_location";

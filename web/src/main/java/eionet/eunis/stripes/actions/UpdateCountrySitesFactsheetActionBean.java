@@ -37,7 +37,7 @@ public class UpdateCountrySitesFactsheetActionBean extends AbstractStripesAction
                 DaoFactory.getDaoFactory().getSitesDao().updateCountrySitesFactsheet();
                 showMessage("Successfully updated!");
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
                 handleEunisException(e.getMessage(), Constants.SEVERITY_ERROR);
             }
         } else {

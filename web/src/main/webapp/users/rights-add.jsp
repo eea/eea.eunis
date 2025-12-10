@@ -64,7 +64,7 @@
           </script>
 <%
     }
-  }catch(Exception e){e.printStackTrace();}
+  }catch(Exception e){ }
 %>
 
 <script type="text/javascript" language="JavaScript">
@@ -240,7 +240,7 @@ if(users_operation.equalsIgnoreCase("edit_rights"))
        <%
               }
             }
-           } catch(Exception e){e.printStackTrace();}
+           } catch(Exception e){ }
         %>
        </select>
        <%=cm.cmsTitle("rights_add_12")%>

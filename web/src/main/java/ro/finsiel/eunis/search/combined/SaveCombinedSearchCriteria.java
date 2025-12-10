@@ -6,6 +6,8 @@ package ro.finsiel.eunis.search.combined;
  * Time: 2:37:16 PM
  */
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
@@ -32,6 +34,8 @@ public class SaveCombinedSearchCriteria {
     private String fromWhere = null;
     // sites source data set
     private String SourceDB = null;
+
+    private static final Logger logger = Logger.getLogger(SaveCombinedSearchCriteria.class);
 
     /**
      * Class constructor.
@@ -194,7 +198,7 @@ public class SaveCombinedSearchCriteria {
             }
             saveWithSuccess = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return saveWithSuccess;
     }
@@ -226,7 +230,7 @@ public class SaveCombinedSearchCriteria {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return sourceDB;
     }
@@ -260,7 +264,7 @@ public class SaveCombinedSearchCriteria {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result + 1;
     }
@@ -295,7 +299,7 @@ public class SaveCombinedSearchCriteria {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return result;
@@ -332,7 +336,7 @@ public class SaveCombinedSearchCriteria {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -479,7 +483,7 @@ public class SaveCombinedSearchCriteria {
             con.close();
             rs.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return beginText + descr + descr2;
     }
@@ -531,7 +535,7 @@ public class SaveCombinedSearchCriteria {
                 result += "</table>";
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
         }
@@ -605,7 +609,7 @@ public class SaveCombinedSearchCriteria {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
         }
@@ -688,7 +692,7 @@ public class SaveCombinedSearchCriteria {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
     }
 
@@ -726,7 +730,7 @@ public class SaveCombinedSearchCriteria {
             st.close();
             con1.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }

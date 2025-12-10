@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Vector;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.search.SortListString;
 import ro.finsiel.eunis.search.Utilities;
 
@@ -31,6 +33,8 @@ public class ReferencesForSpecies {
     private boolean showInvalidatedSpecies = false;
 
     private Vector results = new Vector();
+
+    private static final Logger logger = Logger.getLogger(ReferencesForSpecies.class);
 
     /**
      * Constructor (takes form data as input).
@@ -285,7 +289,7 @@ public class ReferencesForSpecies {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return results;
     }

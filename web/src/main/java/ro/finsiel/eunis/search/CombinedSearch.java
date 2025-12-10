@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import java.sql.ResultSet;
@@ -19,6 +21,8 @@ public class CombinedSearch {
     private int SQL_LIMIT = 1000;
     private String SourceDB = "''";
     private int resultCount = 0;
+
+    private static final Logger logger = Logger.getLogger(CombinedSearch.class);
 
     /**
      * Creates a new CombinedSearch object.
@@ -79,7 +83,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -186,7 +190,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -217,7 +221,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -248,7 +252,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -302,7 +306,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, null);
         }
@@ -333,7 +337,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -365,7 +369,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -446,7 +450,7 @@ public class CombinedSearch {
 
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
@@ -499,7 +503,7 @@ public class CombinedSearch {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
         }
@@ -538,7 +542,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -585,7 +589,7 @@ public class CombinedSearch {
 
             result = this.CreateInitialBranch(IdSession, NatureObject, Attribute);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, null);
         }
@@ -632,7 +636,7 @@ public class CombinedSearch {
             result = true;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -745,7 +749,7 @@ public class CombinedSearch {
                 System.out.println("Unexpected error adding branch!");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
         }
@@ -800,7 +804,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -876,7 +880,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -1059,7 +1063,7 @@ public class CombinedSearch {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return where;
         } finally {
             SQLUtilities.closeAll(null, null, rsa);
@@ -1383,7 +1387,7 @@ public class CombinedSearch {
             con.close();
             // System.out.println("snodes = " + snodes);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return where;
         } finally {
             SQLUtilities.closeAll(null, null, rsa);
@@ -1482,7 +1486,7 @@ public class CombinedSearch {
             }
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             // System.out.println("SQL = " + SQL);
             return "";
         } finally {
@@ -1519,7 +1523,7 @@ public class CombinedSearch {
             }
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return "";
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
@@ -1597,7 +1601,7 @@ public class CombinedSearch {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return "";
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
@@ -1649,7 +1653,7 @@ public class CombinedSearch {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return "";
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
@@ -1703,7 +1707,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, null);
         }
@@ -1750,7 +1754,7 @@ public class CombinedSearch {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, ps, null);
         }
@@ -1815,7 +1819,7 @@ public class CombinedSearch {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         } finally {
             SQLUtilities.closeAll(con, ps, rs);

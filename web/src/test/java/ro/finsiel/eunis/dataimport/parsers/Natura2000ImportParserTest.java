@@ -54,7 +54,7 @@ public class Natura2000ImportParserTest {
                 statement.execute(action + " " + prefix + table) ;
                 statement.close();
             } catch (Exception e) {
-//                e.printStackTrace();
+//                logger.debug(e, e);
             }
         }
     }
@@ -77,7 +77,7 @@ public class Natura2000ImportParserTest {
                 statement.execute("CREATE " + (debug?"":" TEMPORARY ") + " TABLE " + prefix + table + " AS SELECT * FROM " + table) ;
                 statement.close();
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
             }
         }
     }
@@ -109,7 +109,7 @@ public class Natura2000ImportParserTest {
 
                 Assert.assertEquals(0, errors.size());
             } catch (Exception e){
-                e.printStackTrace();
+                logger.debug(e, e);
                 Assert.assertTrue(false);
             }
         }
@@ -129,11 +129,11 @@ public class Natura2000ImportParserTest {
                 Natura2000ParserCallback callback = new Natura2000ParserCallback(sqlUtilities);
                 CallbackSAXParser parser = new CallbackSAXParser(callback);
                 List<Exception> errors = parser.execute(bis);
-                for(Exception e : errors) e.printStackTrace();
+                for(Exception e : errors) logger.debug(e, e);
                 bis.close();
                 Assert.assertEquals(0, errors.size());
             } catch (Exception e){
-                e.printStackTrace();
+                logger.debug(e, e);
                 Assert.assertTrue(false);
             }
         }
@@ -155,7 +155,7 @@ public class Natura2000ImportParserTest {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         runSQL("delete from", "", tables);
@@ -163,7 +163,7 @@ public class Natura2000ImportParserTest {
         try {
             con.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         System.out.println("Total number of discrepancies: " + problems);
@@ -195,11 +195,11 @@ public class Natura2000ImportParserTest {
                 Natura2000ParserCallback callback = new Natura2000ParserCallback(sqlUtilities);
                 CallbackSAXParser parser = new CallbackSAXParser(callback);
                 List<Exception> errors = parser.execute(bis);
-                for(Exception e : errors) e.printStackTrace();
+                for(Exception e : errors) logger.debug(e, e);
                 bis.close();
                 Assert.assertEquals(0, errors.size());
             } catch (Exception e){
-                e.printStackTrace();
+                logger.debug(e, e);
                 Assert.assertTrue(false);
             }
         }
@@ -219,11 +219,11 @@ public class Natura2000ImportParserTest {
                 CallbackSAXParser parser = new CallbackSAXParser(callback);
                 parser.setDebug(debug);
                 List<Exception> errors = parser.execute(bis);
-                for(Exception e : errors) e.printStackTrace();
+                for(Exception e : errors) logger.debug(e, e);
                 bis.close();
                 Assert.assertEquals(0, errors.size());
             } catch (Exception e){
-                e.printStackTrace();
+                logger.debug(e, e);
                 Assert.assertTrue(false);
             }
         }
@@ -271,7 +271,7 @@ public class Natura2000ImportParserTest {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         runSQL("delete from", "", tables);
@@ -279,7 +279,7 @@ public class Natura2000ImportParserTest {
         try {
             con.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         System.out.println("Total number of discrepancies: " + problems);
@@ -309,7 +309,7 @@ public class Natura2000ImportParserTest {
                 BigInteger bigInt = new BigInteger(1, thedigest);
                 hash = bigInt.toString(16);
             } catch (Exception e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                logger.debug(e, e);   //To change body of catch statement use File | Settings | File Templates.
             }
         }
 

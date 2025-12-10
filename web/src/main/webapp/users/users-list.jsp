@@ -116,7 +116,7 @@ if(usersList != null && usersList.size() > 0)
 </table>
 <%
   }
-}catch(Exception e){e.printStackTrace();}
+}catch(Exception e){ }
 %>
 <%
   } else

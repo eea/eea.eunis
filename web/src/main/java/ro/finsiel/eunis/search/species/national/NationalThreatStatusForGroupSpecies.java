@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search.species.national;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.jrfTables.species.national.NationalThreatStatusDomain;
 import ro.finsiel.eunis.jrfTables.species.national.NationalThreatStatusPersist;
 
@@ -21,6 +23,8 @@ public class NationalThreatStatusForGroupSpecies {
     private Vector ThreatStatusForAGroupAndAnyCountry = new Vector();
     private String idGroup = null;
     private String idCountry = null;
+
+    private static final Logger logger = Logger.getLogger(NationalThreatStatusForGroupSpecies.class);
 
     /**
      * Ctor.
@@ -58,7 +62,7 @@ public class NationalThreatStatusForGroupSpecies {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         CountriesForAnyGroup = results;
     }
@@ -83,7 +87,7 @@ public class NationalThreatStatusForGroupSpecies {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         CountriesForAGroup = results;
     }
@@ -107,7 +111,7 @@ public class NationalThreatStatusForGroupSpecies {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         ThreatStatusForAnyGroupAndACountry = results;
     }
@@ -132,7 +136,7 @@ public class NationalThreatStatusForGroupSpecies {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         ThreatStatusForAGroupAndACountry = results;
     }
@@ -156,7 +160,7 @@ public class NationalThreatStatusForGroupSpecies {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         ThreatStatusForAnyGroupAndAnyCountry = results;
     }
@@ -180,7 +184,7 @@ public class NationalThreatStatusForGroupSpecies {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         ThreatStatusForAGroupAndAnyCountry = results;
     }

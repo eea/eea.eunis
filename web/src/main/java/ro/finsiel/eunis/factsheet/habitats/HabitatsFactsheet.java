@@ -1541,7 +1541,7 @@ public class HabitatsFactsheet {
     // }
     // }
     // } catch (Exception e) {
-    // e.printStackTrace();
+    // logger.debug(e, e); 
     // }
     //
     // result.addElement(probability);
@@ -1609,7 +1609,7 @@ public class HabitatsFactsheet {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
 
         result.addElement(probability);

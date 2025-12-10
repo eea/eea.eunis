@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.jrfTables;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -11,6 +13,8 @@ import ro.finsiel.eunis.search.AbstractSortCriteria;
  * A set of utility methods used among ro.finsiel.eunis.jfrTables.* classes.
  */
 public final class DBUtilities {
+
+    private static final Logger logger = Logger.getLogger(DBUtilities.class);
 
     /**
      * This helper method is used to construct the string after WHERE...based on search criterias set. In another words
@@ -75,7 +79,7 @@ public final class DBUtilities {
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {
-            e.printStackTrace(); // To change body of catch statement use Options | File Templates.
+            logger.debug(e, e);  // To change body of catch statement use Options | File Templates.
         }
         return filterSQL;
     }

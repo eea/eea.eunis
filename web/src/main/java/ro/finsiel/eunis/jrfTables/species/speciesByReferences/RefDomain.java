@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.sql.JRFResultSet;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -38,6 +40,8 @@ public class RefDomain extends AbstractDomain implements Paginable {
     private Long _resultCount = new Long(-1);
     private boolean showInvalidatedSpecies = false;
     Vector ListOfIdSpecies = new Vector();
+
+    private static final Logger logger = Logger.getLogger(RefDomain.class);
 
     public RefDomain(AbstractSearchCriteria[] searchCriteria, AbstractSortCriteria[] sortCriteria, boolean showInvalidatedSpecies) {
         this.searchCriteria = searchCriteria;
@@ -236,7 +240,7 @@ public class RefDomain extends AbstractDomain implements Paginable {
         try {
             ListOfIdSpecies = getIdSpeciesList(filterSQL);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         StringBuffer speciesFilterSQL = _prepareWhereSearch("SpeciesPart");
@@ -245,7 +249,7 @@ public class RefDomain extends AbstractDomain implements Paginable {
             result = getCountResultsByIdSpecies(speciesFilterSQL,
                     ListOfIdSpecies);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return result;
@@ -304,7 +308,7 @@ public class RefDomain extends AbstractDomain implements Paginable {
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {
-            e.printStackTrace(); // To change body of catch statement use Options | File Templates.
+            logger.debug(e, e);  // To change body of catch statement use Options | File Templates.
         } finally {
             return filterSQL;
         }

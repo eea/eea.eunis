@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import eionet.eunis.dto.HabitatDTO;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.sql.JRFResultSet;
 
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.formBeans.ReferencesSearchCriteria;
@@ -37,6 +39,8 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
 
     /** Cache the results of a count to avoid overhead queries for counting */
     private Long _resultCount = new Long(-1);
+
+    private static final Logger logger = Logger.getLogger(ReferencesDomain.class);
 
     Vector ListOfReferences = new Vector();
 
@@ -79,7 +83,7 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
         try {
             results = getReferencesList(filterSQL, sortOrderAndLimit.toString());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         List tempList = results;
@@ -266,7 +270,7 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
             ListOfReferences = getReferencesList(filterSQL, "");
             result = new Long(ListOfReferences.size());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return result;
@@ -324,7 +328,7 @@ public class ReferencesDomain extends AbstractDomain implements Paginable {
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {
-            e.printStackTrace(); // To change body of catch statement use Options | File Templates.
+            logger.debug(e, e);  // To change body of catch statement use Options | File Templates.
         } finally {
             return filterSQL;
         }

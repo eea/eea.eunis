@@ -1,6 +1,9 @@
 package ro.finsiel.eunis.search.habitats.country;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
@@ -19,6 +22,7 @@ public class HabitatCountryUtil {
     private Vector _countries = new Vector(); // Countries
     private Vector _regions = new Vector(); // Regions. _regions.size() = _countries.size()!
     private HttpServletRequest _request = null;
+    private static final Logger logger = Logger.getLogger(HabitatCountryUtil.class);
 
     /**
      * Ctor.
@@ -147,7 +151,7 @@ public class HabitatCountryUtil {
                 _regions.addElement(request.getParameter("_" + prefix + "region")); // Add region here.
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
     }
 

@@ -3,6 +3,7 @@ package eionet.eunis.servlets;
 import eionet.eunis.jasper.JasperReportGenerator;
 import eionet.eunis.stripes.actions.ExternalDataGlobalActionBean;
 import net.sf.jasperreports.engine.JRException;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,9 @@ import java.io.IOException;
  * Created by miahi on 9/8/2015.
  */
 public class JasperReportDownloadServlet extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(JasperReportDownloadServlet.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
@@ -42,7 +46,7 @@ public class JasperReportDownloadServlet extends HttpServlet {
                     response.getOutputStream().write(pdf);
 
                 } catch (JRException e) {
-                    e.printStackTrace();
+                    logger.debug(e, e); 
                 }
 
         }

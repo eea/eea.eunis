@@ -65,7 +65,7 @@
 
   } catch (Exception e)
   {
-    e.printStackTrace();
+
 %>
     <jsp:include page="database-error.jsp" />
 <%

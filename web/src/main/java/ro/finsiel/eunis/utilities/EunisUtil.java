@@ -8,8 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import eionet.eunis.dto.TaxonomyTreeDTO;
 import eionet.eunis.util.Constants;
+import org.apache.log4j.Logger;
 
 public class EunisUtil {
 
@@ -18,6 +20,8 @@ public class EunisUtil {
      */
     static final Map<String, String> defaultPictures = new HashMap<String, String>();
     public static HashMap<Integer, Integer> legalStatusOrder = new HashMap<>();
+
+    private static final Logger logger = Logger.getLogger(EunisUtil.class);
 
     static {
         defaultPictures.put("Algae","Algae");
@@ -320,7 +324,7 @@ public class EunisUtil {
                 buf.append(s.substring(s.length() - 2));
             }
         } catch (GeneralSecurityException e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return buf.toString();

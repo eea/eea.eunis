@@ -8,10 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 
 public class Urls extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(Urls.class);
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -40,7 +44,7 @@ public class Urls extends HttpServlet {
             response.getWriter().write(s.toString());
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
     }

@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import java.sql.Connection;
@@ -27,6 +29,8 @@ public class References {
     private String title = null;
     private Integer relationOpPublisher = null;
     private String publisher = null;
+
+    private static final Logger logger = Logger.getLogger(References.class);
 
     private Vector results = new Vector();
 
@@ -248,7 +252,7 @@ public class References {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
         }

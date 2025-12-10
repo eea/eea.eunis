@@ -40,6 +40,13 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
             Pattern.compile("onload(.*?)=(.*?)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),
             Pattern.compile("\"(.*?)>", Pattern.CASE_INSENSITIVE),
             Pattern.compile("'(.*?)>", Pattern.CASE_INSENSITIVE),
+//            Pattern.compile("drop", Pattern.CASE_INSENSITIVE),
+//            Pattern.compile("select", Pattern.CASE_INSENSITIVE),
+//            Pattern.compile("insert", Pattern.CASE_INSENSITIVE),
+//            Pattern.compile("update", Pattern.CASE_INSENSITIVE),
+//            Pattern.compile("create", Pattern.CASE_INSENSITIVE),
+//            Pattern.compile("union", Pattern.CASE_INSENSITIVE),
+//            Pattern.compile("concat", Pattern.CASE_INSENSITIVE),
     };
 
     public XSSRequestWrapper(HttpServletRequest servletRequest) {

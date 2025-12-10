@@ -42,7 +42,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
         try {
             sources = DaoFactory.getDaoFactory().getReferncesDao().getRedListSources();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         String forwardPage = "/stripes/redlistimporter.jsp";
 
@@ -124,7 +124,7 @@ public class RedListImporterActionBean extends AbstractStripesAction {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
                 handleEunisException(e.getMessage(), Constants.SEVERITY_ERROR);
             }
         } else {

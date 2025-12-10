@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class JasperReportGenerator implements Serializable {
 
-    private static final Logger LOGGER = Logger.getLogger(JasperReportGenerator.class);
+    private static final Logger logger = Logger.getLogger(JasperReportGenerator.class);
 
     // page numbering starts at zero
     private int currentPage;
@@ -122,7 +122,7 @@ public class JasperReportGenerator implements Serializable {
 
         } catch (Exception e) {
             System.out.print("Exception" + e);
-            LOGGER.error(e,e);
+            logger.error(e,e);
         } finally {
             SQLUtilities.closeAll(connection, null, null);
         }
@@ -188,8 +188,7 @@ public class JasperReportGenerator implements Serializable {
         try {
             baos.close();
         } catch (IOException e) {
-            e.printStackTrace();
-            LOGGER.warn(e,e);
+            logger.debug(e, e);
         }
         return result;
     }

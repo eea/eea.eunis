@@ -29,7 +29,7 @@
     con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
   }
   catch(Exception e) {
-    e.printStackTrace();
+
     return;
   }
 
@@ -149,5 +149,5 @@
     out.print("</rdf:RDF>");
 
   } catch (Exception e) {
-    e.printStackTrace();
+
   }%>

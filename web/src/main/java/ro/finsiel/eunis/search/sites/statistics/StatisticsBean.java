@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Vector;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.jrfTables.Chm62edtDesignationsDomain;
 import ro.finsiel.eunis.jrfTables.sites.statistics.StatisticsDomain;
 import ro.finsiel.eunis.search.*;
@@ -23,6 +25,8 @@ public class StatisticsBean extends SitesFormBean {
     private Long sitesNumber = new Long(-1);
     private Long totalArea = new Long(-1);
     private Long totalLength = new Long(-1);
+
+    private static final Logger logger = Logger.getLogger(StatisticsBean.class);
 
     /**
      * Compute number of sites for main search criteria.
@@ -51,7 +55,7 @@ public class StatisticsBean extends SitesFormBean {
             sitesNumber = new StatisticsDomain().findLong(sql);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             sitesNumber = new Long(0);
         }
         this.sitesNumber = sitesNumber;

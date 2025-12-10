@@ -201,7 +201,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
             sitesCountryFactsheetRowsHtml =
                     Utilities.getSitesCountryFactsheetInTable(countrySitesFactsheets, getContentManagement());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
     }
 
@@ -230,9 +230,9 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
             BeanUtils.populate(statisticsBean, map);
 
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
     }
 
@@ -310,7 +310,7 @@ public class CountryFactsheetActionBean extends AbstractStripesAction {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             SQLUtilities.closeAll(con, null, null);
 

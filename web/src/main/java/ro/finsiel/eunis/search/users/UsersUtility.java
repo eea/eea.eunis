@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search.users;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.jrfTables.users.*;
 import ro.finsiel.eunis.jrfTables.users.UserDomain;
 import ro.finsiel.eunis.jrfTables.users.UserPersist;
@@ -19,6 +21,8 @@ import java.sql.*;
  * @author finsiel
  */
 public class UsersUtility {
+
+    private static final Logger logger = Logger.getLogger(UsersUtility.class);
 
     /**
      * Retrieve roles for an user.
@@ -40,7 +44,7 @@ public class UsersUtility {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -66,7 +70,7 @@ public class UsersUtility {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return is;
     }
@@ -94,7 +98,7 @@ public class UsersUtility {
                 st += "&lt;/UL&gt;";
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return st;
     }
@@ -172,7 +176,7 @@ public class UsersUtility {
             rs.close();
             succes = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return succes;
     }
@@ -207,7 +211,7 @@ public class UsersUtility {
             con1.close();
             succes = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         if (succes && !existRightName(rightname) && !existRightNameInRolesRights(rightname)) {
             succes = true;
@@ -235,7 +239,7 @@ public class UsersUtility {
                 is = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return is;
@@ -259,7 +263,7 @@ public class UsersUtility {
                 is = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return is;
     }
@@ -282,7 +286,7 @@ public class UsersUtility {
                 is = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return is;
     }
@@ -305,7 +309,7 @@ public class UsersUtility {
                 is = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return is;
     }
@@ -328,7 +332,7 @@ public class UsersUtility {
                 is = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return is;
@@ -590,7 +594,7 @@ public class UsersUtility {
             result = true;
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             if (null != con) {
                 try {
                     con.close();
@@ -688,7 +692,7 @@ public class UsersUtility {
 
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             if (null != con) {
                 try {
                     con.close();
@@ -729,7 +733,7 @@ public class UsersUtility {
             ps.executeUpdate();
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(con, ps, null);
         }
@@ -757,7 +761,7 @@ public class UsersUtility {
                 result = (UserPersist) users.get(0);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -782,7 +786,7 @@ public class UsersUtility {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -807,7 +811,7 @@ public class UsersUtility {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -831,7 +835,7 @@ public class UsersUtility {
                 new RolesDomain().save(role);
                 result = true;
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
             }
         }
         return result;
@@ -857,7 +861,7 @@ public class UsersUtility {
                 success = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return success;
     }
@@ -880,7 +884,7 @@ public class UsersUtility {
                 is = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return is;
     }
@@ -903,7 +907,7 @@ public class UsersUtility {
                 result = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -942,7 +946,7 @@ public class UsersUtility {
             }
             success = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return success;
     }
@@ -960,7 +964,7 @@ public class UsersUtility {
                 result = name.replaceAll("_", " ");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -981,7 +985,7 @@ public class UsersUtility {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -1017,7 +1021,7 @@ public class UsersUtility {
             con.close();
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             if (null != con) {
                 try {
                     con.close();
@@ -1051,7 +1055,7 @@ public class UsersUtility {
                 obj = (RightsPersist) rights.get(0);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return obj;
     }
@@ -1074,7 +1078,7 @@ public class UsersUtility {
                 result = (RolesPersist) roles.get(0);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         ;
         return result;
@@ -1100,7 +1104,7 @@ public class UsersUtility {
                 result = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         ;
         return result;
@@ -1151,7 +1155,7 @@ public class UsersUtility {
             con1.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
     }
 
@@ -1201,7 +1205,7 @@ public class UsersUtility {
             con1.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
     }
 
@@ -1250,7 +1254,7 @@ public class UsersUtility {
             con1.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
     }
 
@@ -1297,7 +1301,7 @@ public class UsersUtility {
 
                 success = true;
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
             }
         }
         return success;
@@ -1337,7 +1341,7 @@ public class UsersUtility {
             }
             success = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return success;
     }

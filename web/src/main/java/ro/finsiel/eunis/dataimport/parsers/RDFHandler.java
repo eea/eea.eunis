@@ -204,7 +204,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             errors.add(e.getMessage());
         }
     }
@@ -226,7 +226,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
                 ret = rs.getString("ID_NATURE_OBJECT");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             errors.add(e.getMessage());
         } finally {
             if (ps != null) {
@@ -307,7 +307,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
                 ps.executeUpdate();
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
                 errors.add(e.getMessage());
             } finally {
                 if (ps != null) {
@@ -329,7 +329,7 @@ public class RDFHandler implements StatementHandler, ErrorHandler {
                 preparedStatement.clearParameters();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             errors.add(e.getMessage());
         } finally {
             if (preparedStatement != null) {

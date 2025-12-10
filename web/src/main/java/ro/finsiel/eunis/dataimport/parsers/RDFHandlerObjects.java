@@ -173,7 +173,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
                 errors.add(e.getMessage());
             } finally {
                 if (ps != null) {
@@ -205,7 +205,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
                 errors.add(e.getMessage());
             }
         }
@@ -227,7 +227,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             errors.add(e.getMessage());
         }
     }
@@ -256,7 +256,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
                 ret = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             errors.add(e.getMessage());
         } finally {
             if (ps != null) {
@@ -285,7 +285,7 @@ public class RDFHandlerObjects implements StatementHandler, ErrorHandler {
                 preparedStatement.clearParameters();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             errors.add(e.getMessage());
         } finally {
             if (preparedStatement != null) {

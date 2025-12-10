@@ -111,7 +111,7 @@ public class DesignationsFactsheetActionBean extends AbstractStripesAction {
 
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.debug(e, e);
                 }
 
             }

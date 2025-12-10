@@ -5,11 +5,13 @@ package ro.finsiel.eunis.jrfTables.sites.habitats;
  * Time: 10:51:29 AM
  */
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import eionet.eunis.util.Constants;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.*;
@@ -26,6 +28,8 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
   public static final Integer SEARCH_EUNIS = new Integer(0);
   public static final Integer SEARCH_ANNEX_I = new Integer(1);
   public static final Integer SEARCH_BOTH = new Integer(2);
+
+  private static final Logger logger = Logger.getLogger(HabitatDomain.class);
   /** Criterias applied for searching */
   private AbstractSearchCriteria[] searchCriteria = new AbstractSearchCriteria[0]; // 0 length means not criteria set
   /** Criterias applied for sorting */
@@ -222,7 +226,7 @@ public class HabitatDomain extends AbstractDomain implements Paginable {
             filterSQL.insert(0, " ORDER BY ");
         }
     } catch (InitializationException e) {
-      e.printStackTrace();  //To change body of catch statement use Options | File Templates.
+      logger.debug(e, e);   //To change body of catch statement use Options | File Templates.
     } finally {
       return filterSQL;
     }

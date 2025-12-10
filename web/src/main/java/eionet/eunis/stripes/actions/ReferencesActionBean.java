@@ -103,7 +103,7 @@ public class ReferencesActionBean extends AbstractStripesAction {
 
                 habitats = refDomain.getHabitatsForAReferences(idref);
             } catch (CriteriaMissingException e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
             }
 
             setMetaDescription("reference");

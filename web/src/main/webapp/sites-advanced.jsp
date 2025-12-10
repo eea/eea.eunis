@@ -527,7 +527,7 @@ function setFormDeleteSaveCriteria(fromWhere,criterianame,natureobject) {
                 con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
               }
               catch(Exception e) {
-                e.printStackTrace();
+
                 return;
               }
 

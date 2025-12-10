@@ -25,6 +25,7 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.jrfTables.Chm62edtLanguageDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtLanguagePersist;
 import ro.finsiel.eunis.jrfTables.EunisISOLanguagesDomain;
@@ -79,6 +80,8 @@ public class WebContentManagement implements java.io.Serializable {
     private boolean editMode = false;
     /** In advanced edit-mode you can edit attribute values - alt, title, value, label. */
     private boolean advancedEditMode = false;
+
+    private static final Logger logger = Logger.getLogger(WebContentManagement.class);
 
     /**
      * Change current language displayed within web pages.
@@ -626,7 +629,7 @@ public class WebContentManagement implements java.io.Serializable {
             }
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             result = false;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -668,7 +671,7 @@ public class WebContentManagement implements java.io.Serializable {
 
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             result = false;
         } finally {
             SQLUtilities.closeAll(con, ps, null);
@@ -863,7 +866,7 @@ public class WebContentManagement implements java.io.Serializable {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
             }
         }
         return result;
@@ -910,7 +913,7 @@ public class WebContentManagement implements java.io.Serializable {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             return false;
         } finally {
             SQLUtilities.closeAll(con, ps, null);

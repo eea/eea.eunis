@@ -13,6 +13,7 @@ import java.util.Map;
 
 import eionet.eunis.dto.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.displaytag.properties.SortOrderEnum;
 
 import ro.finsiel.eunis.search.Utilities;
@@ -27,6 +28,8 @@ import eionet.eunis.util.CustomPaginatedList;
  * @author Risto Alt <a href="mailto:risto.alt@tieto.com">contact</a>
  */
 public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
+
+    private static final Logger logger = Logger.getLogger(ReferencesDaoImpl.class);
 
     public ReferencesDaoImpl() {
     }
@@ -103,7 +106,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return ret;
@@ -138,7 +141,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 ret = rs.getInt(1);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAllResources(con, preparedStatement, rs);
         }
@@ -175,7 +178,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAllResources(con, preparedStatement, rs);
         }
@@ -267,7 +270,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             }
             
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAllResources(con, preparedStatement, rs);
         }
@@ -312,7 +315,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAllResources(con, preparedStatement, rs);
         }
@@ -339,7 +342,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             ret = rsReader.getResultList();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return ret;
@@ -380,7 +383,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 psIndex.executeUpdate();
 
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.debug(e, e);
             } finally {
                 closeAllResources(con, psIndex, null);
             }
@@ -428,7 +431,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 ret.setPublisher(Utilities.formatString(Utilities.FormatDatabaseFieldName(rs.getString(5)), ""));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAllResources(con, preparedStatement, rs);
         }
@@ -469,7 +472,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
                 ret.add(pair);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAllResources(con, preparedStatement, rs);
         }
@@ -516,7 +519,7 @@ public class ReferencesDaoImpl extends MySqlBaseDao implements IReferencesDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAllResources(con, preparedStatement, rs);
         }

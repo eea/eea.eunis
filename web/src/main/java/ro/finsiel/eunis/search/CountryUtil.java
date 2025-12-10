@@ -6,7 +6,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import eionet.eunis.util.Constants;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.RecordNotFoundException;
 import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionPersist;
@@ -32,6 +34,8 @@ public class CountryUtil {
      */
     private static final Map<String, Chm62edtCountryPersist> COUNTRY_PERSIST_BY_EN_NAME = new ConcurrentHashMap<String, Chm62edtCountryPersist>();
 
+    private static final Logger logger = Logger.getLogger(CountryUtil.class);
+
 
     /**
      * This method finds the bioregions located within a country.
@@ -51,7 +55,7 @@ public class CountryUtil {
                         "CODE_COUNTRY='" + countryCode
                         + "' AND CODE_BIOGEOREGION<>'nd'");
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
             }
         }
         Vector _regions = new Vector();
@@ -85,7 +89,7 @@ public class CountryUtil {
                 _countryCodes = new Chm62edtCountryBiogeoregionDomain().findWhere(
                         "CODE_BIOGEOREGION='" + regionCode + "'");
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
                 _countryCodes = new ArrayList();
             }
         }
@@ -120,7 +124,7 @@ public class CountryUtil {
             results = new Chm62edtCountryBiogeoregionDomain().findWhere(
                     "1=1 GROUP BY CODE_COUNTRY");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return results;
     }
@@ -136,7 +140,7 @@ public class CountryUtil {
             results = new Chm62edtCountryBiogeoregionDomain().findWhere(
                     "1=1 GROUP BY CODE_BIOGEOREGION");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return results;
     }
@@ -157,7 +161,7 @@ public class CountryUtil {
             _list = new ro.finsiel.eunis.jrfTables.Chm62edtBiogeoregionDomain().findWhere(
                     "CODE='" + regionCode + "'");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         if (!_list.isEmpty()) {
             result = ((Chm62edtBiogeoregionPersist) _list.get(0)).getBiogeoregionName();
@@ -183,7 +187,7 @@ public class CountryUtil {
             _list = new Chm62edtCountryDomain().findWhere(
                     "EUNIS_AREA_CODE='" + code + "'");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         if (!_list.isEmpty()) {
             result = ((Chm62edtCountryPersist) _list.get(0)).getAreaNameEnglish();
@@ -210,7 +214,7 @@ public class CountryUtil {
             _list = new Chm62edtBiogeoregionDomain().findWhere(
                     "NAME='" + regionName + "'");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         if (!_list.isEmpty()) {
             ret = ((Chm62edtBiogeoregionPersist) _list.get(0)).getIdGeoscope();
@@ -238,7 +242,7 @@ public class CountryUtil {
             _list = new Chm62edtCountryDomain().findWhere(
                     "AREA_NAME_EN='" + countryName + "'");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         if (!_list.isEmpty()) {
             ret = ((Chm62edtCountryPersist) _list.get(0)).getIdGeoscope();
@@ -269,7 +273,7 @@ public class CountryUtil {
             _list = new Chm62edtCountryDomain().findWhere(
                     "EUNIS_AREA_CODE='" + code + "'");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         if (!_list.isEmpty()) {
             ret = ((Chm62edtCountryPersist) _list.get(0)).getIdGeoscope();
@@ -521,7 +525,7 @@ public class CountryUtil {
                                 : ((Chm62edtCountryPersist) country.get(0)).getIso3l());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return ISO;
     }

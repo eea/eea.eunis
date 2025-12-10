@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import org.apache.commons.lang.StringUtils;
 
 import eionet.eunis.dao.INatureObjectAttrDao;
+import org.apache.log4j.Logger;
 
 /**
  * Implementation of {@link INatureObjectAttrDao}.
@@ -14,6 +15,8 @@ import eionet.eunis.dao.INatureObjectAttrDao;
  */
 public class NatureObjectAttrDaoImpl extends MySqlBaseDao implements INatureObjectAttrDao {
 
+
+    private static final Logger logger = Logger.getLogger(NatureObjectAttrDaoImpl.class);
     /*
      * (non-Javadoc)
      * 
@@ -76,7 +79,7 @@ public class NatureObjectAttrDaoImpl extends MySqlBaseDao implements INatureObje
             ps.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             closeAllResources(con, ps, null);
         }
@@ -120,7 +123,7 @@ public class NatureObjectAttrDaoImpl extends MySqlBaseDao implements INatureObje
             ps.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             closeAllResources(con, ps, null);
         }
@@ -160,7 +163,7 @@ public class NatureObjectAttrDaoImpl extends MySqlBaseDao implements INatureObje
             ps.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             closeAllResources(con, ps, null);
         }
@@ -197,7 +200,7 @@ public class NatureObjectAttrDaoImpl extends MySqlBaseDao implements INatureObje
             ps.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             closeAllResources(con, ps, null);
         }

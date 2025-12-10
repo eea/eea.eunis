@@ -42,15 +42,15 @@ public class SitesSDFUpdateActionBean extends AbstractStripesAction  {
                 CallbackSAXParser parser = new CallbackSAXParser(callback);
                 parser.setDebug(false);
                 List<Exception> errors = parser.execute(bis);
-                for(Exception e : errors) e.printStackTrace();
+                for(Exception e : errors) logger.debug(e, e);
                 bis.close();
             } catch (Exception e){
-                e.printStackTrace();
+                logger.debug(e, e);
             }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         long diff = (new Date().getTime() - d1.getTime())/1000;
         System.out.println(new Date() + " Update finished for " + idsite + " in " + diff + " seconds");

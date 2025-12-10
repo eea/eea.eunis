@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search.sites.advanced;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.search.Utilities;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
@@ -32,6 +34,8 @@ public class SaveAdvancedSearchCriteria {
 
     /** Sites source data set. */
     private String SourceDB = null;
+
+    private static final Logger logger = Logger.getLogger(SaveAdvancedSearchCriteria.class);
 
     /**
      * Class constructor.
@@ -186,7 +190,7 @@ public class SaveAdvancedSearchCriteria {
             con1.close();
             saveWithSuccess = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return saveWithSuccess;
     }
@@ -219,7 +223,7 @@ public class SaveAdvancedSearchCriteria {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return sourceDB;
     }
@@ -250,7 +254,7 @@ public class SaveAdvancedSearchCriteria {
                 result = rs.getLong(1);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
         }
@@ -287,7 +291,7 @@ public class SaveAdvancedSearchCriteria {
             ps.close();
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return result;
@@ -320,7 +324,7 @@ public class SaveAdvancedSearchCriteria {
                 result = rs.getString(1);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
         }
@@ -369,7 +373,7 @@ public class SaveAdvancedSearchCriteria {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
            SQLUtilities.closeAll(con, ps, rs);
         }
@@ -421,7 +425,7 @@ public class SaveAdvancedSearchCriteria {
                 result += "</table>";
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
         }
@@ -477,7 +481,7 @@ public class SaveAdvancedSearchCriteria {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
         }
@@ -535,7 +539,7 @@ public class SaveAdvancedSearchCriteria {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(con, ps, rs);
         }
@@ -571,7 +575,7 @@ public class SaveAdvancedSearchCriteria {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(con1, st, rs);
         }

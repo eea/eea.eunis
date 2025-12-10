@@ -110,13 +110,13 @@ public class LinksImporterActionBean extends AbstractStripesAction {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
             } finally {
                 if (file != null) {
                     try {
                         file.delete();
                     } catch (IOException ie) {
-                        ie.printStackTrace();
+                        // ie.printStackTrace(); // preparing for decommissioning
                     }
                 }
                 // close input stream
@@ -124,7 +124,7 @@ public class LinksImporterActionBean extends AbstractStripesAction {
                     try {
                         inputStream.close();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        logger.debug(e, e); 
                     }
                 }
                 // close connection

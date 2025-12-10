@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search.save_criteria;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.jrfTables.save_criteria.*;
 import ro.finsiel.eunis.jrfTables.habitats.habitatsByReferences.RefDomain;
 import ro.finsiel.eunis.search.Utilities;
@@ -62,6 +64,8 @@ public class SaveSearchCriteria {
     private Hashtable fromWhereMapping = null;
     // habitat database
     private Vector database = new Vector();
+
+    private static final Logger logger = Logger.getLogger(SaveSearchCriteria.class);
 
     /**
      * This method maps page names with their automatic string description for save criterias
@@ -227,7 +231,7 @@ public class SaveSearchCriteria {
                 success = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             deleteIfErrorToInsert();
         }
 
@@ -267,7 +271,7 @@ public class SaveSearchCriteria {
             st.close();
             con1.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }
@@ -405,7 +409,7 @@ public class SaveSearchCriteria {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return beginString + result;
     }
@@ -567,7 +571,7 @@ public class SaveSearchCriteria {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }
@@ -595,7 +599,7 @@ public class SaveSearchCriteria {
                 result = attributeName;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }
@@ -620,7 +624,7 @@ public class SaveSearchCriteria {
             }
             result = name;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }
@@ -660,7 +664,7 @@ public class SaveSearchCriteria {
             result = firstValue;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }
@@ -726,7 +730,7 @@ public class SaveSearchCriteria {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }
@@ -747,7 +751,7 @@ public class SaveSearchCriteria {
                 result = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }
@@ -768,7 +772,7 @@ public class SaveSearchCriteria {
                 result = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }
@@ -802,7 +806,7 @@ public class SaveSearchCriteria {
             con1.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
     }
 
@@ -923,7 +927,7 @@ public class SaveSearchCriteria {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return url;
     }

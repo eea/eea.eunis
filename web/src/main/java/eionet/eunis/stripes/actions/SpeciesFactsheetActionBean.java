@@ -539,7 +539,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 gbifLink.setUrl("https://www.gbif.org/species/" + URLEncoder.encode(specie.getScientificName().replaceAll("\\.", ""), "UTF-8"));
                 gbifLink.setName("GBIF search");
             } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+                logger.debug(e, e);
             }
         } else {
             gbifLink.setUrl("https://www.gbif.org/species/" + gbifId);
@@ -676,7 +676,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
             scientificNameUrlEncoded = URLEncoder.encode(scientificName, "UTF-8");
             scientificNameUrlEncoded = scientificNameUrlEncoded.replace("+", "%20");
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         for (SitesByNatureObjectPersist site : speciesSites){
@@ -939,7 +939,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                         }
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.debug(e, e);
                 }
             }
         }
@@ -979,7 +979,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
     }
 
@@ -1071,7 +1071,7 @@ public class SpeciesFactsheetActionBean extends AbstractStripesAction {
                     allQueries.add(q);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
     }
 

@@ -24,7 +24,7 @@
     con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
   }
   catch(Exception e) {
-    e.printStackTrace();
+
     return;
   }
 
@@ -74,5 +74,5 @@
     out.print(sxml);
 
   } catch (Exception e) {
-    e.printStackTrace();
+
   }%>

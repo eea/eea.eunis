@@ -365,7 +365,7 @@ public class JstlFunctions {
             ret = URLEncoder.encode(input, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             logger.error(e);
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return ret;
     }
@@ -423,7 +423,7 @@ public class JstlFunctions {
                 ret = Utilities.formatString(ret);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return ret;
@@ -450,7 +450,7 @@ public class JstlFunctions {
                 ret = Utilities.formatString(ret);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
 
         return ret;

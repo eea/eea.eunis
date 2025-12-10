@@ -1,6 +1,9 @@
 package ro.finsiel.eunis.search.sites.advanced;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
+
 import java.util.Vector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +23,8 @@ public class SitesAdvancedSearch {
     private Vector Operands = new Vector();
     private Vector MinValues = new Vector();
     private Vector MaxValues = new Vector();
+
+    private static final Logger logger = Logger.getLogger(SitesAdvancedSearch.class);
 
     private int resultCount = 0;
 
@@ -182,7 +187,7 @@ public class SitesAdvancedSearch {
             }
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return result;
         }
 
@@ -601,7 +606,7 @@ public class SitesAdvancedSearch {
             }
             con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             System.out.println("SQL = " + SQL);
             return "";
         }

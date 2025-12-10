@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.factsheet.species.NationalThreatWrapper;
 import ro.finsiel.eunis.jrfTables.Chm62edtAbundanceDomain;
 import ro.finsiel.eunis.jrfTables.Chm62edtAbundancePersist;
@@ -42,6 +44,8 @@ import ro.finsiel.eunis.utilities.TableColumns;
  * @author finsiel
  */
 public class SpeciesSearchUtility {
+
+    private static final Logger logger = Logger.getLogger(SpeciesSearchUtility.class);
 
     /**
      * Specifies that the search is used in species' scientific names.
@@ -732,7 +736,7 @@ public class SpeciesSearchUtility {
                 result = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -776,7 +780,7 @@ public class SpeciesSearchUtility {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -824,7 +828,7 @@ public class SpeciesSearchUtility {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return res;
     }

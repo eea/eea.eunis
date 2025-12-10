@@ -93,7 +93,7 @@
     con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
   }
   catch(Exception e) {
-    e.printStackTrace();
+
     return;
   }
 
@@ -778,7 +778,7 @@
         }
     }
   } catch (Exception e) {
-    e.printStackTrace();
+
     //System.out.println(e.toString());
     out.println("<strong>"+cm.cmsPhrase("Could not retrieve list of values")+"</strong>");
     out.println("<br />");

@@ -125,7 +125,7 @@
     		response.sendRedirect(URL);
     		return;
   		} catch(Exception e) {
-    		e.printStackTrace();
+
   		}
   	}
   	WebContentManagement cm = SessionManager.getWebContent();

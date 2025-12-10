@@ -638,7 +638,7 @@ public final class SessionManager implements java.io.Serializable {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return userRights;
     }
@@ -666,7 +666,7 @@ public final class SessionManager implements java.io.Serializable {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return userRoles;
     }

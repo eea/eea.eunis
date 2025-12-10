@@ -83,7 +83,7 @@
         }
         catch(Exception e)
         {
-          e.printStackTrace();
+
           return;
         }
       }
@@ -130,7 +130,7 @@
     }
     catch(Exception e)
     {
-      e.printStackTrace();
+
       return;
     }
 %>

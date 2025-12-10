@@ -23,6 +23,7 @@ import org.apache.commons.lang.StringUtils;
 
 import eionet.rdfexport.RDFExportService;
 import eionet.rdfexport.RDFExportServiceImpl;
+import org.apache.log4j.Logger;
 
 /**
  * @author Risto Alt
@@ -34,6 +35,8 @@ public class RdfFilter implements Filter {
 
     private String identifier = null;
     private String table = null;
+
+    private static final Logger logger = Logger.getLogger(RdfFilter.class);
 
     /**
      * Take this filter out of service.
@@ -82,7 +85,7 @@ public class RdfFilter implements Filter {
                     con.close();
                     return;
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.debug(e, e);
                     throw new ServletException(e.getMessage(), e);
                 }
             }

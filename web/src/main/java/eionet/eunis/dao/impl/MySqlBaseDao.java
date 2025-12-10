@@ -71,7 +71,7 @@ public abstract class MySqlBaseDao {
             conn.commit();
             conn.setAutoCommit(true);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
     }
 
@@ -80,7 +80,7 @@ public abstract class MySqlBaseDao {
             conn.rollback();
             conn.setAutoCommit(true);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
     }
 
@@ -149,7 +149,7 @@ public abstract class MySqlBaseDao {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         } finally {
             closeAllResources(con, pstmt, rs);
         }
@@ -181,7 +181,7 @@ public abstract class MySqlBaseDao {
                 result = rs.getString(1);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
             return "";
         } finally {
             closeAllResources(con, ps, rs);

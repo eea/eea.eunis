@@ -149,7 +149,7 @@ public class SQLUtilities {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             result = "";
         } finally {
             closeAll(con, ps, rs);
@@ -164,7 +164,7 @@ public class SQLUtilities {
         try {
             con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             return null;
         }
         return con;
@@ -201,7 +201,7 @@ public class SQLUtilities {
 
             closeAll(con, ps, rs);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             result = null;
         } finally {
             closeAll(con, ps, rs);
@@ -243,7 +243,7 @@ public class SQLUtilities {
                 result.add(d);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             result = null;
         } finally {
             closeAll(con, ps, rs);
@@ -284,7 +284,7 @@ public class SQLUtilities {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, ps, rs);
         }
@@ -323,7 +323,7 @@ public class SQLUtilities {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, statement, null);
         }
@@ -352,7 +352,7 @@ public class SQLUtilities {
             ps = con.prepareStatement(SQL);
             ps.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, ps, null);
         }
@@ -457,7 +457,7 @@ public class SQLUtilities {
                 result.add(columns);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             result = new ArrayList();
         } finally {
             closeAll(con, ps, rs);
@@ -499,7 +499,7 @@ public class SQLUtilities {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, stmt, rset);
         }
@@ -542,7 +542,7 @@ public class SQLUtilities {
                         + (whereCondition == null || whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition));
             ps.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             result = false;
         } finally {
             closeAll(con, ps, null);
@@ -574,7 +574,7 @@ public class SQLUtilities {
                         + (whereCondition == null || whereCondition.trim().length() <= 0 ? "" : " AND " + whereCondition));
             ps.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             result = false;
         } finally {
             closeAll(con, ps, null);
@@ -608,7 +608,7 @@ public class SQLUtilities {
             ps.execute();
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, ps, null);
         }
@@ -656,7 +656,7 @@ public class SQLUtilities {
 
             ps.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             result = false;
         } finally {
             closeAll(con, ps, null);
@@ -798,8 +798,8 @@ public class SQLUtilities {
                     }
                 }
             }
-        } catch (Exception e) {// e.printStackTrace();
-            e.printStackTrace();
+        } catch (Exception e) {// logger.debug(e, e);
+            logger.debug(e, e);
         } finally {
             closeAll(con, ps, rs);
         }
@@ -1207,7 +1207,7 @@ public class SQLUtilities {
                         + "', CURRENT_TIMESTAMP() ) ");
             ps.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             result = false;
         } finally {
             closeAll(con, ps, null);
@@ -1240,7 +1240,7 @@ public class SQLUtilities {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             return null;
         } finally {
             closeAll(con, ps, rs);
@@ -1295,7 +1295,7 @@ public class SQLUtilities {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             ret = null;
         } finally {
             closeAll(con, ps, rs);
@@ -1319,7 +1319,7 @@ public class SQLUtilities {
         } catch (Exception e) {
             EunisUtil.writeLogMessage("ERROR occured while generating sites latitude/longitude values: " + e.getMessage(), cmd,
                     sqlc);
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, ps, null);
         }
@@ -1372,7 +1372,7 @@ public class SQLUtilities {
                 ps.executeUpdate();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAll(con, ps, rs);
         }

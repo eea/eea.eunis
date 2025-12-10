@@ -1,6 +1,7 @@
 package ro.finsiel.eunis.jrfTables.species.names;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
@@ -8,6 +9,7 @@ import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
 import net.sf.jrf.join.OuterJoinTable;
 import net.sf.jrf.join.joincolumns.StringJoinColumn;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.search.AbstractSearchCriteria;
@@ -47,6 +49,8 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
     private boolean showEUNISInvalidatedSpecies = false;
     private boolean searchSynnonyms = false;
     private boolean searchVernacular = false;
+
+    private static final Logger logger = Logger.getLogger(ScientificNameDomain.class);
 
     /**
      * Normal constructor
@@ -408,7 +412,7 @@ public class ScientificNameDomain extends AbstractDomain implements Paginable {
                 filterSQL.insert(0, " ORDER BY ");
             }
         } catch (InitializationException e) {
-            e.printStackTrace(); // To change body of catch statement use Options | File Templates.
+            logger.debug(e, e);  // To change body of catch statement use Options | File Templates.
         }
         return filterSQL;
     }

@@ -5,6 +5,8 @@ package ro.finsiel.eunis.reports.species.references;
  * Time: 2:25:52 PM
  */
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.exceptions.CriteriaMissingException;
 import ro.finsiel.eunis.exceptions.InitializationException;
 import ro.finsiel.eunis.formBeans.AbstractFormBean;
@@ -31,6 +33,8 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
   private AbstractFormBean formBean = null;
 
   private boolean showInvalidatedSpecies = false;
+
+  private static final Logger logger = Logger.getLogger(TSVSpeciesReferencesReport.class);
 
   /**
    * Constructor.
@@ -105,7 +109,7 @@ public class TSVSpeciesReferencesReport extends AbstractTSVReport
             resultsSpecies = domain.getSpeciesForAReference(book.getId().toString());
           }
           catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
           }
           String species = "";
           if (resultsSpecies != null && resultsSpecies.size() > 0) {

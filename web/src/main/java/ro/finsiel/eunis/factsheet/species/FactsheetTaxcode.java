@@ -1,5 +1,7 @@
 package ro.finsiel.eunis.factsheet.species;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeDomain;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodePersist;
 import ro.finsiel.eunis.jrfTables.species.taxonomy.Chm62edtTaxcodeAllJoinsDomain;
@@ -17,6 +19,8 @@ public class FactsheetTaxcode {
   private String id = null;
   private Vector whatCanFind = new Vector();
   private String levelMax = "";
+
+  private static final Logger logger = Logger.getLogger(FactsheetTaxcode.class);
 
   /**
    * Constructs an new FactsheetTaxcode object.
@@ -122,7 +126,7 @@ public class FactsheetTaxcode {
       try {
         l1 = new Chm62edtTaxcodeAllJoinsDomain().findWhere("A.ID_TAXONOMY ='" + id + "' AND (A.LEVEL = 'CLASS' OR B.LEVEL='CLASS' OR C.LEVEL='CLASS' OR D.LEVEL='CLASS' OR E.LEVEL='CLASS' OR G.LEVEL='CLASS') ");
       } catch (Exception e) {
-        e.printStackTrace();
+        logger.debug(e, e); 
       }
       if (l1 != null && l1.size() > 0)
       {
@@ -152,7 +156,7 @@ public class FactsheetTaxcode {
       {
         l1 = new Chm62edtTaxcodeAllJoinsDomain().findWhere("A.ID_TAXONOMY ='" + id + "' AND (A.LEVEL = 'order' OR B.LEVEL='order' OR C.LEVEL='order' OR D.LEVEL='order' OR E.LEVEL='order' OR G.LEVEL='order') ");
       } catch (Exception e) {
-        e.printStackTrace();
+        logger.debug(e, e); 
       }
       if (l1 != null && l1.size() > 0)
       {
@@ -182,7 +186,7 @@ public class FactsheetTaxcode {
       {
         l1 = new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY<='" + id + "' AND SUBSTRING(ID_TAXONOMY,2,2)='" + id.substring(1, 3) + "' AND (LEVEL='PHYLUM' OR LEVEL='DIVISION') ORDER BY ID_TAXONOMY DESC");
       } catch (Exception e) {
-        e.printStackTrace();
+        logger.debug(e, e); 
       }
       if (l1 != null && l1.size() > 0)
       {
@@ -207,7 +211,7 @@ public class FactsheetTaxcode {
       {
         l1 = new Chm62edtTaxcodeDomain().findWhere("ID_TAXONOMY<='" + id + "' AND SUBSTRING(ID_TAXONOMY,1,1)='" + id.substring(0, 1) + "' AND LEVEL='KINGDOM' ORDER BY ID_TAXONOMY DESC");
       } catch (Exception e) {
-        e.printStackTrace();
+        logger.debug(e, e); 
       }
       if (l1 != null && l1.size() > 0)
       {
@@ -230,7 +234,7 @@ public class FactsheetTaxcode {
       try {
         l1 = new Chm62edtTaxcodeAllJoinsDomain().findWhere("A.ID_TAXONOMY ='" + id + "' AND (A.LEVEL = 'subclass' OR B.LEVEL='subclass' OR C.LEVEL='subclass' OR D.LEVEL='subclass' OR E.LEVEL='subclass' OR G.LEVEL='subclass') ");
       } catch (Exception e) {
-        e.printStackTrace();
+        logger.debug(e, e); 
       }
       if (l1 != null && l1.size() > 0)
       {

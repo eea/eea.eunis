@@ -61,7 +61,7 @@
           </script>
 <%
          }
-  }catch(Exception e){e.printStackTrace();}
+  }catch(Exception e){ }
 %>
 
 <script type="text/javascript" language="JavaScript">
@@ -285,7 +285,7 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
             <%
                 }
               }
-            }catch(Exception e){e.printStackTrace();}
+            }catch(Exception e){ }
             %>
            </select>
            <%=cm.cmsTitle("roles_add_18")%>
@@ -392,7 +392,7 @@ if (users_operation != null && users_operation.equalsIgnoreCase("edit"))
      </table>
     <%
        }
-       } catch(Exception e){e.printStackTrace();}
+       } catch(Exception e){ }
     %>
   </td>
 </tr>

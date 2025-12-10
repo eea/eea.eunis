@@ -139,7 +139,7 @@ public class InternationalStatusForGroupSpecies {
     // }
     // }
     // } catch (Exception e) {
-    // e.printStackTrace();
+    // logger.debug(e, e); 
     // }
     // // a group
     // try {
@@ -152,7 +152,7 @@ public class InternationalStatusForGroupSpecies {
     // }
     // }
     // } catch (Exception e) {
-    // e.printStackTrace();
+    // logger.debug(e, e); 
     // }
     // }
 

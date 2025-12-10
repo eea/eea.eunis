@@ -25,7 +25,7 @@
     con = ro.finsiel.eunis.utilities.TheOneConnectionPool.getConnection();
   }
   catch(Exception e) {
-    e.printStackTrace();
+
     return;
   }
 
@@ -47,7 +47,7 @@
 
   } catch (Exception e) {
     response.setContentType("text/plain;charset=UTF-8");
-    e.printStackTrace();
+
   }
   out.println("</urlset>");
 %>

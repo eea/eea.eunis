@@ -47,7 +47,7 @@
     try
     {
       results = domain.getSpeciesForAReference(null);
-    } catch(Exception e) {e.printStackTrace();}
+    } catch(Exception e) { }
   %>
   <body style="background-color:#ffffff">
   <%     

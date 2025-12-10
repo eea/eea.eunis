@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search.advanced;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
 import java.sql.*;
@@ -12,6 +14,8 @@ import java.sql.*;
  */
 public class CombinedSearch {
     private int SQL_LIMIT = 1000;
+
+    private static final Logger logger = Logger.getLogger(CombinedSearch.class);
 
     /**
      * Ctor.
@@ -85,7 +89,7 @@ public class CombinedSearch {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
             return "";
         } finally {
             SQLUtilities.closeAll(con, ps, rs);

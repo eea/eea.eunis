@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionListener;
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.Settings;
 import ro.finsiel.eunis.search.Utilities;
 import eionet.eunis.util.Constants;
@@ -25,6 +27,8 @@ public class CleanupSessionListener implements HttpSessionListener {
 
     /** Creates a new instance of CleanupSessionListener. */
     public CleanupSessionListener() {}
+
+    private static final Logger logger = Logger.getLogger(CleanupSessionListener.class);
 
     /**
      * Method called by the container when the session is created.
@@ -94,7 +98,7 @@ public class CleanupSessionListener implements HttpSessionListener {
             ps.setString(2, sessionID);
             ps.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             SQLUtilities.closeAll(conn, ps,  null);
         }

@@ -1,11 +1,13 @@
 package ro.finsiel.eunis.jrfTables;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
 import net.sf.jrf.column.columnspecs.IntegerColumnSpec;
 import net.sf.jrf.column.columnspecs.ShortColumnSpec;
 import net.sf.jrf.column.columnspecs.StringColumnSpec;
 import net.sf.jrf.domain.AbstractDomain;
 import net.sf.jrf.domain.PersistentObject;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ import java.util.List;
  * @author finsiel
  **/
 public class Chm62edtSpeciesDomain extends AbstractDomain {
+
+    private static final Logger logger = Logger.getLogger(Chm62edtSpeciesDomain.class);
 
     /**
      * Implements newPersistentObject from AbstractDomain.
@@ -86,7 +90,7 @@ public class Chm62edtSpeciesDomain extends AbstractDomain {
                     "SELECT COUNT(*) FROM " + this.getTableAlias()
                     + " WHERE ID_GROUP_SPECIES='" + groupID.toString() + "' AND VALID_NAME > 0 and TYPE_RELATED_SPECIES='Species'");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e); 
         }
         return result;
     }

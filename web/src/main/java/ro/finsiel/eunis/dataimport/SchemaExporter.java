@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.session.SessionManager;
 import ro.finsiel.eunis.utilities.SQLUtilities;
 
@@ -19,6 +20,8 @@ import ro.finsiel.eunis.utilities.SQLUtilities;
 public class SchemaExporter extends HttpServlet {
 
     private static List<String> errors = null;
+
+    private static final Logger logger = Logger.getLogger(SchemaExporter.class);
 
     /**
      * Overrides public method doPost of javax.servlet.http.HttpServlet.
@@ -119,7 +122,7 @@ public class SchemaExporter extends HttpServlet {
                 response.getWriter().write(s.toString());
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e); 
                 errors.add(e.getMessage());
             }
         } else {

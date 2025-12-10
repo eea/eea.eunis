@@ -85,7 +85,7 @@
             }
             catch ( Exception e )
             {
-              e.printStackTrace();
+
               return;
             } finally {
               SQLUtilities.closeAll(con, ps, rs);

@@ -1,6 +1,8 @@
 package ro.finsiel.eunis.search.sites;
 
 
+import eionet.eunis.dao.impl.MySqlBaseDao;
+import org.apache.log4j.Logger;
 import ro.finsiel.eunis.jrfTables.*;
 import ro.finsiel.eunis.jrfTables.sites.designation_code.DesignationDomain;
 import ro.finsiel.eunis.jrfTables.sites.factsheet.SitesDesignationsDomain;
@@ -21,6 +23,8 @@ public class SitesSearchUtility {
      * Number for sites allowed to be displayed simultaneously in a map.
      */
     public static int SITES_PER_MAP = 300;
+
+    private static final Logger logger = Logger.getLogger(SitesSearchUtility.class);
 
     /**
      * Parse date according to database type.
@@ -411,7 +415,7 @@ public class SitesSearchUtility {
                 result = tempList;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }
@@ -438,7 +442,7 @@ public class SitesSearchUtility {
                 result = tempList;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         }
         return result;
     }

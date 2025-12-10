@@ -141,7 +141,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAllResources(con, ps, rs);
         }
@@ -281,7 +281,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             closeAllResources(con, st, null);
             closeAllResources(con, st2, null);
@@ -360,7 +360,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             if (ps != null) {
                 ps.close();
@@ -397,7 +397,7 @@ public class SpeciesDaoImpl extends MySqlBaseDao implements ISpeciesDao {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e, e);
         } finally {
             if (ps != null) {
                 ps.close();
