@@ -4,9 +4,13 @@ package eionet.eunis.stripes.actions;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import eionet.eunis.util.Constants;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -115,9 +119,12 @@ public class UpdateTemplateActionBean extends AbstractStripesAction {
 
         if (result != null && result.getId() != null && result.getId() == 200
                 && StringUtils.isNotBlank(result.getValue())) {
+
+            String resultPage = result.getValue().replaceAll("https://www\\.eea\\.europa\\.eu/templates/v2/", "/template/");
+
             return getContentManagement().savePageContentJDBC(idPage,
-                    result.getValue(), description, language,
-                    (short) result.getValue().length(), null, true
+                    resultPage, description, language,
+                    (short) resultPage.length(), null, true
             );
         }
         return false;
@@ -144,7 +151,7 @@ public class UpdateTemplateActionBean extends AbstractStripesAction {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.debug(e, e);
                 return false;
             }
             return true;

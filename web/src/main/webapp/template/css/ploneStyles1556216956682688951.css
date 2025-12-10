@@ -1,0 +1,1413 @@
+
+/* - eea-theme.css - */
+@media all {
+/* https://www.eea.europa.eu/portal_css/eea-theme.css?original=1 */
+/* */
+/* */
+/* */
+/* */
+hr {
+border: none 0;
+border-top: 1px solid white;/**/
+height: 0px;
+margin: 0.5em 0 1em 0;
+}
+.eea-dates {
+margin: 1em 1em 1em 0;
+}
+/* */
+/* */
+/* */
+/* */
+#portal-siteactions #siteaction-chooselang .eea-icon {
+color: #FFF;
+}
+#siteaction-contactus {
+font-weight: bold;
+}
+/* */
+#cross-site-top .panel .portlet-subscribtion {
+margin: 0;
+}
+#cross-site-top .panel .portlet-subscribtion .portletFooter {
+margin-bottom: 0;
+}
+#cross-site-top .panel .portlet,
+#cross-site-top .panel .portletHeader {
+background: transparent;
+}
+#tip-siteaction-chooselang,
+#tip-siteaction-chooselang-menu {
+width: 145px;
+}
+#tip-siteaction-chooselang li,
+#tip-siteaction-chooselang-menu li {
+display: list-item;
+margin: 0;
+text-align: left;
+}
+#tip-siteaction-subscriptions,
+#tip-siteaction-subscriptions-menu {
+width: 240px;
+}
+#tip-siteaction-contactus,
+#tip-siteaction-contactus-menu {
+font-size: 125%;
+width: 420px;
+}
+#tip-externalsites-networks, #tip-externalsites-etcssites {
+width: 400px;
+left: 0 !important;
+}
+/* */
+.moreLink {
+border: 0 !important;
+display: inline-block;
+padding-left: 20px;
+height: 18px;
+font-size: 11px;
+line-height: 1.6;
+position: relative;
+}
+.moreLink:before {
+content: "\f138";
+font-family: FontAwesome;
+font-size: 16px;
+color: gray;
+position: absolute;
+margin-left: -18px;
+top: -3px;
+}
+/* */
+/* */
+#portal-siteactions > #siteaction-networks, #portal-siteactions > #siteaction-search {
+display: none;
+}
+/* */
+.portlet-subscription .eea-icon-lg {
+line-height: 0.75em;
+width: 20px;
+}
+.eea-icon-facebook-square {
+color: #596EA0;
+}
+.eea-icon-twitter-square {
+color: #1da1f2;
+}
+.eea-icon-rss-square {
+color: #ED8628;
+}
+.eea-icon-youtube-square {
+color: #DB2B28;
+}
+/* */
+.mini-header #portal-header {
+height: 100%;
+}
+/* */
+#portal-searchbox .gsc-clear-button {
+display: none;
+}
+.panel #portal-searchbox {
+float: none;
+clear: both;
+margin: 1em;
+width: 400px;
+overflow: inherit;
+}
+#portal-searchbox a {
+color: #346f83;
+border: none;
+font-size: 85%;
+}
+#portal-searchbox .gsc-input-query {
+padding: 0 0.5em;
+}
+#portal-searchbox .gsc-input-query:focus {
+background: #FFF none !important;
+}
+#portal-searchbox .gsc-input {
+padding: 0;
+border: 1px solid #BBB;
+}
+#portal-searchbox .searchButton:focus {
+background-color: #f6a800;
+}
+#portal-searchbox .gsc-cursor-current-page {
+color: #FFF;
+}
+#portal-searchbox .gsc-results-wrapper-overlay {
+height: 96%;
+top: 2%;
+width: 90%;
+left: 5%;
+}
+#portal-searchbox .gsc-search-box {
+border-style: none;
+border-width: 0;
+border-spacing: 0 0;
+width: 100%;
+margin-bottom: 2px;
+}
+#portal-searchbox .autocomplete-items {
+position: absolute;
+border: 1px solid #d4d4d4;
+border-bottom: none;
+border-top: none;
+z-index: 9999;
+top: 100%;
+left: 0;
+right: 0;
+}
+#portal-searchbox .autocomplete-item {
+padding: 10px;
+cursor: pointer;
+background-color: #fff;
+border-bottom: 1px solid #d4d4d4;
+overflow: hidden;
+}
+#portal-searchbox .autocomplete-active {
+background-color: #e9e9e9 !important;
+}
+#portal-searchbox .gsc-input-box {
+position: relative;
+}
+#portal-header {
+overflow: inherit;
+}
+.gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
+border-color: #006699;
+background-color: #006699;
+background-image: none;
+filter: none;
+border: none;
+padding: 6px 27px;
+text-align: center;
+color: #fff;
+}
+td.gsc-search-button {
+width: 1%;
+}
+.search_glossary_link, .search_advanced_link {
+font-size: 11px;
+}
+.search_glossary_link:hover, .search_advanced_link:hover {
+text-decoration: none;
+}
+/* */
+/* */
+.breadcrumbSeparator {
+font-size: 120%;
+}
+/* */
+#region-content {
+position: relative;
+}
+#content-core {
+clear:both;
+}
+/* */
+.flowplayer a {
+display: inline;
+}
+.visualPadding {
+padding: 0 1em 1em 1em;
+}
+#portal-column-two .visualPadding {
+padding: 0 1em 1em 0;
+}
+/* */
+.documentActions li, .languageCodes li {
+display: inline-block !important;
+list-style: none none;
+margin: 0;
+padding: 0;
+}
+.languageCodes {
+display: block;
+}
+#languageCodes {
+max-width: 80%;
+}
+#article-language .eea-icon {
+line-height: 0.75em;
+color: #888;
+}
+.width-full #article-language {
+min-width: 180px;
+}
+/* */
+/* */
+/* */
+a.downloading {
+background: transparent url(/template/icon-downloading.gif) no-repeat center center;
+}
+a.downloading img {
+visibility: hidden;
+}
+.downloading-lock::before {
+content: '';
+display: block;
+width: 100%;
+height: 100%;
+position: absolute;
+right: 0;
+z-index: 9999;
+}
+/* */
+#region-content .documentExportActions ul, .documentExportActions ul {
+list-style: none;
+padding: 0;
+margin: 1em -0.15em 0 0;
+}
+#region-content ul,
+#chooselang {
+list-style: square inside url(/template/bullet.gif);
+}
+#region-content .documentExportActions li, .documentExportActions li {
+display: inline;
+}
+.eea-footer-right .link-pdf,
+.eea-footer-right .link-epub,
+#region-content .documentExportActions .link-pdf,
+#region-content .documentExportActions .link-epub,
+.documentExportActions .link-pdf,
+.documentExportActions .link-epub {
+background: none;
+padding: 0;
+margin: 0;
+}
+#content .eea-footer-right a.download-pdf,
+#content .eea-footer-right a.download-epub {
+border-bottom: none !important;
+}
+#content .documentExportActions a {
+border-bottom: none !important;
+text-align: center;
+}
+.documentExportActions .export-action-title {
+display: block;
+}
+.documentExportActions .eea-icon::before {
+margin: 0 0.15em;
+}
+/* */
+.eea-available-version,
+#plone-document-byline + .portalMessage,
+#plone-document-byline + div {
+clear: both;
+}
+#content .documentByLine {
+max-width: 80%;
+text-align: left;
+}
+.portaltype-fiche .link-presentation {
+display: none;
+}
+.eea-epub-download,
+.eea-pdf-download {
+font-size: 150%;
+}
+div.eea-pdf-overlay {
+z-index: 1031;
+}
+/* */
+/* */
+.documentByLine {
+font-size: 85%;
+font-weight: normal;
+color: #808285;
+margin: 0 0 0.5em 0;
+}
+.documentByLine .portalType, .listHead {
+font-weight: bold;
+}
+.documentByLineAuthor:nth-child(2) span:after,
+.documentByLineAuthor a:after, .documentByLineContributor a:after {
+content: ',';
+}
+.documentByLineAuthor:nth-child(2) a:after,
+.documentByLineAuthor:last-child a:after, .documentByLineContributor:last-child a:after {
+content: '';
+}
+/* */
+#viewlet-below-content {
+clear: both;
+}
+/* */
+#relatedItems  {
+margin: 0 0 0 0;
+clear: both;
+overflow: hidden;
+}
+/* */
+#relatedItems  h3 {
+clear: both;
+}
+/* */
+/* */
+.pagination .current:before {
+content: "[";
+}
+.pagination .current:after {
+content: "]";
+}
+.page:before,
+.page:after {
+display: table;
+content: " ";
+}
+.page:after {
+clear: both;
+}
+.spinner {
+text-align: center;
+}
+/* */
+.contentActions {
+clear: both;
+}
+/* */
+#content .callout {
+font-size: 12px;
+}
+/* */
+/* */
+ul.visualNoMarker,
+ol.visualNoMarker {
+list-style: none none;
+margin: 0.5em 0 0 0;
+line-height: 1em;
+}
+/* */
+.link-plain {
+background-image: none;
+padding: 0;
+}
+.link-parent {
+display: block;
+background: transparent url(/template/arrowUp.gif) 4px 5px no-repeat;
+padding: 1px 0 10px 16px;
+font-size: 85%;
+text-decoration: none;
+}
+.link-external {
+background: transparent url(/template/link_icon.gif) 3px 1px no-repeat;
+padding: 1px 0 1px 19px;
+}
+/* */
+#content span.link-external  {
+background: none;
+padding: 0;
+}
+.link-feed, .link-rss, .link-rdf, .link-xml {
+background: transparent url(/template/rss.gif) 0 1px no-repeat;
+padding: 1px 0 1px 18px;
+}
+.link-comment {
+background: transparent url(/template/discussionitem_icon.gif) center left no-repeat;
+padding: 1px 0 1px 16px !important; /* */
+}
+.link-anchor {
+color: #808285;
+text-decoration: none;
+font-weight: normal;
+}
+.link-pdf {
+background: transparent url(/template/pdf.png) 0 50% no-repeat;
+padding: 2px 0 2px 16px;
+}
+.link-xlb, .link-xls, .link-xlt, .link-csv, .link-tsv {
+background: transparent url(/template/xls.png) 0 50% no-repeat;
+padding: 2px 0 2px 20px;}
+.link-json {
+background: transparent url(/template/script_code.png) 0 50% no-repeat;
+padding: 2px 0 2px 20px;}
+.link-exhibit {
+background: transparent url(/template/script_code_red.png) 0 50% no-repeat;
+padding: 2px 0 2px 20px;}
+.link-table {
+background: transparent url(/template/table.png) 0 50% no-repeat;
+padding: 2px 0 2px 20px;}
+/* */
+/* */
+.image-left {
+float: left;
+clear: both;
+margin:  2em 1em 0.5em 0;
+border: 0;
+}
+.image-inline {
+float: none;
+}
+.image-right {
+float: right;
+clear: both;
+margin: 0.5em;
+border: 0;
+}
+/* */
+/* */
+.showOnPrint {
+display: none;
+}
+.mceContentBody .showOnPrint {
+display: block;
+}
+/* */
+/* */
+/* */
+#stats td {
+padding-right: 1em;
+}
+/* */
+.ui-widget-content a {
+color: #346f83;
+}
+.frontpage .progressbar-viewlet,
+.template-datamaps_view .progressbar-viewlet
+{
+display: none;
+}
+/* */
+.userrole-anonymous .metadata ~ .warningMessage {
+display: none;
+}
+/* */
+.fiche-copyright {
+display: none;
+}
+/* */
+table.invisible {
+visibility: visible;
+}
+.template-collection-pdf-body h4.figureHeading {
+margin: 0 0 1.5em 0;
+}
+.portaltype-assessment #parent-fieldname-description {
+display: none;
+}
+/* */
+div#original_chart_div {
+overflow: hidden;
+}
+#c4_option_c4_public-administrative-document {
+display: none !important;
+}
+/* */
+.reply-to-comment-button {
+display: inline !important;
+}
+.figures-download-links > li {
+display: list-item;
+}
+/* */
+.no-bg:after {
+background-image: none !important;
+content: "" !important;
+}
+.qrbox {
+display: none;
+}
+.qrbox img {
+width: 100%;
+height: 100%;
+}
+#content dl.publicationMessage a {
+border: 0;
+color: #346f83;
+}
+/* */
+/* */
+/* */
+
+}
+
+
+/* - bootstrap_fixes.css - */
+/* https://www.eea.europa.eu/portal_css/bootstrap_fixes.css?original=1 */
+/* */
+/* */
+body {
+line-height: normal;
+}
+sup, sub {
+font-size: smaller;
+top: inherit;
+}
+a:hover, a:focus {
+text-decoration: none;
+outline: 0;
+}
+#printLogo {
+height: 71px;
+}
+dl {
+margin-bottom: 0;
+}
+dt, dd {
+line-height: inherit;
+}
+/* */
+input[type="radio"], input[type="checkbox"] {
+margin: 0;
+}
+label {
+display: inline;
+}
+/* */
+.ui-draggable {
+z-index: 1031;
+}
+/* */
+/* */
+#relatedItems .photoAlbumEntry,
+#faceted-results .photoAlbumEntry
+{
+height: 155px;
+}
+/* */
+/* */
+.controls, .controls-sm {
+height: 40px;
+}
+/* */
+blockquote {
+width: 78%;
+}
+/* */
+.faceted-portlet-widget fieldset {
+margin: 1em 0;
+padding: 0;
+}
+/* */
+#visual-portal-wrapper .eea-tabs.two-rows > li > a {
+height: 50px;
+}
+/* */
+#fancybox-content, #fancybox-wrap,
+/* */
+.eea-tooltip-markup-top, .eea-tooltip-markup-bottom, .eea-tooltip-markup-left, .eea-tooltip-markup-right,
+/* */
+.portalMessage,
+/* */
+.faceted-add-button .ui-icon,
+/* */
+.slick-header-column.ui-state-default, .slick-cell,
+/* */
+.daviz-tutorials-main-playlist-title, .daviz-tutorials-main-playlist-title-label,
+.daviz-tutorials .daviz-tutorials-videos .daviz-tutorials-videoitem
+{
+-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+}
+/* */
+input.removecriteria {
+margin-left: 0.5em;
+}
+.ArchetypesQueryWidget .multipleSelectionWidget dt {
+height: 2.6em;
+}
+/* */
+#uber-view-switch a {
+height: 55px;
+}
+/* */
+.annotator-erratum .erratum-quote {
+max-height: 3em; /* */
+}
+/* */
+
+
+/* - eea-responsive.css - */
+/* https://www.eea.europa.eu/portal_css/eea-responsive.css?original=1 */
+/* */
+/* */
+/* */
+/* */
+@media screen and (max-width: 320px) {
+.eea-accordion-panels table {
+font-size: 0.7em; }
+ul.social-buttons > li {
+padding: 0 2px; }
+#content .action-items ul {
+margin-left: 0; }
+#faceted-text-search input[type="text"] {
+font-size: 15px;
+width: 73%; }
+.faceted-results {
+padding: 0 0.5em 0 0.5em; }
+.eea-list-columns {
+padding: 0 1em 0 0.5em;
+float: none;
+display: inline-block; }
+.eea-three-columns {
+width: 48.3%; }
+#panel-tab-regions-countries .eea-list-columns:nth-child(3) {
+margin-left: 10em; }
+/* */
+.photoAlbumEntry {
+width: 120px; }
+.photoAlbumEntry a {
+height: 100%;
+width: 100%;
+padding: 5px; }
+.photoAlbumEntryTitle {
+height: 5em;
+width: 100%; } }
+@media screen and (width: 360px) {
+ul.social-buttons > li {
+padding: 0 8px; } }
+@media screen and (max-width: 360px) {
+.filter-topic {
+width: 69%; }
+.eea-list-columns {
+padding: 0 1em 0 0.5em; } }
+@media screen and (min-width: 361px) and (max-width: 479px) {
+.filter-topic {
+width: 74%; }
+#faceted-text-search input[type="text"] {
+width: 77%; } }
+@media screen and (max-width: 479px) {
+#languageCodes {
+max-width: 40% !important;
+margin-left: 0 !important; } }
+@media screen and (max-width: 480px) {
+#whatsnew-gallery .tileImage {
+display: none; }
+#content ul.gallery-layout-selection {
+display: none; }
+/* */
+#keyfacts-slider dl {
+min-height: 250px; }
+#megatopics-area {
+display: block;
+flex-wrap: nowrap;
+width: 100%; }
+.portlet-megatopic img {
+width: 100%; }
+.portlet-megatopic {
+display: block;
+flex: none;
+width: 100%; } }
+@media screen and (max-height: 480px) and (orientation: landscape) {
+.navbar-fixed-top .navbar-collapse,
+.navbar-fixed-bottom .navbar-collapse {
+max-height: 300px; }
+.filter-topic {
+width: 80%; }
+.featured-highlight-title {
+width: 58%; } }
+@media screen and (min-width: 481px) {
+.featured-highlight-title {
+width: 45%; }
+.featured img {
+max-width: 130px !important; } }
+/* */
+@media screen {
+.template-dc_view #content-core {
+position: static; }
+.template-dc_view #content {
+position: relative; } }
+@media screen and (min-width: 480px) and (max-width: 627px) {
+#content #languageCodes {
+max-width: 50%;
+margin-left: 0; } }
+@media screen and (min-width: 628px) and (max-width: 767px) {
+#content #languageCodes {
+max-width: 60%; } }
+@media screen and (max-width: 767px) {
+#eea-above-columns .plone-breadcrumb {
+margin-top: 0;
+margin-bottom: 0; }
+#eea-above-columns .plone-breadcrumb ol {
+line-height: 2.5em; }
+#portal-personaltools-wrapper,
+.portal-logo,
+#siteaction-login {
+display: none !important; }
+#header-holder .navbar-default {
+will-change: transform; }
+#header-holder .navbar-collapse {
+background-color: #006699; }
+#header-holder .navbar-toggle {
+margin-top: 1em; }
+#cross-site-top {
+display: none; }
+#portal-top {
+margin-top: 1.3em;
+background-color: transparent; }
+#portal-top .eea-accordion-panels {
+width: 100%;
+border: 0; }
+#portal-top .eea-accordion-panels table {
+width: 100%; }
+#portal-top .eea-accordion-title, #portal-top .eea-accordion-panel > h2 {
+font-size: 100%;
+background-color: #006699;
+color: #FFF;
+border: 0;
+padding: 0;
+border-bottom: 1px solid gray; }
+#portal-top .eea-accordion-panel a {
+color: #346f83;
+border-bottom: 0;
+padding-bottom: 0;
+padding-top: 0;
+font-weight: normal; }
+.mini-header #portal-header {
+display: block !important; }
+.mini-header #portal-header > .networkSites {
+display: none; }
+.networkSites,
+.networkSites .portletFooter,
+.networkSites > .col-md-6,
+.networkSites > .col-sm-6 {
+padding: 0; }
+#portal-globalnav {
+display: flex;
+flex-direction: column; }
+#portaltab-europe {
+order: 1; }
+#portaltab-media {
+margin: 0; }
+#portal-globalnav .current a {
+padding-left: 20px; }
+#portal-globalnav .current a:after {
+top: 50% !important;
+left: 0 !important;
+border-left-color: #fff;
+border-top-color: transparent !important;
+margin-left: 0 !important;
+margin-top: -10px !important; }
+#secondary-portaltabs {
+margin: 0;
+width: 100%; }
+#portal-globalnav .current a {
+padding-left: 20px; }
+#portal-globalnav .current a:after {
+top: 50% !important;
+left: 0 !important;
+border-left-color: #fff;
+border-top-color: transparent !important;
+margin-left: 0 !important;
+margin-top: -10px !important; }
+#secondary-portaltabs .portlet {
+margin-bottom: 0;
+padding: 0; }
+#secondary-portaltabs .portlet dt, #secondary-portaltabs .portlet ul {
+margin: 0;
+padding: 0; }
+#secondary-portaltabs .pane, #secondary-portaltabs .portlet {
+background-color: #FFF; }
+#secondary-portaltabs .eea-siteaction {
+display: none !important; }
+#siteaction-user,
+#siteaction-search {
+display: none; }
+#portaltab-europe {
+margin-top: 1em;
+padding-bottom: 2em;
+width: 100%;
+padding-right: 90px;
+background: url("/template/eu-flag.png") no-repeat right -5px; }
+#portaltab-europe a {
+text-align: left;
+margin-top: 1em; }
+#portaltab-europe a {
+padding: 0.5em 0 2em 0;
+border-bottom: 0;
+text-align: left; }
+.panel {
+max-width: 335px;
+left: 20px !important; }
+.panel-top {
+left: 0 !important; }
+.panel-content {
+min-width: 320px; }
+#chooselang {
+-webkit-column-count: 2;
+-moz-column-count: 2;
+column-count: 2; }
+#chooselang li {
+display: list-item;
+list-style: square inside url("/template/bullet.gif"); }
+#portal-externalsites a, #portal-siteactions a {
+display: block;
+padding: 0.5em 0; }
+#portal-externalsites, #portal-siteactions,
+#secondary-portaltabs,
+#portal-searchbox,
+.LSBox {
+float: none; }
+#portal-externalsites li, #portal-siteactions li {
+display: block;
+text-align: left; }
+#portal-header {
+height: 100%;
+margin-bottom: 1em; }
+#portal-logo-link {
+display: none; }
+/* */
+.site-cs #printLogo,
+.site-fr #printLogo,
+.site-hu #printLogo {
+max-height: 51px; }
+.site-es #printLogo,
+.site-el #printLogo,
+.site-sk #printLogo {
+max-height: 53px; }
+.site-mt #printLogo,
+.site-pl #printLogo,
+.site-ru #printLogo {
+max-height: 55px; }
+#printLogo {
+max-height: 60px;
+max-width: 70%;
+float: left;
+padding: 0.5em;
+height: auto; }
+#portal-searchbox {
+margin-top: 0;
+text-align: left; }
+#portal-searchbox input[type="text"] {
+width: 100%; }
+#portal-searchbox a, #portal-searchbox label {
+color: #FFF;
+margin: 0; }
+#portal-searchbox .searchButton {
+display: none; }
+.LSBox {
+padding-right: 0; }
+.LSBox .searchSection {
+left: 0;
+background-color: #006699; }
+#portal-searchbox {
+display: block !important;
+width: 100%; }
+#portal-searchbox input.searchButton {
+margin-left: 0; }
+#globalnav-holder, #portal-globalnav {
+height: inherit; }
+.mini-header #globalnav-holder {
+border: 0; }
+#portal-globalnav > li > a {
+padding: 0.5em 0;
+line-height: 2em;
+width: 100%; }
+.portal-globalnav li a {
+border-bottom: 1px solid gray; }
+#portal-globalnav a:hover:after, #portal-globalnav .eea-nav-current a:after, .mini-header #portal-globalnav .eea-nav-current a:hover:after {
+top: 14px;
+left: -1%;
+border-left-color: #FFF;
+border-top-color: transparent;
+margin-left: -11px; }
+#portal-column-content {
+margin-top: 60px; }
+.frontpage #content {
+margin-bottom: 0; }
+.section-soer-2015 #portal-column-two {
+margin-top: 92px; }
+.column-area,
+.right-column-area {
+float: none;
+width: 100%;
+flex-basis: 100%;
+padding: 0 0 1em 0;
+margin-bottom: 1em; }
+#articles-area {
+margin-top: 2em;
+padding: 0; }
+#promo-gallery-content {
+height: 100%; }
+#promo-gallery-content-sm li img {
+width: 100%; }
+/* ****/
+#right-area, #left-area {
+float: none;
+width: 100%;
+overflow: auto; }
+.faceted-form .right-area-js {
+margin-right: 0; }
+.left-area-js {
+margin-left: 0; }
+#faceted-form .eea-accordion-panel {
+margin: 0;
+padding-bottom: 0;
+background-color: #FFF; }
+#faceted-form legend {
+display: none; }
+.eea-section {
+-webkit-transition: all .25s ease-out;
+-o-transition: all .25s ease-out;
+-moz-transition: all .25s ease-out;
+transition: all .25s ease-out;
+-webkit-overflow-scrolling: touch;
+/* */
+left: 100%;
+right: inherit;
+will-change: transform;
+-webkit-transform: translate3d(0, 0, 0); }
+.eea-section .eea-accordion-panels {
+margin-top: 65px;
+overflow: auto;
+border: 0; }
+.eea-section .eea-accordion-title {
+background-color: #006699;
+color: #FFF;
+border: 0;
+border-bottom: 1px solid gray; }
+.eea-section .eea-accordion-title:hover {
+background-color: #006699; }
+.eea-section .eea-accordion-title.current {
+background-color: #0077b3; }
+.eea-right-section-active {
+left: 10% !important; }
+.eea-right-section {
+width: 90% !important;
+position: fixed;
+right: 100%;
+top: 0;
+overflow: auto;
+z-index: 1000;
+height: 100%;
+background-color: #006699; }
+.eea-right-section-slider {
+position: fixed;
+top: 50%;
+display: table;
+right: 0;
+left: inherit;
+z-index: 1000; }
+.eea-right-section-slider .eea-icon:before {
+margin: 0;
+color: #006699; }
+.eea-right-section-slider-active {
+right: 90%;
+z-index: 1000;
+height: 100%;
+top: 5%;
+background-color: black;
+opacity: 0.5;
+width: 10%; }
+.eea-right-section-slider-active .eea-icon {
+display: none; }
+/* ****/
+#whatsnew-gallery .tileBody, #whatsnew-gallery .tileFooter {
+display: none; }
+#viewlet-below-content .standalone {
+white-space: pre-wrap; }
+#eea-above-columns {
+margin-top: 70px; } }
+@media screen and (min-width: 481px) and (max-width: 860px) {
+#megatopics-area {
+display: block;
+flex-wrap: nowrap;
+width: 100%; }
+.portlet-megatopic img {
+width: 100%;
+height: 150px; }
+.portlet-megatopic ul {
+height: auto; }
+.portlet-megatopic {
+display: block;
+float: left;
+padding-right: 2px;
+flex: none;
+width: 50%; } }
+@media screen and (max-width: 768px) {
+#visual-portal-wrapper {
+overflow: auto; }
+#portal-columns {
+min-width: 100% !important; }
+#portal-column-content, #portal-column-two {
+float: none;
+left: 0;
+margin: 0;
+padding: 0 15px 1.5em 15px;
+min-width: 100%;
+width: 100%; }
+.frontpage #region-content,
+#portal-column-two {
+padding: 0; }
+#portal-column-two {
+margin-top: 1em; }
+.navbar-collapse {
+width: 100%; }
+.userrole-anonymous .documentFirstHeading {
+padding-right: 0; }
+#article-language {
+margin-top: 0;
+margin-bottom: 7px;
+position: relative;
+right: 0; }
+/* */
+#portal-column-content {
+padding: 0; }
+#region-content {
+padding: 0.5em; }
+/* */
+.template-gis_view .content-header,
+.template-gis_view .plone-breadcrumb,
+.template-gis_view .documentFirstHeading,
+.template-gis_view .documentByLine,
+.template-gis_view .documentDescription {
+display: none; }
+/* */
+#portal-colophon .colophonWrapper, .colophon-middle {
+text-align: center; }
+.colophon-left, .colophon-right, .colophon-right span {
+width: 100%;
+float: none; }
+.colophon-right img {
+float: none; }
+.colophon-right {
+margin-top: 1em; }
+.colophonWrapper {
+display: block; }
+.colophon-middle {
+display: block;
+margin: 1em; }
+.template-soer2015_frontpage .eea-row {
+margin-left: 0; }
+.template-soer2015_frontpage .eea-accordion-panels.eea-accordion-panels-soer .pane {
+padding: 10px; }
+.template-soer2015_frontpage .eea-icon:before {
+margin: 0 .2em; }
+.template-soer2015_frontpage #portlet-followus {
+margin: 2em; } }
+@media screen and (width: 768px) {
+.right-column-area {
+width: 41%;
+flex-basis: 41%; } }
+@media screen and (min-width: 768px) {
+#secondary-portaltabs .eea-accordion-panels,
+#portal-logo-link-header {
+display: none; }
+.mini-header #portal-searchbox .searchSection {
+display: none; }
+.navbar-toggle {
+display: none; }
+.eea-right-section-slider {
+display: none; }
+.right-area-js {
+padding: 0 1.5em 0 0;
+/**/ }
+.left-area-js {
+padding: 0 0.5em;
+/**/ }
+#faceted-form .eea-accordion-title, #faceted-form .eea-faceted-filter {
+display: none; }
+#faceted-form .eea-accordion-panels {
+border: 0;
+overflow: auto; }
+#faceted-form .pane {
+display: block !important;
+padding: 0; }
+.eea-tabs-panel .eea-accordion-title {
+display: none; }
+.eea-tabs-panel .pane {
+display: block !important; }
+#header-holder .navbar.hideShadow {
+box-shadow: none;
+border: 0; }
+.template-dc_view .content-header {
+width: 58.5%; }
+#portal-globalnav #siteaction-networks-menu {
+min-width: 125px; }
+.template-dc_view .right-column-area {
+position: absolute;
+right: 0;
+top: 0; } }
+@media screen and (min-width: 768px) and (max-width: 800px) {
+.col-sm-6.bordered-left:before {
+left: -1%; }
+#portaltab-europe {
+padding-right: 95px;
+width: 195px;
+background: url("/template/eu-flag.png") no-repeat right -5px; }
+#portaltab-europe a {
+margin-top: 7px;
+padding: 1.3em 0 !important; }
+.template-soer2015_frontpage .column-area {
+padding-left: 0;
+width: 61%;
+flex-basis: 61%; }
+.template-soer2015_frontpage .right-column-area {
+width: 39%;
+flex-basis: 39%; }
+#visual-portal-wrapper .eea-tabs.eea-tabs-soer > li {
+width: 20%;
+margin-right: 0; }
+#visual-portal-wrapper .eea-tabs.eea-tabs-soer > li > a {
+padding: 0.8em 1em 1em 0.8em; }
+.photoAlbumEntry {
+width: 127px; } }
+@media screen and (min-width: 768px) and (max-width: 910px) {
+#portaltab-europe {
+padding-right: 95px;
+width: 200px; }
+.mini-header #portal-globalnav {
+font-size: 90%; }
+.mini-header #portal-header {
+height: 100%;
+margin: 2em auto; }
+#portal-globalnav > li > a {
+padding: 1em 0.5em; }
+#globalnav-holder #portal-globalnav {
+padding-right: 0 !important; }
+#portaltab-europe a {
+margin-top: 3px !important;
+padding: 1.3em 0 !important; } }
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+#portal-searchbox {
+margin: 25px 0.5em 0 0; } }
+@media screen and (min-width: 768px) {
+.mini-header #secondary-portaltabs > li > a {
+padding: 0 1em; }
+.mini-header .siteaction-title {
+display: none; }
+#siteaction-networks-menu .siteaction-title {
+display: inline-block; } }
+@media screen and (min-width: 961px) {
+#visual-portal-wrapper, #portal-header {
+min-width: 995px;
+max-width: 1024px; }
+#portal-header.eea-miniheader-element {
+height: 100%;
+font-size: 115%;
+margin: 2em auto;
+clear: none; } }
+@media screen and (max-width: 1023px) {
+.mini-header #tip-externalsites-networks .networkSites,
+.mini-header #portal-globalnav #portaltab-eeahome {
+display: none; } }
+@media screen and (max-width: 1024px) {
+.frontpage #portal-columns,
+.frontpage #portal-column-content,
+.template-datamaps_view #portal-columns,
+.template-datamaps_view #portal-column-content,
+.template-soer2015_frontpage #portal-columns,
+.template-soer2015_frontpage #portal-column-content,
+.template-dc_view #portal-columns,
+.template-dc_view #portal-column-content,
+.template-facetednavigation_view #portal-columns,
+.template-facetednavigation_view #portal-column-content {
+min-width: inherit; }
+.frontpage #visual-portal-wrapper,
+.template-datamaps_view #visual-portal-wrapper,
+.template-soer2015_frontpage #visual-portal-wrapper,
+.template-dc_view #visual-portal-wrapper,
+.template-facetednavigation_view #visual-portal-wrapper {
+overflow: hidden; }
+.bordered-left:before {
+left: -5%; } }
+.fullwidth #portal-globalnav,
+.fullwidth #portal-header,
+.fullwidth #visual-portal-wrapper {
+max-width: 100%; }
+.fullwidth #portal-columns {
+min-width: 100%; }
+@media screen and (min-width: 1024px) {
+.mini-header #visual-portal-wrapper {
+overflow: hidden; }
+#portal-globaltab {
+font-size: 120%; } }
+@media screen and (width: 1024px) {
+#portaltab-europe a {
+padding: 1.1em 0; }
+#portaltab-europe {
+font-size: 70%; } }
+@media screen and (min-width: 1025px) {
+.fullwidth #portal-header,
+.fullwidth #secondary-portaltabs {
+padding-right: 1em; }
+.mini-header-expander:before {
+-webkit-transform: perspective(1px) rotateX(-1deg);
+-ms-transform: perspective(1px) rotateX(-1deg);
+-o-transform: perspective(1px) rotateX(-1deg);
+transform: perspective(1px) rotateX(-1deg); } }
+/* */
+/* */
+/* */
+
+
+/* - ++resource++collective.z3cform.datagridfield/datagridfield.css - */
+@media screen {
+/* https://www.eea.europa.eu/portal_css/++resource++collective.z3cform.datagridfield/datagridfield.css?original=1 */
+.datagridwidget-table-view {
+width: 100%;
+border: 1px solid #666;
+background: none repeat scroll 0 0 #EEE;
+}
+.datagridwidget-table-view .header {
+font-weight: bold;
+background: none repeat scroll 0 0 #DDD;
+color: #666;
+padding: 2px;
+font-size: 1.1em;
+text-align: left;
+}
+.datagridwidget-row {
+vertical-align: top;
+}
+.datagridwidget-cell input[type="text"] {
+padding: 1px;
+}
+.datagridwidget-cell input, .datagridwidget-cell select, .datagridwidget-cell textarea {
+border: 1px solid #CCC;
+}
+.datagridwidget-cell > input:only-child { width: 99%; }
+.datagridwidget-cell div.error {
+color:red;
+font-weight:bold;
+}
+.datagridwidget-empty-row {
+/* */
+display: none;
+}
+/* */
+.datagridwidget-cell {
+vertical-align: bottom;
+padding: 1px;
+}
+.datagridwidget-manipulator {
+width: 16px;
+text-align: center;
+padding-bottom: 4px;
+margin: 0;
+vertical-align: bottom;
+}
+.datagridwidget-manipulator img {
+cursor: pointer;
+}
+.datagridwidget-hidden-data {
+display: none;
+}
+/* */
+.auto-append  > .datagridwidget-manipulator.delete-row img,
+.auto-append  > .datagridwidget-manipulator.move-up img,
+.auto-append  > .datagridwidget-manipulator.move-down img,
+.auto-append  > .datagridwidget-manipulator.insert-row img {
+display: none;
+}
+/* */
+.minimum-row  > .datagridwidget-manipulator.insert-row img {
+display: block;
+}
+.datagridwidget-body-non-auto-append[data-many-rows = "true"] .datagridfield-last-filled-row > .datagridwidget-manipulator.move-down img,
+.datagridwidget-body-non-auto-append[data-many-rows = "true"] .datagridfield-first-filled-row > .datagridwidget-manipulator.move-up img {
+display: block;
+}
+/* */
+.datagridfield-first-filled-row > .datagridwidget-manipulator.move-up img {
+display: none !important;
+}
+/* */
+.datagridfield-last-filled-row > .datagridwidget-manipulator.move-down img {
+display: none !important;
+}
+.datagridwidget-cell input {
+background: white;
+background-image: none;
+}
+.datagridwidget-table-view-block {
+border-collapse: collapse;
+}
+.datagridwidget-table-view-block thead {
+display: none;
+}
+.datagridwidget-table-view-block .datagridwidget-row {
+border-bottom: 1px solid black;
+}
+.datagridwidget-table-view-block td {
+vertical-align: top;
+}
+.datagridwidget-block-edit-cell {
+width: auto;
+}
+.datagridwidget-table-view-block .datagridwidget-manipulator {
+width: 16px;
+}
+.datagridwidget-block {
+padding: 0.5em;
+}
+.datagridwidget-block-edit-cell .error {
+background-color: #FFDDCC;
+border: 1px solid red;
+margin: 1em 0;
+padding: 0.5em;
+}
+}
+
+
+/* - ploneCustom.css - */
+/* https://www.eea.europa.eu/portal_css/ploneCustom.css?original=1 */
+/* */
+/* */
+/* */
+/* */
+.row #commenting textarea, .row .discussion textarea {
+height: 10em;
+}
+#formfield-form-widgets-homepages {
+display:none;
+}
+.kssattr-formname-manage-linkeddata .formControls {
+display:none;
+}
+.list-inline li {
+display: inline !important;
+}
+.publicationOrder {
+margin: 0;
+}
+.img_wrap > img {
+left: 0 !important;
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+.template-themes_view #region-content {
+margin: 0 -1.5em;
+}
+#megatopics-area .portlet {
+overflow: hidden;
+}
+#top-news-area div.portletHeader, #megatopics-area .portletHeader {
+font-size: 125% !important;
+}
+#portal-searchbox .gsc-search-button-v2 {
+padding: 9px 27px 8px 27px;
+margin: 0 0 0 -1px;
+vertical-align: top;
+}
+}
+#dialog-inner {
+overflow:auto !important;  /* */
+}
+.region-area {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+}
+.eea-rows {
+display: flex;
+}
+@media screen and (min-width: 768px) {
+.right-column-area.pull-right {
+display: flex;
+flex: 1;
+justify-content: flex-end;
+margin-top: -3em;
+}
+}
+@media screen and (min-width: 1024px) {
+.right-column-area.pull-right {
+margin-right: 80px;
+}
+}
+/* */
+/* */
+/* */
+
