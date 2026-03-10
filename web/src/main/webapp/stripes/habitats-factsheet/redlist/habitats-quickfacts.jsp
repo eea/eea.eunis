@@ -94,7 +94,7 @@
             <tbody>
                 <tr>
                     <th>Source</th>
-                    <td><a href="https://forum.eionet.europa.eu/european-red-list-habitats/library/">European Red List habitat factsheet</a> </td>
+                    <td><a href="https://cmshare.eea.europa.eu/s/Lxygobjdwdt6Xx9?dir=/european-red-list-habitats">European Red List habitat factsheet</a> </td>
                 </tr>
                 <tr>
                     <th class="normalfont"></th>
