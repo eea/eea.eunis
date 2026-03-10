@@ -154,7 +154,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
 
         String eeaHome = getContext().getInitParameter("EEA_HOME");
 
-        System.out.println("HABITAT");
 
         btrail = "eea#" + eeaHome + ",home#index.jsp,habitat_types#habitats.jsp,factsheet";
         factsheet = new HabitatsFactsheet(idHabitatInt);
@@ -170,7 +169,6 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
             return new ForwardResolution("/stripes/habitats-factsheet/habitats-factsheet.layout.jsp");
         }
 
-        System.out.println("HABITAT META DESCR");
 
         // set metadescription and page title
         metaDescription = factsheet.getMetaHabitatDescription();
@@ -179,11 +177,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                         + factsheet.getHabitat().getScientificName();
 
 
-        System.out.println("HABITAT generalTabActions");
         generalTabActions();
 
         if (factsheet.isAnnexI()) {
-            System.out.println("HABITAT isAnnexI");
             sitesTabActions();
 //            linkeddataTabActions(NumberUtils.toInt(idHabitat), factsheet.idNatureObject);
             conservationStatusTabActions(idHabitatInt, factsheet.idNatureObject);
@@ -201,13 +197,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         }
 
         if(factsheet.isEunis2017()) {
-            System.out.println("HABITAT isEunis2017");
-            System.out.println("HABITAT diagnostic");
             diagnosticSpecies = factsheet.getEunis2017Species("Habitat diagnostic species");
-            System.out.println("HABITAT constant");
 
             constantSpecies = factsheet.getEunis2017Species("Habitat constant species");
-            System.out.println("HABITAT dominant");
 
             dominantSpecies = factsheet.getEunis2017Species("Habitat dominant species");
         }
@@ -315,13 +307,10 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
         try {
             // Get main picture
             String picturePath = getContext().getInitParameter("UPLOAD_DIR_PICTURES_HABITATS");
-            System.out.println("HABITAT getMainPicture");
 
             pic = factsheet.getMainPicture(picturePath, domainName);
-            System.out.println("HABITAT getDescrOwner");
 
             descriptions = factsheet.getDescrOwner();
-            System.out.println("HABITAT natObjectAttributes");
 
             Hashtable<String, AttributeDto> natObjectAttributes =
                     DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectAttributes(factsheet.idNatureObject);
@@ -331,11 +320,9 @@ public class HabitatsFactsheetActionBean extends AbstractStripesAction {
                     art17link = attr.getValue();
                 }
             }
-            System.out.println("HABITAT natureLinks");
 
             // Set the site's external links.
             List<LinkDTO> natureLinks = DaoFactory.getDaoFactory().getExternalObjectsDao().getNatureObjectLinks(factsheet.idNatureObject);
-            System.out.println("HABITAT conservationStatus");
 
             // filters the links
             links = new ArrayList<LinkDTO>();
