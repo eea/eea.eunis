@@ -2623,7 +2623,11 @@ public final class Utilities {
         String strSQL = "";
         String newLine = "\n";
 
-        expand = StringEscapeUtils.escapeXml(expand);;
+        expand = StringEscapeUtils.escapeXml(expand);
+
+        if(expand == null || expand.length() > 40) {
+            return "";
+        }
         genus = StringEscapeUtils.escapeXml(genus);
 
         PreparedStatement ps = null;
