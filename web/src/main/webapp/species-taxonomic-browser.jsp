@@ -94,8 +94,6 @@
 					}
 				}
 
-				application.setAttribute(ip, now);
-
 	            String genus = Utilities.formatString( request.getParameter( "genus" ), "" );
 
 	            SQLUtilities sqlc = new SQLUtilities();
