@@ -46,53 +46,9 @@
 				if (expand != null && expand.length() > 40) {
 					return;
 				}
-
-				String ip = request.getHeader("X-Forwarded-For");
-				if (ip != null && ip.contains(",")) {
-					// in case there are multiple IPs, take the first one (the original client)
-					ip = ip.split(",")[0].trim();
-				}
-				if (ip == null || ip.isEmpty()) {
-					ip = request.getRemoteAddr(); // fallback
-				}
-				long now = System.currentTimeMillis();
-
-				ServletContext ctx = application;
-
-				java.util.Map<String, Long> accessMap =
-						(java.util.Map<String, Long>) ctx.getAttribute("accessMap");
-
-				if (accessMap == null) {
-					accessMap = new java.util.HashMap<>();
-					ctx.setAttribute("accessMap", accessMap);
-				}
-
-				synchronized (accessMap) {
-
-					// ---- rate limit check ----
-					Long last = accessMap.get(ip);
-					if (last != null && (now - last) < 1000) {
-						response.sendError(429, "Too many requests");
-						return;
-					}
-
-					accessMap.put(ip, now);
-
-					Long lastCleanup = (Long) application.getAttribute("lastCleanup");
-					if (lastCleanup == null || (now - lastCleanup) > 60000) { // once per minute
-
-						long cutoff = now - (5 * 60 * 1000);
-
-						java.util.Iterator<java.util.Map.Entry<String, Long>> it = accessMap.entrySet().iterator();
-						while (it.hasNext()) {
-							if (it.next().getValue() < cutoff) {
-								it.remove();
-							}
-						}
-
-						application.setAttribute("lastCleanup", now);
-					}
-				}
+				String human = Utilities.formatString( request.getParameter( "human" ), "" );
+				if(human.isEmpty())
+					return;
 
 	            String genus = Utilities.formatString( request.getParameter( "genus" ), "" );
 
