@@ -26,6 +26,7 @@
 <stripes:layout-render name="/stripes/common/template.jsp" pageTitle="${title}" btrail="<%= btrail%>">
 	<stripes:layout-component name="head">
 		<link rel="StyleSheet" href="css/eunistree.css" type="text/css"/>
+		<meta name="robots" content="noindex, nofollow">
 	</stripes:layout-component>
 	<stripes:layout-component name="contents">
 		<a name="documentContent"></a>
@@ -58,9 +59,9 @@
 			%>
 			<li>
 				<% if (next != null && next.getLevel() > h.getLevel()) { %>
-				<a title="<%=hide%>" id="level_<%=h.getIdHabitat()%>" href="habitats-code-browser-redlist.jsp?expand=<%=Utilities.removeFromExpanded(expand,h.getIdHabitat(), root)%>#level_<%=h.getIdHabitat()%>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
+				<a rel="nofollow" title="<%=hide%>" id="level_<%=h.getIdHabitat()%>" href="habitats-code-browser-redlist.jsp?expand=<%=Utilities.removeFromExpanded(expand,h.getIdHabitat(), root)%>#level_<%=h.getIdHabitat()%>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
 				<% } else if (h.hasChildren()) { %>
-				<a title="<%=show%>" id="level_<%=h.getIdHabitat()%>" href="habitats-code-browser-redlist.jsp?expand=<%=Utilities.addToExpanded(expand,h.getIdHabitat())%>#level_<%=h.getIdHabitat()%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
+				<a rel="nofollow" title="<%=show%>" id="level_<%=h.getIdHabitat()%>" href="habitats-code-browser-redlist.jsp?expand=<%=Utilities.addToExpanded(expand,h.getIdHabitat())%>#level_<%=h.getIdHabitat()%>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
 				<% } else { %>
 				<img src="images/img_bullet.gif" alt="<%=h.getName()%>"/>
 				<%

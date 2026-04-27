@@ -87,9 +87,9 @@
 
                         <li>
                         <% if( showExpanded ){ %>
-                        <a id="level_<%= topLevel %>" href="habitats-emerald-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand, topLevel)%>#level_<%= topLevel %>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
+                        <a rel="nofollow" id="level_<%= topLevel %>" href="habitats-emerald-browser.jsp?expand=<%=Utilities.removeFromExpanded(expand, topLevel)%>#level_<%= topLevel %>"><img src="images/img_minus.gif" alt="<%=hide%>"/></a>
                         <% } else { %>
-                        <a id="level_<%= topLevel %>" href="habitats-emerald-browser.jsp?expand=<%=Utilities.addToExpanded(expand, topLevel)%>#level_<%= topLevel %>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
+                        <a rel="nofollow" id="level_<%= topLevel %>" href="habitats-emerald-browser.jsp?expand=<%=Utilities.addToExpanded(expand, topLevel)%>#level_<%= topLevel %>"><img src="images/img_plus.gif" alt="<%=show%>"/></a>
                         <% } %>
                         <a title="<%= topLevelHabitat.getScientificName() %>" href="habitats/<%= topLevelHabitat.getIdHabitat() %>"><%= topLevelHabitat.getEunisHabitatCode() %> : <%=JstlFunctions.bracketsToItalics(topLevelHabitat.getScientificName())%></a><br/>
                         <%--Top level <%= topLevel %>--%>
