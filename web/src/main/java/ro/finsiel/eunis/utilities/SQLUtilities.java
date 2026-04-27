@@ -947,14 +947,15 @@ public class SQLUtilities {
 
         try {
             con = getConnection();
+            if(con != null) {
+                ps = con.prepareStatement(strSQL);
+                ps.setString(1, idCode);
+                ps.setString(2, idCode);
+                rs = ps.executeQuery();
 
-            ps = con.prepareStatement(strSQL);
-            ps.setString(1, idCode);
-            ps.setString(2, idCode);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                result = true;
+                if (rs.next()) {
+                    result = true;
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();

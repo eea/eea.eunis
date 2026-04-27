@@ -2617,17 +2617,19 @@ public final class Utilities {
     }
 
     // Method that generates tree for species-taxonomic-browser.jsp
-    public static String generateSpeciesTaxonomicTree(String id, String expand, String genus, boolean isRoot, Connection con, SQLUtilities sqlc, WebContentManagement cm) {
+    public static String generateSpeciesTaxonomicTree(String id, String expand, String genus, boolean isRoot, Connection con, SQLUtilities sqlc, WebContentManagement cm, int level) {
+
+        if(level>7) return "";
 
         String ret = "";
         String strSQL = "";
         String newLine = "\n";
 
-        expand = StringEscapeUtils.escapeXml(expand);
-
         if(expand == null || expand.length() > 40) {
             return "";
         }
+
+        expand = StringEscapeUtils.escapeXml(expand);
         genus = StringEscapeUtils.escapeXml(genus);
 
         PreparedStatement ps = null;
@@ -2676,14 +2678,14 @@ public final class Utilities {
                 }
                 if (hasChilds || hasChildSpecies) {
                     if (expandContains(expand, taxId)) {
-                        ret += "<a title=\"" + hide + "\" id=\"level_" + taxId
+                        ret += "<a rel=\"nofollow\" title=\"" + hide + "\" id=\"level_" + taxId
                                 + "\" href=\"species-taxonomic-browser.jsp?expand="
                                 + removeSpecieFromExpanded(expand, taxId)
                                 + "#level_" + taxId
                                 + "\"><img src=\"images/img_minus.gif\" alt=\""
                                 + hide + "\"/></a>" + newLine;
                     } else {
-                        ret += "<a title=\"" + show + "\" id=\"level_" + taxId
+                        ret += "<a rel=\"nofollow\" title=\"" + show + "\" id=\"level_" + taxId
                                 + "\" href=\"species-taxonomic-browser.jsp?expand="
                                 + addToExpanded(expand, taxId) + "#level_"
                                 + taxId
@@ -2697,7 +2699,7 @@ public final class Utilities {
                 }
                 if (expand.length() > 0 && expandContains(expand, taxId)) {
 
-                    ret += generateSpeciesTaxonomicTree(taxId, expand, genus, false, con, sqlc, cm);
+                    ret += generateSpeciesTaxonomicTree(taxId, expand, genus, false, con, sqlc, cm, level+1);
 
                     // Extract genus list and species links
                     List speciesList = sqlc.ExecuteSQLReturnList("SELECT GENUS, CONCAT('<a href=\"species/',ID_SPECIES,'\">',SCIENTIFIC_NAME,'</a>') FROM chm62edt_species"
@@ -2726,13 +2728,13 @@ public final class Utilities {
 
                                 if (currentGenus.equalsIgnoreCase(genus)) {
                                     // link to hide the branches
-                                    ret += "<a title=\"" + hide + "\" id=\"level_" + currentGenus
+                                    ret += "<a rel=\"nofollow\" title=\"" + hide + "\" id=\"level_" + currentGenus
                                             + "\" href=\"species-taxonomic-browser.jsp?expand=" + expand + "#level_" + currentGenus
                                             + "\"><img src=\"images/img_minus.gif\" alt=\""
                                             + hide + "\"/></a>" + newLine;
                                 } else {
                                     // link to expand the branches
-                                    ret += "<a title=\"" + show + "\" id=\"level_" + currentGenus
+                                    ret += "<a rel=\"nofollow\" title=\"" + show + "\" id=\"level_" + currentGenus
                                             + "\" href=\"species-taxonomic-browser.jsp?expand=" + expand + "&genus=" + currentGenus + "#level_"
                                             + currentGenus
                                             + "\"><img src=\"images/img_plus.gif\" alt=\""
@@ -2771,11 +2773,10 @@ public final class Utilities {
 
             ret += "</ul>" + newLine;
 
-            rs.close();
-            ps.close();
-
         } catch (Exception e) {
             logger.debug(e, e); 
+        } finally {
+            SQLUtilities.closeAll(null, ps, rs);
         }
         return ret;
     }
