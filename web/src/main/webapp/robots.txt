@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /
 Disallow: /reports/
 Disallow: /documnents/
 Disallow: /species-taxonomic-browser.jsp
