@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EUNIS - Application retired</title>
+<style>
+    /* Colours taken from the EUNIS "sky blue" theme:
+       dark #006CAD / medium #6DABD0 / light #B8D6E8 */
+    html, body {
+        margin: 0;
+        padding: 0;
+        background: #E9F1F7;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #222;
+    }
+
+    .page {
+        max-width: 740px;
+        margin: 30px auto;
+        background: #FFFFFF;
+        border: 1px solid #B8D6E8;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    .banner {
+        width: 100%;
+        height: 60px;
+        background: #006CAD url('/images/banner_blue.jpg') no-repeat left top;
+        background-size: cover;
+    }
+
+    .content {
+        padding: 1.8em 2.2em 2.2em 2.2em;
+    }
+
+    .content p {
+        font-size: 1em;
+        line-height: 1.5em;
+    }
+
+    .content a {
+        color: #006CAD;
+    }
+
+    .content a:hover {
+        color: #6DABD0;
+    }
+
+    .bise-links {
+        margin: 1.8em 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .bise-links li {
+        margin-bottom: 0.9em;
+    }
+
+    .bise-links a.card {
+        display: block;
+        text-decoration: none;
+        background: #F3F9FC;
+        border: 1px solid #B8D6E8;
+        border-left: 5px solid #006CAD;
+        padding: 0.8em 1em;
+        transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .bise-links a.card:hover {
+        background: #E4F0F7;
+        border-left-color: #6DABD0;
+    }
+
+    .bise-links .card-title {
+        display: block;
+        font-weight: bold;
+        color: #006CAD;
+        font-size: 1.05em;
+    }
+
+    .bise-links .card-url {
+        display: block;
+        color: #557;
+        font-size: 0.85em;
+        margin-top: 0.2em;
+        word-break: break-all;
+    }
+
+    .footer {
+        border-top: 1px solid #B8D6E8;
+        padding: 1em 2.2em;
+        font-size: 0.85em;
+        color: #556;
+        text-align: center;
+    }
+
+    .footer a {
+        color: #006CAD;
+    }
+
+    @media screen and (max-width: 480px) {
+        .page {
+            margin: 0;
+            border: none;
+        }
+        .content {
+            padding: 1.4em;
+        }
+        .banner {
+            background-size: cover;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="page">
+
+    <div class="banner"></div>
+
+    <div class="content">
+
+        <p>Dear EUNIS user,</p>
+
+        <p>The EUNIS web application is retired. The software behind it can no longer be maintained.
+        The underpinning EUNIS database continues to be updated, and its content is integrated into
+        the Biodiversity Information System for Europe, BISE. The European Environment Agency is
+        still improving the visualisation and layout of the EUNIS content in BISE. In case you
+        don&rsquo;t find the information you used to access from the EUNIS web application, please
+        contact us at <a href="mailto:bise@eea.europa.eu">bise@eea.europa.eu</a>.</p>
+
+        <ul class="bise-links">
+            <li>
+                <a class="card" href="https://biodiversity.europa.eu/resources/search-habitat">
+                    <span class="card-title">Search habitats in BISE</span>
+                    <span class="card-url">https://biodiversity.europa.eu/resources/search-habitat</span>
+                </a>
+            </li>
+            <li>
+                <a class="card" href="https://biodiversity.europa.eu/resources/search-species">
+                    <span class="card-title">Search species in BISE</span>
+                    <span class="card-url">https://biodiversity.europa.eu/resources/search-species</span>
+                </a>
+            </li>
+            <li>
+                <a class="card" href="https://biodiversity.europa.eu/resources/search-protected-areas">
+                    <span class="card-title">Search protected and conserved areas in BISE</span>
+                    <span class="card-url">https://biodiversity.europa.eu/resources/search-protected-areas</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="footer">
+        European Environment Agency &mdash; <a href="mailto:bise@eea.europa.eu">bise@eea.europa.eu</a>
+    </div>
+
+</div>
+</body>
+</html>
