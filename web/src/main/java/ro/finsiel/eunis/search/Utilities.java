@@ -2625,9 +2625,6 @@ public final class Utilities {
         String strSQL = "";
         String newLine = "\n";
 
-        if(expand == null || expand.length() > 40) {
-            return "";
-        }
 
         expand = StringEscapeUtils.escapeXml(expand);
         genus = StringEscapeUtils.escapeXml(genus);

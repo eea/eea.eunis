@@ -43,9 +43,7 @@
                 <%
 	            String expand = Utilities.formatString( request.getParameter( "expand" ), "" );
 
-				if (expand != null && expand.length() > 40) {
-					return;
-				}
+
 				String human = Utilities.formatString( request.getParameter( "human" ), "" );
 				if(human.isEmpty())
 					return;

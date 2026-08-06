@@ -38,9 +38,7 @@
         <%
             try {
                 String expand = Utilities.formatString(request.getParameter("expand"), "");
-                if (expand != null && expand.length() > 20) {
-                    return;
-                }
+
                 HabitatTree root = Utilities.buildTree(expand, "ANNEX1");
                 List<HabitatTreeList> habitats = Utilities.treeAsList(root, 1);
 
